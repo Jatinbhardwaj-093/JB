@@ -1,0 +1,22 @@
+ *,
+::after,
+::before {
+    box-sizing: border-box;
+    font-family: 'Work Sans', sans-serif;
+}
+
+:root[data-theme="light"] {
+    --background-color: #ffffff;
+}
+
+:root[data-theme="dark"] {
+    --background-color: #1A1A1D;
+}
+
+body {
+    background-color: var(--background-color);
+    
+}
+body.dark {
+    background-color: var(--background-color); 
+}
