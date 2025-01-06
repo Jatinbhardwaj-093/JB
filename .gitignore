@@ -14,11 +14,8 @@ node_modules/
 dist/
 dist-ssr/
 *.local
-*.js
 *.vue.js
 *.d.ts
-!tailwind.config.js
-!postcss.config.js
 
 # TypeScript specific
 *.tsbuildinfo
