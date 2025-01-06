@@ -19,6 +19,7 @@ dist-ssr/
 *.d.ts
 !tailwind.config.js
 !postcss.config.js
+!dist/assets/*.js
 
 # TypeScript specific
 *.tsbuildinfo
