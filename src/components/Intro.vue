@@ -325,7 +325,7 @@ onMounted(() => {
 .ring-1 {
   width: 440px;
   height: 440px;
-  animation: spin 270s linear infinite;
+  animation: spin 170s linear infinite;
 }
 
 .ring-2 {
@@ -337,7 +337,7 @@ onMounted(() => {
 .ring-3 {
   width: 680px;
   height: 680px;
-  animation: spin 270s linear infinite;
+  animation: spin 370s linear infinite;
 }
 
 /* Position icons in first ring */
