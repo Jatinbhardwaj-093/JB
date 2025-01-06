@@ -276,9 +276,6 @@ watch(
   border-radius: inherit;
   padding: 2px;
   background: linear-gradient(45deg, #6366f1, #8b5cf6);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
