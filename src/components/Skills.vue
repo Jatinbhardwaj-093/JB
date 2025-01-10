@@ -501,25 +501,41 @@ const themeStore = useThemeStore();
             'bg-gray-50': themeStore.theme === 'light',
           }"
         >
-        <div class="flex items-center justify-start gap-2">
-          <p class="text-md font-bold ">Languages:</p>
-          <p class="text-sm ">Python|JavaScript|C|C++</p>
+        <div class="flex items-center justify-start gap-2 mb-1">
+          <p class="text-md font-bold text-purple-500"
+          :class="{'text-purple-600': themeStore.theme==='dark'}">Languages:</p>
+          <p class="text-sm text-black"
+          :class="{ 'text-white': themeStore.theme === 'dark' }">Python | JavaScript | C | C++</p>
         </div>
-        <div class="flex items-center justify-start gap-2">
-          <p class="text-md font-bold ">Frontend:</p>
-          <p class="text-sm ">Vue|jQuery|Tailwind|Bootstrap</p>
+        <div class="flex items-center justify-start gap-2 mb-1">
+          <p class="text-md font-bold text-purple-500"
+          :class="{'text-purple-600': themeStore.theme==='dark'}">Frontend:</p>
+          <p class="text-sm text-black"
+          :class="{ 'text-white': themeStore.theme === 'dark' }">Vue | jQuery | Tailwind | Bootstrap</p>
         </div>
-        <div class="flex items-center justify-start gap-2">
-          <p class="text-md font-bold ">Backend:</p>
-          <p class="text-sm ">Flask|Django</p>
+        <div class="flex items-center justify-start gap-2 mb-1">
+          <p class="text-md font-bold text-purple-500"
+          :class="{'text-purple-600': themeStore.theme==='dark'}">Backend:</p>
+          <p class="text-sm text-black"
+          :class="{ 'text-white': themeStore.theme === 'dark' }">Flask | Django</p>
         </div>
-        <div class="flex items-center justify-start gap-2">
-          <p class="text-md font-bold ">VCS:</p>
-          <p class="text-sm ">Git|GitHub</p>
+        <div class="flex items-center justify-start gap-2 mb-1">
+          <p class="text-md font-bold text-purple-500"
+          :class="{'text-purple-600': themeStore.theme==='dark'}">Databases:</p>
+          <p class="text-sm text-black"
+          :class="{ 'text-white': themeStore.theme === 'dark' }">MongoDB | Redis | SQL| GraphQL</p>
         </div>
-        <div class="flex items-center justify-start gap-2">
-          <p class="text-md font-bold ">DevOps:</p>
-          <p class="text-sm ">Docker|Kubernetes</p>
+        <div class="flex items-center justify-start gap-2 mb-1">
+          <p class="text-md font-bold text-purple-500"
+          :class="{'text-purple-600': themeStore.theme==='dark'}">VCS:</p>
+          <p class="text-sm text-black"
+          :class="{ 'text-white': themeStore.theme === 'dark' }">Git | GitHub</p>
+        </div>
+        <div class="flex items-center justify-start gap-2 mb-1">
+          <p class="text-md font-bold text-purple-500"
+          :class="{'text-purple-600': themeStore.theme==='dark'}">DevOps:</p>
+          <p class="text-sm text-black"
+          :class="{ 'text-white': themeStore.theme === 'dark' }">Docker | Kubernetes</p>
         </div>
       </div>
     </div>
