@@ -27,7 +27,7 @@ onMounted(() => {
     <div class="lg:hidden flex flex-col items-center ">
     <!-- profileImage -->
       <img src="../assets/images/profileImage/myimage2.png" class="rounded-full object-cover object-center h-48 w-48 text-center" alt="img">
-      <div class="my-4">
+      <div class="mt-4">
         <span
           class="text-3xl sm:text-3xl text-black font-bold dark:text-white"
         >
