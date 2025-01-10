@@ -24,17 +24,12 @@ onMounted(() => {
 <template>
   <div>
     <!-- Mobile version -->
-    <div
-      class="block lg:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
-    >
-      <p
-        class="text-2xl sm:text-3xl text-black font-bold dark:text-white mb-4"
-      >
-        Hi,
-      </p>
-      <div class="mb-4">
+    <div class="lg:hidden flex flex-col items-center ">
+    <!-- profileImage -->
+      <img src="../assets/images/profileImage/myimage2.png" class="rounded-full object-cover object-center h-48 w-48 text-center" alt="img">
+      <div class="my-4">
         <span
-          class="text-2xl sm:text-3xl text-black font-bold dark:text-white"
+          class="text-3xl sm:text-3xl text-black font-bold dark:text-white"
         >
           {{ myData.firstName }}
         </span>
@@ -45,7 +40,7 @@ onMounted(() => {
         </span>
       </div>
       <div class="text-lg sm:text-xl text-red-600 dark:text-red-400">
-        Web Developer, Data Scientist
+        Web Development |  Data Science | ML 
       </div>
       <div
         class="flex flex-row items-center justify-start space-x-6"
@@ -54,7 +49,7 @@ onMounted(() => {
           class="bg-purple-600 text-white px-6 py-2 rounded-xl mt-8 w-auto shadow-lg shadow-black flex items-center justify-center hover:transform hover:transform-ease-in-out hover:scale-105 cursor-pointer"
           @click="$router.push('/about')"
         >
-          <i class="bi bi-person-lines-fill text-lg mr-2"></i>
+          <i class="bi bi-person-lines-fill text-md mr-2"></i>
           <span class="font-bold text-sm sm:text-base text-white">
           About
           </span>
@@ -63,7 +58,7 @@ onMounted(() => {
           class="bg-purple-600 text-white px-6 py-2 rounded-xl mt-8 w-auto shadow-lg shadow-black flex items-center justify-center hover:transform hover:transform-ease-in-out hover:scale-105 cursor-pointer"
           @click="$router.push('/contact')"
         >
-          <i class="bi bi-envelope-at-fill text-lg mr-2"></i>
+          <i class="bi bi-envelope-at-fill text-md mr-2"></i>
           <span class="font-bold text-sm sm:text-base text-white">
           Contact
           </span>
