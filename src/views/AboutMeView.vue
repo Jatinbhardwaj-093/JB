@@ -13,8 +13,8 @@ const themeStore = useThemeStore();
     <!-- First Column (Experience) -->
     <div class="flex  
         lg:border-r-2 lg:pr-6 lg:border-b-0 lg:pb-0
-        md:border-b-2 md:pb-6 md:border-r-0 md:pr-0
-        sm:border-b-2 sm:pb-6 sm:border-r-0 sm:pr-0" :class="{'border-purple-900': themeStore.theme==='dark'}">
+        border-b-2 pb-6 border-r-0 pr-0"
+        :class="{'border-purple-900': themeStore.theme==='dark'}">
         <Experience />
         </div>
 
