@@ -112,10 +112,10 @@ watch(
             <router-link 
               v-for="(link, index) in [
                 { name: 'home', icon: 'bi-house-door-fill', text: 'Home' },
-                { name: 'about', icon: 'bi-info-circle-fill', text: 'About' },
-                { name: 'blogs', icon: 'bi-info-circle-fill', text: 'Blog' },
-                { name: 'projects', icon: 'bi-clipboard-fill', text: 'Projects' },
-                { name: 'contact', icon: 'bi-envelope-fill', text: 'Contact' }
+                { name: 'about', icon: 'bi-file-person-fill', text: 'About' },
+                { name: 'blogs', icon: 'bi-pencil-square', text: 'Blog' },
+                { name: 'projects', icon: 'bi-box-fill', text: 'Projects' },
+                { name: 'contact', icon: 'bi-telephone-fill', text: 'Contact' }
               ]"
               :key="index"
               :to="{ name: link.name }"
