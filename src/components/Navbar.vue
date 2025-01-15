@@ -113,6 +113,7 @@ watch(
               v-for="(link, index) in [
                 { name: 'home', icon: 'bi-house-door-fill', text: 'Home' },
                 { name: 'about', icon: 'bi-info-circle-fill', text: 'About' },
+                { name: 'blogs', icon: 'bi-info-circle-fill', text: 'Blog' },
                 { name: 'projects', icon: 'bi-clipboard-fill', text: 'Projects' },
                 { name: 'contact', icon: 'bi-envelope-fill', text: 'Contact' }
               ]"
@@ -166,7 +167,7 @@ watch(
           </span>
         </router-link>
 
-        <router-link :to="{ name: 'about' }" class="group">
+        <router-link :key="$route.fullPath" :to="{ name: 'about' }" class="group">
           <div class="relative group">
             <i
               class="bi bi-info-circle-fill text-2xl text-gray-800 md:block lg:hidden group-hover:text-purple-700"
@@ -184,6 +185,31 @@ watch(
             :class="{ 'text-white hover:text-purple-400': themeStore.theme === 'dark' }"
           >
             About
+            <span
+              class="absolute left-0 bottom-[-2px] w-0 h-1 rounded-xl bg-purple-700 transition-all duration-300 ease-in-out group-hover:w-full"
+              :class="{ 'bg-purple-400': themeStore.theme === 'dark' }"
+            ></span>
+          </span>
+        </router-link>
+
+        <router-link :to="{ name: 'blogs' }" class="group">
+          <div class="relative group">
+            <i
+              class="bi bi-info-circle-fill text-2xl text-gray-800 md:block lg:hidden group-hover:text-purple-700"
+              :class="{ 'text-white': themeStore.theme === 'dark' }"
+            ></i>
+            <span
+              class="absolute top-full left-1/2 transform -translate-x-1/2 text-sm font-semibold md:block lg:hidden text-gray-800 opacity-0 transition-all duration-300 group-hover:bottom-[0] group-hover:opacity-100"
+              :class="{ 'text-white': themeStore.theme === 'dark' }"
+            >
+              Blog
+            </span>
+          </div>
+          <span
+            class="hidden lg:inline-block font-semibold text-xl text-gray-800 group relative hover:text-purple-700"
+            :class="{ 'text-white hover:text-purple-400': themeStore.theme === 'dark' }"
+          >
+            Blog
             <span
               class="absolute left-0 bottom-[-2px] w-0 h-1 rounded-xl bg-purple-700 transition-all duration-300 ease-in-out group-hover:w-full"
               :class="{ 'bg-purple-400': themeStore.theme === 'dark' }"
