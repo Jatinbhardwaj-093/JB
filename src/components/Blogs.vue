@@ -11,7 +11,7 @@ const BlogList = ref<Blog[]>([
     {
         heading: 'Sympy 3D Geometry Extension',
         content: 'A 3D geometry extension for Sympy',
-        link: '#sympy-3d-geometry'
+        link: 'https://jatinbhardwaj-093.github.io/JB-blog/'
     },
 ]);
 </script>
