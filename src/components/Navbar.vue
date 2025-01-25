@@ -103,16 +103,8 @@ watch(
         class="fixed top-0 right-0 h-full w-8/12 bg-white dark:bg-gray-800 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 lg:hidden overflow-y-auto"
         :class="isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'"
       >
-        <!-- Close button -->
-        <button 
-          @click="closeMobileMenu"
-          class="absolute top-4 right-4 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
-        >
-          <i class="bi bi-x-lg text-xl"></i>
-        </button>
-
         <!-- Mobile menu content -->
-        <div class="pt-16 px-6">
+        <div class="pt-8 px-6">
           <!-- Theme Toggle at Top -->
           <div class="mb-8 flex items-center justify-end">
             <div class="relative">
@@ -121,8 +113,8 @@ watch(
                 class="theme-button flex items-center space-x-2 px-4 py-2 rounded-lg"
                 :class="[
                   themeStore.theme === 'dark' 
-                    ? 'bg-gray-800 text-white hover:bg-gray-700' 
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                    ? 'theme-button dark' 
+                    : 'theme-button light'
                 ]"
               >
                 <i class="bi text-xl" :class="themeStore.theme === 'dark' ? 'bi-moon-stars-fill' : 'bi-sun-fill'"></i>
@@ -298,8 +290,8 @@ watch(
             class="theme-button flex items-center space-x-2 px-4 py-2 rounded-lg"
             :class="[
               themeStore.theme === 'dark' 
-                ? 'bg-gray-800 text-white hover:bg-gray-700' 
-                : 'bg-white text-gray-700 hover:bg-gray-50'
+                ? 'theme-button dark' 
+                : 'theme-button light'
             ]"
           >
             <i class="bi text-xl" :class="themeStore.theme === 'dark' ? 'bi-moon-stars-fill' : 'bi-sun-fill'"></i>
@@ -317,6 +309,30 @@ watch(
   transition: all 0.3s ease;
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+}
+
+.theme-button.light {
+  background: linear-gradient(45deg, #ffffff, #ffd900);
+  color: black;
+}
+
+.theme-button.light:hover {
+  background: linear-gradient(45deg, #ffffff, #ffd900);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.theme-button.dark {
+  background: linear-gradient(45deg, #000000, #8b5cf6);
+  color: white;
+}
+
+.theme-button.dark:hover {
+  background: linear-gradient(45deg, #8b5cf6, #6366f1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .theme-button::before {
@@ -336,11 +352,6 @@ watch(
   mask-composite: exclude;
   opacity: 0;
   transition: all 0.3s ease;
-}
-
-.theme-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .theme-button:hover::before {
