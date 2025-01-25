@@ -17,12 +17,34 @@ const handleClickOutside = (event: MouseEvent) => {
   }
 };
 
+let touchStartX = 0;
+let touchEndX = 0;
+
+const handleTouchStart = (event: TouchEvent) => {
+  touchStartX = event.changedTouches[0].screenX;
+};
+
+const handleTouchEnd = (event: TouchEvent) => {
+  touchEndX = event.changedTouches[0].screenX;
+  handleSwipeGesture();
+};
+
+const handleSwipeGesture = () => {
+  if (touchStartX > window.innerWidth * 0.9 && touchEndX < touchStartX) {
+    isMobileMenuOpen.value = true;
+  }
+};
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
+  document.addEventListener('touchstart', handleTouchStart);
+  document.addEventListener('touchend', handleTouchEnd);
 });
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside);
+  document.removeEventListener('touchstart', handleTouchStart);
+  document.removeEventListener('touchend', handleTouchEnd);
 });
 
 const toggleDropdown = () => {
