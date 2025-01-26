@@ -24,47 +24,52 @@ onMounted(() => {
 <template>
   <div>
     <!-- Mobile version -->
-    <div class="lg:hidden flex flex-col items-center ">
-    <!-- profileImage -->
-      <img src="../assets/images/profileImage/myimage2.png" class="rounded-full object-cover object-center h-48 w-48 text-center" alt="img">
-      <div class="mt-4">
-        <span
-          class="text-3xl sm:text-3xl text-black font-bold dark:text-white"
-        >
-          {{ myData.firstName }}
-        </span>
-        <span
-          class="text-2xl sm:text-3xl text-purple-600 font-bold ml-1 dark:text-purple-500"
-        >
-          {{ myData.lastName }}
-        </span>
-      </div>
-      <div class="text-lg sm:text-xl text-red-600 dark:text-red-400">
-        Web Development |  Data Science | ML 
-      </div>
-      <div
-        class="flex flex-row items-center justify-start space-x-6"
-      >
-        <div
-          class="bg-purple-600 text-white px-6 py-2 rounded-xl mt-8 w-auto shadow-lg shadow-black flex items-center justify-center hover:transform hover:transform-ease-in-out hover:scale-105 cursor-pointer"
-          @click="$router.push('/about')"
-        >
-          <i class="bi bi-person-lines-fill text-md mr-2"></i>
-          <span class="font-bold text-sm sm:text-base text-white">
-          About
-          </span>
+    <div class="lg:hidden flex flex-col items-center p-6">
+      <div class="profile-container backdrop-blur-sm bg-white/30 dark:bg-gray-800/30 rounded-3xl p-8 shadow-xl">
+        <div class="profile-image-wrapper">
+          <img 
+            src="../assets/images/profileImage/myimage2.png" 
+            class="profile-image" 
+            alt="Profile Image"
+          >
         </div>
-        <div
-          class="bg-purple-600 text-white px-6 py-2 rounded-xl mt-8 w-auto shadow-lg shadow-black flex items-center justify-center hover:transform hover:transform-ease-in-out hover:scale-105 cursor-pointer"
-          @click="$router.push('/contact')"
-        >
-          <i class="bi bi-envelope-at-fill text-md mr-2"></i>
-          <span class="font-bold text-sm sm:text-base text-white">
-          Contact
-          </span>
+        <div class="mt-6 text-center">
+          <div class="fade-in-up" style="animation-delay: 200ms">
+            <span class="text-4xl text-black font-bold dark:text-white">
+              {{ myData.firstName }}
+            </span>
+            <span class="text-4xl text-purple-600 font-bold ml-2 dark:text-purple-500">
+              {{ myData.lastName }}
+            </span>
+          </div>
+          <!-- Tech Skills -->
+          <div class="mt-3 overflow-hidden fade-in-up" style="animation-delay: 400ms">
+            <div class="tech-skills-scroll">
+              <div class="scroll-content">
+                <span class="text-xl text-red-600 dark:text-red-400"> Web Development | Data Science | Data Analysis | ML | AI | </span>
+                <span class="text-xl text-red-600 dark:text-red-400 "> Web Development | Data Science | Data Analysis | ML | AI | </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-row items-center justify-center space-x-4 mt-8 fade-in-up" style="animation-delay: 600ms">
+          <button
+            class="btn-primary"
+            @click="$router.push('/about')"
+          >
+            <i class="bi bi-person-lines-fill text-md mr-2"></i>
+            <span>About</span>
+          </button>
+          <button
+            class="btn-primary"
+            @click="$router.push('/contact')"
+          >
+            <i class="bi bi-envelope-at-fill text-md mr-2"></i>
+            <span>Contact</span>
+          </button>
         </div>
       </div>
-      <div class="mt-8 sm:mt-16 w-min ">
+      <div class="mt-8 w-min fade-in-up" style="animation-delay: 800ms">
         <ContactLink />
       </div>
     </div>
@@ -614,5 +619,79 @@ onMounted(() => {
   50% {
     border-color: transparent;
   }
+}
+
+.profile-container {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-image-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid theme('colors.purple.600');
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  @apply bg-purple-600 text-white px-6 py-3 rounded-xl shadow-md shadow-purple-500/30
+         flex items-center justify-center hover:transform hover:scale-105
+         transition-all duration-300 ease-in-out font-bold text-sm sm:text-base;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tech-skills-scroll {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.scroll-content {
+  display: inline-block;
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll-content:hover {
+  animation-play-state: paused;
 }
 </style>

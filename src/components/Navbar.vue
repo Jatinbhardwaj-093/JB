@@ -85,7 +85,7 @@ watch(
         <!-- Burger Menu Button for sm and md screens -->
         <button 
           @click="toggleMobileMenu"
-          class="text-gray-800 dark:text-white focus:outline-none lg:hidden p-2 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-r from-gray-200 to-purple-300 dark:from-gray-700 dark:to-gray-900 border border-gray-200 dark:border-gray-700 w-12 h-12 flex items-center justify-center"
+          class="text-gray-800 dark:text-white focus:outline-none lg:hidden p-2 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-r from-white to-gray-300 dark:from-gray-700 dark:to-gray-900 border border-gray-200 dark:border-gray-700 w-12 h-12 flex items-center justify-center"
         >
           <i class="bi text-2xl" :class="isMobileMenuOpen ? 'bi-x-lg' : 'bi-list'"></i>
         </button>
