@@ -1,19 +1,45 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useThemeStore } from "../store/theme";
 import ContactLink from "./ContactLink.vue";
-const WEB3FORMS_ACCESS_KEY = "f19ff89a-d669-4a51-8d08-47e392f4a85f";
 
+const WEB3FORMS_ACCESS_KEY = "f19ff89a-d669-4a51-8d08-47e392f4a85f";
 const themeStore = useThemeStore();
 
 // Reactive form data
 const name = ref("");
 const email = ref("");
 const message = ref("");
-const showSuccessPopup = ref(false); // Flag to show success popup
+const showSuccessPopup = ref(false);
+const isLoading = ref(false);
+const errorMessage = ref("");
+
+// Form validation
+const errors = ref({ name: "", email: "", message: "" });
+
+const isValidEmail = computed(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email.value);
+});
+
+const validateForm = () => {
+    errors.value = { name: "", email: "", message: "" };
+
+    if (!name.value.trim()) errors.value.name = "Name is required";
+    if (!email.value.trim()) errors.value.email = "Email is required";
+    else if (!isValidEmail.value) errors.value.email = "Please enter a valid email";
+    if (!message.value.trim()) errors.value.message = "Message is required";
+
+    return !Object.values(errors.value).some(error => error);
+};
 
 // Submit form method
 const submitForm = async () => {
+    if (!validateForm()) return;
+
+    isLoading.value = true;
+    errorMessage.value = "";
+
     try {
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
@@ -32,24 +58,25 @@ const submitForm = async () => {
         const result = await response.json();
 
         if (result.success) {
-            showSuccessPopup.value = true; // Show success popup
-            // Reset form fields after success
+            showSuccessPopup.value = true;
             name.value = "";
             email.value = "";
             message.value = "";
         } else {
-            console.error("Error submitting form:", result);
+            errorMessage.value = "Failed to send message. Please try again.";
         }
     } catch (error) {
-        console.error("Error submitting form:", error);
+        errorMessage.value = "An error occurred. Please try again later.";
+    } finally {
+        isLoading.value = false;
     }
 };
 
-// Close the success popup
 const closePopup = () => {
     showSuccessPopup.value = false;
 };
 </script>
+
 <template>
     <div :data-theme="themeStore.theme">
         <div class="flex flex-col md:flex-row justify-center items-center p-4 space-y-8 md:space-y-0">
@@ -68,60 +95,84 @@ const closePopup = () => {
                 </p>
                 <div class="w-1/5 h-2 rounded-lg bg-purple-600 mt-1 mb-4"></div>
 
+                <!-- Error Message -->
+                <div v-if="errorMessage" class="mb-4 p-3 rounded bg-red-100 text-red-700">
+                    {{ errorMessage }}
+                </div>
+
                 <!-- Form -->
-                <form @submit.prevent="submitForm">
-                    <label for="name" class="text-xl font-bold text-black"
-                        :class="{ 'text-white': themeStore.theme === 'dark' }">
-                        Name
-                    </label>
-                    <input type="text" id="name" v-model="name"
-                        class="shadow-inner shadow-black rounded-lg h-10 w-full px-3 mb-4 outline-none text-base font-semibold font-ubuntu focus:outline-purple-500"
-                        :class="{
-                            'text-white bg-[#2c2c2c]': themeStore.theme === 'dark',
-                            'bg-white text-black': themeStore.theme === 'light',
-                        }" />
+                <form @submit.prevent="submitForm" novalidate>
+                    <div class="mb-4">
+                        <label for="name" class="text-xl font-bold"
+                            :class="{ 'text-white': themeStore.theme === 'dark' }">
+                            Name <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="name" v-model="name" required :aria-invalid="!!errors.name"
+                            :aria-describedby="errors.name ? 'name-error' : undefined"
+                            class="shadow-inner shadow-black rounded-lg h-10 w-full px-3 outline-none text-base font-semibold font-ubuntu focus:outline-purple-500 transition-all duration-300"
+                            :class="{
+                                'text-white bg-[#2c2c2c]': themeStore.theme === 'dark',
+                                'bg-white text-black': themeStore.theme === 'light',
+                                'border-red-500': errors.name
+                            }" />
+                        <p v-if="errors.name" id="name-error" class="text-red-500 text-sm mt-1">{{ errors.name }}</p>
+                    </div>
 
-                    <label for="mail" class="text-xl font-bold text-black"
-                        :class="{ 'text-white': themeStore.theme === 'dark' }">
-                        Mail id
-                    </label>
-                    <input type="email" id="mail" v-model="email"
-                        class="shadow-inner shadow-black rounded-lg h-10 w-full px-3 mb-4 outline-none text-base font-semibold font-ubuntu focus:outline-purple-500"
-                        :class="{
-                            'text-white bg-[#2c2c2c]': themeStore.theme === 'dark',
-                            'bg-white text-black': themeStore.theme === 'light',
-                        }" />
+                    <div class="mb-4">
+                        <label for="mail" class="text-xl font-bold"
+                            :class="{ 'text-white': themeStore.theme === 'dark' }">
+                            Email <span class="text-red-500">*</span>
+                        </label>
+                        <input type="email" id="mail" v-model="email" required :aria-invalid="!!errors.email"
+                            :aria-describedby="errors.email ? 'email-error' : undefined"
+                            class="shadow-inner shadow-black rounded-lg h-10 w-full px-3 outline-none text-base font-semibold font-ubuntu focus:outline-purple-500 transition-all duration-300"
+                            :class="{
+                                'text-white bg-[#2c2c2c]': themeStore.theme === 'dark',
+                                'bg-white text-black': themeStore.theme === 'light',
+                                'border-red-500': errors.email
+                            }" />
+                        <p v-if="errors.email" id="email-error" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
+                    </div>
 
-                    <label for="message" class="text-xl font-bold text-black"
-                        :class="{ 'text-white': themeStore.theme === 'dark' }">
-                        Message
-                    </label>
-                    <textarea id="message" v-model="message" rows="5"
-                        class="shadow-inner shadow-black rounded-lg w-full px-3 outline-none pt-2 text-base font-semibold font-ubuntu resize-none focus:outline-purple-500"
-                        :class="{
-                            'text-white bg-[#2c2c2c]': themeStore.theme === 'dark',
-                            'bg-white text-black': themeStore.theme === 'light',
-                        }"></textarea>
+                    <div class="mb-4">
+                        <label for="message" class="text-xl font-bold"
+                            :class="{ 'text-white': themeStore.theme === 'dark' }">
+                            Message <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="message" v-model="message" rows="5" required :aria-invalid="!!errors.message"
+                            :aria-describedby="errors.message ? 'message-error' : undefined"
+                            class="shadow-inner shadow-black rounded-lg w-full px-3 outline-none pt-2 text-base font-semibold font-ubuntu resize-none focus:outline-purple-500 transition-all duration-300"
+                            :class="{
+                                'text-white bg-[#2c2c2c]': themeStore.theme === 'dark',
+                                'bg-white text-black': themeStore.theme === 'light',
+                                'border-red-500': errors.message
+                            }"></textarea>
+                        <p v-if="errors.message" id="message-error" class="text-red-500 text-sm mt-1">{{ errors.message
+                            }}</p>
+                    </div>
 
-                    <button type="submit"
-                        class="mt-6 bg-purple-600 text-white font-bold py-2 px-4 w-full rounded-lg shadow hover:bg-purple-700 transition-colors">
-                        Submit
+                    <button type="submit" :disabled="isLoading"
+                        class="mt-6 bg-purple-600 text-white font-bold py-2 px-4 w-full rounded-lg shadow hover:bg-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span v-if="isLoading">Sending...</span>
+                        <span v-else>Submit</span>
                     </button>
                 </form>
 
                 <!-- Success Popup -->
                 <div v-if="showSuccessPopup"
-                    class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-                    <div class="p-8 rounded-xl shadow-xl text-center bg-white"
-                        :class="{ 'bg-[#3B1C32] text-white': themeStore.theme === 'dark' }">
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 animate-fadeIn">
+                    <div class="p-8 rounded-xl shadow-xl text-center transform transition-all duration-300 animate-scaleIn"
+                        :class="{ 'bg-[#3B1C32] text-white': themeStore.theme === 'dark', 'bg-white': themeStore.theme === 'light' }">
                         <p class="text-xl font-semibold text-green-500">
                             Mail sent successfully!
                         </p>
-                        <button @click="closePopup" class="mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg">
+                        <button @click="closePopup"
+                            class="mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">
                             Close
                         </button>
                     </div>
                 </div>
+
                 <!-- Social Links -->
                 <div class="mt-8 lg:mt-14 w-min mx-auto">
                     <ContactLink />
@@ -130,3 +181,35 @@ const closePopup = () => {
         </div>
     </div>
 </template>
+
+<style scoped>
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.3s ease-out;
+}
+</style>
