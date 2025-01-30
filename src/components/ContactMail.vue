@@ -79,7 +79,7 @@ const closePopup = () => {
 
 <template>
     <div :data-theme="themeStore.theme">
-        <div class="flex flex-col md:flex-row justify-center items-center p-4 space-y-8 md:space-y-0">
+        <div class="flex flex-col md:flex-row justify-center items-center p-4 pt-1">
             <!-- Left Side: Image -->
             <div class="w-min hidden lg:block mx-auto rounded-3xl">
                 <img v-if="themeStore.theme === 'light'" src="../assets/images/ContactPage/morningSloth.jpg"
@@ -89,7 +89,7 @@ const closePopup = () => {
             </div>
 
             <!-- Right Side: Form -->
-            <div class="w-full md:w-1/2 lg:w-1/2 mt-8 lg:mt-4 px-4">
+            <div class="w-full md:w-1/2 lg:w-1/2 px-4">
                 <p class="text-4xl font-bold font-ubuntu text-purple-600">
                     Get in touch
                 </p>
