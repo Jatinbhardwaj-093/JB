@@ -314,12 +314,12 @@ watch(
 }
 
 .theme-button.light {
-  background: linear-gradient(45deg, #ffffff, #ffd900);
+  background: linear-gradient(45deg, #ffffff, #babab8);
   color: black;
 }
 
 .theme-button.light:hover {
-  background: linear-gradient(45deg, #ffffff, #ffd900);
+  background: linear-gradient(45deg, #ffffff, #babab8);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
