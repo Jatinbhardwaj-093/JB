@@ -1,34 +1,109 @@
 <script setup lang="ts">
-import Experience from '../components/Experience.vue';
-import Skills from '../components/Skills.vue';
-import Education from '../components/Education.vue';
-import Hobby from '../components/Hobby.vue';
-import { useThemeStore } from '../store/theme';
+import Experience from "../components/Experience.vue";
+import Skills from "../components/Skills.vue";
+import Education from "../components/Education.vue";
+import Hobby from "../components/Hobby.vue";
+import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
 </script>
 
 <template>
-    <div class="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-2">
-    <!-- First Column (Experience) -->
-    <div class="flex  
-        lg:border-r-2 lg:pr-6 lg:border-b-0 lg:pb-0
-        border-b-2 pb-6 border-r-0 pr-0"
-        :class="{'border-purple-900': themeStore.theme==='dark'}">
-        <Experience />
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-gray-900/30">
+    <div class="container mx-auto px-4 md:px-6">
+      <!-- About Me Header -->
+      <div class="mb-12 text-center">
+        <h1
+          class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2"
+        >
+          About Me
+        </h1>
+        <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-4"></div>
+        <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          I craft elegant solutions at the intersection of front-end design and
+          back-end architecture. My analytical mindset and technical versatility
+          enable me to transform complex problems into streamlined,
+          user-centered applications.
+        </p>
+      </div>
+
+      <!-- Experience Section -->
+      <div class="mb-12">
+        <h2
+          class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+        >
+          Professional Experience
+        </h2>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700"
+        >
+          <Experience />
+        </div>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="mb-12">
+        <h2
+          class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+        >
+          Skills & Expertise
+        </h2>
+        <div
+          class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700"
+        >
+          <Skills />
+        </div>
+      </div>
+
+      <!-- Two Column Layout for Education and Hobbies -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Education Section -->
+        <div>
+          <h2
+            class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+          >
+            Education
+          </h2>
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 h-full border border-gray-100 dark:border-gray-700"
+          >
+            <Education />
+          </div>
         </div>
 
-        <!-- Second Column (Skills, Education, Hobby) -->
-        <div class="grid grid-cols-1 gap-4">
-            <div class="flex flex-col items-start justify-start border-b-2 border-gray-300  px-4 pb-6" :class="{'border-purple-900': themeStore.theme==='dark'}">
-                <Skills />
-            </div>
-            <div class="flex flex-col items-start justify-start border-b-2 border-gray-300  px-4 pb-8" :class="{'border-purple-900': themeStore.theme==='dark'}">
-                <Education />
-            </div>
-            <div class="flex flex-col items-start justify-start px-4 pb-4">
-                <Hobby />
-            </div>
+        <!-- Hobbies Section -->
+        <div>
+          <h2
+            class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+          >
+            Hobbies & Interests
+          </h2>
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 h-full border border-gray-100 dark:border-gray-700"
+          >
+            <Hobby />
+          </div>
         </div>
+      </div>
     </div>
+  </section>
 </template>
+
+<style scoped>
+.bg-white,
+.dark\:bg-gray-800 {
+  transition: all 0.3s ease;
+}
+
+.bg-white:hover,
+.dark\:bg-gray-800:hover {
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1),
+    0 10px 20px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
+}
+
+/* Ensure consistent section styling */
+section {
+  overflow: hidden;
+}
+</style>
