@@ -1,0 +1,180 @@
+/* Responsive Utilities for JB-Portfolio
+   This file contains utilities to enhance cross-device compatibility */
+
+/* Base responsive grid system */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 640px) {
+  /* Reduce paddings and margins on mobile */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Reduce vertical spacing */
+  .py-10, .py-12, .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .my-8, .my-10, .my-12 {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  /* Make text sizes more readable on small screens */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Make buttons easier to tap */
+  button, .button, a.button, [role="button"] {
+    min-height: 44px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Improve form field touch targets */
+  input, select, textarea {
+    font-size: 16px !important; /* Prevent zoom on iOS */
+    min-height: 44px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 641px) and (max-width: 1023px) {
+  /* Moderate spacing reduction on tablets */
+  .py-16 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .my-12 {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+}
+
+/* Improved touch targets for mobile and tablet */
+@media (max-width: 1023px) {
+  /* Add spacing between interactive elements for better usability */
+  nav a, .nav-link, .menu-item {
+    padding: 0.5rem !important;
+    margin: 0.25rem !important;
+  }
+  
+  /* Ensure proper spacing in stacked layouts */
+  .flex-col > * + * {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Reduced motion preference support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark mode contrast improvements */
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-gray-900 {
+    background-color: #111827 !important;
+  }
+  
+  .dark\:text-white {
+    color: #f9fafb !important;
+  }
+  
+  /* Improved contrast for interactive elements */
+  .dark .form-input, .dark input, .dark select, .dark textarea {
+    background-color: #1f2937 !important;
+    border-color: #4b5563 !important;
+  }
+}
+
+/* Print styles for better printing */
+@media print {
+  /* Remove unnecessary elements when printing */
+  nav, footer, button, .no-print {
+    display: none !important;
+  }
+  
+  /* Ensure text is readable in print */
+  body {
+    font-size: 12pt;
+    color: #000;
+    background-color: #fff;
+  }
+  
+  /* Ensure links are readable in print */
+  a, a:visited {
+    text-decoration: underline;
+    color: #000;
+  }
+  
+  /* Add URL after links for print */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+}
+
+/* Fix for navbar on mobile */
+@media (max-width: 768px) {
+  .navbar-mobile-fix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+  }
+  
+  .mobile-nav-spacing {
+    padding-top: 64px;
+  }
+}
+
+/* Reduced margin adjustments globally */
+.mt-reduced {
+  margin-top: 0.5rem !important;
+}
+
+.mb-reduced {
+  margin-bottom: 0.5rem !important;
+}
+
+.py-reduced {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
