@@ -9,7 +9,7 @@ const themeStore = useThemeStore();
 </script>
 
 <template>
-  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-gray-900/30">
+  <section class="py-8 md:py-12 lg:py-16 bg-gray-50 dark:bg-gray-900/30">
     <div class="container mx-auto px-4 md:px-6">
       <!-- About Me Header -->
       <div class="mb-12 text-center">

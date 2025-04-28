@@ -8,14 +8,14 @@ const themeStore = useThemeStore();
 
 <template>
   <div
-    class="py-10 md:py-16"
+    class="py-8 md:py-14"
     :class="{
       'bg-gray-50': themeStore.theme === 'light',
       'bg-gray-900': themeStore.theme === 'dark',
     }"
   >
     <div class="container mx-auto px-4 max-w-6xl">
-      <div class="text-center mb-12">
+      <div class="text-center mb-14">
         <h1
           class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4"
           :class="{ 'text-white': themeStore.theme === 'dark' }"

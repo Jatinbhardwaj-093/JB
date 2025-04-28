@@ -110,7 +110,7 @@ const contactInfo = [
 
 <template>
   <section
-    class="py-12 md:py-20"
+    class="py-10 md:py-18"
     :class="{
       'bg-gray-50': themeStore.theme === 'light',
       'bg-gray-900': themeStore.theme === 'dark',
