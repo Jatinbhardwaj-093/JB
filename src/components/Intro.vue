@@ -216,7 +216,9 @@ onMounted(() => {
                   class="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent"
                 ></div>
                 <!-- Inner shine effect -->
-                <div class="absolute inset-0 opacity-0 hover:opacity-40 shine-effect"></div>
+                <div
+                  class="absolute inset-0 opacity-0 hover:opacity-40 shine-effect"
+                ></div>
               </div>
             </div>
           </div>

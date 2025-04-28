@@ -85,40 +85,48 @@ const themeStore = useThemeStore();
       </div>
 
       <!-- Newsletter Subscription -->
-      <div
-        class="mt-16 rounded-xl p-8 text-center border"
-        :class="{
-          'bg-indigo-50 border-indigo-100': themeStore.theme === 'light',
-          'bg-indigo-900/20 border-indigo-800/30': themeStore.theme === 'dark',
-        }"
-      >
-        <h3
-          class="text-2xl font-bold text-black mb-4"
-          :class="{ 'text-white': themeStore.theme === 'dark' }"
+      <div class="mt-16 relative">
+        <!-- Subtle glow effect -->
+        <div
+          class="absolute -inset-0.5 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-xl opacity-30 blur-sm"
+        ></div>
+
+        <!-- Content container with border -->
+        <div
+          class="relative rounded-xl p-8 text-center border-2 z-10"
+          :class="{
+            'bg-indigo-50 border-indigo-200': themeStore.theme === 'light',
+            'bg-indigo-900/20 border-indigo-600': themeStore.theme === 'dark',
+          }"
         >
-          Get Notified When Blog Launches
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-          Be the first to know when my blog goes live! Subscribe to get notified
-          about new articles and exclusive content.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-          <input
-            type="email"
-            placeholder="Your email address"
-            class="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            :class="{
-              'bg-white text-gray-900 border-gray-300':
-                themeStore.theme === 'light',
-              'bg-gray-800 text-white border-gray-600':
-                themeStore.theme === 'dark',
-            }"
-          />
-          <button
-            class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200"
+          <h3
+            class="text-2xl font-bold text-black mb-4"
+            :class="{ 'text-white': themeStore.theme === 'dark' }"
           >
-            Notify Me
-          </button>
+            Get Notified When Blog Launches
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+            Be the first to know when my blog goes live! Subscribe to get
+            notified about new articles and exclusive content.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+            <input
+              type="email"
+              placeholder="Your email address"
+              class="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              :class="{
+                'bg-white text-gray-900 border-gray-300':
+                  themeStore.theme === 'light',
+                'bg-gray-800 text-white border-gray-600':
+                  themeStore.theme === 'dark',
+              }"
+            />
+            <button
+              class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-md"
+            >
+              Notify Me
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -149,5 +157,83 @@ const themeStore = useThemeStore();
   100% {
     opacity: 1;
   }
+}
+
+/* Newsletter subscription glow effect */
+.newsletter-glow-box {
+  position: relative;
+  box-shadow: 0 0 25px rgba(79, 70, 229, 0.15);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.newsletter-glow-box::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    90deg,
+    rgba(79, 70, 229, 0.3),
+    rgba(129, 140, 248, 0.3),
+    rgba(79, 70, 229, 0.3)
+  );
+  background-size: 200% 100%;
+  border-radius: 0.75rem; /* matches rounded-xl */
+  z-index: -1;
+  animation: border-glow 3s linear infinite;
+}
+
+@keyframes border-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add a floating animation to the subscription box for extra effect */
+.newsletter-glow-box {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Add the slow pulse animation for the outer glow */
+@keyframes pulse-slow {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Add extra styling for the newsletter container */
+.newsletter-glow-container {
+  filter: drop-shadow(0 4px 12px rgba(79, 70, 229, 0.25));
 }
 </style>

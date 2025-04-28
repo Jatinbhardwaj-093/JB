@@ -246,11 +246,12 @@ const getProficiencyText = (proficiency: number): string => {
                     />
                   </div>
                   <div class="flex justify-between items-center w-full">
-                    <span class="font-medium text-black "
-                    :class="{ 'text-white': themeStore.theme === 'dark' }">
-                    {{
-                      skill.name
-                    }}</span>
+                    <span
+                      class="font-medium text-black"
+                      :class="{ 'text-white': themeStore.theme === 'dark' }"
+                    >
+                      {{ skill.name }}</span
+                    >
                     <span class="text-sm text-gray-600 dark:text-gray-400">{{
                       getProficiencyText(skill.proficiency)
                     }}</span>
@@ -455,38 +456,46 @@ const getProficiencyText = (proficiency: number): string => {
       </div>
 
       <!-- Certification/Achievement Banner -->
-      <div
-        class="mt-10 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-5 border border-indigo-100 dark:border-indigo-800/30 flex items-center justify-between flex-wrap md:flex-nowrap gap-4"
-      >
-        <div>
-          <h3 class="font-bold text-indigo-900 dark:text-indigo-300">
-            Continuous Learning
-          </h3>
-          <p class="text-sm text-gray-700 dark:text-gray-400">
-            I'm constantly enhancing my skills through projects, online courses,
-            and community engagement.
-          </p>
-        </div>
-        <router-link 
-          to="/projects"
-          class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition-all duration-300 shadow-md flex items-center space-x-1 whitespace-nowrap"
+      <div class="mt-10 relative">
+        <!-- Subtle glow effect -->
+        <div
+          class="absolute -inset-0.5 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-xl opacity-30 blur-sm"
+        ></div>
+
+        <!-- Content container with border -->
+        <div
+          class="relative bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-5 border-2 border-indigo-200 dark:border-indigo-700 flex items-center justify-between flex-wrap md:flex-nowrap gap-4 z-10"
         >
-          <span>See Projects</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <div>
+            <h3 class="font-bold text-indigo-900 dark:text-indigo-300">
+              Continuous Learning
+            </h3>
+            <p class="text-sm text-gray-700 dark:text-gray-400">
+              I'm constantly enhancing my skills through projects, online
+              courses, and community engagement.
+            </p>
+          </div>
+          <router-link
+            to="/projects"
+            class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition-all duration-300 shadow-md flex items-center space-x-1 whitespace-nowrap"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            />
-          </svg>
-        </router-link>
+            <span>See Projects</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </router-link>
+        </div>
       </div>
     </div>
   </section>
@@ -548,5 +557,44 @@ const getProficiencyText = (proficiency: number): string => {
   to {
     left: 100%;
   }
+}
+
+/* Continuous Learning box glow effect */
+.continuous-learning-box {
+  position: relative;
+  box-shadow: 0 0 25px rgba(79, 70, 229, 0.15);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.continuous-learning-box::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    90deg,
+    rgba(79, 70, 229, 0.3),
+    rgba(129, 140, 248, 0.3),
+    rgba(79, 70, 229, 0.3)
+  );
+  border-radius: 0.75rem; /* matches rounded-xl */
+  z-index: -1;
+  animation: border-glow 2s linear infinite;
+}
+
+@keyframes border-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.dark .continuous-learning-box {
+  box-shadow: 0 0 25px rgba(79, 70, 229, 0.2);
 }
 </style>
