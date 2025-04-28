@@ -198,23 +198,25 @@ onMounted(() => {
         <!-- Right column: Profile image -->
         <div class="w-full lg:w-1/2 mt-6 lg:mt-0 fade-in delay-300">
           <div class="relative max-w-md mx-auto">
-            <!-- Decorative elements with more subtle effect -->
+            <!-- Enhanced glow effect with animated gradient -->
             <div
-              class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg blur opacity-15 group-hover:opacity-25 transition duration-700"
+              class="absolute -inset-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 rounded-xl blur-xl opacity-70 group-hover:opacity-100 animate-glow-pulse"
             ></div>
 
             <div
-              class="relative rounded-xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg"
+              class="relative rounded-xl overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl"
             >
-              <div class="aspect-ratio-container">
+              <div class="aspect-ratio-container profile-image-container">
                 <img
                   src="../assets/images/profileImage/myimage2.png"
                   alt="Jatin Bhardwaj"
-                  class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                  class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
                 />
                 <div
                   class="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent"
                 ></div>
+                <!-- Inner shine effect -->
+                <div class="absolute inset-0 opacity-0 hover:opacity-40 shine-effect"></div>
               </div>
             </div>
           </div>
@@ -374,5 +376,64 @@ onMounted(() => {
 .social-icon-link:hover::before {
   opacity: 1;
   transform: translateX(-50%) translateY(5px); /* Changed Y value from -5px to 5px */
+}
+
+/* Profile Image Glow Effects */
+@keyframes glow-pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.01);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.profile-image-container {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.profile-image-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
+}
+
+/* Shine effect animation */
+.shine-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.profile-image-container:hover .shine-effect {
+  opacity: 0.4;
+  animation: shine 1.5s ease-in-out;
+}
+
+@keyframes shine {
+  to {
+    left: 100%;
+  }
 }
 </style>

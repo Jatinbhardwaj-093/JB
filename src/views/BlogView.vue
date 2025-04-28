@@ -10,7 +10,7 @@ onMounted(() => {
 
 <template>
   <main class="flex-grow">
-    <div class="pt-16 pb-4">
+    <div class="pt-8 pb-4">
       <Blogs />
     </div>
   </main>
@@ -24,8 +24,8 @@ main {
 }
 
 @media (max-width: 768px) {
-  .pt-16 {
-    padding-top: 4rem; /* Reduce spacing on mobile */
+  .pt-8 {
+    padding-top: 2rem; /* Reduce spacing on mobile */
   }
 }
 </style>
