@@ -352,9 +352,9 @@ onMounted(() => {
 .social-icon-link::before {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 100%;
+  top: 100%; /* Changed from bottom: 100% to top: 100% to show below */
   left: 50%;
-  transform: translateX(-50%) translateY(5px);
+  transform: translateX(-50%) translateY(-5px); /* Changed Y value from 5px to -5px */
   padding: 0.3rem 0.6rem;
   border-radius: 0.25rem;
   background: #4f46e5;
@@ -369,6 +369,6 @@ onMounted(() => {
 
 .social-icon-link:hover::before {
   opacity: 1;
-  transform: translateX(-50%) translateY(-5px);
+  transform: translateX(-50%) translateY(5px); /* Changed Y value from -5px to 5px */
 }
 </style>

@@ -5,7 +5,7 @@ import { useThemeStore } from "../store/theme";
 const themeStore = useThemeStore();
 
 // Import base URL for images
-const getImageUrl = (name) => {
+const getImageUrl = (name: string) => {
   return new URL(`../assets/images/${name}`, import.meta.url).href;
 };
 
@@ -70,7 +70,7 @@ const skillCategories = ref([
   },
 ]);
 
-const visibleSkills = ref([]);
+const visibleSkills = ref<string[]>([]);
 
 onMounted(() => {
   // Stagger the appearance of the skill categories for animation

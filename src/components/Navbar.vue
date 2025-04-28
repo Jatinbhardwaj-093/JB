@@ -58,21 +58,11 @@ watch(
         <!-- Logo -->
         <router-link to="/" class="logo-container flex items-center space-x-2"
           ><!-- Reduced space-x from 3 to 2 -->
+          <!-- Reduced size from w-12 h-12 to w-10 h-10 -->
           <img
             src="../assets/images/Navbar/Logo.png"
             alt="Logo"
             class="w-10 h-10 object-contain"
-            <!--
-            Reduced
-            size
-            from
-            w-12
-            h-12
-            to
-            w-10
-            h-10
-            --
-          />
           />
           <span class="text-xl font-bold text-gray-800 dark:text-white"
             >JB</span
