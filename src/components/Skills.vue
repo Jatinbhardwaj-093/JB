@@ -32,8 +32,8 @@ const skillCategories = ref([
   {
     title: "Backend",
     skills: [
-      { name: "Flask", img: "Flask.png", color: "text-gray-800" },
-      { name: "Django", img: "Django.png", color: "text-green-800" },
+      { name: "Flask", img: "Flask.png", color: "text-gray-400" },
+      { name: "Django", img: "Django.png", color: "text-green-600" },
       { name: "GraphQL", img: "GraphQL.png", color: "text-pink-600" },
     ],
   },
@@ -86,7 +86,10 @@ onMounted(() => {
   <section class="py-12">
     <div class="container mx-auto px-4">
       <div class="mb-8 text-center">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h2
+          class="text-3xl font-bold text-black mb-2"
+          :class="{ 'text-white': themeStore.theme === 'dark' }"
+        >
           Technical Skills
         </h2>
         <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full"></div>
@@ -105,7 +108,8 @@ onMounted(() => {
           :style="{ animationDelay: `${categoryIndex * 200}ms` }"
         >
           <h3
-            class="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center"
+            class="text-xl font-bold text-black mb-4 flex items-center"
+            :class="{ 'text-white': themeStore.theme === 'dark' }"
           >
             <span class="text-indigo-600 mr-2">
               <svg
@@ -151,7 +155,10 @@ onMounted(() => {
       <!-- Mobile skill tags - Fixed nested v-for -->
       <div class="mt-10 md:hidden">
         <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 shadow-inner">
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+          <h3
+            class="text-lg font-semibold text-black mb-3"
+            :class="{ 'text-white': themeStore.theme === 'dark' }"
+          >
             All Skills
           </h3>
           <div class="flex flex-wrap gap-2">

@@ -94,7 +94,10 @@ const activeTab = ref("all");
   <section class="py-10">
     <div class="container mx-auto px-4">
       <div class="mb-10 text-center">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h2
+          class="text-3xl font-bold text-black mb-2"
+          :class="{ 'text-white': themeStore.theme === 'dark' }"
+        >
           Featured Projects
         </h2>
         <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full"></div>
@@ -104,7 +107,9 @@ const activeTab = ref("all");
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 projects-container">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 projects-container"
+      >
         <div
           v-for="(project, index) in projects"
           :key="project.id"
@@ -127,7 +132,9 @@ const activeTab = ref("all");
 
             <!-- Project title overlay -->
             <div class="absolute inset-0 flex items-end p-6">
-              <h3 class="text-2xl font-bold text-white project-title">{{ project.title }}</h3>
+              <h3 class="text-2xl font-bold text-white project-title">
+                {{ project.title }}
+              </h3>
             </div>
           </div>
 
@@ -139,7 +146,10 @@ const activeTab = ref("all");
 
             <!-- Features -->
             <div class="space-y-2">
-              <h4 class="font-semibold text-gray-900 dark:text-white">
+              <h4
+                class="font-semibold text-black"
+                :class="{ 'text-white': themeStore.theme === 'dark' }"
+              >
                 Key Features:
               </h4>
               <ul class="list-disc pl-5 space-y-1">
@@ -155,7 +165,10 @@ const activeTab = ref("all");
 
             <!-- Technologies -->
             <div class="mt-3">
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-2">
+              <h4
+                class="font-semibold text-black mb-2"
+                :class="{ 'text-white': themeStore.theme === 'dark' }"
+              >
                 Technologies Used:
               </h4>
               <div class="flex flex-wrap gap-2 tags-container">
@@ -257,10 +270,18 @@ const activeTab = ref("all");
   animation: projectCardEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) backwards;
 }
 
-.project-card:nth-child(1) { animation-delay: 0.2s; }
-.project-card:nth-child(2) { animation-delay: 0.4s; }
-.project-card:nth-child(3) { animation-delay: 0.6s; }
-.project-card:nth-child(4) { animation-delay: 0.8s; }
+.project-card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.project-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.project-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.project-card:nth-child(4) {
+  animation-delay: 0.8s;
+}
 
 @keyframes projectCardEntrance {
   0% {
@@ -275,7 +296,8 @@ const activeTab = ref("all");
 
 .project-card:hover {
   transform: translateY(-12px) translateZ(10px) scale(1.01);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .project-card img {
@@ -296,7 +318,7 @@ const activeTab = ref("all");
 }
 
 .project-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -322,10 +344,18 @@ const activeTab = ref("all");
   animation: tagEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-.tags-container span:nth-child(1) { animation-delay: 0.8s; }
-.tags-container span:nth-child(2) { animation-delay: 0.9s; }
-.tags-container span:nth-child(3) { animation-delay: 1s; }
-.tags-container span:nth-child(4) { animation-delay: 1.1s; }
+.tags-container span:nth-child(1) {
+  animation-delay: 0.8s;
+}
+.tags-container span:nth-child(2) {
+  animation-delay: 0.9s;
+}
+.tags-container span:nth-child(3) {
+  animation-delay: 1s;
+}
+.tags-container span:nth-child(4) {
+  animation-delay: 1.1s;
+}
 
 @keyframes tagEntrance {
   0% {
@@ -354,7 +384,7 @@ const activeTab = ref("all");
 }
 
 .btn-view-project::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -369,7 +399,8 @@ const activeTab = ref("all");
 .btn-view-project:hover {
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .btn-view-project:hover::before {
@@ -391,7 +422,8 @@ const activeTab = ref("all");
 }
 
 :root[data-theme="dark"] .project-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 :root[data-theme="dark"] .project-title {
@@ -423,20 +455,22 @@ const activeTab = ref("all");
   bottom: 0;
   left: 0;
   transform: translateX(-100%);
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0) 0%, 
-    rgba(255, 255, 255, 0.2) 20%, 
-    rgba(255, 255, 255, 0.5) 60%, 
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
     rgba(255, 255, 255, 0)
   );
   animation: shimmer 2s infinite;
 }
 
 :root[data-theme="dark"] .loading-skeleton::after {
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0) 0%, 
-    rgba(255, 255, 255, 0.1) 20%, 
-    rgba(255, 255, 255, 0.2) 60%, 
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.2) 60%,
     rgba(255, 255, 255, 0)
   );
 }
@@ -448,7 +482,8 @@ const activeTab = ref("all");
 }
 
 @keyframes skeletonPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -461,7 +496,7 @@ const activeTab = ref("all");
   .project-card {
     animation-delay: calc(0.15s * var(--index, 0));
   }
-  
+
   .project-card:hover {
     transform: translateY(-8px) translateZ(5px);
   }

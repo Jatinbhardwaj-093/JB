@@ -45,7 +45,11 @@ onMounted(() => {
             <h1
               class="mt-2 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
-              <span class="block fade-in">{{ firstName }}</span>
+              <span
+                class="block fade-in text-black"
+                :class="{ 'text-white': themeStore.theme === 'dark' }"
+                >{{ firstName }}</span
+              >
               <span
                 class="block text-indigo-600 dark:text-indigo-400 fade-in delay-100"
                 >{{ lastName }}</span

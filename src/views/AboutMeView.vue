@@ -14,7 +14,8 @@ const themeStore = useThemeStore();
       <!-- About Me Header -->
       <div class="mb-12 text-center">
         <h1
-          class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2"
+          class="text-3xl md:text-4xl font-bold text-black mb-2"
+          :class="{ 'text-white': themeStore.theme === 'dark' }"
         >
           About Me
         </h1>
@@ -30,7 +31,8 @@ const themeStore = useThemeStore();
       <!-- Experience Section -->
       <div class="mb-12">
         <h2
-          class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+          class="text-2xl md:text-3xl font-bold text-black mb-6 text-center"
+          :class="{ 'text-white': themeStore.theme === 'dark' }"
         >
           Professional Experience
         </h2>
@@ -44,7 +46,8 @@ const themeStore = useThemeStore();
       <!-- Skills Section -->
       <div class="mb-12">
         <h2
-          class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+          class="text-2xl md:text-3xl font-bold text-black mb-6 text-center"
+          :class="{ 'text-white': themeStore.theme === 'dark' }"
         >
           Skills & Expertise
         </h2>
@@ -60,7 +63,8 @@ const themeStore = useThemeStore();
         <!-- Education Section -->
         <div>
           <h2
-            class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+            class="text-2xl font-bold text-black mb-6 text-center"
+            :class="{ 'text-white': themeStore.theme === 'dark' }"
           >
             Education
           </h2>
@@ -74,7 +78,8 @@ const themeStore = useThemeStore();
         <!-- Hobbies Section -->
         <div>
           <h2
-            class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center"
+            class="text-2xl font-bold text-black mb-6 text-center"
+            :class="{ 'text-white': themeStore.theme === 'dark' }"
           >
             Hobbies & Interests
           </h2>

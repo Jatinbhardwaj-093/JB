@@ -64,7 +64,9 @@ watch(
             alt="Logo"
             class="w-10 h-10 object-contain"
           />
-          <span class="text-xl font-bold text-gray-800 dark:text-white"
+          <span
+            class="text-xl font-bold text-black"
+            :class="{ 'text-white': themeStore.theme === 'dark' }"
             >JB</span
           >
         </router-link>

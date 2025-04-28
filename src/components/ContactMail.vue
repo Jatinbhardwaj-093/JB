@@ -121,7 +121,8 @@ const contactInfo = [
         <!-- Section Header -->
         <div class="text-center mb-12">
           <h1
-            class="text-3xl md:text-4xl font-bold mb-2 text-gray-900 dark:text-white"
+            class="text-3xl md:text-4xl font-bold mb-2 text-black"
+            :class="{ 'text-white': themeStore.theme === 'dark' }"
           >
             Get in Touch
           </h1>
