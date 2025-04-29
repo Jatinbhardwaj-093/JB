@@ -6,13 +6,6 @@ const themeStore = useThemeStore();
 
 <template>
   <div :data-theme="themeStore.theme">
-    <p
-      class="text-3xl font-bold font-ubuntu mb-4 text-black"
-      :class="{ 'text-white': themeStore.theme === 'dark' }"
-    >
-      Education
-    </p>
-
     <div class="mb-2">
       <div class="flex items-center justify-start gap-2">
         <a href="https://www.cbse.gov.in/cbsenew/cbse.html">

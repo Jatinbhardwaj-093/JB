@@ -179,7 +179,7 @@ watch(
         <!-- Mobile menu button -->
         <button
           @click="toggleMobileMenu"
-          class="mobile-menu-button md:hidden !block md:!hidden p-2 text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none"
+          class="mobile-menu-button md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] p-0 m-0 rounded focus:outline-none text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400"
           aria-label="Toggle menu"
         >
           <svg
@@ -218,8 +218,12 @@ watch(
 
     <!-- Mobile menu with overlay styling - moved outside the container -->
     <div
-      class="mobile-menu fixed md:hidden right-0 top-0 h-screen w-4/5 max-w-sm bg-white dark:bg-gray-900 shadow-lg z-50 border-l border-gray-200 dark:border-gray-700 overflow-y-auto"
-      :class="{ 'menu-open': isMobileMenuOpen }"
+      class="mobile-menu fixed md:hidden right-0 top-0 h-screen w-4/5 max-w-sm z-50 border-l overflow-y-auto transition-colors duration-300"
+      :class="{
+        'menu-open': isMobileMenuOpen,
+        'bg-white border-gray-200': themeStore.theme === 'light',
+        'bg-gray-900 border-gray-700': themeStore.theme === 'dark',
+      }"
     >
       <div class="p-6 min-h-full flex flex-col">
         <!-- Removed the duplicate close button div -->

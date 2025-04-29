@@ -27,12 +27,8 @@ const mlImg = computed(() =>
 
 <template>
   <div :data-theme="themeStore.theme">
-    <p
-      class="text-3xl font-bold font-ubuntu mb-4 text-black"
-      :class="{ 'text-white': themeStore.theme === 'dark' }"
-    >
-      Hobbies
-    </p>
+    <!-- Removed duplicate Hobbies heading -->
+
     <div class="flex items-start justify-start gap-4 flex-wrap">
       <div class="flex justify-start items-center gap-2">
         <div
