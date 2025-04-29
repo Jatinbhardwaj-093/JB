@@ -10,18 +10,66 @@ const selectedTheme = ref<string>(
 );
 const isMobileMenuOpen = ref<boolean>(false);
 
+// Improved swipe detection variables
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+const SWIPE_THRESHOLD = 70; // Reduced threshold for easier detection
+const SWIPE_ANGLE_THRESHOLD = 30; // Angle in degrees to determine horizontal swipe
+
 const handleClickOutside = (event: MouseEvent) => {
   if (navRef.value && !navRef.value.contains(event.target as Node)) {
     isMobileMenuOpen.value = false;
   }
 };
 
+// Improved touch event handlers for swipe detection
+const handleTouchStart = (event: TouchEvent) => {
+  touchStartX = event.changedTouches[0].screenX;
+  touchStartY = event.changedTouches[0].screenY;
+};
+
+const handleTouchEnd = (event: TouchEvent) => {
+  touchEndX = event.changedTouches[0].screenX;
+  touchEndY = event.changedTouches[0].screenY;
+  handleSwipe();
+};
+
+// Calculate swipe direction with improved angle detection
+const handleSwipe = () => {
+  const deltaX = touchStartX - touchEndX;
+  const deltaY = touchStartY - touchEndY;
+
+  // Calculate angle to determine if it's a horizontal swipe
+  const angle = Math.abs((Math.atan2(deltaY, deltaX) * 180) / Math.PI);
+  const isHorizontalSwipe =
+    angle <= SWIPE_ANGLE_THRESHOLD || angle >= 180 - SWIPE_ANGLE_THRESHOLD;
+
+  if (isHorizontalSwipe) {
+    // Left swipe (from right to left)
+    if (deltaX > SWIPE_THRESHOLD && !isMobileMenuOpen.value) {
+      isMobileMenuOpen.value = true;
+    }
+    // Right swipe (from left to right)
+    else if (deltaX < -SWIPE_THRESHOLD && isMobileMenuOpen.value) {
+      isMobileMenuOpen.value = false;
+    }
+  }
+};
+
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
+
+  // Add touch event listeners for all mobile devices
+  document.addEventListener("touchstart", handleTouchStart, { passive: true });
+  document.addEventListener("touchend", handleTouchEnd, { passive: true });
 });
 
 onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
+  document.removeEventListener("touchstart", handleTouchStart);
+  document.removeEventListener("touchend", handleTouchEnd);
 });
 
 const toggleMobileMenu = () => {
@@ -131,7 +179,7 @@ watch(
         <!-- Mobile menu button -->
         <button
           @click="toggleMobileMenu"
-          class="mobile-menu-button md:hidden p-2 text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none"
+          class="mobile-menu-button md:hidden !block md:!hidden p-2 text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none"
           aria-label="Toggle menu"
         >
           <svg
@@ -166,14 +214,17 @@ watch(
           </svg>
         </button>
       </div>
+    </div>
 
-      <!-- Mobile menu with improved styling -->
-      <div
-        v-show="isMobileMenuOpen"
-        class="mobile-menu md:hidden mt-3 py-2 border-t border-gray-200 dark:border-gray-700 rounded-lg"
-      >
-        <div class="flex flex-col space-y-2">
-          <!-- Reduced space-y from 4 to 2 -->
+    <!-- Mobile menu with overlay styling - moved outside the container -->
+    <div
+      class="mobile-menu fixed md:hidden right-0 top-0 h-screen w-4/5 max-w-sm bg-white dark:bg-gray-900 shadow-lg z-50 border-l border-gray-200 dark:border-gray-700 overflow-y-auto"
+      :class="{ 'menu-open': isMobileMenuOpen }"
+    >
+      <div class="p-6 min-h-full flex flex-col">
+        <!-- Removed the duplicate close button div -->
+
+        <div class="flex flex-col space-y-5 mt-6 flex-grow">
           <router-link
             v-for="(link, index) in [
               { name: 'home', text: 'Home' },
@@ -185,7 +236,7 @@ watch(
             :key="index"
             :to="{ name: link.name }"
             @click="closeMobileMenu"
-            class="nav-link px-2 py-2 font-medium hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
+            class="nav-link px-3 py-4 text-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
             :class="
               $route.name === link.name
                 ? 'text-indigo-600 dark:text-indigo-400'
@@ -195,15 +246,15 @@ watch(
             {{ link.text }}
           </router-link>
 
-          <!-- Theme toggle in mobile menu -->
+          <!-- Theme toggle in mobile menu - simplified animation -->
           <button
             @click="toggleTheme"
-            class="theme-toggle px-2 py-2 flex items-center space-x-2 font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
+            class="mobile-theme-toggle mt-auto px-3 py-4 flex items-center space-x-3 font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
           >
             <span v-if="themeStore.theme === 'light'">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -219,7 +270,7 @@ watch(
             <span v-else>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -232,27 +283,34 @@ watch(
                 />
               </svg>
             </span>
-            <span>{{
+            <span class="text-lg">{{
               themeStore.theme === "light" ? "Dark Mode" : "Light Mode"
             }}</span>
           </button>
         </div>
       </div>
     </div>
+
+    <!-- Background overlay when mobile menu is open -->
+    <div
+      v-if="isMobileMenuOpen"
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden overlay-fade-in"
+      @click="closeMobileMenu"
+    ></div>
   </nav>
 </template>
 
 <style scoped>
 .navbar {
   backdrop-filter: blur(10px);
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  animation: fadeInDown 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  transition: all 0.3s ease;
+  animation: fadeInDown 0.5s ease forwards;
 }
 
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
@@ -267,17 +325,17 @@ watch(
 }
 
 .logo-container img {
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s ease;
 }
 
 .logo-container:hover img {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.05);
 }
 
 /* Menu item hover effect with animated underline */
 .nav-link {
   position: relative;
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.2s ease;
 }
 
 .nav-link::after {
@@ -290,7 +348,7 @@ watch(
   background: currentColor;
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.3s ease;
   opacity: 0.7;
 }
 
@@ -301,7 +359,6 @@ watch(
 }
 
 .nav-link:hover {
-  transform: translateY(-2px);
   color: #4f46e5;
 }
 
@@ -310,104 +367,73 @@ watch(
   font-weight: 600;
 }
 
-/* Enhanced theme toggle animation */
+/* Simplified theme toggle animation */
 .theme-toggle {
   position: relative;
-  overflow: hidden;
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.2s ease;
 }
 
-.theme-toggle:hover {
-  transform: rotate(15deg) scale(1.15);
+/* Mobile-specific theme toggle with even more subtle animation */
+.mobile-theme-toggle {
+  transition: background-color 0.2s ease;
 }
 
-.theme-toggle:active {
-  transform: scale(0.9);
-}
-
-.theme-toggle::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(99, 102, 241, 0.2) 0%,
-    rgba(99, 102, 241, 0) 70%
-  );
-  opacity: 0;
-  transform: scale(0);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.theme-toggle:hover::before {
-  opacity: 1;
-  transform: scale(2);
-}
-
-/* Mobile menu button animation */
+/* Mobile menu button improvements for better tap response */
 .mobile-menu-button {
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  z-index: 60; /* Make it above the overlay */
+  transition: all 0.2s ease;
+  touch-action: manipulation; /* Improve mobile tap */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+  padding: 8px; /* Sized for the hamburger icon only */
+  display: flex; /* Ensure the button wraps around the SVG tightly */
+  align-items: center;
+  justify-content: center;
 }
 
-.mobile-menu-button:hover {
-  transform: scale(1.1);
-  color: #4f46e5;
+/* Remove the expanded tap area pseudo-element */
+/* Commented out to restrict the clickable area to just the button itself
+.mobile-menu-button::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  bottom: -8px;
+  left: -8px;
+  z-index: -1;
 }
+*/
 
-.mobile-menu-button:active {
-  transform: scale(0.95);
-}
-
-/* Mobile menu animation */
+/* Mobile menu slide animation */
 .mobile-menu {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: top;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* For smoother animation in Safari */
+  perspective: 1000px;
 }
 
-.mobile-menu.open {
-  animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+.mobile-menu.menu-open {
+  transform: translateX(0);
+  visibility: visible;
 }
 
-.mobile-menu.closed {
-  animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+/* Background overlay animation */
+.overlay-fade-in {
+  animation: fadeIn 0.25s ease forwards;
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-@keyframes slideDown {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scaleY(0);
   }
   to {
     opacity: 1;
-    transform: scaleY(1);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-  to {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-}
-
-/* Floating animation for navbar on scroll */
-.navbar.scrolled {
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
   }
 }
 
@@ -425,7 +451,7 @@ watch(
   }
 
   .mobile-menu {
-    max-height: 80vh;
+    max-height: 100vh;
     overflow-y: auto;
   }
 
@@ -441,14 +467,11 @@ watch(
   .nav-link,
   .theme-toggle,
   .mobile-menu-button,
+  .mobile-theme-toggle,
   .mobile-menu {
     transition: none !important;
     animation: none !important;
     transform: none !important;
-  }
-
-  .nav-link::after {
-    transition: none !important;
   }
 }
 </style>
