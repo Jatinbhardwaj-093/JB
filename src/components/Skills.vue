@@ -167,7 +167,7 @@ const getProficiencyText = (proficiency: number): string => {
 </script>
 
 <template>
-  <section class="py-12">
+  <section class="py-6">
     <div class="container mx-auto px-4">
       <!-- Section Header -->
       <div class="mb-8 text-center">

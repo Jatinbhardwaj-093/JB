@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from "vue";
 import { useThemeStore } from "../store/theme";
+import CicadaLogo from "./CicadaLogo.vue";
 
 const themeStore = useThemeStore();
 const navRef = ref<HTMLElement | null>(null);
@@ -55,15 +56,9 @@ watch(
     <div class="container mx-auto px-4 py-3">
       <!-- Reduced padding-y from py-4 to py-3 -->
       <div class="flex justify-between items-center">
-        <!-- Logo -->
-        <router-link to="/" class="logo-container flex items-center space-x-2"
-          ><!-- Reduced space-x from 3 to 2 -->
-          <!-- Reduced size from w-12 h-12 to w-10 h-10 -->
-          <img
-            src="../assets/images/Navbar/Logo.png"
-            alt="Logo"
-            class="w-10 h-10 object-contain"
-          />
+        <!-- Updated to use the elegant cicada logo -->
+        <router-link to="/" class="logo-container flex items-center space-x-2">
+          <CicadaLogo :animate="true" />
           <span
             class="text-xl font-bold text-black"
             :class="{ 'text-white': themeStore.theme === 'dark' }"
