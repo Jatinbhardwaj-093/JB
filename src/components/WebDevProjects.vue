@@ -13,6 +13,12 @@ const getIconUrl = (path) => {
   return new URL(`../assets/images/${path}`, import.meta.url).href;
 };
 
+// Add direct references to image paths for better reliability
+const projectImagePaths = {
+  isep: isepImage,
+  hsp: hspImage,
+};
+
 const projects = ref([
   {
     id: 1,
@@ -89,10 +95,19 @@ const projects = ref([
 
 const activeTab = ref("all");
 
-const handleImageError = (e: Event) => {
+// Improved error handling for images
+const handleImageError = (e: Event, projectId: number) => {
   const target = e.target as HTMLImageElement;
+  console.error(`Image failed to load for project ${projectId}`);
   if (target) {
-    target.style.display = "none";
+    // Instead of hiding, set a fallback background color
+    target.style.backgroundColor = "#1f1f1f";
+    // Try reloading the image with a different approach
+    if (projectId === 1) {
+      target.src = projectImagePaths.isep;
+    } else if (projectId === 2) {
+      target.src = projectImagePaths.hsp;
+    }
   }
 };
 </script>
@@ -142,9 +157,9 @@ const handleImageError = (e: Event) => {
             <img
               :src="project.image"
               :alt="`${project.title} screenshot`"
-              class="w-full  min-h-[160px] h-64 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              class="w-full min-h-[160px] h-64 object-cover object-top transition-transform duration-700 group-hover:scale-105"
               loading="eager"
-              @error="handleImageError"
+              @error="handleImageError($event, project.id)"
             />
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"

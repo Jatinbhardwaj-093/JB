@@ -196,11 +196,13 @@ onMounted(() => {
         </div>
 
         <!-- Right column: Profile image -->
-        <div class="w-full lg:w-1/2 mt-6 lg:mt-0 fade-in delay-300">
-          <div class="relative max-w-md mx-auto">
-            <!-- Enhanced glow effect with animated gradient -->
+        <div
+          class="w-full lg:w-1/2 mt-6 lg:mt-0 fade-in delay-300 overflow-hidden"
+        >
+          <div class="relative max-w-md mx-auto overflow-hidden">
+            <!-- Modified glow effect with better containment -->
             <div
-              class="absolute -inset-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 rounded-xl blur-xl opacity-70 group-hover:opacity-100 animate-glow-pulse"
+              class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 rounded-xl blur-lg opacity-50 group-hover:opacity-70 animate-glow-subtle"
             ></div>
 
             <div
@@ -394,6 +396,27 @@ onMounted(() => {
     opacity: 0.6;
     transform: scale(0.98);
   }
+}
+
+/* New subtle glow animation */
+@keyframes glow-subtle {
+  0% {
+    opacity: 0.4;
+    filter: blur(12px);
+  }
+  50% {
+    opacity: 0.55;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 0.4;
+    filter: blur(12px);
+  }
+}
+
+.animate-glow-subtle {
+  animation: glow-subtle 4s ease-in-out infinite;
+  will-change: opacity, filter;
 }
 
 .animate-glow-pulse {

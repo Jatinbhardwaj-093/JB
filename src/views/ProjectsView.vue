@@ -3,14 +3,18 @@ import WebDevProjects from "../components/WebDevProjects.vue";
 import { useThemeStore } from "../store/theme";
 import { ref, computed } from "vue";
 
+// Import the project images directly for reliable loading
+import isepImage from "../assets/images/WebDevProjects/ISEP.png";
+import hspImage from "../assets/images/WebDevProjects/HSP.png";
+
 const themeStore = useThemeStore();
 
-// Projects data for mobile view - Updated with real projects only
+// Projects data for mobile view - Updated with direct image imports
 const projects = ref([
   {
     id: 1,
     title: "Influencer-Sponsor Engagement Platform",
-    image: "/src/assets/images/WebDevProjects/ISEP.png",
+    image: isepImage,
     description:
       "A comprehensive collaboration platform connecting influencers with sponsors and sponsorship opportunities.",
     tags: ["HTML/CSS", "JavaScript", "Flask", "SQLite"],
@@ -19,7 +23,7 @@ const projects = ref([
   {
     id: 2,
     title: "HouseHold Service Platform",
-    image: "/src/assets/images/WebDevProjects/HSP.png",
+    image: hspImage,
     description:
       "A booking service platform that helps users find and schedule household services with verified service providers.",
     tags: ["Vue.js", "Flask", "SQLite", "Redis"],
