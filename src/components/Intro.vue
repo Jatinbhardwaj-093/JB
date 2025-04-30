@@ -239,7 +239,7 @@ onMounted(() => {
             >
               <div class="aspect-ratio-container profile-image-container">
                 <img
-                  src="../assets/images/profileImage/myimage2.png"
+                  src="../assets/images/profileImage/myimage.png"
                   alt="Jatin Bhardwaj"
                   class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
                 />
@@ -399,6 +399,15 @@ onMounted(() => {
 
 :root[data-theme="dark"] .social-icon-link:hover {
   color: #818cf8;
+}
+
+/* Light mode hover color effect - Adding this to fix the hover issue */
+.social-icon-link {
+  color: #4b5563; /* Default gray color for icons */
+}
+
+.social-icon-link:hover {
+  color: #4f46e5; /* Indigo color on hover - matching the primary theme color */
 }
 
 /* Reduced motion preference support */
