@@ -28,8 +28,15 @@ onUnmounted(() => {
   // Removed touch event listeners
 });
 
-const toggleMobileMenu = () => {
+const toggleMobileMenu = (event?: Event) => {
+  // Prevent event from bubbling up to document
+  if (event) {
+    event.stopPropagation();
+  }
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
+
+  // Prevent body scrolling when menu is open
+  document.body.style.overflow = isMobileMenuOpen.value ? "hidden" : "";
 };
 
 const closeMobileMenu = () => {
@@ -139,43 +146,48 @@ watch(
           </button>
         </div>
 
-        <!-- Mobile menu button - making it larger and more clickable -->
-        <div class="md:hidden cursor-pointer">
+        <!-- Completely redesigned hamburger menu button with improved hit area -->
+        <div class="md:hidden relative z-50">
           <button
-            @click="toggleMobileMenu"
-            class="mobile-menu-button flex items-center justify-center p-2 rounded-md focus:outline-none text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+            @click.stop="toggleMobileMenu"
+            class="mobile-menu-button block w-12 h-12 rounded-lg focus:outline-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             aria-label="Toggle menu"
+            style="touch-action: manipulation"
           >
-            <svg
-              v-if="!isMobileMenuOpen"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+            <div class="absolute inset-0 flex items-center justify-center">
+              <!-- Hamburger icon when closed -->
+              <svg
+                v-if="!isMobileMenuOpen"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-7 w-7 text-gray-700 dark:text-gray-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
                 stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-            <svg
-              v-else
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              <!-- X icon when open -->
+              <svg
+                v-else
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-7 w-7 text-gray-700 dark:text-gray-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
                 stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
           </button>
         </div>
       </div>
@@ -192,7 +204,7 @@ watch(
       }"
     >
       <div class="p-6 min-h-full flex flex-col">
-        <!-- Adding a close button at the top of the menu -->
+        <!-- Restoring the close button at the top of the menu -->
         <div class="flex justify-end mb-4">
           <button
             @click="closeMobileMenu"
@@ -216,7 +228,7 @@ watch(
           </button>
         </div>
 
-        <div class="flex flex-col space-y-5 mt-2 flex-grow">
+        <div class="flex flex-col space-y-5 flex-grow mt-6">
           <router-link
             v-for="(link, index) in [
               { name: 'home', text: 'Home' },
@@ -373,12 +385,18 @@ watch(
 /* Mobile menu button improvements for better tap response */
 .mobile-menu-button {
   position: relative;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   touch-action: manipulation; /* Improve mobile tap */
   -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
   display: flex; /* Ensure the button wraps around the SVG tightly */
   align-items: center;
   justify-content: center;
+  user-select: none;
+}
+
+.mobile-menu-button:active {
+  transform: scale(0.95);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Mobile menu slide animation */
@@ -387,18 +405,20 @@ watch(
   right: 0;
   top: 0;
   transform: translateX(100%);
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
   visibility: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden; /* For smoother animation in Safari */
   max-width: 300px;
   width: 80%; /* Use percentage instead of viewport units */
-  height: 100vh;
+  height: 100%;
+  height: 100dvh; /* Use dynamic viewport height when available */
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 50;
   touch-action: pan-y; /* Only allow vertical scrolling */
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu.menu-open {
