@@ -135,9 +135,10 @@ const experiences = [
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-500 dark:text-gray-400"
+              class="h-7 w-7 text-indigo-600 dark:text-indigo-400"
               viewBox="0 0 20 20"
               fill="currentColor"
+              stroke-width="1.5"
             >
               <path
                 fill-rule="evenodd"

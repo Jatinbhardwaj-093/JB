@@ -25,7 +25,7 @@ onMounted(() => {
 <template>
   <section class="py-4 md:py-6 lg:py-8">
     <!-- Further reduced vertical spacing for better mobile view -->
-    <div class="container mx-auto px-4 md:px-6 overflow-y-hidden">
+    <div class="container mx-auto px-4 md:px-6 overflow-hidden">
       <div
         class="flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-10"
       >
@@ -196,13 +196,11 @@ onMounted(() => {
         </div>
 
         <!-- Right column: Profile image -->
-        <div
-          class="w-full lg:w-1/2 mt-6 lg:mt-0 fade-in delay-300 overflow-hidden"
-        >
-          <div class="relative max-w-md mx-auto overflow-hidden">
-            <!-- Modified glow effect with better containment -->
+        <div class="w-full lg:w-1/2 mt-6 lg:mt-0 fade-in delay-300">
+          <div class="relative max-w-md mx-auto p-4">
+            <!-- Enhanced glow effect with breathing animation -->
             <div
-              class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 rounded-xl blur-lg opacity-50 group-hover:opacity-70 animate-glow-subtle"
+              class="absolute inset-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 rounded-xl blur-2xl opacity-70 animate-pulse-glow"
             ></div>
 
             <div
@@ -385,20 +383,27 @@ onMounted(() => {
 /* Profile Image Glow Effects */
 @keyframes glow-pulse {
   0% {
-    opacity: 0.6;
-    transform: scale(0.98);
+    opacity: 0.5;
+    transform: scale(0.97);
+    filter: blur(15px);
   }
   50% {
-    opacity: 0.8;
-    transform: scale(1.01);
+    opacity: 0.9;
+    transform: scale(1.03);
+    filter: blur(20px);
   }
   100% {
-    opacity: 0.6;
-    transform: scale(0.98);
+    opacity: 0.5;
+    transform: scale(0.97);
+    filter: blur(15px);
   }
 }
 
-/* New subtle glow animation */
+.animate-pulse-glow {
+  animation: glow-pulse 4s ease-in-out infinite;
+  will-change: opacity, transform, filter;
+}
+
 @keyframes glow-subtle {
   0% {
     opacity: 0.4;

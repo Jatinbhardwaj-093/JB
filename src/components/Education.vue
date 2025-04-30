@@ -95,15 +95,15 @@ const isMobile = window.innerWidth < 768;
 
     <!-- Enhanced Mobile View -->
     <div class="block md:hidden">
-      <!-- Education timeline with styled cards - Fixed alignment -->
+      <!-- Education timeline with styled cards - Updated with dots above the line -->
       <div
-        class="education-timeline relative pl-8 before:absolute before:left-4 before:top-3 before:h-[calc(100%-32px)] before:w-[2px] before:bg-indigo-400 dark:before:bg-indigo-600"
+        class="education-timeline relative pl-8 before:absolute before:left-4 before:top-6 before:h-[calc(100%-24px)] before:w-[2px] before:bg-indigo-400 dark:before:bg-indigo-600"
       >
         <!-- CBSE Education -->
         <div class="education-card mb-6 relative">
-          <!-- Timeline dot - Adjusted position -->
+          <!-- Timeline dot - Repositioned to cross the line -->
           <div
-            class="absolute -left-8 top-4 h-4 w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
+            class="absolute -left-8 top-0 h-4 w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
           ></div>
 
           <!-- Card content -->
@@ -174,9 +174,9 @@ const isMobile = window.innerWidth < 768;
 
         <!-- IIT Madras Education -->
         <div class="education-card relative">
-          <!-- Timeline dot - Adjusted position -->
+          <!-- Timeline dot - Repositioned to cross the line -->
           <div
-            class="absolute -left-8 top-4 h-4 w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
+            class="absolute -left-8 top-0 h-4 w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
           ></div>
 
           <!-- Card content -->

@@ -64,9 +64,9 @@ watch(
     ref="navRef"
     class="navbar sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300"
   >
-    <div class="container mx-auto px-2 py-0">
-      <!-- Reduced padding for mobile view -->
-      <div class="flex justify-between items-center">
+    <div class="container mx-auto px-2 md:py-0 overflow-hidden">
+      <!-- Removed padding for mobile view -->
+      <div class="flex justify-between items-center h-[50px] md:h-auto">
         <!-- More compact logo on mobile -->
         <router-link
           to="/"
@@ -150,7 +150,7 @@ watch(
         <div class="md:hidden relative z-50">
           <button
             @click.stop="toggleMobileMenu"
-            class="mobile-menu-button block w-12 h-12 rounded-lg focus:outline-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            class="mobile-menu-button block w-10 h-10 rounded-lg focus:outline-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             aria-label="Toggle menu"
             style="touch-action: manipulation"
           >

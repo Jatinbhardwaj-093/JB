@@ -157,19 +157,19 @@ const setActiveTab = (tabId) => {
 
       <!-- Tab Navigation -->
       <div
-        class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden"
+        class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden "
         :class="{
           'bg-white': themeStore.theme === 'light',
           'bg-gray-900': themeStore.theme === 'dark',
         }"
       >
         <div class="overflow-x-auto no-scrollbar">
-          <div class="flex space-x-2 w-max min-w-full px-1">
+          <div class="flex space-x-3 w-max min-w-full px-2 py-1">
             <button
               v-for="tab in tabs"
               :key="tab.id"
               @click="setActiveTab(tab.id)"
-              class="px-4 py-2 rounded-lg text-sm font-medium min-w-[90px] transition-all duration-300"
+              class="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex-shrink-0"
               :class="{
                 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300':
                   activeTab === tab.id,
@@ -179,6 +179,30 @@ const setActiveTab = (tabId) => {
             >
               {{ tab.title }}
             </button>
+          </div>
+        </div>
+
+        <!-- Right scroll indicator arrow -->
+        <div
+          class="absolute right-1 top-1/2 transform -translate-y-1/2 z-10 pointer-events-none"
+        >
+          <div
+            class="flex items-center justify-center h-8 w-8 bg-gradient-to-l from-white dark:from-gray-900 to-transparent pr-1"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-indigo-500 dark:text-indigo-400 animate-pulse-gentle"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </div>
         </div>
       </div>
@@ -327,5 +351,22 @@ button.bg-indigo-100::after {
 /* Force content to stay within bounds */
 .about-view {
   position: relative;
+}
+
+/* Add gentle pulsing animation for the arrow */
+.animate-pulse-gentle {
+  animation: pulsegently 2s infinite ease-in-out;
+}
+
+@keyframes pulsegently {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
 }
 </style>

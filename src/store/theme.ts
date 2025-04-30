@@ -31,8 +31,6 @@ export const useThemeStore = defineStore("theme", {
       document.documentElement.setAttribute("data-theme", this.theme);
       // Save preference
       localStorage.setItem("theme", this.theme);
-
-      console.log("Applied theme:", this.theme);
     },
 
     initializeTheme() {
