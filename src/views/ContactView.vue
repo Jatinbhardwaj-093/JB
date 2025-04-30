@@ -33,11 +33,13 @@ const submitForm = () => {
     </div>
 
     <!-- Mobile Version - Custom Design -->
-    <div class="block md:hidden min-h-screen"
-    :class="{
-      'bg-gray-50': themeStore.theme === 'light',
-      'bg-gray-900': themeStore.theme === 'dark',
-    }">
+    <div
+      class="block md:hidden min-h-screen"
+      :class="{
+        'bg-gray-50': themeStore.theme === 'light',
+        'bg-gray-900': themeStore.theme === 'dark',
+      }"
+    >
       <!-- Header -->
       <!-- Header with wavy background -->
       <div class="relative overflow-hidden bg-indigo-600">
@@ -89,9 +91,12 @@ const submitForm = () => {
                 />
               </svg>
             </div>
-            <h3 class="text-sm font-medium text-gray-900"
-            :class="{
-              'text-white': themeStore.theme === 'dark',}">
+            <h3
+              class="text-sm font-medium text-gray-900"
+              :class="{
+                'text-white': themeStore.theme === 'dark',
+              }"
+            >
               Email
             </h3>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -118,9 +123,12 @@ const submitForm = () => {
                 />
               </svg>
             </div>
-            <h3 class="text-sm font-medium text-gray-900"
-            :class="{
-              'text-white': themeStore.theme === 'dark',}">
+            <h3
+              class="text-sm font-medium text-gray-900"
+              :class="{
+                'text-white': themeStore.theme === 'dark',
+              }"
+            >
               LinkedIn
             </h3>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -278,7 +286,7 @@ const submitForm = () => {
         </div>
 
         <!-- Alternate Contact Info -->
-        <div class="mt-8 text-center">
+        <div class="mt-8 text-center pb-12">
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Prefer to reach out directly? Email me at
             <a

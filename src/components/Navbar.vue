@@ -139,19 +139,17 @@ watch(
           </button>
         </div>
 
-        <!-- Mobile menu button - more compact for mobile -->
-        <div
-          @click="toggleMobileMenu"
-          class="hamburger-wrapper md:hidden p-1 cursor-pointer"
-        >
+        <!-- Mobile menu button - making it larger and more clickable -->
+        <div class="md:hidden cursor-pointer">
           <button
-            class="mobile-menu-button flex items-center justify-center p-1 rounded-md focus:outline-none text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+            @click="toggleMobileMenu"
+            class="mobile-menu-button flex items-center justify-center p-2 rounded-md focus:outline-none text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800"
             aria-label="Toggle menu"
           >
             <svg
               v-if="!isMobileMenuOpen"
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 md:h-6 md:w-6"
+              class="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -166,7 +164,7 @@ watch(
             <svg
               v-else
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 md:h-6 md:w-6"
+              class="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -194,9 +192,31 @@ watch(
       }"
     >
       <div class="p-6 min-h-full flex flex-col">
-        <!-- Removed the duplicate close button div -->
+        <!-- Adding a close button at the top of the menu -->
+        <div class="flex justify-end mb-4">
+          <button
+            @click="closeMobileMenu"
+            class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
+            aria-label="Close menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 text-gray-600 dark:text-gray-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
 
-        <div class="flex flex-col space-y-5 mt-6 flex-grow">
+        <div class="flex flex-col space-y-5 mt-2 flex-grow">
           <router-link
             v-for="(link, index) in [
               { name: 'home', text: 'Home' },

@@ -241,7 +241,7 @@ const specializations = ref([
       </div>
 
       <!-- Social Links Bar -->
-      <div class="py-6 px-4 bg-gray-50 dark:bg-gray-800">
+      <div class="py-6 px-4 bg-gray-50 dark:bg-gray-800 mb-10">
         <div class="flex justify-around items-center">
           <a
             href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"

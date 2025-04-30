@@ -35,8 +35,8 @@ const setActiveTab = (tabId) => {
     <!-- Desktop Version -->
     <section
       class="hidden md:block py-8 md:py-12 lg:py-16"
-      :class=" {
-        'bg-gray-50' : themeStore.theme === 'light',
+      :class="{
+        'bg-gray-50': themeStore.theme === 'light',
         'bg-gray-900/30': themeStore.theme === 'dark',
       }"
     >
@@ -184,7 +184,7 @@ const setActiveTab = (tabId) => {
       </div>
 
       <!-- Tab Content -->
-      <div class="px-4 py-6">
+      <div class="px-4 py-6 pb-12">
         <!-- Experience Tab Content -->
         <div
           id="experience-content"

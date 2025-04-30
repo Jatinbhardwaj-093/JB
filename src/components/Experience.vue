@@ -168,10 +168,11 @@ const experiences = [
               :style="{ animationDelay: `${i * 100}ms` }"
             >
               <svg
-                class="h-4 w-4 text-indigo-600 dark:text-indigo-400 mr-2 mt-0.5 flex-shrink-0"
+                class="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-2 mt-0.5 flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                stroke-width="2.5"
               >
                 <path
                   stroke-linecap="round"
