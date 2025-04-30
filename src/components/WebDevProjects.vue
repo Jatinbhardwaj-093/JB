@@ -398,7 +398,7 @@ const handleImageError = (e: Event, projectId: number) => {
   left: 0;
   width: 0%;
   height: 2px;
-  background: linear-gradient(90deg, #4f46e5, #818cf8);
+  background: white; /* White underline */
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -407,7 +407,12 @@ const handleImageError = (e: Event, projectId: number) => {
 }
 
 .project-card:hover .project-title {
-  color: var(--title-hover, #4f46e5);
+  /* Remove gradient color change effect and text-shadow */
+  color: white; /* Keep text white */
+  /* Keep the underline effect only */
+  filter: drop-shadow(
+    0 1px 2px rgba(0, 0, 0, 0.3)
+  ); /* Light shadow for depth */
 }
 
 .tags-container span {
@@ -443,8 +448,6 @@ const handleImageError = (e: Event, projectId: number) => {
 }
 
 .project-card:hover .tags-container span {
-  background: var(--tag-bg-hover, #e0e7ff);
-  color: var(--tag-color-hover, #4f46e5);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px -2px rgba(79, 70, 229, 0.2);
 }
