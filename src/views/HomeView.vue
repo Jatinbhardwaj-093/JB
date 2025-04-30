@@ -83,7 +83,7 @@ const specializations = ref([
         >
           <a
             href="#portfolio"
-            class="bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
+            class="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-lg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,9 +104,20 @@ const specializations = ref([
       </div>
 
       <!-- Portfolio Section -->
-      <div id="portfolio" class="py-12 px-4 bg-white dark:bg-gray-900">
+      <div
+        id="portfolio"
+        class="py-12 px-4"
+        :class="{
+          'bg-gray-900': themeStore.theme === 'dark',
+          'bg-white': themeStore.theme === 'light',
+        }"
+      >
         <h2
-          class="text-2xl font-bold text-center mb-8 text-gray-900 dark:text-white"
+          class="text-2xl font-bold text-center mb-8"
+          :class="{
+            'text-white': themeStore.theme === 'dark',
+            'text-gray-900': themeStore.theme === 'light',
+          }"
         >
           My Work
         </h2>
@@ -115,7 +126,11 @@ const specializations = ref([
         <div class="space-y-6">
           <router-link
             to="/projects"
-            class="block bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            class="block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            :class="{
+              'bg-gray-800': themeStore.theme === 'dark',
+              'bg-gray-50': themeStore.theme === 'light',
+            }"
           >
             <div class="h-40 bg-indigo-600 flex items-center justify-center">
               <svg
@@ -134,18 +149,34 @@ const specializations = ref([
               </svg>
             </div>
             <div class="p-5">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                Web Projects
+              <h3
+                class="text-xl font-semibold"
+                :class="{
+                  'text-white': themeStore.theme === 'dark',
+                  'text-gray-900': themeStore.theme === 'light',
+                }"
+              >
+                Projects
               </h3>
-              <p class="text-gray-600 dark:text-gray-300 mt-2">
-                Check out my recent web development work and applications.
+              <p
+                class="mt-2"
+                :class="{
+                  'text-gray-300': themeStore.theme === 'dark',
+                  'text-gray-600': themeStore.theme === 'light',
+                }"
+              >
+                Check out my recent work and applications.
               </p>
             </div>
           </router-link>
 
           <router-link
             to="/about"
-            class="block bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            class="block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            :class="{
+              'bg-gray-800': themeStore.theme === 'dark',
+              'bg-gray-50': themeStore.theme === 'light',
+            }"
           >
             <div class="h-40 bg-purple-600 flex items-center justify-center">
               <svg
@@ -164,10 +195,22 @@ const specializations = ref([
               </svg>
             </div>
             <div class="p-5">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+              <h3
+                class="text-xl font-semibold"
+                :class="{
+                  'text-white': themeStore.theme === 'dark',
+                  'text-gray-900': themeStore.theme === 'light',
+                }"
+              >
                 About Me
               </h3>
-              <p class="text-gray-600 dark:text-gray-300 mt-2">
+              <p
+                class="mt-2"
+                :class="{
+                  'text-gray-300': themeStore.theme === 'dark',
+                  'text-gray-600': themeStore.theme === 'light',
+                }"
+              >
                 Learn more about my skills, experience and background.
               </p>
             </div>

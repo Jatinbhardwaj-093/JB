@@ -278,17 +278,20 @@ const getProficiencyText = (proficiency: number): string => {
       <!-- Mobile Skills View -->
       <div class="md:hidden">
         <div
-          class="p-5 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
+          class="p-3 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700"
         >
           <!-- Mobile toggle between list and grid view -->
-          <div class="flex justify-between items-center mb-5">
-            <h3 class="font-bold text-black dark:text-white">
+          <div class="flex justify-between items-center mb-3">
+            <h3
+              class="font-bold text-black"
+              :class="{ 'text-white': themeStore.theme === 'dark' }"
+            >
               Skills Overview
             </h3>
-            <div class="flex space-x-2">
+            <div class="flex space-x-1">
               <button
                 @click="isCompactView = false"
-                class="p-2 rounded-md"
+                class="p-1.5 rounded-md flex items-center justify-center"
                 :class="{
                   'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400':
                     !isCompactView,
@@ -313,7 +316,7 @@ const getProficiencyText = (proficiency: number): string => {
               </button>
               <button
                 @click="isCompactView = true"
-                class="p-2 rounded-md"
+                class="p-1.5 rounded-md flex items-center justify-center"
                 :class="{
                   'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400':
                     isCompactView,
@@ -341,11 +344,11 @@ const getProficiencyText = (proficiency: number): string => {
 
           <!-- Compact View (Tags) -->
           <div v-if="isCompactView" class="skill-cloud">
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-1.5">
               <div
                 v-for="(skill, index) in allSkills"
                 :key="index"
-                class="skill-badge flex items-center gap-1 px-3 py-1.5 rounded-full transition-all duration-300 hover:transform hover:scale-105"
+                class="skill-badge flex items-center gap-1 px-1.5 py-1 rounded-full transition-all duration-300 hover:transform hover:scale-105 w-auto"
                 :class="[
                   skill.proficiency >= 85
                     ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
@@ -354,7 +357,7 @@ const getProficiencyText = (proficiency: number): string => {
                     : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300',
                 ]"
               >
-                <div class="w-4 h-4 rounded-full overflow-hidden flex-shrink-0">
+                <div class="w-3 h-3 rounded-full overflow-hidden flex-shrink-0">
                   <img
                     :src="getImageUrl(skill.img)"
                     :alt="`${skill.name} icon`"
@@ -368,7 +371,7 @@ const getProficiencyText = (proficiency: number): string => {
 
           <!-- List View (Expandable) -->
           <div v-else>
-            <div class="space-y-4">
+            <div class="space-y-2">
               <div
                 v-for="(category, catIndex) in skillCategories"
                 :key="catIndex"
@@ -376,24 +379,29 @@ const getProficiencyText = (proficiency: number): string => {
               >
                 <!-- Category Header (Expandable) -->
                 <div
-                  class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 cursor-pointer"
+                  class="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700/50 cursor-pointer"
                   @click="
                     activeCategory =
                       activeCategory === category.title ? '' : category.title
                   "
                 >
-                  <div class="flex items-center space-x-2">
+                  <div class="flex items-center space-x-1.5">
                     <span
                       v-html="getCategoryIcon(category.icon)"
                       class="text-indigo-600"
                     ></span>
-                    <h4 class="font-medium text-black dark:text-white">
+                    <h4
+                      class="font-medium text-black text-sm"
+                      :class="{
+                        'text-white': themeStore.theme === 'dark',
+                      }"
+                    >
                       {{ category.title }}
                     </h4>
                   </div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 transition-transform"
+                    class="h-4 w-4 transition-transform"
                     :class="{
                       'transform rotate-180': activeCategory === category.title,
                     }"
@@ -413,7 +421,7 @@ const getProficiencyText = (proficiency: number): string => {
                 <!-- Skills List -->
                 <div
                   v-if="activeCategory === category.title"
-                  class="p-3 space-y-3 bg-white dark:bg-gray-800"
+                  class="p-2 space-y-2 bg-white dark:bg-gray-800"
                 >
                   <div
                     v-for="(skill, skillIndex) in category.skills"
@@ -422,7 +430,7 @@ const getProficiencyText = (proficiency: number): string => {
                   >
                     <div class="flex items-center mb-1">
                       <div
-                        class="w-6 h-6 rounded-md bg-gray-100 dark:bg-gray-700 p-1 mr-2"
+                        class="w-5 h-5 rounded-md bg-gray-100 dark:bg-gray-700 p-0.5 mr-1.5"
                       >
                         <img
                           :src="getImageUrl(skill.img)"
@@ -431,13 +439,13 @@ const getProficiencyText = (proficiency: number): string => {
                         />
                       </div>
                       <span
-                        class="text-sm font-medium text-black dark:text-white"
+                        class="text-xs font-medium text-black dark:text-white"
                         >{{ skill.name }}</span
                       >
                     </div>
 
                     <div
-                      class="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"
+                      class="h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"
                     >
                       <div
                         class="h-full bg-gradient-to-r transition-all duration-1000"
@@ -456,7 +464,7 @@ const getProficiencyText = (proficiency: number): string => {
       </div>
 
       <!-- Certification/Achievement Banner -->
-      <div class="mt-10 relative">
+      <div class="mt-6 md:mt-10 relative">
         <!-- Subtle glow effect -->
         <div
           class="absolute -inset-0.5 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-xl opacity-30 blur-sm"
@@ -464,25 +472,27 @@ const getProficiencyText = (proficiency: number): string => {
 
         <!-- Content container with border -->
         <div
-          class="relative bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-5 border-2 border-indigo-200 dark:border-indigo-700 flex items-center justify-between flex-wrap md:flex-nowrap gap-4 z-10"
+          class="relative bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-3 md:p-5 border-2 border-indigo-200 dark:border-indigo-700 flex items-center justify-between flex-wrap md:flex-nowrap gap-2 md:gap-4 z-10"
         >
           <div>
-            <h3 class="font-bold text-indigo-900 dark:text-indigo-300">
+            <h3
+              class="font-bold text-indigo-900 dark:text-indigo-300 text-sm md:text-base"
+            >
               Continuous Learning
             </h3>
-            <p class="text-sm text-gray-700 dark:text-gray-400">
+            <p class="text-xs md:text-sm text-gray-700 dark:text-gray-400">
               I'm constantly enhancing my skills through projects, online
               courses, and community engagement.
             </p>
           </div>
           <router-link
             to="/projects"
-            class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700 transition-all duration-300 shadow-md flex items-center space-x-1 whitespace-nowrap"
+            class="w-auto px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs hover:bg-indigo-700 transition-all duration-300 shadow-md flex items-center space-x-1 whitespace-nowrap"
           >
-            <span>See Projects</span>
+            <span>Projects</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
+              class="h-3 w-3"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

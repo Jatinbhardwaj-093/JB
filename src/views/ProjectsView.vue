@@ -5,31 +5,31 @@ import { ref, computed } from "vue";
 
 const themeStore = useThemeStore();
 
-// Projects data for mobile view
+// Projects data for mobile view - Updated with real projects only
 const projects = ref([
   {
     id: 1,
-    title: "Human Stress Prediction",
-    image: "../assets/images/WebDevProjects/HSP.png",
+    title: "Influencer-Sponsor Engagement Platform",
+    image: "/src/assets/images/WebDevProjects/ISEP.png",
     description:
-      "A machine learning model to predict stress levels based on physiological data.",
-    tags: ["ML", "Python", "TensorFlow", "Flask"],
-    link: "https://github.com/Jatinbhardwaj-093/Stress-Prediction",
+      "A comprehensive collaboration platform connecting influencers with sponsors and sponsorship opportunities.",
+    tags: ["HTML/CSS", "JavaScript", "Flask", "SQLite"],
+    link: "https://github.com/Jatinbhardwaj-093/Infulencer-Sponsor-Engagement-Platform",
   },
   {
     id: 2,
-    title: "ISEP Website",
-    image: "../assets/images/WebDevProjects/ISEP.png",
+    title: "HouseHold Service Platform",
+    image: "/src/assets/images/WebDevProjects/HSP.png",
     description:
-      "A responsive website for the International Student Exchange Program.",
-    tags: ["HTML/CSS", "JavaScript", "Bootstrap"],
-    link: "https://github.com/Jatinbhardwaj-093/ISEP",
+      "A booking service platform that helps users find and schedule household services with verified service providers.",
+    tags: ["Vue.js", "Flask", "SQLite", "Redis"],
+    link: "https://github.com/Jatinbhardwaj-093/HouseHold-Service-Platform",
   },
 ]);
 
 // Filter state
 const activeFilter = ref("all");
-const filters = ["all", "ML", "Web Dev", "UI/UX"];
+const filters = ["all", "Web Dev"];
 
 const setFilter = (filter) => {
   activeFilter.value = filter;
@@ -40,16 +40,10 @@ const filteredProjects = computed(() => {
   if (activeFilter.value === "all") return projects.value;
 
   return projects.value.filter((project) => {
-    if (activeFilter.value === "ML") {
+    if (activeFilter.value === "Web Dev") {
       return project.tags.some((tag) =>
-        ["ML", "Python", "TensorFlow"].includes(tag)
+        ["HTML/CSS", "JavaScript", "Vue.js", "Flask"].includes(tag)
       );
-    } else if (activeFilter.value === "Web Dev") {
-      return project.tags.some((tag) =>
-        ["HTML/CSS", "JavaScript", "Vue"].includes(tag)
-      );
-    } else if (activeFilter.value === "UI/UX") {
-      return project.tags.some((tag) => ["UI/UX", "Design"].includes(tag));
     }
     return true;
   });
@@ -64,7 +58,13 @@ const filteredProjects = computed(() => {
     </div>
 
     <!-- Mobile Version - Custom Design -->
-    <div class="block md:hidden min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div
+      class="block md:hidden min-h-screen"
+      :class="{
+        'bg-gray-50': themeStore.theme === 'light',
+        'bg-gray-900': themeStore.theme === 'dark',
+      }"
+    >
       <!-- Header with animated gradient background -->
       <div class="relative overflow-hidden">
         <div
@@ -77,15 +77,19 @@ const filteredProjects = computed(() => {
           <h1 class="text-3xl font-bold text-white mb-2">My Projects</h1>
           <div class="h-1 w-16 bg-white/70 mx-auto rounded-full mb-4"></div>
           <p class="text-white/90 text-sm max-w-md mx-auto">
-            A showcase of my work across web development, machine learning, and
-            data science.
+            Explore some of my latest web development projects, combining
+            elegant design with powerful functionality.
           </p>
         </div>
       </div>
 
       <!-- Filter tabs -->
       <div
-        class="sticky top-16 z-20 bg-white dark:bg-gray-900 shadow-sm px-3 py-3"
+        class="sticky top-16 z-20 shadow-sm px-3 py-3"
+        :class="{
+          'bg-white': themeStore.theme === 'light',
+          'bg-gray-900': themeStore.theme === 'dark',
+        }"
       >
         <div class="overflow-x-auto no-scrollbar">
           <div class="flex space-x-2 min-w-full w-max">
@@ -117,18 +121,17 @@ const filteredProjects = computed(() => {
             class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300"
           >
             <!-- Project image with overlay -->
-            <div class="relative h-48 overflow-hidden">
+            <div class="relative h-64 overflow-hidden group">
               <img
                 :src="project.image"
                 :alt="project.title"
-                class="w-full h-full object-cover"
-                onerror="this.src='https://via.placeholder.com/400x200?text=Project+Image'"
+                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               />
               <div
-                class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end"
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"
               >
-                <div class="p-4 w-full">
-                  <h3 class="text-lg font-bold text-white">
+                <div class="absolute inset-0 flex items-end p-6">
+                  <h3 class="text-2xl font-bold text-white project-title">
                     {{ project.title }}
                   </h3>
                 </div>
@@ -232,6 +235,96 @@ const filteredProjects = computed(() => {
 /* Filter button transitions */
 button {
   transition: all 0.2s ease;
+}
+
+/* Project title styling */
+.project-title {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.project-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #4f46e5, #818cf8);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .project-title::after {
+  width: 100%;
+}
+
+/* Card entrance animation */
+.bg-white,
+.dark\:bg-gray-800 {
+  animation: projectCardEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+}
+
+.bg-white:nth-child(1),
+.dark\:bg-gray-800:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.bg-white:nth-child(2),
+.dark\:bg-gray-800:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+@keyframes projectCardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image hover effect with parallax and shine */
+.group {
+  overflow: hidden;
+}
+
+.group::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  transform: skewX(-25deg);
+  z-index: 2;
+  transition: all 0.75s;
+  opacity: 0;
+}
+
+.group:hover::before {
+  animation: shine 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
 }
 
 /* Ensure image aspect ratio is maintained */

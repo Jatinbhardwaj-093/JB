@@ -10,7 +10,7 @@ onMounted(() => {
 
 <template>
   <main class="flex-grow">
-    <div class="pt-8 pb-4">
+    <div class="pt-2 pb-2">
       <Blogs />
     </div>
   </main>

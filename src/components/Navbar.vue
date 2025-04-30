@@ -10,13 +10,7 @@ const selectedTheme = ref<string>(
 );
 const isMobileMenuOpen = ref<boolean>(false);
 
-// Improved swipe detection variables
-let touchStartX = 0;
-let touchEndX = 0;
-let touchStartY = 0;
-let touchEndY = 0;
-const SWIPE_THRESHOLD = 70; // Reduced threshold for easier detection
-const SWIPE_ANGLE_THRESHOLD = 30; // Angle in degrees to determine horizontal swipe
+// Removed all swipe detection variables and functions
 
 const handleClickOutside = (event: MouseEvent) => {
   if (navRef.value && !navRef.value.contains(event.target as Node)) {
@@ -24,52 +18,14 @@ const handleClickOutside = (event: MouseEvent) => {
   }
 };
 
-// Improved touch event handlers for swipe detection
-const handleTouchStart = (event: TouchEvent) => {
-  touchStartX = event.changedTouches[0].screenX;
-  touchStartY = event.changedTouches[0].screenY;
-};
-
-const handleTouchEnd = (event: TouchEvent) => {
-  touchEndX = event.changedTouches[0].screenX;
-  touchEndY = event.changedTouches[0].screenY;
-  handleSwipe();
-};
-
-// Calculate swipe direction with improved angle detection
-const handleSwipe = () => {
-  const deltaX = touchStartX - touchEndX;
-  const deltaY = touchStartY - touchEndY;
-
-  // Calculate angle to determine if it's a horizontal swipe
-  const angle = Math.abs((Math.atan2(deltaY, deltaX) * 180) / Math.PI);
-  const isHorizontalSwipe =
-    angle <= SWIPE_ANGLE_THRESHOLD || angle >= 180 - SWIPE_ANGLE_THRESHOLD;
-
-  if (isHorizontalSwipe) {
-    // Left swipe (from right to left)
-    if (deltaX > SWIPE_THRESHOLD && !isMobileMenuOpen.value) {
-      isMobileMenuOpen.value = true;
-    }
-    // Right swipe (from left to right)
-    else if (deltaX < -SWIPE_THRESHOLD && isMobileMenuOpen.value) {
-      isMobileMenuOpen.value = false;
-    }
-  }
-};
-
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
-
-  // Add touch event listeners for all mobile devices
-  document.addEventListener("touchstart", handleTouchStart, { passive: true });
-  document.addEventListener("touchend", handleTouchEnd, { passive: true });
+  // Removed touch event listeners
 });
 
 onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
-  document.removeEventListener("touchstart", handleTouchStart);
-  document.removeEventListener("touchend", handleTouchEnd);
+  // Removed touch event listeners
 });
 
 const toggleMobileMenu = () => {
@@ -101,22 +57,29 @@ watch(
     ref="navRef"
     class="navbar sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300"
   >
-    <div class="container mx-auto px-4 py-3">
-      <!-- Reduced padding-y from py-4 to py-3 -->
+    <div class="container mx-auto px-2 py-0">
+      <!-- Reduced padding for mobile view -->
       <div class="flex justify-between items-center">
-        <!-- Updated to use the elegant cicada logo -->
-        <router-link to="/" class="logo-container flex items-center space-x-2">
-          <CicadaLogo :animate="true" />
+        <!-- More compact logo on mobile -->
+        <router-link
+          to="/"
+          class="logo-container flex items-center space-x-1 md:space-x-2"
+        >
+          <span class="scale-75 md:scale-100"
+            ><CicadaLogo :animate="true"
+          /></span>
           <span
-            class="text-xl font-bold text-black"
-            :class="{ 'text-white': themeStore.theme === 'dark' }"
+            class="text-base md:text-xl font-bold transition-colors duration-300"
+            :class="{
+              'text-white': themeStore.theme === 'dark',
+              'text-black': themeStore.theme === 'light',
+            }"
             >JB</span
           >
         </router-link>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-6">
-          <!-- Reduced space-x from 8 to 6 -->
           <router-link
             v-for="(link, index) in [
               { name: 'home', text: 'Home' },
@@ -176,43 +139,47 @@ watch(
           </button>
         </div>
 
-        <!-- Mobile menu button -->
-        <button
+        <!-- Mobile menu button - more compact for mobile -->
+        <div
           @click="toggleMobileMenu"
-          class="mobile-menu-button md:hidden flex items-center justify-center min-w-[44px] min-h-[44px] p-0 m-0 rounded focus:outline-none text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400"
-          aria-label="Toggle menu"
+          class="hamburger-wrapper md:hidden p-1 cursor-pointer"
         >
-          <svg
-            v-if="!isMobileMenuOpen"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <button
+            class="mobile-menu-button flex items-center justify-center p-1 rounded-md focus:outline-none text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+            aria-label="Toggle menu"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-          <svg
-            v-else
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+            <svg
+              v-if="!isMobileMenuOpen"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 md:h-6 md:w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+            <svg
+              v-else
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 md:h-6 md:w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -221,6 +188,7 @@ watch(
       class="mobile-menu fixed md:hidden right-0 top-0 h-screen w-4/5 max-w-sm z-50 border-l overflow-y-auto transition-colors duration-300"
       :class="{
         'menu-open': isMobileMenuOpen,
+        'menu-closed': !isMobileMenuOpen,
         'bg-white border-gray-200': themeStore.theme === 'light',
         'bg-gray-900 border-gray-700': themeStore.theme === 'dark',
       }"
@@ -385,43 +353,42 @@ watch(
 /* Mobile menu button improvements for better tap response */
 .mobile-menu-button {
   position: relative;
-  z-index: 60; /* Make it above the overlay */
   transition: all 0.2s ease;
   touch-action: manipulation; /* Improve mobile tap */
   -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
-  padding: 8px; /* Sized for the hamburger icon only */
   display: flex; /* Ensure the button wraps around the SVG tightly */
   align-items: center;
   justify-content: center;
 }
 
-/* Remove the expanded tap area pseudo-element */
-/* Commented out to restrict the clickable area to just the button itself
-.mobile-menu-button::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  bottom: -8px;
-  left: -8px;
-  z-index: -1;
-}
-*/
-
 /* Mobile menu slide animation */
 .mobile-menu {
+  position: fixed;
+  right: 0;
+  top: 0;
   transform: translateX(100%);
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
   visibility: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden; /* For smoother animation in Safari */
-  perspective: 1000px;
+  max-width: 300px;
+  width: 80%; /* Use percentage instead of viewport units */
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 50;
+  touch-action: pan-y; /* Only allow vertical scrolling */
 }
 
 .mobile-menu.menu-open {
-  transform: translateX(0);
+  transform: translateX(0); /* Simplified transform */
   visibility: visible;
+}
+
+.menu-closed {
+  transform: translateX(100%);
+  visibility: hidden;
 }
 
 /* Background overlay animation */

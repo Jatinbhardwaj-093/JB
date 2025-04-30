@@ -88,6 +88,13 @@ const projects = ref([
 ]);
 
 const activeTab = ref("all");
+
+const handleImageError = (e: Event) => {
+  const target = e.target as HTMLImageElement;
+  if (target) {
+    target.style.display = "none";
+  }
+};
 </script>
 
 <template>
@@ -95,13 +102,22 @@ const activeTab = ref("all");
     <div class="container mx-auto px-4">
       <div class="mb-10 text-center">
         <h2
-          class="text-3xl font-bold text-black mb-2"
-          :class="{ 'text-white': themeStore.theme === 'dark' }"
+          class="text-3xl font-bold mb-2"
+          :class="{
+            'text-white': themeStore.theme === 'dark',
+            'text-black': themeStore.theme === 'light',
+          }"
         >
           Featured Projects
         </h2>
         <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full"></div>
-        <p class="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p
+          class="mt-4 max-w-2xl mx-auto"
+          :class="{
+            'text-gray-300': themeStore.theme === 'dark',
+            'text-gray-600': themeStore.theme === 'light',
+          }"
+        >
           Explore some of my latest web development projects, combining elegant
           design with powerful functionality.
         </p>
@@ -113,26 +129,32 @@ const activeTab = ref("all");
         <div
           v-for="(project, index) in projects"
           :key="project.id"
-          class="project-card bg-white dark:bg-gray-800/60 rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl border border-gray-100 dark:border-gray-700"
+          class="project-card rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl border"
           :class="{
             'transform-gpu hover:-translate-y-2': index % 2 === 0,
             'transform-gpu hover:translate-y-2': index % 2 !== 0,
+            'bg-gray-800/60 border-gray-700': themeStore.theme === 'dark',
+            'bg-white border-gray-100': themeStore.theme === 'light',
           }"
         >
           <!-- Image -->
-          <div class="relative overflow-hidden group">
+          <div class="relative overflow-hidden group min-h-[160px]">
             <img
               :src="project.image"
               :alt="`${project.title} screenshot`"
-              class="w-full h-64 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              class="w-full h-auto min-h-[160px] sm:h-48 md:h-64 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              loading="eager"
+              @error="handleImageError"
             />
             <div
               class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"
             ></div>
 
             <!-- Project title overlay -->
-            <div class="absolute inset-0 flex items-end p-6">
-              <h3 class="text-2xl font-bold text-white project-title">
+            <div class="absolute inset-0 flex items-end p-4 sm:p-6">
+              <h3
+                class="text-lg sm:text-xl md:text-2xl font-bold text-white project-title"
+              >
                 {{ project.title }}
               </h3>
             </div>
@@ -140,15 +162,23 @@ const activeTab = ref("all");
 
           <!-- Content -->
           <div class="p-5 space-y-3">
-            <p class="text-gray-700 dark:text-gray-300">
+            <p
+              :class="{
+                'text-gray-300': themeStore.theme === 'dark',
+                'text-gray-700': themeStore.theme === 'light',
+              }"
+            >
               {{ project.description }}
             </p>
 
             <!-- Features -->
             <div class="space-y-2">
               <h4
-                class="font-semibold text-black"
-                :class="{ 'text-white': themeStore.theme === 'dark' }"
+                class="font-semibold"
+                :class="{
+                  'text-white': themeStore.theme === 'dark',
+                  'text-black': themeStore.theme === 'light',
+                }"
               >
                 Key Features:
               </h4>
@@ -156,7 +186,11 @@ const activeTab = ref("all");
                 <li
                   v-for="(feature, i) in project.features"
                   :key="i"
-                  class="text-gray-700 dark:text-gray-300 text-sm"
+                  class="text-sm"
+                  :class="{
+                    'text-gray-300': themeStore.theme === 'dark',
+                    'text-gray-700': themeStore.theme === 'light',
+                  }"
                 >
                   {{ feature }}
                 </li>
@@ -166,28 +200,43 @@ const activeTab = ref("all");
             <!-- Technologies -->
             <div class="mt-3">
               <h4
-                class="font-semibold text-black mb-2"
-                :class="{ 'text-white': themeStore.theme === 'dark' }"
+                class="font-semibold mb-2"
+                :class="{
+                  'text-white': themeStore.theme === 'dark',
+                  'text-black': themeStore.theme === 'light',
+                }"
               >
                 Technologies Used:
               </h4>
-              <div class="flex flex-wrap gap-2 tags-container">
+              <div class="flex flex-wrap gap-1.5 tags-container">
                 <div
                   v-for="(tech, i) in project.technologies"
                   :key="i"
-                  class="tech-badge group flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-gray-700/70 rounded-full"
+                  class="tech-badge group flex items-center gap-1 px-1.5 py-1 rounded-full"
+                  :class="{
+                    'bg-gray-700/70': themeStore.theme === 'dark',
+                    'bg-gray-100': themeStore.theme === 'light',
+                  }"
                 >
                   <div
-                    class="w-6 h-6 rounded-md overflow-hidden flex items-center justify-center bg-white dark:bg-gray-800"
+                    class="w-4 h-4 rounded-md overflow-hidden flex items-center justify-center"
+                    :class="{
+                      'bg-gray-800': themeStore.theme === 'dark',
+                      'bg-white': themeStore.theme === 'light',
+                    }"
                   >
                     <img
                       :src="getIconUrl(tech.img)"
                       :alt="`${tech.name} icon`"
-                      class="w-5 h-5 object-contain"
+                      class="w-4 h-4 object-contain"
                     />
                   </div>
                   <span
-                    class="text-xs font-medium text-gray-700 dark:text-gray-300"
+                    class="text-xs font-medium"
+                    :class="{
+                      'text-gray-300': themeStore.theme === 'dark',
+                      'text-gray-700': themeStore.theme === 'light',
+                    }"
                     >{{ tech.name }}</span
                   >
                 </div>
@@ -196,7 +245,11 @@ const activeTab = ref("all");
 
             <!-- Links -->
             <div
-              class="pt-3 mt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center"
+              class="pt-3 mt-3 border-t flex justify-between items-center"
+              :class="{
+                'border-gray-700': themeStore.theme === 'dark',
+                'border-gray-100': themeStore.theme === 'light',
+              }"
             >
               <div class="flex space-x-3">
                 <a
@@ -205,7 +258,13 @@ const activeTab = ref("all");
                   :href="link.url"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="link-button p-2 rounded-full transition-colors duration-300 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 dark:text-gray-400 dark:hover:text-indigo-400 dark:hover:bg-gray-700"
+                  class="link-button p-2 rounded-full transition-colors duration-300"
+                  :class="{
+                    'text-gray-400 hover:text-indigo-400 hover:bg-gray-700':
+                      themeStore.theme === 'dark',
+                    'text-gray-600 hover:text-indigo-600 hover:bg-indigo-50':
+                      themeStore.theme === 'light',
+                  }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
                 >
                   <i :class="link.icon" class="text-lg"></i>
@@ -724,5 +783,28 @@ h2.text-3xl {
     transform: scaleX(1);
     opacity: 1;
   }
+}
+
+/* Ensure images display correctly on mobile */
+@media (max-width: 640px) {
+  .project-card img {
+    display: block !important; /* Force display in case error handler hides it */
+    min-height: 160px;
+    max-height: 200px;
+    width: 100%;
+    object-position: center top;
+  }
+
+  .project-card .relative {
+    background-color: #1f1f1f; /* Fallback background if image fails */
+  }
+}
+
+/* Base image styling enhancements */
+.project-card img {
+  max-width: 100%;
+  object-fit: cover;
+  backface-visibility: hidden; /* Prevents glitches during animation */
+  will-change: transform; /* Optimizes for animation */
 }
 </style>
