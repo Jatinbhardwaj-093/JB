@@ -1,19 +1,19 @@
 <template>
   <div
-    class="app-container min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500"
+    class="app-container min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500"
   >
     <!-- Theme transition animation overlay -->
     <ThemeTransition />
 
     <Navbar />
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-8 flex-grow">
       <router-view v-slot="{ Component }">
         <transition name="page-fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
     </main>
-    <footer class="py-6 mt-16 border-t border-gray-200 dark:border-gray-700">
+    <footer class="py-6 border-t border-gray-200 dark:border-gray-700 mt-auto">
       <div
         class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400"
       >

@@ -106,7 +106,7 @@ function handleHoverEnd() {
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <!-- Left Wing - butterfly style with fold line between top and bottom halves -->
+      <!-- Left Wing - more realistic cicada style -->
       <g
         :style="{
           transform: leftWingTransform,
@@ -117,39 +117,19 @@ function handleHoverEnd() {
             's cubic-bezier(0.34, 1.56, 0.64, 1)',
         }"
       >
-        <!-- Main butterfly wing shape - left top half -->
+        <!-- Main cicada wing shape - left -->
         <path
-          d="M44 40 C35 30, 25 25, 15 35 C10 40, 12 45, 15 48 C25 55, 35 45, 44 40"
-          fill="transparent"
+          d="M44 40 C35 28, 20 20, 10 35 C5 42, 8 48, 12 52 C20 58, 35 45, 44 40"
+          :fill="fillColor"
           :stroke="outlineColor"
           stroke-width="1.5"
           class="wing-element"
         />
 
-        <!-- Left bottom half -->
+        <!-- Wing veins - more detailed cicada style -->
         <path
-          d="M44 40 C35 45, 25 55, 18 65 C15 70, 20 72, 25 68 C35 60, 40 50, 44 40"
-          fill="transparent"
-          :stroke="outlineColor"
-          stroke-width="1.5"
-          class="wing-element"
-        />
-
-        <!-- Fold line between upper and lower wing -->
-        <path
-          d="M44 40 L15 45"
-          fill="none"
-          :stroke="outlineColor"
-          stroke-opacity="0.9"
-          stroke-width="1.0"
-          stroke-linecap="round"
-          class="fold-line"
-        />
-
-        <!-- Wing veins - butterfly style -->
-        <path
-          d="M44 40 L35 32 M44 40 L30 30 M44 40 L25 35 M44 40 L18 40
-           M44 40 L30 50 M44 40 L25 60 M44 40 L22 65"
+          d="M44 40 L35 30 M44 40 L28 28 M44 40 L22 33 M44 40 L15 40
+           M44 40 L25 45 M44 40 L20 50 M44 40 L15 52"
           fill="none"
           :stroke="outlineColor"
           stroke-opacity="0.7"
@@ -157,42 +137,26 @@ function handleHoverEnd() {
           stroke-linecap="round"
         />
 
-        <!-- Wing decorative spots -->
-        <circle
-          cx="30"
-          cy="35"
-          r="1.2"
+        <!-- Wing membrane pattern -->
+        <path
+          d="M30 35 Q25 37, 20 42 Q18 45, 20 47 Q25 50, 30 45 Q32 42, 30 35"
+          :fill="fillColor"
           :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
+          stroke-opacity="0.4"
+          stroke-width="0.6"
         />
-        <circle
-          cx="28"
-          cy="45"
-          r="1.0"
+
+        <!-- Wing texture lines -->
+        <path
+          d="M15 45 Q25 42, 35 35 M18 48 Q27 45, 37 38"
+          fill="none"
           :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
-        />
-        <circle
-          cx="25"
-          cy="55"
-          r="1.0"
-          :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
-        />
-        <circle
-          cx="35"
-          cy="40"
-          r="0.8"
-          :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
+          stroke-opacity="0.3"
+          stroke-width="0.5"
         />
       </g>
 
-      <!-- Right Wing - butterfly style with fold line between top and bottom halves -->
+      <!-- Right Wing - more realistic cicada style -->
       <g
         :style="{
           transform: rightWingTransform,
@@ -203,39 +167,19 @@ function handleHoverEnd() {
             's cubic-bezier(0.34, 1.56, 0.64, 1)',
         }"
       >
-        <!-- Main butterfly wing shape - right top half -->
+        <!-- Main cicada wing shape - right -->
         <path
-          d="M56 40 C65 30, 75 25, 85 35 C90 40, 88 45, 85 48 C75 55, 65 45, 56 40"
-          fill="transparent"
+          d="M56 40 C65 28, 80 20, 90 35 C95 42, 92 48, 88 52 C80 58, 65 45, 56 40"
+          :fill="fillColor"
           :stroke="outlineColor"
           stroke-width="1.5"
           class="wing-element"
         />
 
-        <!-- Right bottom half -->
+        <!-- Wing veins - more detailed cicada style -->
         <path
-          d="M56 40 C65 45, 75 55, 82 65 C85 70, 80 72, 75 68 C65 60, 60 50, 56 40"
-          fill="transparent"
-          :stroke="outlineColor"
-          stroke-width="1.5"
-          class="wing-element"
-        />
-
-        <!-- Fold line between upper and lower wing -->
-        <path
-          d="M56 40 L85 45"
-          fill="none"
-          :stroke="outlineColor"
-          stroke-opacity="0.9"
-          stroke-width="1.0"
-          stroke-linecap="round"
-          class="fold-line"
-        />
-
-        <!-- Wing veins - butterfly style -->
-        <path
-          d="M56 40 L65 32 M56 40 L70 30 M56 40 L75 35 M56 40 L82 40
-           M56 40 L70 50 M56 40 L75 60 M56 40 L78 65"
+          d="M56 40 L65 30 M56 40 L72 28 M56 40 L78 33 M56 40 L85 40
+           M56 40 L75 45 M56 40 L80 50 M56 40 L85 52"
           fill="none"
           :stroke="outlineColor"
           stroke-opacity="0.7"
@@ -243,117 +187,135 @@ function handleHoverEnd() {
           stroke-linecap="round"
         />
 
-        <!-- Wing decorative spots -->
-        <circle
-          cx="70"
-          cy="35"
-          r="1.2"
+        <!-- Wing membrane pattern -->
+        <path
+          d="M70 35 Q75 37, 80 42 Q82 45, 80 47 Q75 50, 70 45 Q68 42, 70 35"
+          :fill="fillColor"
           :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
+          stroke-opacity="0.4"
+          stroke-width="0.6"
         />
-        <circle
-          cx="72"
-          cy="45"
-          r="1.0"
+
+        <!-- Wing texture lines -->
+        <path
+          d="M85 45 Q75 42, 65 35 M82 48 Q73 45, 63 38"
+          fill="none"
           :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
-        />
-        <circle
-          cx="75"
-          cy="55"
-          r="1.0"
-          :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
-        />
-        <circle
-          cx="65"
-          cy="40"
-          r="0.8"
-          :stroke="outlineColor"
-          stroke-width="0.8"
-          fill="transparent"
+          stroke-opacity="0.3"
+          stroke-width="0.5"
         />
       </g>
 
-      <!-- Body - slightly refined for butterfly appearance -->
+      <!-- Second pair of wings (underneath) -->
       <path
-        d="M50 62 L50 34 Q50 30, 53 30 L57 30 Q60 30, 60 34 L60 44 Q60 52, 55 57 L50 62 Q45 57, 40 52 L40 34 Q40 30, 43 30 L47 30 Q50 30, 50 34"
-        fill="transparent"
+        d="M44 42 C40 45, 35 55, 38 60 C40 62, 45 60, 48 55 C49 52, 48 47, 44 42"
+        :fill="fillColor"
+        :stroke="outlineColor"
+        stroke-opacity="0.6"
+        stroke-width="0.8"
+      />
+      <path
+        d="M56 42 C60 45, 65 55, 62 60 C60 62, 55 60, 52 55 C51 52, 52 47, 56 42"
+        :fill="fillColor"
+        :stroke="outlineColor"
+        stroke-opacity="0.6"
+        stroke-width="0.8"
+      />
+
+      <!-- Body - more detailed cicada style -->
+      <path
+        d="M50 65 L50 35 Q50 30, 53 32 L57 32 Q60 30, 60 35 L60 45 Q60 55, 55 60 L50 65 Q45 60, 40 55 L40 35 Q40 30, 43 32 L47 32 Q50 30, 50 35"
+        :fill="fillColor"
         :stroke="outlineColor"
         stroke-width="1.5"
       />
 
-      <!-- Head - outline only -->
+      <!-- Body segments -->
+      <path
+        d="M46 38 L54 38 M46 42 L54 42 M46 46 L54 46 M46 50 L54 50 M47 54 L53 54 M48 58 L52 58"
+        fill="none"
+        :stroke="outlineColor"
+        stroke-opacity="0.8"
+        stroke-width="0.8"
+      />
+
+      <!-- Head - more detailed -->
       <circle
         cx="50"
-        cy="30"
+        cy="32"
         r="5"
-        fill="transparent"
+        :fill="fillColor"
         :stroke="outlineColor"
         stroke-width="1.5"
       />
 
-      <!-- Eyes -->
-      <circle cx="48" cy="29" r="1.2" :fill="outlineColor" />
-      <circle cx="52" cy="29" r="1.2" :fill="outlineColor" />
-
-      <!-- Antennae - longer, curvier butterfly style -->
+      <!-- Head markings -->
       <path
-        d="M46 27 Q40 18, 38 20 Q37 22, 38 23"
+        d="M47 31 L53 31 M48 34 L52 34"
         fill="none"
         :stroke="outlineColor"
-        stroke-width="1.2"
-        stroke-linecap="round"
-      />
-      <path
-        d="M54 27 Q60 18, 62 20 Q63 22, 62 23"
-        fill="none"
-        :stroke="outlineColor"
-        stroke-width="1.2"
-        stroke-linecap="round"
+        stroke-opacity="0.8"
+        stroke-width="0.8"
       />
 
-      <!-- Legs - more delicate butterfly style -->
+      <!-- Eyes - cicada has large compound eyes -->
+      <circle cx="46" cy="30" r="2" :fill="outlineColor" opacity="0.8" />
+      <circle cx="54" cy="30" r="2" :fill="outlineColor" opacity="0.8" />
+
+      <!-- Antennae - thinner and longer for cicadas -->
       <path
-        d="M45 38 C43 40, 41 42, 38 43"
+        d="M47 28 Q43 22, 41 24 Q40 25, 41 27"
         fill="none"
         :stroke="outlineColor"
         stroke-width="1.0"
         stroke-linecap="round"
       />
       <path
-        d="M45 45 C43 47, 41 49, 38 50"
+        d="M53 28 Q57 22, 59 24 Q60 25, 59 27"
+        fill="none"
+        :stroke="outlineColor"
+        stroke-width="1.0"
+        stroke-linecap="round"
+      />
+
+      <!-- Legs - cicada has strong front legs -->
+      <path
+        d="M45 38 C40 39, 38 42, 35 45"
         fill="none"
         :stroke="outlineColor"
         stroke-width="1.0"
         stroke-linecap="round"
       />
       <path
-        d="M45 52 C43 54, 41 56, 38 57"
+        d="M45 45 C40 47, 38 49, 36 52"
         fill="none"
         :stroke="outlineColor"
         stroke-width="1.0"
         stroke-linecap="round"
       />
       <path
-        d="M55 38 C57 40, 59 42, 62 43"
+        d="M45 52 C42 54, 40 56, 38 59"
         fill="none"
         :stroke="outlineColor"
         stroke-width="1.0"
         stroke-linecap="round"
       />
       <path
-        d="M55 45 C57 47, 59 49, 62 50"
+        d="M55 38 C60 39, 62 42, 65 45"
         fill="none"
         :stroke="outlineColor"
         stroke-width="1.0"
         stroke-linecap="round"
       />
       <path
-        d="M55 52 C57 54, 59 56, 62 57"
+        d="M55 45 C60 47, 62 49, 64 52"
+        fill="none"
+        :stroke="outlineColor"
+        stroke-width="1.0"
+        stroke-linecap="round"
+      />
+      <path
+        d="M55 52 C58 54, 60 56, 62 59"
         fill="none"
         :stroke="outlineColor"
         stroke-width="1.0"
