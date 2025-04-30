@@ -29,7 +29,8 @@ const mlImg = computed(() =>
   <div :data-theme="themeStore.theme">
     <!-- Removed duplicate Hobbies heading -->
 
-    <div class="flex items-start justify-start gap-4 flex-wrap">
+    <!-- Changed to flex-col layout for all screen sizes -->
+    <div class="flex flex-col items-start justify-start gap-4">
       <div class="flex justify-start items-center gap-2">
         <div
           class="w-10 h-10 p-1 rounded-md shadow-md"
