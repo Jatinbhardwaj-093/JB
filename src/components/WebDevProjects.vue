@@ -142,7 +142,7 @@ const handleImageError = (e: Event) => {
             <img
               :src="project.image"
               :alt="`${project.title} screenshot`"
-              class="w-full h-auto min-h-[160px] sm:h-48 md:h-64 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              class="w-full  min-h-[160px] h-64 object-cover object-top transition-transform duration-700 group-hover:scale-105"
               loading="eager"
               @error="handleImageError"
             />

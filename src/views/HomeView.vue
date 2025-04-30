@@ -16,18 +16,18 @@ const specializations = ref([
 </script>
 
 <template>
-  <div>
+  <div class="w-full max-w-[100vw] overflow-x-hidden box-border">
     <!-- Desktop Version -->
     <div class="hidden md:block">
       <Intro />
     </div>
 
     <!-- Mobile Version - Custom Design -->
-    <div class="block md:hidden">
+    <div class="block md:hidden overflow-hidden">
       <!-- Hero Section with Immersive Background -->
-      <div class="relative">
+      <div class="relative w-full">
         <!-- Full-width background with gradient overlay -->
-        <div class="relative h-[60vh] overflow-hidden">
+        <div class="relative h-[60vh] w-full overflow-hidden">
           <div
             class="absolute inset-0 bg-gradient-to-b from-indigo-600/80 to-purple-800/90 z-0"
           ></div>
@@ -37,7 +37,7 @@ const specializations = ref([
 
           <!-- Centered content with animation -->
           <div
-            class="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center"
+            class="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center"
           >
             <h1 class="text-4xl font-bold text-white animate-fade-in-up">
               {{ firstName }}
@@ -63,8 +63,8 @@ const specializations = ref([
             </div>
           </div>
 
-          <!-- Bottom wave decoration -->
-          <div class="absolute bottom-0 left-0 w-full">
+          <!-- Bottom wave decoration with overflow hidden -->
+          <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1440 320"
@@ -342,5 +342,28 @@ html {
 .bg-white,
 .dark\:bg-gray-900 {
   transition: background-color 0.3s ease;
+}
+
+/* Prevent any content from creating horizontal scrollbars */
+div {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make sure SVGs and images don't overflow */
+svg,
+img {
+  max-width: 100%;
+}
+
+/* Override any problematic animations */
+@media (max-width: 767px) {
+  .animate-fade-in-up,
+  .animation-delay-200,
+  .animation-delay-400 {
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
 }
 </style>

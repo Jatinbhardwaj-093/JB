@@ -40,7 +40,7 @@ const setActiveTab = (tabId) => {
         'bg-gray-900/30': themeStore.theme === 'dark',
       }"
     >
-      <div class="container mx-auto px-4 md:px-6">
+      <div class="container mx-auto px-4 md:px-6 overflow-y-hidden">
         <!-- About Me Header -->
         <div class="mb-12 text-center">
           <h1
@@ -50,8 +50,10 @@ const setActiveTab = (tabId) => {
             About Me
           </h1>
           <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-4"></div>
-          <p class="text-gray-600 max-w-3xl mx-auto"
-          :class="{ 'text-gray-300': themeStore.theme === 'dark' }">
+          <p
+            class="text-gray-600 max-w-3xl mx-auto"
+            :class="{ 'text-gray-300': themeStore.theme === 'dark' }"
+          >
             I craft elegant solutions at the intersection of front-end design
             and back-end architecture. My analytical mindset and technical
             versatility enable me to transform complex problems into
@@ -125,7 +127,9 @@ const setActiveTab = (tabId) => {
     </section>
 
     <!-- Mobile Version - Custom Design -->
-    <section class="block md:hidden bg-gray-50 dark:bg-gray-900/30">
+    <section
+      class="block md:hidden bg-gray-50 dark:bg-gray-900/30 w-full overflow-hidden"
+    >
       <!-- Hero Banner -->
       <div class="relative bg-indigo-600 overflow-hidden">
         <div class="absolute inset-0 z-0">
@@ -153,8 +157,11 @@ const setActiveTab = (tabId) => {
 
       <!-- Tab Navigation -->
       <div
-        class="sticky top-16 z-20bg-gray-900 shadow-md px-2 py-3"
-        :class="{ 'bg-white': themeStore.theme === 'light'}"
+        class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden"
+        :class="{
+          'bg-white': themeStore.theme === 'light',
+          'bg-gray-900': themeStore.theme === 'dark',
+        }"
       >
         <div class="overflow-x-auto no-scrollbar">
           <div class="flex space-x-2 w-max min-w-full px-1">
@@ -186,10 +193,11 @@ const setActiveTab = (tabId) => {
             hidden: activeTab !== 'experience',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6"
-          >
-            <h2 class="text-xl font-bold text-gray-900 mb-4"
-            :class="{'text-white': themeStore.theme === 'dark'}">
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
+            <h2
+              class="text-xl font-bold text-gray-900 mb-4"
+              :class="{ 'text-white': themeStore.theme === 'dark' }"
+            >
               Experience
             </h2>
             <Experience />
@@ -205,8 +213,10 @@ const setActiveTab = (tabId) => {
           }"
         >
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4"
-            :class="{'text-white': themeStore.theme === 'dark'}">
+            <h2
+              class="text-xl font-bold text-gray-900 mb-4"
+              :class="{ 'text-white': themeStore.theme === 'dark' }"
+            >
               Skills & Expertise
             </h2>
             <div class="skills-container">
@@ -224,8 +234,10 @@ const setActiveTab = (tabId) => {
           }"
         >
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4"
-            :class="{'text-white': themeStore.theme === 'dark'}">
+            <h2
+              class="text-xl font-bold text-gray-900 mb-4"
+              :class="{ 'text-white': themeStore.theme === 'dark' }"
+            >
               Education
             </h2>
             <Education />
@@ -241,8 +253,10 @@ const setActiveTab = (tabId) => {
           }"
         >
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4"
-            :class="{'text-white': themeStore.theme === 'dark'}">
+            <h2
+              class="text-xl font-bold text-gray-900 mb-4"
+              :class="{ 'text-white': themeStore.theme === 'dark' }"
+            >
               Hobbies & Interests
             </h2>
             <Hobby />
@@ -267,8 +281,10 @@ const setActiveTab = (tabId) => {
 }
 
 /* Ensure consistent section styling */
-section {
-  overflow: hidden;
+section,
+div {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Hide scrollbar while keeping functionality */
@@ -306,5 +322,10 @@ button.bg-indigo-100::after {
     min-width: 0;
     flex: 1;
   }
+}
+
+/* Force content to stay within bounds */
+.about-view {
+  position: relative;
 }
 </style>

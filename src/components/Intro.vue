@@ -25,7 +25,7 @@ onMounted(() => {
 <template>
   <section class="py-4 md:py-6 lg:py-8">
     <!-- Further reduced vertical spacing for better mobile view -->
-    <div class="container mx-auto px-4 md:px-6">
+    <div class="container mx-auto px-4 md:px-6 overflow-y-hidden">
       <div
         class="flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-10"
       >

@@ -8,13 +8,13 @@ const themeStore = useThemeStore();
 
 <template>
   <div
-    class="py-8 md:py-14"
+    class="py-8 md:py-14 w-full max-w-[100vw] overflow-x-hidden"
     :class="{
       'bg-gray-50': themeStore.theme === 'light',
       'bg-gray-900': themeStore.theme === 'dark',
     }"
   >
-    <div class="container mx-auto px-4 max-w-6xl">
+    <div class="container mx-auto px-4 max-w-6xl overflow-hidden">
       <div class="text-center mb-14">
         <h1
           class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4"

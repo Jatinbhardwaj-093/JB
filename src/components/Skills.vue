@@ -167,8 +167,8 @@ const getProficiencyText = (proficiency: number): string => {
 </script>
 
 <template>
-  <section class="py-6">
-    <div class="container mx-auto px-4">
+  <section class="py-6 overflow-hidden">
+    <div class="container mx-auto px-4 overflow-hidden">
       <!-- Section Header -->
       <div class="mb-8 text-center">
         <h2
@@ -343,12 +343,12 @@ const getProficiencyText = (proficiency: number): string => {
           </div>
 
           <!-- Compact View (Tags) -->
-          <div v-if="isCompactView" class="skill-cloud">
-            <div class="flex flex-wrap gap-1.5">
+          <div v-if="isCompactView" class="skill-cloud overflow-x-hidden">
+            <div class="flex flex-wrap gap-1.5 w-full max-w-full">
               <div
                 v-for="(skill, index) in allSkills"
                 :key="index"
-                class="skill-badge flex items-center gap-1 px-1.5 py-1 rounded-full transition-all duration-300 hover:transform hover:scale-105 w-auto"
+                class="skill-badge flex items-center gap-1 px-1.5 py-1 rounded-full transition-all duration-300 hover:transform hover:scale-105"
                 :class="[
                   skill.proficiency >= 85
                     ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
