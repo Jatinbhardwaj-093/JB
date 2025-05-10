@@ -51,13 +51,12 @@ const setActiveTab = (tabId) => {
           </h1>
           <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-4"></div>
           <p
-            class="text-gray-600 max-w-3xl mx-auto"
-            :class="{ 'text-gray-300': themeStore.theme === 'dark' }"
+            class="text-gray-200 max-w-3xl mx-auto"
+            :class="{ 'text-gray-600': themeStore.theme === 'light' }"
           >
-            I craft elegant solutions at the intersection of front-end design
-            and back-end architecture. My analytical mindset and technical
-            versatility enable me to transform complex problems into
-            streamlined, user-centered applications.
+            I build effective web applications with strong front-end 
+            and back-end skills. I analyze problems thoroughly and
+            create practical software that's easy for people to use.
           </p>
         </div>
 

@@ -24,26 +24,17 @@ const isMobile = computed(() => {
 
 const experiences = [
   {
-    title: "Influencer-Sponsor Engagement Platform",
+    title: "Google Summer of Code @Sympy",
+    timeline: "May 2025 - Present",
     summary:
-      "A platform connecting influencers with sponsors, developed during my MAD-1 course.",
+      "Contributing to open source software development through Google Summer of Code from May 2025 to present.",
     points: [
-      "This project was developed as part of my MAD-1 course. I created a fully functional application to facilitate collaboration and deals between sponsors and influencers.",
-      "Few applications offer reliable services for sponsorship management. Despite being my first project, I focused on adding scalable features to the application.",
-      "I engaged with local influencers to understand their needs for a quick and easy sponsorship platform. Based on their feedback, I kept the UI simple and added a statistics feature.",
+      "Implementing a domain system for formal power series in SymPy, enhancing the ring_series module with PowerSeriesRing, PowerSeriesPolyRing, and PowerSeriesElement classes.",
+      "Developing efficient series expansions and domain integration for arithmetic over diverse coefficient domains (QQ, RR) with a robust API for Taylor expansions of functions like sin and exp.",
+      "Creating comprehensive documentation, examples, and unit tests to ensure reliability and ease of use for the new power series functionality.",
+      "Optimizing the ring_series module and fixing bugs to improve performance and integration with SymPy's core symbolic computation engine.",
     ],
     className: "border-l-indigo-600",
-  },
-  {
-    title: "HouseHold Services Platform",
-    summary:
-      "A service booking platform with robust pricing controls, built with advanced frameworks.",
-    points: [
-      "This project was developed as part of my MAD-2 course. This time, I used more advanced frameworks as part of the learning process.",
-      "One of the major issues addressed in this project is the difficulty in pricing between service providers and customers. I aimed to solve this issue within the application.",
-      "I eliminated the complexities of fluctuating prices and overpricing by allowing the service details to be managed by the admin, ensuring better control over pricing and services.",
-    ],
-    className: "border-l-purple-600",
   },
 ];
 </script>
@@ -58,15 +49,22 @@ const experiences = [
         class="rounded-lg overflow-hidden bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900/80 shadow-md"
       >
         <div class="border-l-4 p-5 relative" :class="exp.className">
-          <h3
-            class="text-xl font-bold mb-3"
-            :class="{
-              'text-gray-700': themeStore.theme === 'light',
-              'text-white': themeStore.theme === 'dark',
-            }"
-          >
-            {{ exp.title }}
-          </h3>
+          <div class="flex justify-between items-center mb-3">
+            <h3
+              class="text-xl font-bold"
+              :class="{
+                'text-gray-700': themeStore.theme === 'light',
+                'text-white': themeStore.theme === 'dark',
+              }"
+            >
+              {{ exp.title }}
+            </h3>
+            <span
+              class="text-sm font-medium px-3 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+            >
+              {{ exp.timeline }}
+            </span>
+          </div>
 
           <ul class="space-y-3">
             <li
@@ -149,8 +147,16 @@ const experiences = [
           </div>
         </div>
 
-        <!-- Brief Summary (Always visible) -->
-        <div class="px-4 pb-3 pt-0">
+        <!-- Brief Summary and Timeline (Always visible) -->
+        <div class="px-4 pb-1 pt-0">
+          <!-- Timeline badge -->
+          <div class="flex justify-start mb-2">
+            <span
+              class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+            >
+              {{ exp.timeline }}
+            </span>
+          </div>
           <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ exp.summary }}
           </p>

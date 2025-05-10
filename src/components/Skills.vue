@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watchEffect } from "vue";
 import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
+// Used to force re-render of skill images when theme changes
+const themeChanged = ref(0);
 
 // Define skill types for TypeScript
 interface Skill {
@@ -19,7 +21,28 @@ interface SkillCategory {
 
 // Import base URL for images
 const getImageUrl = (name: string) => {
+  // Check if we're in dark mode and the icon is either Flask or GitHub
+  if (
+    themeStore.theme === "dark" &&
+    (name === "Flask.png" || name === "GitHub.png")
+  ) {
+    // Use light version from Technology-Dark folder
+    const iconName =
+      name === "Flask.png" ? "flask-light.png" : "github-light.png";
+    return new URL(
+      `../assets/images/Technology-Dark/${iconName}`,
+      import.meta.url
+    ).href;
+  }
   return new URL(`../assets/images/${name}`, import.meta.url).href;
+};
+
+// Check if the image should have larger size in dark mode
+const shouldEnlargeIcon = (name: string) => {
+  return (
+    themeStore.theme === "dark" &&
+    (name === "Flask.png" || name === "GitHub.png")
+  );
 };
 
 // Updated skills data with proficiency levels (1-100)
@@ -121,6 +144,12 @@ onMounted(() => {
   }, 300);
 });
 
+// Watch for theme changes to update Flask and GitHub icons
+watchEffect(() => {
+  // When theme changes, increment to trigger re-render
+  themeChanged.value += themeStore.theme === "dark" ? 1 : 0;
+});
+
 // Get icon for each category
 const getCategoryIcon = (iconName: string) => {
   const icons: Record<string, string> = {
@@ -169,21 +198,6 @@ const getProficiencyText = (proficiency: number): string => {
 <template>
   <section class="py-6 overflow-hidden">
     <div class="container mx-auto px-4 overflow-hidden">
-      <!-- Section Header -->
-      <div class="mb-8 text-center">
-        <h2
-          class="text-3xl font-bold text-black mb-2"
-          :class="{ 'text-white': themeStore.theme === 'dark' }"
-        >
-          Technical Skills
-        </h2>
-        <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full"></div>
-        <p class="mt-4 text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          My technical expertise spans front-end, back-end, databases, and data
-          science. Here's how I rate myself in various technologies:
-        </p>
-      </div>
-
       <!-- Desktop Skills View -->
       <div class="hidden md:block">
         <!-- Category Navigation -->
@@ -237,12 +251,17 @@ const getProficiencyText = (proficiency: number): string => {
               >
                 <div class="flex items-center mb-2">
                   <div
-                    class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 p-2 shadow-md flex-shrink-0 mr-3"
+                    class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 shadow-md flex-shrink-0 mr-3"
+                    :class="{
+                      'p-2': !shouldEnlargeIcon(skill.img),
+                      'p-0': shouldEnlargeIcon(skill.img),
+                    }"
                   >
                     <img
-                      :src="getImageUrl(skill.img)"
+                      :src="getImageUrl(skill.img) + (themeChanged ? '' : '')"
                       :alt="`${skill.name} icon`"
-                      class="w-full h-full object-contain"
+                      class="w-full h-full object-contain scale-110"
+                      :class="{ 'scale-125': shouldEnlargeIcon(skill.img) }"
                     />
                   </div>
                   <div class="flex justify-between items-center w-full">
@@ -357,11 +376,18 @@ const getProficiencyText = (proficiency: number): string => {
                     : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300',
                 ]"
               >
-                <div class="w-3 h-3 rounded-full overflow-hidden flex-shrink-0">
+                <div
+                  :class="{
+                    'w-3 h-3': !shouldEnlargeIcon(skill.img),
+                    'w-4.5 h-4.5 -m-0.5': shouldEnlargeIcon(skill.img),
+                  }"
+                  class="rounded-full overflow-hidden flex-shrink-0"
+                >
                   <img
-                    :src="getImageUrl(skill.img)"
+                    :src="getImageUrl(skill.img) + (themeChanged ? '' : '')"
                     :alt="`${skill.name} icon`"
                     class="w-full h-full object-contain"
+                    :class="{ 'scale-110': shouldEnlargeIcon(skill.img) }"
                   />
                 </div>
                 <span class="text-xs font-medium">{{ skill.name }}</span>
@@ -430,12 +456,19 @@ const getProficiencyText = (proficiency: number): string => {
                   >
                     <div class="flex items-center mb-1">
                       <div
-                        class="w-5 h-5 rounded-md bg-gray-100 dark:bg-gray-700 p-0.5 mr-1.5"
+                        class="rounded-md bg-gray-100 dark:bg-gray-700 mr-1.5"
+                        :class="{
+                          'w-5 h-5 p-0.5': !shouldEnlargeIcon(skill.img),
+                          'w-6 h-6 p-0': shouldEnlargeIcon(skill.img),
+                        }"
                       >
                         <img
-                          :src="getImageUrl(skill.img)"
+                          :src="
+                            getImageUrl(skill.img) + (themeChanged ? '' : '')
+                          "
                           :alt="`${skill.name} icon`"
                           class="w-full h-full object-contain"
+                          :class="{ 'scale-110': shouldEnlargeIcon(skill.img) }"
                         />
                       </div>
                       <span
