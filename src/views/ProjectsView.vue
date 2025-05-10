@@ -1,16 +1,29 @@
 <script setup lang="ts">
-import WebDevProjects from "../components/WebDevProjects.vue";
+import Projects from "../components/Projects.vue";
 import { useThemeStore } from "../store/theme";
 import { ref, computed } from "vue";
 
 // Import the project images directly for reliable loading
 import isepImage from "../assets/images/WebDevProjects/ISEP.png";
 import hspImage from "../assets/images/WebDevProjects/HSP.png";
+import sympyImage from "../assets/images/WebDevProjects/sympy.png";
+import gsocImage from "../assets/images/WebDevProjects/gsoc.png";
 
 const themeStore = useThemeStore();
 
 // Projects data for mobile view - Updated with direct image imports
 const projects = ref([
+  {
+    id: 3,
+    title: "Google Summer of Code at SymPy",
+    image: sympyImage,
+    secondaryImage: gsocImage,
+    description:
+      "Implementing a formal power series domain system for SymPy to enhance its symbolic mathematics capabilities, with expected completion in Summer 2025.",
+    tags: ["Python", "SymPy", "Codecov"],
+    link: "https://github.com/sympy/sympy/pulls?q=author%3AJatinbhardwaj-093",
+    upcoming: true,
+  },
   {
     id: 1,
     title: "Influencer-Sponsor Engagement Platform",
@@ -33,7 +46,7 @@ const projects = ref([
 
 // Filter state
 const activeFilter = ref("all");
-const filters = ["all", "Web Dev"];
+const filters = ["all", "Web Dev", "Open Source"];
 
 const setFilter = (filter) => {
   activeFilter.value = filter;
@@ -49,6 +62,9 @@ const filteredProjects = computed(() => {
         ["HTML/CSS", "JavaScript", "Vue.js", "Flask"].includes(tag)
       );
     }
+    if (activeFilter.value === "Open Source") {
+      return project.id === 3; // SymPy project is open source
+    }
     return true;
   });
 });
@@ -58,7 +74,7 @@ const filteredProjects = computed(() => {
   <div>
     <!-- Desktop Version -->
     <div class="hidden md:block">
-      <WebDevProjects />
+      <Projects />
     </div>
 
     <!-- Mobile Version - Custom Design -->
@@ -126,11 +142,31 @@ const filteredProjects = computed(() => {
           >
             <!-- Project image with overlay -->
             <div class="relative h-64 overflow-hidden group">
-              <img
-                :src="project.image"
-                :alt="project.title"
-                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
+              <!-- Special dual image layout for GSoC+SymPy project -->
+              <template v-if="project.id === 3">
+                <div
+                  class="flex items-center justify-center w-full h-full px-0"
+                >
+                  <img
+                    :src="project.secondaryImage"
+                    alt="GSoC logo"
+                    class="w-1/2 h-full object-contain p-0 pr-1 transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <img
+                    :src="project.image"
+                    alt="SymPy logo"
+                    class="w-1/2 h-full object-contain p-0 pl-1 transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              </template>
+              <!-- Standard image for other projects -->
+              <template v-else>
+                <img
+                  :src="project.image"
+                  :alt="project.title"
+                  class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+              </template>
               <div
                 class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"
               >
@@ -139,6 +175,13 @@ const filteredProjects = computed(() => {
                     {{ project.title }}
                   </h3>
                 </div>
+              </div>
+              <!-- Upcoming badge -->
+              <div
+                v-if="project.upcoming"
+                class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
+              >
+                Upcoming
               </div>
             </div>
 
@@ -159,17 +202,22 @@ const filteredProjects = computed(() => {
                 </span>
               </div>
 
-              <!-- Project link -->
+              <!-- Project link - matched with desktop -->
               <a
                 :href="project.link"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-medium text-sm"
+                class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
               >
-                View Project
+                <span class="relative">
+                  View Project
+                  <span
+                    class="absolute bottom-0 left-0 w-full h-0.5 bg-current transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"
+                  ></span>
+                </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 ml-1"
+                  class="ml-1 h-4 w-4 transition-transform duration-300"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -227,9 +275,18 @@ const filteredProjects = computed(() => {
   background-size: 20px 20px;
 }
 
-/* Card hover effect */
+/* Card hover effect - matched with desktop */
 .rounded-xl {
-  transition: all 0.3s ease;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.dark\:bg-gray-800 {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.rounded-xl:hover {
+  transform: translateY(-12px) translateZ(10px) scale(1.01);
 }
 
 .rounded-xl:active {
@@ -241,7 +298,7 @@ button {
   transition: all 0.2s ease;
 }
 
-/* Project title styling */
+/* Project title styling - matched with desktop version */
 .project-title {
   position: relative;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -255,7 +312,7 @@ button {
   left: 0;
   width: 0%;
   height: 2px;
-  background: linear-gradient(90deg, #4f46e5, #818cf8);
+  background: white; /* White underline to match desktop */
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -263,10 +320,19 @@ button {
   width: 100%;
 }
 
-/* Card entrance animation */
+/* Add drop shadow on hover to match desktop */
+.group:hover .project-title {
+  color: white;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+/* Card entrance animation - matched with desktop */
 .bg-white,
 .dark\:bg-gray-800 {
   animation: projectCardEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bg-white:nth-child(1),
@@ -279,15 +345,28 @@ button {
   animation-delay: 0.4s;
 }
 
+.bg-white:nth-child(3),
+.dark\:bg-gray-800:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
 @keyframes projectCardEntrance {
   0% {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(60px) translateZ(-30px) rotateX(-10deg);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0) rotateX(0);
   }
+}
+
+/* Enhanced hover effect to match desktop */
+.bg-white:hover,
+.dark\:bg-gray-800:hover {
+  transform: translateY(-12px) translateZ(10px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Image hover effect with parallax and shine */
@@ -329,6 +408,48 @@ button {
     left: 150%;
     opacity: 0;
   }
+}
+
+/* View Project link animation - matched with desktop */
+.btn-view-project {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.btn-view-project:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2);
+}
+
+.btn-view-project span.relative {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+
+.btn-view-project:hover span.relative::after {
+  transform: scaleX(1);
+}
+
+.btn-view-project span.relative::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-view-project:hover svg {
+  transform: translateX(5px);
 }
 
 /* Ensure image aspect ratio is maintained */

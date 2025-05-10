@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, onMounted } from "vue";
 import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
-// Used to force re-render of technology icons when theme changes
-const themeChanged = ref(0);
 
 // Import project images directly
 import isepImage from "../assets/images/WebDevProjects/ISEP.png";
@@ -14,37 +12,22 @@ import gsocImage from "../assets/images/WebDevProjects/gsoc.png";
 
 // Helper function to get correct image URLs for technology icons
 const getIconUrl = (path) => {
-  // Special case for Flask, GitHub, and SymPy in dark theme
+  // Special cases for icons in dark theme
   if (themeStore.theme === "dark") {
+    // Special case for Flask in dark theme
     if (path === "Flask.png") {
-      // Using flask-light.png with higher quality
-      return new URL(
-        "../assets/images/Technology-Dark/flask-light.png",
-        import.meta.url
-      ).href;
-    }
-    if (path === "GitHub.png") {
-      // Using github-light.png for dark theme
-      return new URL(
-        "../assets/images/Technology-Dark/github-light.png",
-        import.meta.url
-      ).href;
-    }
-    // For SymPy, use an external URL since local file is damaged
-    if (path === "SymPy.png") {
-      // Use public SymPy logo from their official site
-      return "https://sympy.org/static/images/logo.png";
+      // Use the light Flask icon in dark theme
+      return new URL("../assets/images/Technology-Dark/flask-light.png", import.meta.url).href;
     }
   }
+  
+  // Special case for SymPy image (regardless of theme)
+  if (path === "SymPy.png") {
+    // Use public SymPy logo from their official site since local file might be damaged
+    return "https://sympy.org/static/images/logo.png";
+  }
+  
   return new URL(`../assets/images/${path}`, import.meta.url).href;
-};
-
-// Check if the image should have larger size in dark mode
-const shouldEnlargeIcon = (filename) => {
-  return (
-    themeStore.theme === "dark" &&
-    (filename === "Flask.png" || filename === "GitHub.png")
-  );
 };
 
 // Add direct references to image paths for better reliability
@@ -107,9 +90,9 @@ const projects = ref([
         icon: "bi bi-github",
       },
       {
-        type: "docs",
+        type: "drive",
         url: "https://drive.google.com/drive/folders/1SLRgwuTLKnKVfdY9br0idI0x_NHyb0Qn?usp=drive_link",
-        icon: "bi bi-file-earmark-text",
+        icon: "bi bi-filetype-doc",
       },
     ],
     features: [
@@ -139,9 +122,9 @@ const projects = ref([
         icon: "bi bi-github",
       },
       {
-        type: "docs",
+        type: "drive",
         url: "https://drive.google.com/drive/folders/1YR5UsPf4jtXYstgQJDPUFEjy33uew83I?usp=drive_link",
-        icon: "bi bi-file-earmark-text",
+        icon: "bi bi-filetype-doc",
       },
       {
         type: "figma",
@@ -177,37 +160,6 @@ const handleImageError = (e: Event, projectId: number) => {
     }
   }
 };
-
-// Watch for theme changes to update Flask and GitHub icons
-watchEffect(() => {
-  // When theme changes, increment to trigger re-render
-  themeChanged.value += themeStore.theme === "dark" ? 1 : 0;
-});
-
-// Error handling for technology icons
-const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
-  const target = e.target as HTMLImageElement;
-  console.error(`Technology icon failed to load: ${tech.name} (${tech.img})`);
-  if (target) {
-    // Set a colored background with the first letter of the technology as fallback
-    target.style.display = "none";
-    const parent = target.parentElement;
-    if (parent) {
-      parent.style.backgroundColor = "#4f46e5"; // Indigo color
-      parent.style.color = "white";
-      parent.style.display = "flex";
-      parent.style.alignItems = "center";
-      parent.style.justifyContent = "center";
-
-      // Create and append text node with first letter
-      const textNode = document.createElement("span");
-      textNode.textContent = tech.name.charAt(0);
-      textNode.style.fontSize = "10px";
-      textNode.style.fontWeight = "bold";
-      parent.appendChild(textNode);
-    }
-  }
-};
 </script>
 
 <template>
@@ -231,9 +183,8 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
             'text-gray-600': themeStore.theme === 'light',
           }"
         >
-          Discover my portfolio of innovative projects, from open source
-          contributions to full-stack applications, where clean code meets
-          creative design.
+          Explore some of my latest web development projects, combining elegant
+          design with powerful functionality.
         </p>
       </div>
 
@@ -339,45 +290,43 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
             </div>
 
             <!-- Technologies -->
-            <div class="mt-3">
+            <div
+              class="mt-5 rounded-lg tech-section"
+            >
               <h4
-                class="font-semibold mb-2"
+                class="text-lg font-semibold my-3 flex items-center"
                 :class="{
                   'text-white': themeStore.theme === 'dark',
                   'text-black': themeStore.theme === 'light',
                 }"
               >
-                Technologies Used:
+                Technologies Used
               </h4>
-              <div class="flex flex-wrap gap-1.5 tags-container">
+              <div class="flex flex-wrap gap-2 justify-center md:justify-start">
                 <div
                   v-for="(tech, i) in project.technologies"
                   :key="i"
-                  class="tech-badge group flex items-center gap-1 px-1.5 py-1 rounded-sm"
+                  class="tech-badge flex items-center gap-2 px-2 py-1 rounded-md transition-all duration-200 hover:translate-y-[-2px]"
                   :class="{
-                    'bg-gray-700/70': themeStore.theme === 'dark',
-                    'bg-gray-100': themeStore.theme === 'light',
+                    'hover:shadow-md': themeStore.theme === 'dark',
+                    'hover:shadow-sm': themeStore.theme === 'light',
                   }"
+                  :title="`${tech.name}`"
                 >
                   <div
-                    class="rounded-sm overflow-hidden flex items-center justify-center"
-                    :class="{
-                      'w-5 h-5 p-0.5': !shouldEnlargeIcon(tech.img),
-                      'w-6 h-6 p-0': shouldEnlargeIcon(tech.img),
-                    }"
+                    class="w-5 h-5 rounded-md overflow-hidden flex items-center justify-center"
                   >
                     <img
-                      :src="getIconUrl(tech.img) + (themeChanged ? '' : '')"
+                      :src="getIconUrl(tech.img)"
                       :alt="`${tech.name} icon`"
-                      class="w-full h-full object-contain"
-                      :class="{ 'scale-110': shouldEnlargeIcon(tech.img) }"
-                      @error="(e) => handleTechIconError(e, tech)"
+                      class="w-4 h-4 object-contain"
+                      loading="eager"
                     />
                   </div>
                   <span
                     class="text-xs font-medium"
                     :class="{
-                      'text-gray-300': themeStore.theme === 'dark',
+                      'text-gray-200': themeStore.theme === 'dark',
                       'text-gray-700': themeStore.theme === 'light',
                     }"
                     >{{ tech.name }}</span
@@ -403,9 +352,9 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
                   rel="noopener noreferrer"
                   class="link-button p-2 rounded-full transition-colors duration-300"
                   :class="{
-                    'text-gray-400 hover:text-indigo-400':
+                    'text-gray-400 hover:text-indigo-400 hover:bg-gray-700':
                       themeStore.theme === 'dark',
-                    'text-gray-600 hover:text-indigo-600':
+                    'text-gray-600 hover:text-indigo-600 hover:bg-indigo-50':
                       themeStore.theme === 'light',
                   }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
@@ -420,13 +369,10 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
                 rel="noopener noreferrer"
                 class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
               >
-                <span class="relative">
-                  View Project
-                  <!-- Animation is handled by CSS in .btn-view-project span.relative::after -->
-                </span>
+                View Project
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="ml-1 h-4 w-4 transition-transform duration-300"
+                  class="ml-1 h-4 w-4"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -546,45 +492,7 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
   ); /* Light shadow for depth */
 }
 
-.tags-container span {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: translateZ(0);
-  animation: tagEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-}
-
-.tags-container span:nth-child(1) {
-  animation-delay: 0.8s;
-}
-.tags-container span:nth-child(2) {
-  animation-delay: 0.9s;
-}
-.tags-container span:nth-child(3) {
-  animation-delay: 1s;
-}
-.tags-container span:nth-child(4) {
-  animation-delay: 1.1s;
-}
-.tags-container span:nth-child(5) {
-  animation-delay: 1.2s;
-}
-
-@keyframes tagEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(10px) scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.project-card:hover .tags-container span {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px -2px rgba(79, 70, 229, 0.2);
-}
+/* Simplified tech badge transitions */
 
 .btn-view-project {
   position: relative;
@@ -592,8 +500,6 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateZ(0);
   z-index: 1;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
 }
 
 .btn-view-project::before {
@@ -603,32 +509,28 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
   left: 0;
   width: 100%;
   height: 100%;
-  /* Background gradient removed */
+  background: linear-gradient(135deg, #4f46e5, #818cf8);
   opacity: 0;
   z-index: -1;
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-view-project:hover,
-.project-card:hover .btn-view-project {
-  /* Keeping text color as is instead of forcing white */
+.btn-view-project:hover {
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.btn-view-project:hover::before,
-.project-card:hover .btn-view-project::before {
-  /* Preventing background effect from showing */
-  opacity: 0;
+.btn-view-project:hover::before {
+  opacity: 1;
 }
 
 .btn-view-project svg {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-view-project:hover svg,
-.project-card:hover .btn-view-project svg {
+.btn-view-project:hover svg {
   transform: translateX(4px);
 }
 
@@ -764,35 +666,45 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
   }
 }
 
-/* Technology badges with pop effect */
+/* Technology badges with simplified effects */
 .tech-badge {
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation: fadeIn 0.5s ease-out both;
-  animation-delay: calc(var(--badge-index, 0) * 100ms + 800ms);
-  border: 1px solid transparent;
+  position: relative;
+  transition: all 0.2s ease;
+  overflow: hidden;
 }
 
 .tech-badge:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 4px 8px -4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
-/* Improve tech icon container sizing */
-.tech-badge .w-5 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.25rem;
+/* Technology section simplified */
+
+/* Technology section styling */
+.tech-section {
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px) scale(0.9);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
+  }
+}
+
+/* Simplified animation keyframes */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -803,38 +715,68 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.link-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.2) 0%,
+    rgba(99, 102, 241, 0) 70%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1;
+}
+
 .link-button:hover {
   transform: translateY(-3px);
-  /* No background color change on hover */
+}
+
+.link-button:hover::before {
+  width: 300%;
+  height: 300%;
 }
 
 .link-button:active {
   transform: translateY(0) scale(0.95);
 }
 
-/* View Project link animation - span underline effect */
-.btn-view-project span.relative {
+/* View Project link animation */
+a.inline-flex {
   position: relative;
-  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
-  padding-bottom: 2px;
 }
 
-.btn-view-project span.relative::after {
+a.inline-flex::after {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   width: 100%;
   height: 2px;
   background: currentColor;
   transform: scaleX(0);
-  transform-origin: left;
+  transform-origin: right;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.btn-view-project:hover svg,
-.project-card:hover .btn-view-project svg {
+a.inline-flex:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+a.inline-flex svg {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+a.inline-flex:hover svg {
   transform: translateX(5px);
 }
 
@@ -943,38 +885,5 @@ h2.text-3xl {
   object-fit: cover;
   backface-visibility: hidden; /* Prevents glitches during animation */
   will-change: transform; /* Optimizes for animation */
-}
-
-/* Button animation styles */
-.btn-view-project span.relative::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.project-card:hover .btn-view-project span.relative::after,
-.btn-view-project:hover span.relative::after {
-  transform: scaleX(1);
-  transition-delay: 0.1s;
-}
-
-/* Ensure mobile view gets the same animation experience as desktop */
-@media (max-width: 640px) {
-  .project-card:hover .btn-view-project {
-    /* Keeping text color as is instead of forcing white */
-    transform: translateY(-2px);
-  }
-
-  .project-card:hover .btn-view-project::before {
-    /* Preventing background effect from showing */
-    opacity: 0;
-  }
 }
 </style>
