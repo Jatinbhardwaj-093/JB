@@ -353,9 +353,9 @@ const handleImageError = (e: Event, projectId: number) => {
                   class="link-button p-2 rounded-full transition-colors duration-300"
                   :class="{
                     'text-gray-400 hover:text-indigo-400 hover:bg-gray-700':
-                      themeStore.theme === 'dark',
+                      themeStore.theme === 'dark' && link.type !== 'figma',
                     'text-gray-600 hover:text-indigo-600 hover:bg-indigo-50':
-                      themeStore.theme === 'light',
+                      themeStore.theme === 'light' && link.type !== 'figma',
                   }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
                 >
@@ -496,38 +496,30 @@ const handleImageError = (e: Event, projectId: number) => {
 
 .btn-view-project {
   position: relative;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: translateZ(0);
-  z-index: 1;
-}
-
-.btn-view-project::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #4f46e5, #818cf8);
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease-in-out;
 }
 
 .btn-view-project:hover {
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
 }
 
-.btn-view-project:hover::before {
-  opacity: 1;
+.btn-view-project::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease-in-out;
+}
+
+.btn-view-project:hover::after {
+  width: 100%;
 }
 
 .btn-view-project svg {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s ease-in-out;
 }
 
 .btn-view-project:hover svg {
@@ -712,26 +704,26 @@ const handleImageError = (e: Event, projectId: number) => {
 .link-button {
   position: relative;
   overflow: hidden;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .link-button::before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(
-    circle,
-    rgba(99, 102, 241, 0.2) 0%,
-    rgba(99, 102, 241, 0) 70%
-  );
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-    height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: -1;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .link-button:hover {
@@ -739,12 +731,36 @@ const handleImageError = (e: Event, projectId: number) => {
 }
 
 .link-button:hover::before {
-  width: 300%;
-  height: 300%;
+  opacity: 0.1;
+  transform: scale(1);
 }
 
 .link-button:active {
   transform: translateY(0) scale(0.95);
+}
+
+.link-button i {
+  position: relative;
+  z-index: 1;
+  font-size: 1.25rem;
+}
+
+/* Special styling for document and design tool icons */
+.link-button i.bi-filetype-doc {
+  font-size: 1.35rem;
+  transform: translateY(1px);
+}
+
+.link-button i.bi-figma {
+  font-size: 1.35rem;
+  color: #f24e1e; /* Figma's brand color */
+}
+
+/* Dark mode specific icon adjustments */
+:root[data-theme="dark"] .link-button i.bi-figma,
+.dark .link-button i.bi-figma,
+[data-theme="dark"] .link-button i.bi-figma {
+  color: #ff7262; /* Brighter version of Figma's color for dark mode */
 }
 
 /* View Project link animation */
