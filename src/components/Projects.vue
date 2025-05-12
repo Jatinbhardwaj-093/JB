@@ -17,17 +17,27 @@ const getIconUrl = (path) => {
     // Special case for Flask in dark theme
     if (path === "Flask.png") {
       // Use the light Flask icon in dark theme
-      return new URL("../assets/images/Technology-Dark/flask-light.png", import.meta.url).href;
+      return new URL(
+        "../assets/images/Technology-Dark/flask-light.png",
+        import.meta.url
+      ).href;
     }
   }
-  
+
   // Special case for SymPy image (regardless of theme)
   if (path === "SymPy.png") {
     // Use public SymPy logo from their official site since local file might be damaged
     return "https://sympy.org/static/images/logo.png";
   }
-  
+
   return new URL(`../assets/images/${path}`, import.meta.url).href;
+};
+
+// Get Google Doc icon based on theme
+const getGoogleDocIcon = () => {
+  return themeStore.theme === "dark"
+    ? "/JB-Portfolio/images/icons/google-docs-dark.svg"
+    : "/JB-Portfolio/images/icons/google-docs.svg";
 };
 
 // Add direct references to image paths for better reliability
@@ -290,9 +300,7 @@ const handleImageError = (e: Event, projectId: number) => {
             </div>
 
             <!-- Technologies -->
-            <div
-              class="mt-5 rounded-lg tech-section"
-            >
+            <div class="mt-5 rounded-lg tech-section">
               <h4
                 class="text-lg font-semibold my-3 flex items-center"
                 :class="{
@@ -359,11 +367,40 @@ const handleImageError = (e: Event, projectId: number) => {
                   }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
                 >
-                  <i :class="link.icon" class="text-lg"></i>
+                  <!-- Special case for Google Docs links -->
+                  <img
+                    v-if="link.type === 'drive'"
+                    :src="getGoogleDocIcon()"
+                    :alt="`${link.type} icon`"
+                    class="w-5 h-5 custom-doc-icon"
+                  />
+                  <i v-else :class="link.icon" class="text-lg"></i>
                 </a>
               </div>
 
+              <router-link
+                v-if="project.id === 2"
+                to = "projects/hsp"
+                class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
+              >
+                View Project
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ml-1 h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </router-link>
               <a
+                v-else
                 :href="project.links[0].url"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -749,6 +786,19 @@ const handleImageError = (e: Event, projectId: number) => {
 .link-button i.bi-filetype-doc {
   font-size: 1.35rem;
   transform: translateY(1px);
+}
+
+.custom-doc-icon {
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
+  transform: scale(1.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 2px;
+  overflow: visible;
+}
+
+.link-button:hover .custom-doc-icon {
+  transform: scale(1.35);
+  filter: drop-shadow(0px 3px 5px rgba(66, 133, 244, 0.4));
 }
 
 .link-button i.bi-figma {
