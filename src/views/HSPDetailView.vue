@@ -109,8 +109,36 @@ onMounted(() => {
 
 <template>
   <div class="container mx-auto px-4 py-4 min-h-screen">
-    <!-- Improved back button with gradient effect -->
-    <div class="flex justify-end mb-3">
+    <!-- Mobile floating back button (arrow only) - positioned below the navbar -->
+    <div class="fixed top-20 right-4 z-40 md:hidden">
+      <button
+        @click="goBack"
+        class="flex items-center justify-center w-10 h-10 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+        :class="{
+          'bg-blue-600 text-white': themeStore.theme === 'dark',
+          'bg-indigo-500 text-white': themeStore.theme === 'light',
+        }"
+        aria-label="Back to projects"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Desktop back button with gradient effect (hidden on mobile) -->
+    <div class="hidden md:flex justify-end mb-3">
       <button
         @click="goBack"
         class="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-lg transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-x-0.5"
@@ -686,7 +714,7 @@ onMounted(() => {
           }"
         >
           <h3
-            class="text-lg font-semibold mb-4 flex items-center"
+            class="text-xl font-semibold mb-6 flex items-center"
             :class="{
               'text-white': themeStore.theme === 'dark',
               'text-gray-900': themeStore.theme === 'light',
@@ -709,91 +737,149 @@ onMounted(() => {
             Project Resources
           </h3>
 
-          <div class="flex flex-wrap gap-4">
+          <!-- Completely redesigned resources section -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6"
+            :class="{
+              'opacity-100 transition-opacity duration-300': true,
+            }"
+          >
+            <!-- GitHub Link -->
             <a
               href="https://github.com/Jatinbhardwaj-093/HouseHold-Service-Platform"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center px-4 py-2 rounded-lg transition-all duration-300 shadow-sm hover:shadow"
+              class="resource-card flex items-center overflow-hidden group transition-all duration-300 ease-in-out"
               :class="{
-                'bg-gray-700 text-white hover:bg-gray-600':
+                'bg-gray-800 text-white border border-gray-700 hover:border-indigo-400':
                   themeStore.theme === 'dark',
-                'bg-white text-gray-800 hover:bg-gray-50 border border-gray-200':
+                'bg-white text-gray-800 shadow-md hover:shadow-lg border border-gray-100 hover:border-indigo-200':
                   themeStore.theme === 'light',
               }"
             >
-              <i class="bi bi-github mr-2 text-lg"></i>
-              GitHub Repository
+              <div class="resource-icon-container">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="resource-icon"
+                >
+                  <path
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                  />
+                </svg>
+              </div>
+              <div class="resource-content">
+                <h4 class="resource-title">GitHub Repository</h4>
+                <p class="resource-description">
+                  Source code and documentation
+                </p>
+                <div class="resource-arrow">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </div>
+              </div>
             </a>
+
+            <!-- Documentation Link -->
             <a
               href="https://drive.google.com/drive/folders/1YR5UsPf4jtXYstgQJDPUFEjy33uew83I?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center px-4 py-2 rounded-lg transition-all duration-300 shadow-sm hover:shadow"
+              class="resource-card flex items-center overflow-hidden group transition-all duration-300 ease-in-out"
               :class="{
-                'bg-gray-700 text-white hover:bg-gray-600':
+                'bg-gray-800 text-white border border-gray-700 hover:border-indigo-400':
                   themeStore.theme === 'dark',
-                'bg-white text-gray-800 hover:bg-gray-50 border border-gray-200':
+                'bg-white text-gray-800 shadow-md hover:shadow-lg border border-gray-100 hover:border-indigo-200':
                   themeStore.theme === 'light',
               }"
             >
-              <img
-                :src="
-                  themeStore.theme === 'dark'
-                    ? '/JB-Portfolio/images/icons/google-docs-dark.svg'
-                    : '/JB-Portfolio/images/icons/google-docs.svg'
-                "
-                alt="Documentation"
-                class="w-5 h-5 mr-2 doc-icon-detail"
-              />
-              Documentation
+              <div class="resource-icon-container">
+                <img
+                  src="/JB-Portfolio/images/icons/google-docs.svg"
+                  alt="Documentation"
+                  class="resource-icon"
+                  :class="{
+                    'invert-icon': themeStore.theme === 'dark',
+                  }"
+                />
+              </div>
+              <div class="resource-content">
+                <h4 class="resource-title">Documentation</h4>
+                <p class="resource-description">Project details and guides</p>
+                <div class="resource-arrow">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </div>
+              </div>
             </a>
+
+            <!-- Figma Design Link -->
             <a
               href="https://www.figma.com/design/a5MomTlXdFQ1qz7lAzog7E/Househod-Service-MAD-1?node-id=0-1&t=Xo1ho1DEgCnSpn03-1"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center px-4 py-2 rounded-lg transition-all duration-300 shadow-sm hover:shadow"
+              class="resource-card flex items-center overflow-hidden group transition-all duration-300 ease-in-out"
               :class="{
-                'bg-gray-700 text-white hover:bg-gray-600':
+                'bg-gray-800 text-white border border-gray-700 hover:border-indigo-400':
                   themeStore.theme === 'dark',
-                'bg-white text-gray-800 hover:bg-gray-50 border border-gray-200':
+                'bg-white text-gray-800 shadow-md hover:shadow-lg border border-gray-100 hover:border-indigo-200':
                   themeStore.theme === 'light',
               }"
             >
-              <div class="flex items-center">
-                <div class="figma-icon-wrapper mr-2 relative">
+              <div class="resource-icon-container">
+                <img
+                  src="/JB-Portfolio/images/icons/figma.svg"
+                  alt="Figma Design"
+                  class="resource-icon"
+                  :class="{
+                    'invert-icon': themeStore.theme === 'dark',
+                  }"
+                />
+              </div>
+              <div class="resource-content">
+                <h4 class="resource-title">Figma Design</h4>
+                <p class="resource-description">UI/UX prototypes and assets</p>
+                <div class="resource-arrow">
                   <svg
-                    width="16"
-                    height="24"
-                    viewBox="0 0 16 24"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="figma-icon"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    class="w-5 h-5"
                   >
                     <path
-                      d="M4 24C6.20914 24 8 22.2091 8 20V16H4C1.79086 16 0 17.7909 0 20C0 22.2091 1.79086 24 4 24Z"
-                      fill="#0ACF83"
-                    />
-                    <path
-                      d="M0 12C0 9.79086 1.79086 8 4 8H8V16H4C1.79086 16 0 14.2091 0 12Z"
-                      fill="#A259FF"
-                    />
-                    <path
-                      d="M0 4C0 1.79086 1.79086 0 4 0H8V8H4C1.79086 8 0 6.20914 0 4Z"
-                      fill="#F24E1E"
-                    />
-                    <path
-                      d="M8 0H12C14.2091 0 16 1.79086 16 4C16 6.20914 14.2091 8 12 8H8V0Z"
-                      fill="#FF7262"
-                    />
-                    <path
-                      d="M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z"
-                      fill="#1ABCFE"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                     />
                   </svg>
-                  <div class="figma-glow"></div>
                 </div>
-                <span>Figma Design</span>
               </div>
             </a>
           </div>
@@ -817,56 +903,164 @@ onMounted(() => {
 }
 
 .doc-icon-detail {
-  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
-  transform: scale(1.25);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 100%;
+  height: auto;
   border-radius: 2px;
-  overflow: visible;
-}
-
-a:hover .doc-icon-detail {
-  transform: scale(1.35);
-  filter: drop-shadow(0px 3px 5px rgba(66, 133, 244, 0.4));
 }
 
 /* Figma icon styling */
-.figma-icon-wrapper {
+.figma-icon {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modern resource card styling */
+.resource-card {
+  border-radius: 12px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  min-height: 90px;
+}
+
+.resource-icon-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  overflow: visible;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  padding: 12px;
   transition: all 0.3s ease;
 }
 
-.figma-icon {
-  z-index: 2;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.figma-glow {
-  position: absolute;
+.resource-icon {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  z-index: 1;
-  transform: scale(0);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-a:hover .figma-icon {
-  transform: scale(1.15);
+.invert-icon {
+  filter: invert(1) brightness(1.5);
 }
 
-a:hover .figma-glow {
-  transform: scale(1.2);
-  background: radial-gradient(
-    circle,
-    rgba(242, 78, 30, 0.2) 0%,
-    rgba(255, 114, 97, 0) 70%
-  );
-  box-shadow: 0 0 20px 2px rgba(242, 78, 30, 0.2);
+.resource-content {
+  padding: 16px 12px;
+  flex-grow: 1;
+  position: relative;
+}
+
+.resource-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+.resource-description {
+  font-size: 0.813rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.resource-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) translateX(5px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.resource-card:hover .resource-arrow {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+}
+
+.resource-card:hover .resource-icon {
+  transform: scale(1.1);
+}
+
+/* Add invert filter for dark mode icons */
+.invert {
+  filter: invert(1) brightness(1.5);
+}
+
+/* Mobile responsive enhancements for resource cards */
+@media (max-width: 640px) {
+  .resource-card {
+    min-height: 80px;
+  }
+
+  .resource-icon-container {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+  }
+
+  .resource-content {
+    padding: 12px 8px;
+  }
+
+  .resource-title {
+    font-size: 0.95rem;
+  }
+
+  .resource-description {
+    font-size: 0.75rem;
+  }
+}
+
+/* Floating back button styles */
+.fixed.top-20.right-4 button {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.fixed.top-20.right-4 button:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 640px) {
+  /* Add padding at top to account for floating button */
+  .container.mx-auto {
+    padding-top: 1rem;
+  }
+
+  /* Project header improvements */
+  .text-3xl {
+    font-size: 1.75rem;
+    line-height: 2rem;
+  }
+
+  /* Adjust image strip height for mobile */
+  .min-w-full.h-\[350px\] {
+    height: 250px;
+  }
+
+  /* Improve project links section for mobile */
+  .flex.flex-wrap.gap-3.md\:gap-4.lg\:gap-5.justify-center {
+    gap: 1.5rem !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  /* Enhanced resource cards on mobile */
+  .resource-card {
+    min-height: 70px;
+  }
+
+  .resource-content {
+    padding: 8px 12px;
+  }
+
+  .resource-description {
+    display: none;
+  }
 }
 </style>

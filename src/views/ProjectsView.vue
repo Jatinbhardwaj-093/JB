@@ -105,7 +105,7 @@ const filteredProjects = computed(() => {
 
       <!-- Filter tabs -->
       <div
-        class="sticky top-16 z-20 shadow-sm px-3 py-3"
+        class="sticky top-16 z-20 px-4 py-4 filter-tabs-container"
         :class="{
           'bg-white': themeStore.theme === 'light',
           'bg-gray-900': themeStore.theme === 'dark',
@@ -117,13 +117,14 @@ const filteredProjects = computed(() => {
               v-for="filter in filters"
               :key="filter"
               @click="setFilter(filter)"
-              class="px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap"
+              class="px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap select-none"
               :class="{
                 'bg-indigo-100 text-indigo-700 border border-indigo-200 dark:bg-indigo-900/60 dark:text-indigo-300 dark:border-indigo-700':
                   activeFilter === filter,
                 'bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700':
                   activeFilter !== filter,
               }"
+              style="transition: none; transform: none"
             >
               {{ filter === "all" ? "All Projects" : filter }}
             </button>
@@ -203,7 +204,32 @@ const filteredProjects = computed(() => {
               </div>
 
               <!-- Project link - matched with desktop -->
+              <router-link
+                v-if="project.id === 2"
+                to="/projects/hsp"
+                class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
+              >
+                <span class="relative">
+                  View Project
+                  <span
+                    class="absolute bottom-0 left-0 w-full h-0.5 bg-current transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"
+                  ></span>
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ml-1 h-4 w-4 transition-transform duration-300"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </router-link>
               <a
+                v-else
                 :href="project.link"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -293,9 +319,22 @@ const filteredProjects = computed(() => {
   transform: scale(0.98);
 }
 
-/* Filter button transitions */
-button {
+/* Filter buttons - removed hover transitions */
+/* button {
   transition: all 0.2s ease;
+} */
+
+/* Filter tab specific styles - disable hover effects */
+.flex.space-x-2.min-w-full.w-max button {
+  transition: none !important;
+  transform: none !important;
+  pointer-events: auto; /* Keep clickable */
+  cursor: pointer;
+}
+
+.flex.space-x-2.min-w-full.w-max button:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 /* Project title styling - matched with desktop version */
@@ -327,8 +366,8 @@ button {
 }
 
 /* Card entrance animation - matched with desktop */
-.bg-white,
-.dark\:bg-gray-800 {
+.bg-white:not(.filter-tabs-container),
+.dark\:bg-gray-800:not(.filter-tabs-container) {
   animation: projectCardEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) backwards;
   transform-style: preserve-3d;
   transform: translateZ(0);
@@ -421,7 +460,6 @@ button {
 
 .btn-view-project:hover {
   transform: translateY(-2px);
-  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2);
 }
 
 .btn-view-project span.relative {
@@ -442,7 +480,6 @@ button {
   left: 0;
   width: 100%;
   height: 2px;
-  background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -456,5 +493,26 @@ button {
 img {
   aspect-ratio: 16/9;
   object-fit: cover;
+}
+
+/* Prevent animations and transformations on the filter tabs container */
+.filter-tabs-container {
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.filter-tabs-container:hover {
+  transform: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Enhanced hover effect to match desktop */
+.bg-white:hover,
+.dark\:bg-gray-800:hover {
+  transform: translateY(-12px) translateZ(10px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 </style>

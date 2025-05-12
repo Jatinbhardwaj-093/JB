@@ -390,7 +390,7 @@ const handleImageError = (e: Event, projectId: number) => {
 
               <router-link
                 v-if="project.id === 2"
-                to="projects/hsp"
+                to="/projects/hsp"
                 class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
               >
                 View Project
@@ -558,7 +558,6 @@ const handleImageError = (e: Event, projectId: number) => {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: currentColor;
   transition: all 0.3s ease-in-out;
   opacity: 0;
 }
@@ -968,6 +967,59 @@ h2.text-3xl {
 
   .project-card .relative {
     background-color: #1f1f1f; /* Fallback background if image fails */
+  }
+
+  /* Enhanced mobile view for project links */
+  .btn-view-project {
+    padding: 0.625rem 1rem;
+    border-radius: 0.375rem;
+    background-color: rgba(79, 70, 229, 0.1);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dark .btn-view-project,
+  [data-theme="dark"] .btn-view-project {
+    background-color: rgba(79, 70, 229, 0.15);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-view-project::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  .btn-view-project:active {
+    transform: translateY(1px);
+  }
+
+  /* Fix flex layout on small screens */
+  .project-card .pt-3.mt-3.border-t {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .project-card .pt-3.mt-3.border-t > div:first-child {
+    flex: 1 0 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-card .pt-3.mt-3.border-t > a,
+  .project-card .pt-3.mt-3.border-t > router-link {
+    width: 100%;
+    justify-content: center;
   }
 }
 
