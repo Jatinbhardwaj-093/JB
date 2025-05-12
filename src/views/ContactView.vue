@@ -66,7 +66,7 @@ const submitForm = () => {
       </div>
 
       <!-- Contact Options -->
-      <div class="px-4 py-8">
+      <div class="py-8">
         <div class="grid grid-cols-2 gap-4 mb-8">
           <!-- Email Option -->
           <a
@@ -142,7 +142,10 @@ const submitForm = () => {
           v-if="!formSubmitted"
           class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5"
         >
-          <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 class="text-xl font-bold mb-4"
+          :class= "{ 'text-white': themeStore.theme === 'dark',
+            'text-black': themeStore.theme === 'light'
+           }">
             Send a Message
           </h2>
 

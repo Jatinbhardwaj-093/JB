@@ -22,12 +22,6 @@
 
 /* Mobile-friendly adjustments */
 @media (max-width: 640px) {
-  /* Reduce paddings and margins on mobile */
-  .container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-  
   /* Reduce vertical spacing */
   .py-10, .py-12, .py-16 {
     padding-top: 2rem !important;

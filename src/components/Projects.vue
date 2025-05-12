@@ -196,8 +196,8 @@ const handleImageError = (e: Event, projectId: number) => {
             'text-gray-600': themeStore.theme === 'light',
           }"
         >
-          Explore some of my latest web development projects, combining elegant
-          design with powerful functionality.
+          Explore my latest web development and open source contributions,
+          showcasing elegant design with powerful functionality.
         </p>
       </div>
 
@@ -219,18 +219,18 @@ const handleImageError = (e: Event, projectId: number) => {
           <div class="relative overflow-hidden group min-h-[160px]">
             <template v-if="project.id === 3">
               <div
-                class="flex items-center justify-center w-full min-h-[160px] h-64 px-0"
+                class="flex items-center justify-center w-full min-h-[90px] sm:min-h-[160px] h-28 sm:h-48 px-0 overflow-hidden gsoc-sympy-container"
               >
                 <img
                   :src="gsocImage"
                   alt="GSoC logo"
-                  class="w-1/2 h-full object-contain p-0 pr-1 transition-transform duration-700 group-hover:scale-105"
+                  class="w-5 md:w-3/6 h-auto object-contain p-0 pr-1 transition-transform duration-700 group-hover:scale-105 gsoc-logo"
                   loading="eager"
                 />
                 <img
                   :src="sympyImage"
                   alt="SymPy logo"
-                  class="w-1/2 h-full object-contain p-0 pl-1 transition-transform duration-700 group-hover:scale-105"
+                  class="w-4 md:w-2/6 h-auto object-contain p-0 pl-1 transition-transform duration-700 group-hover:scale-105 sympy-logo"
                   loading="eager"
                   @error="handleImageError($event, project.id)"
                 />
@@ -1021,6 +1021,31 @@ h2.text-3xl {
     width: 100%;
     justify-content: center;
   }
+
+  /* SymPy and GSoC image adjustment for small screens */
+  .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 {
+    min-height: 90px !important;
+    height: auto !important;
+    padding: 0.25rem 0;
+  }
+
+  .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 img {
+    object-fit: contain !important;
+    max-height: 60px !important;
+    width: 40% !important;
+  }
+
+  /* Optimize small screen layout for project cards */
+  @media (max-width: 375px) {
+    .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 {
+      min-height: 70px !important;
+    }
+
+    .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 img {
+      max-height: 50px !important;
+      width: 35% !important;
+    }
+  }
 }
 
 /* Base image styling enhancements */
@@ -1029,5 +1054,18 @@ h2.text-3xl {
   object-fit: cover;
   backface-visibility: hidden; /* Prevents glitches during animation */
   will-change: transform; /* Optimizes for animation */
+}
+
+/* Force specific sizes for GSoC and SymPy logos on mobile */
+@media (max-width: 767px) {
+  .gsoc-logo {
+    width: 20px !important;
+    max-width: 20px !important;
+  }
+
+  .sympy-logo {
+    width: 16px !important;
+    max-width: 16px !important;
+  }
 }
 </style>

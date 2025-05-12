@@ -207,7 +207,7 @@ const setActiveTab = (tabId) => {
       </div>
 
       <!-- Tab Content -->
-      <div class="px-4 py-6 pb-12">
+      <div class="py-6 pb-12">
         <!-- Experience Tab Content -->
         <div
           id="experience-content"
@@ -216,7 +216,7 @@ const setActiveTab = (tabId) => {
             hidden: activeTab !== 'experience',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6">
             <h2
               class="text-xl font-bold text-gray-900 mb-4"
               :class="{ 'text-white': themeStore.theme === 'dark' }"
@@ -235,7 +235,7 @@ const setActiveTab = (tabId) => {
             hidden: activeTab !== 'skills',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6">
             <h2
               class="text-xl font-bold text-gray-900 mb-4"
               :class="{ 'text-white': themeStore.theme === 'dark' }"

@@ -108,7 +108,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-4 min-h-screen">
+  <div class="container mx-auto min-h-screen">
     <!-- Mobile floating back button (arrow only) - positioned below the navbar -->
     <div class="fixed top-20 right-4 z-40 md:hidden">
       <button
@@ -176,7 +176,8 @@ onMounted(() => {
           'text-gray-900': themeStore.theme === 'light',
         }"
       >
-        HouseHold Service Platform
+        <span class="hidden sm:inline">HouseHold Service Platform</span>
+        <span class="sm:hidden">HomeServe</span>
       </h1>
       <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full"></div>
       <p
@@ -300,7 +301,7 @@ onMounted(() => {
       </div>
 
       <!-- Card content container -->
-      <div class="p-6">
+      <div class="px-3 py-6">
         <h3
           class="text-xl font-semibold mb-3 mt-6 flex items-center"
           :class="{

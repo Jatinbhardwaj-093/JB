@@ -1,11 +1,20 @@
 <script setup lang="ts">
 import { useThemeStore } from "../store/theme";
+import { ref, onMounted } from "vue";
 
 const themeStore = useThemeStore();
 
 // Check if we're in mobile view based on screen width
 // Will be used to conditionally render different layouts
 const isMobile = window.innerWidth < 768;
+
+// Animation state for mobile
+const animationStarted = ref(false);
+
+onMounted(() => {
+  // Trigger animations on mount
+  animationStarted.value = true;
+});
 </script>
 
 <template>
@@ -97,20 +106,20 @@ const isMobile = window.innerWidth < 768;
     <div class="block md:hidden">
       <!-- Education timeline with styled cards - Updated with dots above the line -->
       <div
-        class="education-timeline relative pl-8 before:absolute before:left-4 before:top-6 before:h-[calc(100%-24px)] before:w-[2px] before:bg-indigo-400 dark:before:bg-indigo-600"
+        class="education-timeline"
       >
         <!-- CBSE Education -->
-        <div class="education-card mb-6 relative">
+        <div class="education-card mb-4 relative">
           <!-- Timeline dot - Repositioned to cross the line -->
           <div
-            class="absolute -left-8 top-0 h-4 w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
+            class="absolute -left-6 top-0 h-3 w-3 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
           ></div>
 
           <!-- Card content -->
           <div
-            class="bg-white dark:bg-gray-800/80 rounded-lg p-4 shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+            class="bg-white dark:bg-gray-800/80 rounded-lg p-3 shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
           >
-            <div class="flex items-start gap-3">
+            <div class="flex items-start gap-2">
               <!-- Logo -->
               <div class="flex-shrink-0">
                 <a
@@ -120,7 +129,7 @@ const isMobile = window.innerWidth < 768;
                   rel="noopener noreferrer"
                 >
                   <div
-                    class="w-12 h-12 p-1.5 rounded-lg flex items-center justify-center shadow-sm overflow-hidden"
+                    class="w-10 h-10 p-1 rounded-lg flex items-center justify-center shadow-sm overflow-hidden"
                     :class="{
                       'bg-white': themeStore.theme === 'light',
                       'bg-gray-700': themeStore.theme === 'dark',
@@ -138,7 +147,7 @@ const isMobile = window.innerWidth < 768;
               <!-- Info -->
               <div class="flex-grow">
                 <h3
-                  class="font-bold text-base mb-1"
+                  class="font-bold text-sm mb-0.5"
                   :class="{
                     'text-gray-900': themeStore.theme === 'light',
                     'text-white': themeStore.theme === 'dark',
@@ -148,7 +157,7 @@ const isMobile = window.innerWidth < 768;
                 </h3>
 
                 <div
-                  class="text-sm mb-2"
+                  class="text-xs mb-1"
                   :class="{
                     'text-gray-700': themeStore.theme === 'light',
                     'text-gray-300': themeStore.theme === 'dark',
@@ -159,7 +168,7 @@ const isMobile = window.innerWidth < 768;
 
                 <div class="flex items-center gap-2">
                   <span
-                    class="inline-block px-2 py-1 text-xs font-semibold rounded-md bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300"
+                    class="inline-block px-2 py-0.5 text-xs font-semibold rounded-md bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300"
                   >
                     9.4 CGPA
                   </span>
@@ -176,14 +185,14 @@ const isMobile = window.innerWidth < 768;
         <div class="education-card relative">
           <!-- Timeline dot - Repositioned to cross the line -->
           <div
-            class="absolute -left-8 top-0 h-4 w-4 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
+            class="absolute -left-6 top-0 h-3 w-3 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
           ></div>
 
           <!-- Card content -->
           <div
-            class="bg-white dark:bg-gray-800/80 rounded-lg p-4 shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+            class="bg-white dark:bg-gray-800/80 rounded-lg p-3 shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
           >
-            <div class="flex items-start gap-3">
+            <div class="flex items-start gap-2">
               <!-- Logo -->
               <div class="flex-shrink-0">
                 <a
@@ -193,7 +202,7 @@ const isMobile = window.innerWidth < 768;
                   rel="noopener noreferrer"
                 >
                   <div
-                    class="w-12 h-12 p-1 rounded-lg flex items-center justify-center shadow-sm overflow-hidden"
+                    class="w-10 h-10 p-1 rounded-lg flex items-center justify-center shadow-sm overflow-hidden"
                     :class="{
                       'bg-white': themeStore.theme === 'light',
                       'bg-gray-700': themeStore.theme === 'dark',
@@ -211,7 +220,7 @@ const isMobile = window.innerWidth < 768;
               <!-- Info -->
               <div class="flex-grow">
                 <h3
-                  class="font-bold text-base mb-1"
+                  class="font-bold text-sm mb-0.5"
                   :class="{
                     'text-gray-900': themeStore.theme === 'light',
                     'text-white': themeStore.theme === 'dark',
@@ -221,7 +230,7 @@ const isMobile = window.innerWidth < 768;
                 </h3>
 
                 <div
-                  class="text-sm mb-2"
+                  class="text-xs mb-1"
                   :class="{
                     'text-gray-700': themeStore.theme === 'light',
                     'text-gray-300': themeStore.theme === 'dark',
@@ -230,21 +239,21 @@ const isMobile = window.innerWidth < 768;
                   Indian Institute of Technology Madras
                 </div>
 
-                <div class="flex flex-wrap items-center gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
                   <span
-                    class="inline-block px-2 py-1 text-xs font-semibold rounded-md bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300"
+                    class="inline-block px-1.5 py-0.5 text-[10px] font-semibold rounded-md bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300"
                   >
-                    Foundation Level Completed
+                    Foundation Completed
                   </span>
                   <span
-                    class="inline-block px-2 py-1 text-xs font-semibold rounded-md bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300"
+                    class="inline-block px-1.5 py-0.5 text-[10px] font-semibold rounded-md bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300"
                   >
-                    Diploma Level (Current)
+                    Diploma (Current)
                   </span>
                 </div>
 
                 <div
-                  class="mt-2 text-xs font-medium text-red-600 dark:text-red-400"
+                  class="mt-1 text-[10px] font-medium text-red-600 dark:text-red-400"
                 >
                   Currently pursuing Diploma Level
                 </div>
@@ -281,7 +290,7 @@ const isMobile = window.innerWidth < 768;
 }
 
 /* Pulse animation for timeline dots */
-.education-card .absolute.-left-8::after {
+.education-card .absolute.-left-6::after {
   content: "";
   position: absolute;
   top: 0;
@@ -290,18 +299,22 @@ const isMobile = window.innerWidth < 768;
   bottom: 0;
   border-radius: 50%;
   box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
-  animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .education-timeline {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+
+  .education-card {
+    transition: transform 0.2s ease;
   }
-  100% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+
+  .education-card:active {
+    transform: scale(0.98);
   }
 }
 </style>

@@ -197,7 +197,7 @@ const getProficiencyText = (proficiency: number): string => {
 
 <template>
   <section class="py-6 overflow-hidden">
-    <div class="container mx-auto px-4 overflow-hidden">
+    <div class="container mx-auto overflow-hidden">
       <!-- Desktop Skills View -->
       <div class="hidden md:block">
         <!-- Category Navigation -->

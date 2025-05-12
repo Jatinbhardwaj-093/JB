@@ -6,7 +6,7 @@
     <ThemeTransition />
 
     <Navbar />
-    <main class="container mx-auto px-4 py-8 flex-grow">
+    <main class="container mx-auto flex-grow">
       <router-view v-slot="{ Component }">
         <transition name="page-fade" mode="out-in">
           <component :is="Component" />
