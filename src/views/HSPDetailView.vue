@@ -808,7 +808,7 @@ onMounted(() => {
             >
               <div class="resource-icon-container">
                 <img
-                  src="/JB-Portfolio/images/icons/google-docs.svg"
+                  src="../assets/icons/google-docs.svg"
                   alt="Documentation"
                   class="resource-icon"
                   :class="{
@@ -853,7 +853,7 @@ onMounted(() => {
             >
               <div class="resource-icon-container">
                 <img
-                  src="/JB-Portfolio/images/icons/figma.svg"
+                  src="../assets/icons/figma.svg"
                   alt="Figma Design"
                   class="resource-icon"
                   :class="{

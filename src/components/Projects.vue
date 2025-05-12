@@ -35,12 +35,12 @@ const getIconUrl = (path) => {
 
 // Get Google Doc icon based on theme
 const getGoogleDocIcon = () => {
-  return "/JB-Portfolio/images/icons/google-docs.svg";
+  return new URL("../assets/icons/google-docs.svg", import.meta.url).href;
 };
 
 // Get Figma icon
 const getFigmaIcon = () => {
-  return "/JB-Portfolio/images/icons/figma.svg";
+  return new URL("../assets/icons/figma.svg", import.meta.url).href;
 };
 
 // Add direct references to image paths for better reliability
