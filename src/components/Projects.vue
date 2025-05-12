@@ -35,9 +35,12 @@ const getIconUrl = (path) => {
 
 // Get Google Doc icon based on theme
 const getGoogleDocIcon = () => {
-  return themeStore.theme === "dark"
-    ? "/JB-Portfolio/images/icons/google-docs-dark.svg"
-    : "/JB-Portfolio/images/icons/google-docs.svg";
+  return "/JB-Portfolio/images/icons/google-docs.svg";
+};
+
+// Get Figma icon
+const getFigmaIcon = () => {
+  return "/JB-Portfolio/images/icons/figma.svg";
 };
 
 // Add direct references to image paths for better reliability
@@ -374,13 +377,20 @@ const handleImageError = (e: Event, projectId: number) => {
                     :alt="`${link.type} icon`"
                     class="w-5 h-5 custom-doc-icon"
                   />
+                  <!-- Special case for Figma links -->
+                  <img
+                    v-else-if="link.type === 'figma'"
+                    :src="getFigmaIcon()"
+                    :alt="`${link.type} icon`"
+                    class="w-5 h-5 figma-icon"
+                  />
                   <i v-else :class="link.icon" class="text-lg"></i>
                 </a>
               </div>
 
               <router-link
                 v-if="project.id === 2"
-                to = "projects/hsp"
+                to="projects/hsp"
                 class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
               >
                 View Project
@@ -534,10 +544,11 @@ const handleImageError = (e: Event, projectId: number) => {
 .btn-view-project {
   position: relative;
   transition: all 0.3s ease-in-out;
+  padding-bottom: 2px; /* Add slight padding for underline */
 }
 
 .btn-view-project:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px); /* Reduced vertical movement */
 }
 
 .btn-view-project::after {
@@ -545,14 +556,16 @@ const handleImageError = (e: Event, projectId: number) => {
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   background-color: currentColor;
-  transition: width 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
 }
 
 .btn-view-project:hover::after {
   width: 100%;
+  opacity: 1;
 }
 
 .btn-view-project svg {
@@ -560,7 +573,7 @@ const handleImageError = (e: Event, projectId: number) => {
 }
 
 .btn-view-project:hover svg {
-  transform: translateX(4px);
+  transform: translateX(3px); /* Slightly reduced movement */
 }
 
 /* Dark mode specific adjustments */
@@ -804,6 +817,19 @@ const handleImageError = (e: Event, projectId: number) => {
 .link-button i.bi-figma {
   font-size: 1.35rem;
   color: #f24e1e; /* Figma's brand color */
+}
+
+/* Figma icon styling */
+.figma-icon {
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
+  transform: scale(1.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 2px;
+}
+
+.link-button:hover .figma-icon {
+  transform: scale(1.35);
+  filter: drop-shadow(0px 3px 5px rgba(242, 78, 30, 0.4));
 }
 
 /* Dark mode specific icon adjustments */
