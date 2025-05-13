@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useThemeStore } from "../store/theme";
+import { getPostsByCategory } from "../data/blogs/index";
+import BlogCard from "./blog/BlogCard.vue";
 
 const themeStore = useThemeStore();
 const filterTabsContainer = ref<HTMLElement | null>(null);
@@ -55,6 +57,16 @@ const currentCategory = computed(() => {
   );
 });
 
+// Get blog posts for the active category
+const currentPosts = computed(() => {
+  return getPostsByCategory(activeCategory.value);
+});
+
+// Check if there are any posts for the current category
+const hasPosts = computed(() => {
+  return currentPosts.value.length > 0;
+});
+
 // Function to set active category
 const setActiveCategory = (categoryId: string) => {
   activeCategory.value = categoryId;
@@ -63,10 +75,13 @@ const setActiveCategory = (categoryId: string) => {
 // Banner image path based on active category
 const bannerImagePath = computed(() => {
   try {
-    // Special case for mathematics - use GIF instead of JPG
-    if (activeCategory.value === "mathematics") {
+    // Special cases for GIF images
+    if (
+      activeCategory.value === "mathematics" ||
+      activeCategory.value === "machine-learning"
+    ) {
       return new URL(
-        `../assets/images/BlogHeaderBanner/mathematics.gif`,
+        `../assets/images/BlogHeaderBanner/${activeCategory.value}.gif`,
         import.meta.url
       ).href;
     }
@@ -302,8 +317,17 @@ onMounted(() => {
     </div>
 
     <div class="container mx-auto px-4 max-w-6xl overflow-hidden py-8 md:py-14">
-      <!-- Coming Soon Section with Zoro Lost GIF -->
+      <!-- Blog Posts Grid when posts are available -->
       <div
+        v-if="hasPosts"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <BlogCard v-for="post in currentPosts" :key="post.id" :post="post" />
+      </div>
+
+      <!-- Coming Soon Section when no posts are available -->
+      <div
+        v-else
         class="rounded-xl shadow-lg p-4 sm:p-6 md:p-8 text-center max-w-2xl mx-auto border"
         :class="{
           'bg-white border-gray-100': themeStore.theme === 'light',
@@ -321,14 +345,13 @@ onMounted(() => {
           class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-black mb-2 sm:mb-4"
           :class="{ 'text-white': themeStore.theme === 'dark' }"
         >
-          Blogs Coming Soon
+          More Content Coming Soon
         </p>
         <p
           class="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 dark:text-gray-300 mb-4 sm:mb-6"
         >
-          I'm currently working on creating valuable content to share with you.
-          My blog will feature articles about web development, data science, and
-          other tech topics I'm passionate about.
+          I'm working on new articles about programming, mathematics, and my
+          experiences with open source projects. Check back soon for updates.
         </p>
         <div
           class="p-3 sm:p-4 rounded-lg border"
@@ -345,8 +368,8 @@ onMounted(() => {
               'text-gray-300': themeStore.theme === 'dark',
             }"
           >
-            "The writer is lost in doing another work. He'll find their way back
-            soon!"
+            "Like Zoro, I've wandered off the path. Don't worry, I'll find my
+            way back with new content soon!"
           </p>
         </div>
       </div>

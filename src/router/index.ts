@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/HomeView.vue";
 import AboutMe from "../views/AboutMeView.vue";
 import BlogView from "../views/BlogView.vue";
+import BlogPostView from "../views/BlogPostView.vue";
 import Projects from "../views/ProjectsView.vue";
 import Contact from "../views/ContactView.vue";
 import HSPDetailView from "../views/HSPDetailView.vue";
@@ -21,6 +22,12 @@ const routes: RouteRecordRaw[] = [
     path: "/blogs",
     name: "blogs",
     component: BlogView,
+  },
+  {
+    path: "/blog/:slug",
+    name: "blog-post",
+    component: BlogPostView,
+    props: true,
   },
   {
     path: "/projects",
