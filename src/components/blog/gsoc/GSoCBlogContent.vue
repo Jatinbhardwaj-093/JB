@@ -230,7 +230,7 @@ const themeStore = useThemeStore();
     </p>
 
     <p
-      class="pt-2 font-bold text-lg sm:text-xl md:text-xl lg:text-2xlmt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 border-b border-dashed border-gray-200 dark:border-gray-700 w-full"
+      class="pt-2 font-bold text-lg sm:text-xl md:text-xl lg:text-2xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 border-b border-dashed border-gray-200 dark:border-gray-700 w-full"
     >
       2. Reading Matters
     </p>
