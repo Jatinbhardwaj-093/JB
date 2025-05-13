@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
+const filterTabsContainer = ref<HTMLElement | null>(null);
 
 // Define blog categories with descriptions
 const categories = ref([
@@ -69,7 +70,7 @@ const bannerImagePath = computed(() => {
         import.meta.url
       ).href;
     }
-    
+
     // For other categories, use JPG
     return new URL(
       `../assets/images/BlogHeaderBanner/${activeCategory.value}.jpg`,
@@ -84,7 +85,100 @@ const bannerImagePath = computed(() => {
 // Update banner image whenever active category changes
 const handleCategoryChange = (categoryId: string) => {
   setActiveCategory(categoryId);
+
+  // Scroll to center the selected category button
+  setTimeout(() => {
+    const selectedButton = document.querySelector(
+      `button[data-category="${categoryId}"]`
+    );
+    if (selectedButton && filterTabsContainer.value) {
+      const containerWidth = filterTabsContainer.value.clientWidth;
+      const buttonRect = selectedButton.getBoundingClientRect();
+      const containerRect = filterTabsContainer.value.getBoundingClientRect();
+
+      // Calculate position to center the button
+      const scrollPosition =
+        buttonRect.left +
+        buttonRect.width / 2 -
+        (containerRect.left + containerWidth / 2);
+
+      // Scroll to center the button
+      filterTabsContainer.value.scrollBy({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+    }
+  }, 50);
 };
+
+// Function to handle scrolling in the tabs container when arrow is clicked
+const scrollFilterTabs = (direction = "right", amount = 200) => {
+  if (filterTabsContainer.value) {
+    filterTabsContainer.value.scrollBy({
+      left: direction === "right" ? amount : -amount,
+      behavior: "smooth",
+    });
+  }
+};
+
+// Reactive refs to track scroll state
+const showScrollIndicator = ref(false);
+const scrollPosition = ref(0);
+
+// Check if tabs container has overflow that requires scrolling
+const checkForScrollOverflow = () => {
+  if (filterTabsContainer.value) {
+    // Update scroll position
+    scrollPosition.value = filterTabsContainer.value.scrollLeft;
+
+    // Show indicator if content width exceeds container width
+    showScrollIndicator.value =
+      filterTabsContainer.value.scrollWidth >
+      filterTabsContainer.value.clientWidth;
+  }
+};
+
+// Handle scroll events to update arrow visibility
+const handleScroll = () => {
+  if (filterTabsContainer.value) {
+    scrollPosition.value = filterTabsContainer.value.scrollLeft;
+  }
+};
+
+onMounted(() => {
+  checkForScrollOverflow();
+
+  // Set up event listeners
+  window.addEventListener("resize", checkForScrollOverflow);
+
+  if (filterTabsContainer.value) {
+    filterTabsContainer.value.addEventListener("scroll", handleScroll);
+  }
+
+  // Initial scroll to active category (with a slight delay for rendering)
+  setTimeout(() => {
+    const activeEl = document.querySelector(
+      `button[data-category="${activeCategory.value}"]`
+    );
+    if (activeEl && filterTabsContainer.value) {
+      const containerWidth = filterTabsContainer.value.clientWidth;
+      const activeElLeft = activeEl.getBoundingClientRect().left;
+      const containerLeft =
+        filterTabsContainer.value.getBoundingClientRect().left;
+
+      // Center the active element
+      const scrollTo =
+        activeElLeft -
+        containerLeft -
+        containerWidth / 2 +
+        activeEl.clientWidth / 2;
+      filterTabsContainer.value.scrollTo({
+        left: scrollTo > 0 ? scrollTo : 0,
+        behavior: "smooth",
+      });
+    }
+  }, 200);
+});
 </script>
 
 <template>
@@ -98,7 +192,7 @@ const handleCategoryChange = (categoryId: string) => {
     <!-- Banner Image - Full width without container -->
     <div class="relative w-full">
       <div
-        class="h-[15vh] md:h-[20vh] lg:h-[25vh] xl:h-[30vh] w-full overflow-hidden"
+        class="h-[15vh] md:h-[25vh] lg:h-[25vh] xl:h-[30vh] w-full overflow-hidden"
       >
         <img
           :src="bannerImagePath"
@@ -110,12 +204,25 @@ const handleCategoryChange = (categoryId: string) => {
         >
           <div class="p-4 md:p-6 w-full">
             <div class="w-full px-4 sm:px-6">
-              <h2
-                class="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2"
+              <p
+                class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2"
               >
-                {{ currentCategory.title }}
-              </h2>
-              <p class="text-sm text-gray-200 max-w-3xl hidden md:block">
+                <span class="hidden sm:inline">{{
+                  currentCategory.title
+                }}</span>
+                <span class="sm:hidden">
+                  {{
+                    currentCategory.id === "gsoc"
+                      ? "GSoC"
+                      : currentCategory.id === "machine-learning"
+                      ? "ML Research"
+                      : currentCategory.title
+                  }}
+                </span>
+              </p>
+              <p
+                class="text-xs sm:text-xs md:text-sm text-gray-200 max-w-3xl hidden md:block"
+              >
                 {{ currentCategory.description }}
               </p>
             </div>
@@ -126,60 +233,105 @@ const handleCategoryChange = (categoryId: string) => {
 
     <!-- Filter Tabs - Full width with a dark background -->
     <div
-      class="w-full py-4 mb-10 shadow-md overflow-x-auto no-scrollbar"
+      class="w-full py-4 mb-10 shadow-md relative"
       :class="{
         'bg-gray-100': themeStore.theme === 'light',
         'bg-gray-800': themeStore.theme === 'dark',
       }"
     >
-      <div class="flex space-x-4 min-w-max justify-center px-4 w-full">
-        <button
-          v-for="category in categories"
-          :key="category.id"
-          @click="handleCategoryChange(category.id)"
-          class="px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200"
+      <div
+        class="overflow-x-auto no-scrollbar scroll-smooth"
+        ref="filterTabsContainer"
+      >
+        <div class="flex space-x-4 min-w-max justify-center px-4 w-full">
+          <button
+            v-for="category in categories"
+            :key="category.id"
+            :data-category="category.id"
+            @click="handleCategoryChange(category.id)"
+            class="px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200"
+            :class="{
+              'bg-indigo-600 text-white': activeCategory === category.id,
+              'bg-white text-gray-700 hover:bg-gray-200 shadow':
+                activeCategory !== category.id && themeStore.theme === 'light',
+              'bg-gray-700 text-gray-300 hover:bg-gray-600 shadow':
+                activeCategory !== category.id && themeStore.theme === 'dark',
+            }"
+          >
+            {{ category.name }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Right scroll indicator arrow -->
+      <div
+        v-if="showScrollIndicator"
+        class="absolute right-0 top-1/2 transform -translate-y-1/2 z-20 cursor-pointer"
+        title="Scroll for more categories"
+        @click="scrollFilterTabs('right')"
+      >
+        <div
+          class="flex items-center justify-center h-10 w-10 rounded-l-full shadow-md backdrop-blur-sm"
           :class="{
-            'bg-indigo-600 text-white': activeCategory === category.id,
-            'bg-white text-gray-700 hover:bg-gray-200 shadow':
-              activeCategory !== category.id && themeStore.theme === 'light',
-            'bg-gray-700 text-gray-300 hover:bg-gray-600 shadow':
-              activeCategory !== category.id && themeStore.theme === 'dark',
+            'bg-gradient-to-l from-gray-100 to-white/90':
+              themeStore.theme === 'light',
+            'bg-gradient-to-l from-gray-800 to-gray-900/90':
+              themeStore.theme === 'dark',
           }"
         >
-          {{ category.name }}
-        </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 animate-arrow-pulse"
+            :class="{
+              'text-indigo-600': themeStore.theme === 'light',
+              'text-indigo-400': themeStore.theme === 'dark',
+            }"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </div>
       </div>
     </div>
 
     <div class="container mx-auto px-4 max-w-6xl overflow-hidden py-8 md:py-14">
       <!-- Coming Soon Section with Zoro Lost GIF -->
       <div
-        class="rounded-xl shadow-lg p-8 text-center max-w-2xl mx-auto border"
+        class="rounded-xl shadow-lg p-4 sm:p-6 md:p-8 text-center max-w-2xl mx-auto border"
         :class="{
           'bg-white border-gray-100': themeStore.theme === 'light',
           'bg-gray-800 border-gray-700': themeStore.theme === 'dark',
         }"
       >
-        <div class="mb-6 flex justify-center">
+        <div class="mb-4 sm:mb-6 flex justify-center">
           <img
-            src="../assets/images/lost/zoro_lost.gif"
+            src="../assets/images/lost/zoro_lost.jpg"
             alt="Zoro Lost"
             class="h-40 w-auto rounded-lg shadow-lg"
           />
         </div>
-        <h2
-          class="text-2xl font-bold text-black mb-4"
+        <p
+          class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-black mb-2 sm:mb-4"
           :class="{ 'text-white': themeStore.theme === 'dark' }"
         >
-          Blog Section Coming Soon
-        </h2>
-        <p class="text-gray-600 dark:text-gray-300 mb-6">
+          Blogs Coming Soon
+        </p>
+        <p
+          class="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 dark:text-gray-300 mb-4 sm:mb-6"
+        >
           I'm currently working on creating valuable content to share with you.
           My blog will feature articles about web development, data science, and
           other tech topics I'm passionate about.
         </p>
         <div
-          class="p-4 rounded-lg border"
+          class="p-3 sm:p-4 rounded-lg border"
           :class="{
             'bg-indigo-50 border-indigo-100': themeStore.theme === 'light',
             'bg-indigo-900/20 border-indigo-800/30':
@@ -187,7 +339,7 @@ const handleCategoryChange = (categoryId: string) => {
           }"
         >
           <p
-            class="text-sm italic"
+            class="text-xs sm:text-sm md:text-base italic"
             :class="{
               'text-gray-700': themeStore.theme === 'light',
               'text-gray-300': themeStore.theme === 'dark',
@@ -318,5 +470,44 @@ const handleCategoryChange = (categoryId: string) => {
 /* Banner image transitions */
 img {
   transition: all 0.5s ease-in-out;
+}
+
+/* Enhanced arrow pulse animations for the scroll indicators */
+.animate-arrow-pulse {
+  animation: arrow-pulse-right 1.5s ease-in-out infinite;
+}
+
+.animate-arrow-pulse-left {
+  animation: arrow-pulse-left 1.5s ease-in-out infinite;
+}
+
+@keyframes arrow-pulse-right {
+  0% {
+    opacity: 0.7;
+    transform: translateX(-3px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateX(-3px);
+  }
+}
+
+@keyframes arrow-pulse-left {
+  0% {
+    opacity: 0.7;
+    transform: translateX(3px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-2px);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateX(3px);
+  }
 }
 </style>
