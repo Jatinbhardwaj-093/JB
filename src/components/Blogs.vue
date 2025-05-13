@@ -1,34 +1,158 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
-// Simplified component without blog data
+
+// Define blog categories with descriptions
+const categories = ref([
+  {
+    id: "gsoc",
+    name: "GSoC",
+    title: "Google Summer of Code",
+    description:
+      "My journey and contributions during Google Summer of Code. Sharing experiences, challenges, and the open-source projects I've worked on.",
+  },
+  {
+    id: "sympy",
+    name: "SymPy",
+    title: "SymPy Library",
+    description:
+      "Exploring symbolic mathematics with Python using SymPy. Tutorials, project insights, and advancements in computer algebra systems.",
+  },
+  {
+    id: "mathematics",
+    name: "Mathematics",
+    title: "Mathematical Explorations",
+    description:
+      "Delving into mathematical concepts, theorems, and applications. From pure mathematics to practical problem-solving approaches.",
+  },
+  {
+    id: "machine-learning",
+    name: "Machine Learning",
+    title: "Machine Learning Research",
+    description:
+      "Research papers, implementations, and insights in machine learning. Covering neural networks, algorithms, and cutting-edge AI developments.",
+  },
+  {
+    id: "psychology",
+    name: "Psychology",
+    title: "Psychology Studies",
+    description:
+      "Exploring the human mind, behavior, and cognitive processes. Bridging technology with psychological insights and research.",
+  },
+]);
+
+// Track active category
+const activeCategory = ref("gsoc");
+
+// Get the current category object based on active ID
+const currentCategory = computed(() => {
+  return (
+    categories.value.find((cat) => cat.id === activeCategory.value) ||
+    categories.value[0]
+  );
+});
+
+// Function to set active category
+const setActiveCategory = (categoryId: string) => {
+  activeCategory.value = categoryId;
+};
+
+// Banner image path based on active category
+const bannerImagePath = computed(() => {
+  try {
+    // Special case for mathematics - use GIF instead of JPG
+    if (activeCategory.value === "mathematics") {
+      return new URL(
+        `../assets/images/BlogHeaderBanner/mathematics.gif`,
+        import.meta.url
+      ).href;
+    }
+    
+    // For other categories, use JPG
+    return new URL(
+      `../assets/images/BlogHeaderBanner/${activeCategory.value}.jpg`,
+      import.meta.url
+    ).href;
+  } catch (error) {
+    // Fallback to cicada image if the file doesn't exist
+    return new URL("../assets/images/cicada.jpg", import.meta.url).href;
+  }
+});
+
+// Update banner image whenever active category changes
+const handleCategoryChange = (categoryId: string) => {
+  setActiveCategory(categoryId);
+};
 </script>
 
 <template>
   <div
-    class="py-8 md:py-14 w-full max-w-[100vw] overflow-x-hidden"
+    class="w-full max-w-[100vw] overflow-x-hidden"
     :class="{
       'bg-gray-50': themeStore.theme === 'light',
       'bg-gray-900': themeStore.theme === 'dark',
     }"
   >
-    <div class="container mx-auto px-4 max-w-6xl overflow-hidden">
-      <div class="text-center mb-14">
-        <h1
-          class="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4"
-          :class="{ 'text-white': themeStore.theme === 'dark' }"
+    <!-- Banner Image - Full width without container -->
+    <div class="relative w-full">
+      <div
+        class="h-[15vh] md:h-[20vh] lg:h-[25vh] xl:h-[30vh] w-full overflow-hidden"
+      >
+        <img
+          :src="bannerImagePath"
+          :alt="`${currentCategory.name} Banner`"
+          class="w-full h-full object-contain object-center"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end"
         >
-          My Blog
-        </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          Sharing my thoughts and insights on web development, data science, and
-          everything in between. Check back regularly for new content!
-        </p>
+          <div class="p-4 md:p-6 w-full">
+            <div class="w-full px-4 sm:px-6">
+              <h2
+                class="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2"
+              >
+                {{ currentCategory.title }}
+              </h2>
+              <p class="text-sm text-gray-200 max-w-3xl hidden md:block">
+                {{ currentCategory.description }}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <!-- Coming Soon Section -->
+    <!-- Filter Tabs - Full width with a dark background -->
+    <div
+      class="w-full py-4 mb-10 shadow-md overflow-x-auto no-scrollbar"
+      :class="{
+        'bg-gray-100': themeStore.theme === 'light',
+        'bg-gray-800': themeStore.theme === 'dark',
+      }"
+    >
+      <div class="flex space-x-4 min-w-max justify-center px-4 w-full">
+        <button
+          v-for="category in categories"
+          :key="category.id"
+          @click="handleCategoryChange(category.id)"
+          class="px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200"
+          :class="{
+            'bg-indigo-600 text-white': activeCategory === category.id,
+            'bg-white text-gray-700 hover:bg-gray-200 shadow':
+              activeCategory !== category.id && themeStore.theme === 'light',
+            'bg-gray-700 text-gray-300 hover:bg-gray-600 shadow':
+              activeCategory !== category.id && themeStore.theme === 'dark',
+          }"
+        >
+          {{ category.name }}
+        </button>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 max-w-6xl overflow-hidden py-8 md:py-14">
+      <!-- Coming Soon Section with Zoro Lost GIF -->
       <div
         class="rounded-xl shadow-lg p-8 text-center max-w-2xl mx-auto border"
         :class="{
@@ -36,21 +160,12 @@ const themeStore = useThemeStore();
           'bg-gray-800 border-gray-700': themeStore.theme === 'dark',
         }"
       >
-        <div class="mb-6">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-16 w-16 text-indigo-500 mx-auto"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            />
-          </svg>
+        <div class="mb-6 flex justify-center">
+          <img
+            src="../assets/images/lost/zoro_lost.gif"
+            alt="Zoro Lost"
+            class="h-40 w-auto rounded-lg shadow-lg"
+          />
         </div>
         <h2
           class="text-2xl font-bold text-black mb-4"
@@ -78,55 +193,9 @@ const themeStore = useThemeStore();
               'text-gray-300': themeStore.theme === 'dark',
             }"
           >
-            "Stay tuned for articles on Vue.js, Machine Learning, and more. The
-            first posts are in the works!"
+            "The writer is lost in doing another work. He'll find their way back
+            soon!"
           </p>
-        </div>
-      </div>
-
-      <!-- Newsletter Subscription -->
-      <div class="mt-16 relative">
-        <!-- Subtle glow effect -->
-        <div
-          class="absolute -inset-0.5 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-xl opacity-30 blur-sm"
-        ></div>
-
-        <!-- Content container with border -->
-        <div
-          class="relative rounded-xl p-8 text-center border-2 z-10"
-          :class="{
-            'bg-indigo-50 border-indigo-200': themeStore.theme === 'light',
-            'bg-indigo-900/20 border-indigo-600': themeStore.theme === 'dark',
-          }"
-        >
-          <h3
-            class="text-2xl font-bold text-black mb-4"
-            :class="{ 'text-white': themeStore.theme === 'dark' }"
-          >
-            Get Notified When Blog Launches
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-            Be the first to know when my blog goes live! Subscribe to get
-            notified about new articles and exclusive content.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Your email address"
-              class="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              :class="{
-                'bg-white text-gray-900 border-gray-300':
-                  themeStore.theme === 'light',
-                'bg-gray-800 text-white border-gray-600':
-                  themeStore.theme === 'dark',
-              }"
-            />
-            <button
-              class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-md"
-            >
-              Notify Me
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -140,6 +209,15 @@ const themeStore = useThemeStore();
     padding-left: 16px;
     padding-right: 16px;
   }
+}
+
+/* Hide scrollbar but allow scrolling */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 /* Animation for coming soon */
@@ -235,5 +313,10 @@ const themeStore = useThemeStore();
 /* Add extra styling for the newsletter container */
 .newsletter-glow-container {
   filter: drop-shadow(0 4px 12px rgba(79, 70, 229, 0.25));
+}
+
+/* Banner image transitions */
+img {
+  transition: all 0.5s ease-in-out;
 }
 </style>
