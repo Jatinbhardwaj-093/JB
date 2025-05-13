@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, onMounted } from "vue";
+import { defineProps, ref, onMounted, defineAsyncComponent } from "vue";
 import { useThemeStore } from "../../store/theme";
 import type { BlogPost } from "../../data/blogs/index";
 
@@ -9,6 +9,11 @@ const props = defineProps<{
 
 const themeStore = useThemeStore();
 const content = ref("");
+
+// Lazy load blog components based on slug
+const GSoCBlogContent = defineAsyncComponent(
+  () => import("./gsoc/GSoCBlogContent.vue")
+);
 
 // Format date
 const formatDate = (dateString: string) => {
@@ -23,39 +28,8 @@ const formatDate = (dateString: string) => {
 // Load blog content from markdown file
 onMounted(async () => {
   try {
-    // For now, we'll use the existing content template
-    if (props.post.slug === "gsoc-tips-to-start-with-open-source") {
-      content.value = `
-<h2>Tips to Start with Open Source</h2>
-<p>Google Summer of Code is a global program that encourages students to contribute to open source software development. Students work with mentoring organizations on projects over a three-month period and receive a stipend for their contributions.</p>
-
-<h2>First Steps in Open Source</h2>
-<h3>1. Find Your Interests</h3>
-<p>Before diving into contributions, identify which technologies, programming languages, or areas interest you the most. This will help you find projects that align with your skills and passions.</p>
-
-<h3>2. Learn Git and GitHub</h3>
-<p>Most open source projects use Git for version control and GitHub (or similar platforms) for hosting. Make sure you understand basic Git commands, pull requests, issue tracking, and Git workflow.</p>
-
-<h3>3. Start Small</h3>
-<p>Don't aim to fix major issues immediately. Look for documentation improvements, small bug fixes, test additions, and simple feature enhancements.</p>
-
-<p>Many projects label issues as "good first issue" or "beginner-friendly" - these are perfect starting points.</p>
-
-<h2>Preparing for GSoC</h2>
-<h3>1. Research Organizations</h3>
-<p>GSoC publishes a list of participating organizations each year. Start by reviewing previous years' organizations, reading their project ideas, and joining their communication channels (IRC, Discord, mailing lists).</p>
-
-<h3>2. Contribute Early</h3>
-<p>Don't wait until the GSoC application period to start contributing. Organizations prefer students who have already demonstrated their abilities and commitment.</p>
-
-<h3>3. Prepare a Strong Proposal</h3>
-<p>Your GSoC proposal should include a clear understanding of the project, detailed timeline with milestones, your approach to solving the problem, why you're the right candidate, and your past relevant experience.</p>
-
-<h2>My GSoC Experience with SymPy</h2>
-<p><em>Coming Soon: I'll share details about my personal GSoC journey with SymPy, including challenges faced and lessons learned.</em></p>
-
-<p>Stay tuned for more tips and strategies for a successful Google Summer of Code application!</p>`;
-    } else {
+    // We use the component for GSoC blog, and fallback to this for other blogs
+    if (props.post.slug !== "gsoc-tips-to-start-with-open-source") {
       content.value = "This blog content is coming soon!";
     }
   } catch (error) {
@@ -67,15 +41,15 @@ onMounted(async () => {
 
 <template>
   <div
-    class="blog-reader max-w-4xl mx-auto px-4 py-8"
+    class="blog-reader max-w-5xl mx-auto px-0 sm:px-6 py-12"
     :class="{
+      'text-gray-800 dark': themeStore.theme === 'dark',
       'text-gray-800': themeStore.theme === 'light',
-      'text-gray-200': themeStore.theme === 'dark',
     }"
   >
     <!-- Blog Header -->
     <header
-      class="mb-8 border-b pb-4"
+      class="mb-4 border-b"
       :class="{
         'border-gray-200': themeStore.theme === 'light',
         'border-gray-700': themeStore.theme === 'dark',
@@ -98,7 +72,7 @@ onMounted(async () => {
           'text-gray-400': themeStore.theme === 'dark',
         }"
       >
-        <span>{{ formatDate(post.date) }}</span>
+        <span class="ml-3">{{ formatDate(post.date) }}</span>
         <span class="mx-2">•</span>
         <span
           class="font-medium px-2 py-0.5 rounded"
@@ -114,14 +88,17 @@ onMounted(async () => {
 
     <!-- Blog Content -->
     <div
-      class="blog-content prose prose-lg max-w-none"
+      class="blog-content prose prose-lg max-w-none mx-auto px-4 sm:px-8"
       :class="{
         'prose-gray': themeStore.theme === 'light',
         'prose-invert': themeStore.theme === 'dark',
       }"
     >
-      <!-- Render HTML content -->
-      <div v-html="content"></div>
+      <!-- Render component or HTML content -->
+      <GSoCBlogContent
+        v-if="post.slug === 'gsoc-tips-to-start-with-open-source'"
+      />
+      <div v-else v-html="content"></div>
 
       <!-- Back button -->
       <div
@@ -163,54 +140,20 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-/* You might need to add custom styles for Markdown content */
-.blog-content h1,
-.blog-content h2,
-.blog-content h3,
-.blog-content h4,
-.blog-content h5,
-.blog-content h6 {
-  font-weight: bold;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
+/* Simple styling for BlogReader */
+.blog-reader {
+  position: relative;
+  isolation: isolate;
 }
 
-.blog-content h1 {
-  font-size: 1.875rem;
+.blog-content {
+  /* Basic container styles */
+  max-width: none;
+  margin: 0 auto;
 }
 
-.blog-content h2 {
-  font-size: 1.5rem;
-}
-
-.blog-content h3 {
-  font-size: 1.25rem;
-}
-
-.blog-content p {
-  margin-bottom: 1em;
-}
-
-.blog-content ul,
-.blog-content ol {
-  margin-left: 1.5em;
-  margin-bottom: 1em;
-}
-
-.blog-content li {
-  margin-bottom: 0.5em;
-}
-
-.blog-content blockquote {
-  border-left: 4px solid;
-  padding-left: 1em;
-  font-style: italic;
-  margin: 1em 0;
-}
-
-.blog-content code {
-  font-family: monospace;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
+/* For non-GSoC blogs that might use the generic content renderer */
+.blog-content > div {
+  padding: 1rem 0;
 }
 </style>

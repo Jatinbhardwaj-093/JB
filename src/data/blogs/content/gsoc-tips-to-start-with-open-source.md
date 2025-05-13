@@ -4,7 +4,7 @@ This blog aims to provide some tips for getting started with the open-source com
 
 ## My Experience Contributing to Open Source
 
-I generally contribute to various libraries while also engaging with the community, understanding codebases, and more. In terms of pull requests (PRs), I have mainly contributed to SymPy and Wagtail (a CMS library).
+I am currently new to open source, so I am trying to learn more about the plans of a particular repository, understand its codebase, and more In terms of pull requests (PRs), I have mainly contributed to SymPy and Wagtail (a CMS library).
 
 From here, I’ll share what I’ve learned from working with SymPy, as that has been my primary area of interest. When I first started contributing, I felt overwhelmed by the codebase, especially since I had no prior work experience. Later, I discovered that even people with years of experience often take months to adjust to a new library or technology. Now, that makes complete sense. For example, shifting from a web-focused library to something machine learning-related involves a drastic change in coding practices. Over time, you become more familiar with the library. One of the fastest ways to do so is by trying to fix bugs. Debugging forces you to explore different modules in the repository, which helps you build a mental map of how the different parts are connected.
 
@@ -40,13 +40,11 @@ In open source, you’ll spend a lot of time reading—whether it’s documentat
 
 ### 3. Write a Clear Pull Request Description
 
-This is a very important step whenever you’re contributing a patch or introducing something new to a library. In many repositories, you’ll often see new contributors opening pull requests with empty or unclear descriptions. This is not a good practice.
-
-Remember, the reviewer is there to review your changes, not to guess what you’re trying to do.In the description, you should clearly explain:
+This is a very important step whenever you’re contributing a patch or introducing something new to a library. In many repositories, you’ll often see new contributors opening pull requests with empty or unclear descriptions. This is not a good practice. Remember, the reviewer is there to review your changes, not to guess what you’re trying to do.In the description, you should clearly explain:
 - What changes you’ve made
--	Why you’ve made them
--	What the motivation is behind the change
--	Any resources or links that support your changes
+- Why you’ve made them
+- What the motivation is behind the change
+- Any resources or links that support your changes
 
 If you don’t provide a good description, it not only delays the time it takes to merge your patch, but also increases the chance that the reviewer might fix the issue themselves rather than reviewing your work—especially if they don’t have enough context from your PR.
 

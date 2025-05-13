@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { useThemeStore } from "../../store/theme";
 import type { BlogPost } from "../../data/blogs/index";
 
