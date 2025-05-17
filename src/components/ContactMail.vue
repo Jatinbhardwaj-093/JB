@@ -18,17 +18,87 @@ const errorMessage = ref("");
 const errors = ref({ name: "", email: "", subject: "", message: "" });
 
 const isValidEmail = computed(() => {
+  // Enhanced email validation
+  if (!email.value.trim()) return false;
+  
+  // Basic format check with regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email.value);
+  if (!emailRegex.test(email.value)) return false;
+  
+  // Additional validation checks
+  const parts = email.value.split('@');
+  const domain = parts[1];
+  
+  // Check domain has valid TLD (at least 2 characters after last dot)
+  const tld = domain.split('.').pop();
+  if (!tld || tld.length < 2) return false;
+  
+  // Check for common disposable email domains
+  const disposableDomains = ['tempmail.com', 'throwawaymail.com', 'mailinator.com', 'fakeinbox.com', 'yopmail.com'];
+  if (disposableDomains.includes(domain.toLowerCase())) return false;
+  
+  // Check for common typos in popular domains
+  const typos = {
+    'gmial.com': 'gmail.com',
+    'gmal.com': 'gmail.com',
+    'gamil.com': 'gmail.com',
+    'gnail.com': 'gmail.com',
+    'hotmial.com': 'hotmail.com',
+    'hotmal.com': 'hotmail.com',
+    'yaho.com': 'yahoo.com',
+    'yhaoo.com': 'yahoo.com',
+    'outloo.com': 'outlook.com',
+  };
+  
+  if (typos[domain.toLowerCase()]) {
+    return false;
+  }
+  
+  return true;
+});
+
+// Get suggested email correction if there's a typo
+const emailSuggestion = computed(() => {
+  if (!email.value.trim()) return '';
+  
+  const parts = email.value.split('@');
+  if (parts.length !== 2) return '';
+  
+  const domain = parts[1].toLowerCase();
+  const typos = {
+    'gmial.com': 'gmail.com',
+    'gmal.com': 'gmail.com',
+    'gamil.com': 'gmail.com',
+    'gnail.com': 'gmail.com',
+    'hotmial.com': 'hotmail.com',
+    'hotmal.com': 'hotmail.com',
+    'yaho.com': 'yahoo.com',
+    'yhaoo.com': 'yahoo.com',
+    'outloo.com': 'outlook.com',
+  };
+  
+  if (typos[domain]) {
+    return `${parts[0]}@${typos[domain]}`;
+  }
+  
+  return '';
 });
 
 const validateForm = () => {
   errors.value = { name: "", email: "", subject: "", message: "" };
 
   if (!name.value.trim()) errors.value.name = "Name is required";
-  if (!email.value.trim()) errors.value.email = "Email is required";
-  else if (!isValidEmail.value)
-    errors.value.email = "Please enter a valid email";
+  
+  if (!email.value.trim()) {
+    errors.value.email = "Email is required";
+  } else if (!isValidEmail.value) {
+    if (emailSuggestion.value) {
+      errors.value.email = `Invalid email. Did you mean ${emailSuggestion.value}?`;
+    } else {
+      errors.value.email = "Please enter a valid email address";
+    }
+  }
+  
   if (!subject.value.trim()) errors.value.subject = "Subject is required";
   if (!message.value.trim()) errors.value.message = "Message is required";
 
