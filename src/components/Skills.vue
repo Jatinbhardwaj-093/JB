@@ -62,7 +62,7 @@ const skills = ref<Skill[]>([
           :alt="`${skill.name} icon`"
           class="w-12 h-12 object-contain mb-2"
         />
-        <p class="text-sm font-medium text-gray-900 dark:text-white">
+        <p class="text-sm font-medium">
           {{ skill.name }}
         </p>
       </div>
@@ -80,7 +80,7 @@ const skills = ref<Skill[]>([
 
         <!-- Text Content -->
         <div class="flex-grow">
-          <p class="text-lg font-semibold mb-1 text-gray-900 dark:text-white">
+          <p class="text-lg font-semibold mb-1">
             {{ skill.name }}
           </p>
           <p class="text-sm text-gray-700 dark:text-gray-200">

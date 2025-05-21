@@ -110,11 +110,6 @@ onMounted(() => {
       >
         <!-- CBSE Education -->
         <div class="education-card mb-4 relative">
-          <!-- Timeline dot - Repositioned to cross the line -->
-          <div
-            class="absolute -left-6 top-0 h-3 w-3 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
-          ></div>
-
           <!-- Card content -->
           <div
             class="bg-white dark:bg-gray-800/80 rounded-lg p-3 shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
@@ -183,11 +178,6 @@ onMounted(() => {
 
         <!-- IIT Madras Education -->
         <div class="education-card relative">
-          <!-- Timeline dot - Repositioned to cross the line -->
-          <div
-            class="absolute -left-6 top-0 h-3 w-3 rounded-full bg-indigo-500 dark:bg-indigo-400 shadow-md z-10"
-          ></div>
-
           <!-- Card content -->
           <div
             class="bg-white dark:bg-gray-800/80 rounded-lg p-3 shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300"

@@ -148,7 +148,7 @@ const setActiveTab = (tabId) => {
           <h1 class="text-3xl font-bold text-white mb-2">About Me</h1>
           <div class="h-1 w-16 bg-white/70 mx-auto rounded-full mb-4"></div>
           <p class="text-white/90 max-w-md mx-auto text-sm">
-            I'm passionate about building seamless digital experiences that
+            Building seamless digital experiences that
             solve real problems through elegant code and thoughtful design.
           </p>
         </div>
@@ -211,20 +211,23 @@ const setActiveTab = (tabId) => {
         <!-- Experience Tab Content -->
         <div
           id="experience-content"
+          class="p-2"
           :class="{
             block: activeTab === 'experience',
             hidden: activeTab !== 'experience',
           }"
         >
           <div
-            class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6"
+            class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-2"
           >
-            <h2
-              class="text-xl font-bold text-gray-900 mb-4"
+            <p
+              class="text-2xl text-center font-bold text-gray-900"
               :class="{ 'text-white': themeStore.theme === 'dark' }"
             >
               Experience
-            </h2>
+            </p>
+            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+
             <Experience />
           </div>
         </div>
@@ -232,41 +235,43 @@ const setActiveTab = (tabId) => {
         <!-- Skills Tab Content -->
         <div
           id="skills-content"
+          class="p-2"
           :class="{
             block: activeTab === 'skills',
             hidden: activeTab !== 'skills',
           }"
         >
           <div
-            class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6"
+            class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-2"
           >
-            <h2
-              class="text-xl font-bold text-gray-900 mb-4"
+            <p
+              class="text-2xl text-center font-bold text-gray-900"
               :class="{ 'text-white': themeStore.theme === 'dark' }"
             >
               Current Technology
-            </h2>
-            <div class="skills-container">
-              <Skills />
-            </div>
+            </p>
+            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+            <Skills />
           </div>
         </div>
 
         <!-- Education Tab Content -->
         <div
           id="education-content"
+          class="p-2"
           :class="{
             block: activeTab === 'education',
             hidden: activeTab !== 'education',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
-            <h2
-              class="text-xl font-bold text-gray-900 mb-4"
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-2">
+            <p
+              class="text-2xl text-center font-bold text-gray-900"
               :class="{ 'text-white': themeStore.theme === 'dark' }"
             >
               Education
-            </h2>
+            </p>
+            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
             <Education />
           </div>
         </div>
@@ -274,18 +279,20 @@ const setActiveTab = (tabId) => {
         <!-- Hobbies Tab Content -->
         <div
           id="hobby-content"
+          class="p-2"
           :class="{
             block: activeTab === 'hobby',
             hidden: activeTab !== 'hobby',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-6">
-            <h2
-              class="text-xl font-bold text-gray-900 mb-4"
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-2">
+            <p
+              class="text-2xl text-center font-bold text-gray-900"
               :class="{ 'text-white': themeStore.theme === 'dark' }"
             >
               Hobbies & Interests
-            </h2>
+            </p>
+            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
             <Hobby />
           </div>
         </div>
