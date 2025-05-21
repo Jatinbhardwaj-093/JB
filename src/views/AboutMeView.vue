@@ -54,9 +54,9 @@ const setActiveTab = (tabId) => {
             class="text-gray-200 max-w-3xl mx-auto"
             :class="{ 'text-gray-600': themeStore.theme === 'light' }"
           >
-            I build effective web applications with strong front-end 
-            and back-end skills. I analyze problems thoroughly and
-            create practical software that's easy for people to use.
+            I build effective web applications with strong front-end and
+            back-end skills. I analyze problems thoroughly and create practical
+            software that's easy for people to use.
           </p>
         </div>
 
@@ -81,7 +81,7 @@ const setActiveTab = (tabId) => {
             class="text-2xl md:text-3xl font-bold text-black mb-6 text-center"
             :class="{ 'text-white': themeStore.theme === 'dark' }"
           >
-            Skills & Expertise
+            Current Technology
           </h2>
           <div
             class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700"
@@ -156,7 +156,7 @@ const setActiveTab = (tabId) => {
 
       <!-- Tab Navigation -->
       <div
-        class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden "
+        class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden"
         :class="{
           'bg-white': themeStore.theme === 'light',
           'bg-gray-900': themeStore.theme === 'dark',
@@ -216,7 +216,9 @@ const setActiveTab = (tabId) => {
             hidden: activeTab !== 'experience',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6">
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6"
+          >
             <h2
               class="text-xl font-bold text-gray-900 mb-4"
               :class="{ 'text-white': themeStore.theme === 'dark' }"
@@ -235,12 +237,14 @@ const setActiveTab = (tabId) => {
             hidden: activeTab !== 'skills',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6">
+          <div
+            class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-6"
+          >
             <h2
               class="text-xl font-bold text-gray-900 mb-4"
               :class="{ 'text-white': themeStore.theme === 'dark' }"
             >
-              Skills & Expertise
+              Current Technology
             </h2>
             <div class="skills-container">
               <Skills />

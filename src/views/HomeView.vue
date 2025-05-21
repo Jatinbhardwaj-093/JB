@@ -6,13 +6,7 @@ import { ref } from "vue";
 const themeStore = useThemeStore();
 const firstName = ref("Jatin");
 const lastName = ref("Bhardwaj");
-const jobTitle = ref("Web Developer & Data Scientist");
-const specializations = ref([
-  "Web Development",
-  "Data Science",
-  "Machine Learning",
-  "AI",
-]);
+const specializations = ref(["Machine Learning", "AI", "Maths"]);
 </script>
 
 <template>
@@ -43,11 +37,40 @@ const specializations = ref([
               {{ firstName }}
               <span class="text-indigo-200">{{ lastName }}</span>
             </h1>
-            <p
-              class="text-xl text-white/90 mt-2 animate-fade-in-up animation-delay-200"
+
+            <!-- Location Section -->
+            <div
+              class="flex items-center gap-2 mt-2 mb-2 animate-fade-in-up animation-delay-200"
             >
-              {{ jobTitle }}
-            </p>
+              <div class="relative">
+                <div
+                  class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-20 group-hover:opacity-30 transition duration-500"
+                ></div>
+                <div class="relative bg-white/10 p-2 rounded-full shadow-sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-white transition-transform duration-500 group-hover:scale-105"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <p class="text-base font-medium text-white/90">Delhi, India</p>
+            </div>
 
             <!-- Animated badges -->
             <div

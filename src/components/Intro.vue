@@ -6,13 +6,12 @@ const themeStore = useThemeStore();
 
 const firstName = ref("Jatin");
 const lastName = ref("Bhardwaj");
-const jobTitle = ref("Web Developer & Data Scientist");
+const location = ref("Delhi, India");
 const isAnimationComplete = ref(false);
 const specializations = ref([
-  "Web Development",
-  "Data Science",
+  "Artificial Intelligence",
   "Machine Learning",
-  "AI",
+  "Mathematics",
 ]);
 
 onMounted(() => {
@@ -63,30 +62,89 @@ onMounted(() => {
               class="mt-2 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
               <span
-                class="block fade-in text-black"
+                class="inline-block fade-in text-black"
                 :class="{ 'text-white': themeStore.theme === 'dark' }"
                 >{{ firstName }}</span
               >
               <span
-                class="block text-indigo-600 dark:text-indigo-400 fade-in delay-100"
+                class="inline-block text-indigo-600 dark:text-indigo-400 fade-in delay-100 ml-2"
                 >{{ lastName }}</span
               >
             </h1>
-            <h3
-              class="mt-3 text-xl sm:text-2xl font-medium text-gray-600 dark:text-gray-300 fade-in delay-200"
-            >
-              {{ jobTitle }}
-            </h3>
           </div>
 
-          <p
-            class="text-base sm:text-lg text-gray-600 dark:text-gray-300 fade-in delay-300 max-w-2xl mx-auto lg:mx-0"
+          <div
+            class="flex flex-col sm:flex-row items-center md:justify-start gap-2 sm:gap-4 fade-in delay-200"
           >
-            I transform complex technical challenges into elegant digital
-            solutions. By combining data-driven insights with polished UI
-            implementations, I create web applications that deliver meaningful
-            experiences and tangible results.
-          </p>
+            <!-- Location Section -->
+            <div class="flex items-center gap-2 group sm:mt-2 sm:mb-6 my-0">
+              <div class="relative">
+                <div
+                  class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-20 group-hover:opacity-30 transition duration-500"
+                ></div>
+                <div
+                  class="relative bg-white dark:bg-gray-800 p-2 rounded-full shadow-sm"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-indigo-600 dark:text-indigo-400 transition-transform duration-500 group-hover:scale-105"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <p
+                class="text-base sm:text-lg font-medium bg-gradient-to-r from-gray-700 to-gray-500 dark:from-gray-300 dark:to-gray-500 bg-clip-text text-transparent transition-all duration-500 group-hover:from-indigo-600 group-hover:to-purple-600 dark:group-hover:from-indigo-400 dark:group-hover:to-purple-400"
+              >
+                {{ location }}
+              </p>
+            </div>
+
+            <!-- Home Section -->
+            <div class="flex items-center gap-2 group sm:mt-2 sm:mb-6 my-0">
+              <div class="relative">
+                <div
+                  class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-20 group-hover:opacity-30 transition duration-500"
+                ></div>
+                <div
+                  class="relative bg-white dark:bg-gray-800 p-2 rounded-full shadow-sm"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-indigo-600 dark:text-indigo-400 transition-transform duration-500 group-hover:scale-105"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <span
+                class="text-base sm:text-lg font-medium text-gray-500 dark:text-gray-400 transition-colors duration-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400"
+                >Home</span
+              >
+            </div>
+          </div>
 
           <div
             class="flex flex-wrap gap-2 justify-center lg:justify-start fade-in delay-400"
@@ -318,39 +376,23 @@ onMounted(() => {
   object-position: center 15%;
 }
 
-/* Subtle social icon hover effects */
+/* Basic social icon hover effects */
 .social-icon-link {
   display: flex;
   align-items: center;
   height: 40px;
   overflow: hidden;
-  background: transparent;
   border-radius: 30px;
   padding: 0;
-  /* Different transition speeds for hover and unhover */
-  transition-property: width, padding, background, box-shadow, transform;
-  transition-duration: 0.35s, 0.35s, 0.35s, 0.35s, 0.35s;
-  transition-timing-function: ease;
-  position: relative;
   text-decoration: none;
   width: 40px;
-}
-
-/* Apply longer transition when unhovered */
-.social-icon-link.hovered {
-  transition-duration: 0.7s, 0.7s, 0.7s, 0.7s, 0.7s;
+  color: #4b5563;
 }
 
 .social-icon-link:hover {
   width: auto;
-  padding: 0 12px 0 8px; /* Less padding for subtlety */
-  background: rgba(243, 244, 246, 0.7); /* More transparent background */
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Lighter shadow */
-}
-
-.dark .social-icon-link:hover {
-  background: rgba(55, 65, 81, 0.5); /* More transparent dark background */
+  padding: 0 12px 0 8px;
+  color: #4f46e5;
 }
 
 .icon-container {
@@ -360,12 +402,6 @@ onMounted(() => {
   width: 40px;
   height: 40px;
   flex-shrink: 0;
-  transition: transform 0.6s ease;
-}
-
-/* Icon spin animation on hover */
-.social-icon-link:hover .icon-container {
-  transform: rotate(360deg);
 }
 
 .label-text {
@@ -376,20 +412,11 @@ onMounted(() => {
   font-weight: 500;
   opacity: 0;
   max-width: 0;
-  transform: translateX(-10px); /* Reduced distance for gentler animation */
-  /* Different speeds for appearing/disappearing */
-  transition: opacity 0.4s ease, transform 0.4s ease, max-width 0.4s ease;
-}
-
-/* Apply slower transition for hiding the text */
-.social-icon-link.hovered .label-text {
-  transition: opacity 0.6s ease, transform 0.6s ease, max-width 0.6s ease;
 }
 
 .social-icon-link:hover .label-text {
-  opacity: 0.9; /* Not fully opaque for subtlety */
-  transform: translateX(0);
-  max-width: 120px; /* Adjust based on longest text */
+  opacity: 1;
+  max-width: 120px;
 }
 
 /* Dark mode adjustments */
@@ -401,13 +428,13 @@ onMounted(() => {
   color: #818cf8;
 }
 
-/* Light mode hover color effect - Adding this to fix the hover issue */
+/* Light mode hover color effect */
 .social-icon-link {
-  color: #4b5563; /* Default gray color for icons */
+  color: #4b5563;
 }
 
 .social-icon-link:hover {
-  color: #4f46e5; /* Indigo color on hover - matching the primary theme color */
+  color: #4f46e5;
 }
 
 /* Reduced motion preference support */
