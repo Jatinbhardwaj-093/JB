@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed, onMounted } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { getPostBySlug } from "../data/blogs";
 import BlogReader from "../components/blog/BlogReader.vue";
@@ -31,7 +31,7 @@ onMounted(() => {
 
 <template>
   <main
-    class="flex-grow pt-16 pb-16"
+    class="flex-grow py-8 sm:py-12"
     :class="{
       'bg-gray-50': themeStore.theme === 'light',
       'bg-gray-900': themeStore.theme === 'dark',

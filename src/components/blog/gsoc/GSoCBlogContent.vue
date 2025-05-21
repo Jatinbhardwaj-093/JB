@@ -415,11 +415,6 @@ const themeStore = useThemeStore();
         everything shared here is based on my personal opinions.
       </p>
       <div
-        class="absolute top-3 sm:top-4 right-4 sm:right-6 text-xl sm:text-2xl text-indigo-600 dark:text-indigo-400 opacity-60"
-      >
-        ✦
-      </div>
-      <div
         class="absolute inset-0 -z-10 bg-gradient-radial from-indigo-200/30 dark:from-indigo-800/40 to-transparent opacity-50 sm:opacity-60"
       ></div>
     </blockquote>

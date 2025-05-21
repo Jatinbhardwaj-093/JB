@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, onMounted, defineAsyncComponent } from "vue";
+import { ref, onMounted, defineAsyncComponent } from "vue";
 import { useThemeStore } from "../../store/theme";
 import type { BlogPost } from "../../data/blogs/index";
 
@@ -41,7 +41,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="blog-reader max-w-5xl mx-auto px-0 sm:px-6 py-12"
+    class="blog-reader max-w-5xl mx-auto px-0 sm:px-6"
     :class="{
       'text-gray-800 dark': themeStore.theme === 'dark',
       'text-gray-800': themeStore.theme === 'light',
@@ -49,21 +49,21 @@ onMounted(async () => {
   >
     <!-- Blog Header -->
     <header
-      class="mb-4 border-b"
+      class="mb-4 border-b sm:pl-0 pl-2"
       :class="{
         'border-gray-200': themeStore.theme === 'light',
         'border-gray-700': themeStore.theme === 'dark',
       }"
     >
-      <h1
-        class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
+      <p
+        class="text-2xl sm:text-3xl font-bold mb-4"
         :class="{
           'text-gray-900': themeStore.theme === 'light',
           'text-white': themeStore.theme === 'dark',
         }"
       >
         {{ post.title }}
-      </h1>
+      </p>
 
       <div
         class="flex items-center text-sm mb-2"
@@ -102,7 +102,7 @@ onMounted(async () => {
 
       <!-- Back button -->
       <div
-        class="mt-12 pt-4 border-t"
+        class="mt-6 border-t"
         :class="{
           'border-gray-200': themeStore.theme === 'light',
           'border-gray-700': themeStore.theme === 'dark',
