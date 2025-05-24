@@ -346,14 +346,14 @@ const filteredProjects = computed(() => {
     transform: none !important;
     will-change: auto !important;
   }
-  
+
   .filter-tabs-container button {
     animation: none !important;
     transition: none !important;
     transform: none !important;
     will-change: auto !important;
   }
-  
+
   .filter-tabs-container button:hover,
   .filter-tabs-container button:focus,
   .filter-tabs-container button:active {
@@ -363,7 +363,7 @@ const filteredProjects = computed(() => {
     box-shadow: none !important;
     will-change: auto !important;
   }
-  
+
   /* Override any inherited animations */
   .filter-tabs-container .flex,
   .filter-tabs-container .space-x-2,
