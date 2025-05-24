@@ -324,7 +324,7 @@ const filteredProjects = computed(() => {
   transition: all 0.2s ease;
 } */
 
-/* Filter tab specific styles - disable hover effects */
+/* Filter tab specific styles - disable hover effects and ALL animations on small screens */
 .flex.space-x-2.min-w-full.w-max button {
   transition: none !important;
   transform: none !important;
@@ -335,6 +335,45 @@ const filteredProjects = computed(() => {
 .flex.space-x-2.min-w-full.w-max button:hover {
   transform: none !important;
   box-shadow: none !important;
+}
+
+/* Comprehensive animation removal for filter tabs container on small screens */
+@media (max-width: 640px) {
+  .filter-tabs-container,
+  .filter-tabs-container * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+  
+  .filter-tabs-container button {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+  
+  .filter-tabs-container button:hover,
+  .filter-tabs-container button:focus,
+  .filter-tabs-container button:active {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+    will-change: auto !important;
+  }
+  
+  /* Override any inherited animations */
+  .filter-tabs-container .flex,
+  .filter-tabs-container .space-x-2,
+  .filter-tabs-container .min-w-full,
+  .filter-tabs-container .w-max {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
 }
 
 /* Project title styling - matched with desktop version */
@@ -368,7 +407,6 @@ const filteredProjects = computed(() => {
 /* Card entrance animation - matched with desktop */
 .bg-white:not(.filter-tabs-container),
 .dark\:bg-gray-800:not(.filter-tabs-container) {
-  animation: projectCardEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) backwards;
   transform-style: preserve-3d;
   transform: translateZ(0);
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -408,111 +446,47 @@ const filteredProjects = computed(() => {
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Image hover effect with parallax and shine */
-.group {
-  overflow: hidden;
-}
-
-.group::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 100%
-  );
-  transform: skewX(-25deg);
-  z-index: 2;
-  transition: all 0.75s;
-  opacity: 0;
-}
-
-.group:hover::before {
-  animation: shine 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-@keyframes shine {
-  0% {
-    left: -100%;
-    opacity: 0;
+/* GSoC and SymPy image responsive fixes for mobile */
+@media (max-width: 640px) {
+  /* GSoC project image container adjustments - Made bigger */
+  .flex.items-center.justify-center.w-full.h-full.px-0 {
+    min-height: 200px !important;
+    height: 250px !important;
+    padding: 1.5rem 0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
-  50% {
-    opacity: 0.6;
+
+  .flex.items-center.justify-center.w-full.h-full.px-0 img:first-child {
+    object-fit: contain !important;
+    max-height: 160px !important;
+    width: 60% !important;
+    max-width: 60% !important;
+    height: auto !important;
   }
-  100% {
-    left: 150%;
-    opacity: 0;
+
+  .flex.items-center.justify-center.w-full.h-full.px-0 img:last-child {
+    object-fit: contain !important;
+    max-height: 160px !important;
+    width: 40% !important;
+    max-width: 40% !important;
+    height: auto !important;
   }
-}
 
-/* View Project link animation - matched with desktop */
-.btn-view-project {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: hidden;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-}
+  /* Optimize for very small screens - Made bigger */
+  @media (max-width: 375px) {
+    .flex.items-center.justify-center.w-full.h-full.px-0 {
+      min-height: 180px !important;
+      height: 220px !important;
+      padding: 1rem 0;
+    }
 
-.btn-view-project:hover {
-  transform: translateY(-2px);
-}
-
-.btn-view-project span.relative {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  padding-bottom: 2px;
-}
-
-.btn-view-project:hover span.relative::after {
-  transform: scaleX(1);
-}
-
-.btn-view-project span.relative::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.btn-view-project:hover svg {
-  transform: translateX(5px);
-}
-
-/* Ensure image aspect ratio is maintained */
-img {
-  aspect-ratio: 16/9;
-  object-fit: cover;
-}
-
-/* Prevent animations and transformations on the filter tabs container */
-.filter-tabs-container {
-  transform: none !important;
-  transition: none !important;
-  animation: none !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.filter-tabs-container:hover {
-  transform: none !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Enhanced hover effect to match desktop */
-.bg-white:hover,
-.dark\:bg-gray-800:hover {
-  transform: translateY(-12px) translateZ(10px) scale(1.01);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    .flex.items-center.justify-center.w-full.h-full.px-0 img {
+      max-height: 130px !important;
+      width: 47% !important;
+      max-width: 47% !important;
+    }
+  }
 }
 </style>

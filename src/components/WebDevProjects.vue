@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, onMounted } from "vue";
 import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
-// Used to force re-render of technology icons when theme changes
-const themeChanged = ref(0);
 
 // Import project images directly
 import isepImage from "../assets/images/WebDevProjects/ISEP.png";
@@ -12,39 +10,47 @@ import hspImage from "../assets/images/WebDevProjects/HSP.png";
 import sympyImage from "../assets/images/WebDevProjects/sympy.png";
 import gsocImage from "../assets/images/WebDevProjects/gsoc.png";
 
-// Helper function to get correct image URLs for technology icons
-const getIconUrl = (path) => {
-  // Special case for Flask, GitHub, and SymPy in dark theme
-  if (themeStore.theme === "dark") {
-    if (path === "Flask.png") {
-      // Using flask-light.png with higher quality
-      return new URL(
-        "../assets/images/Technology-Dark/flask-light.png",
-        import.meta.url
-      ).href;
-    }
-    if (path === "GitHub.png") {
-      // Using github-light.png for dark theme
-      return new URL(
-        "../assets/images/Technology-Dark/github-light.png",
-        import.meta.url
-      ).href;
-    }
-    // For SymPy, use an external URL since local file is damaged
-    if (path === "SymPy.png") {
-      // Use public SymPy logo from their official site
-      return "https://sympy.org/static/images/logo.png";
-    }
-  }
-  return new URL(`../assets/images/${path}`, import.meta.url).href;
-};
+// Function to get technology-specific colors
+const getTechColor = (techName: string) => {
+  const colors = {
+    // Frontend
+    HTML5: "bg-orange-500",
+    CSS3: "bg-blue-500",
+    JavaScript: "bg-yellow-500",
+    "Vue.js": "bg-green-500",
+    TypeScript: "bg-blue-600",
 
-// Check if the image should have larger size in dark mode
-const shouldEnlargeIcon = (filename) => {
-  return (
-    themeStore.theme === "dark" &&
-    (filename === "Flask.png" || filename === "GitHub.png")
-  );
+    // Backend
+    Python: "bg-yellow-600",
+    Flask: "bg-gray-700",
+    Django: "bg-green-700",
+    "Node.js": "bg-green-600",
+
+    // Databases
+    SQLite: "bg-blue-400",
+    MongoDB: "bg-green-600",
+    MySQL: "bg-blue-600",
+    Redis: "bg-red-500",
+
+    // Tools & Libraries
+    Git: "bg-orange-600",
+    GitHub: "bg-gray-800",
+    Docker: "bg-blue-500",
+    SymPy: "bg-green-500",
+    Codecov: "bg-pink-500",
+    Celery: "bg-green-400",
+
+    // Machine Learning
+    TensorFlow: "bg-orange-500",
+    PyTorch: "bg-red-600",
+    NumPy: "bg-blue-500",
+    Pandas: "bg-purple-600",
+
+    // Default
+    default: "bg-indigo-500",
+  };
+
+  return colors[techName] || colors["default"];
 };
 
 // Add direct references to image paths for better reliability
@@ -177,37 +183,6 @@ const handleImageError = (e: Event, projectId: number) => {
     }
   }
 };
-
-// Watch for theme changes to update Flask and GitHub icons
-watchEffect(() => {
-  // When theme changes, increment to trigger re-render
-  themeChanged.value += themeStore.theme === "dark" ? 1 : 0;
-});
-
-// Error handling for technology icons
-const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
-  const target = e.target as HTMLImageElement;
-  console.error(`Technology icon failed to load: ${tech.name} (${tech.img})`);
-  if (target) {
-    // Set a colored background with the first letter of the technology as fallback
-    target.style.display = "none";
-    const parent = target.parentElement;
-    if (parent) {
-      parent.style.backgroundColor = "#4f46e5"; // Indigo color
-      parent.style.color = "white";
-      parent.style.display = "flex";
-      parent.style.alignItems = "center";
-      parent.style.justifyContent = "center";
-
-      // Create and append text node with first letter
-      const textNode = document.createElement("span");
-      textNode.textContent = tech.name.charAt(0);
-      textNode.style.fontSize = "10px";
-      textNode.style.fontWeight = "bold";
-      parent.appendChild(textNode);
-    }
-  }
-};
 </script>
 
 <template>
@@ -255,18 +230,18 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
           <div class="relative overflow-hidden group min-h-[160px]">
             <template v-if="project.id === 3">
               <div
-                class="flex items-center justify-center w-full min-h-[160px] h-64 px-0"
+                class="flex items-center justify-center w-full min-h-[160px] h-64 px-0 gsoc-sympy-container"
               >
                 <img
                   :src="gsocImage"
                   alt="GSoC logo"
-                  class="w-1/2 h-full object-contain p-0 pr-1 transition-transform duration-700 group-hover:scale-105"
+                  class="w-1/2 h-full object-contain p-0 pr-1 transition-transform duration-700 group-hover:scale-105 gsoc-logo"
                   loading="eager"
                 />
                 <img
                   :src="sympyImage"
                   alt="SymPy logo"
-                  class="w-1/2 h-full object-contain p-0 pl-1 transition-transform duration-700 group-hover:scale-105"
+                  class="w-1/2 h-full object-contain p-0 pl-1 transition-transform duration-700 group-hover:scale-105 sympy-logo"
                   loading="eager"
                   @error="handleImageError($event, project.id)"
                 />
@@ -353,27 +328,18 @@ const handleTechIconError = (e: Event, tech: { name: string; img: string }) => {
                 <div
                   v-for="(tech, i) in project.technologies"
                   :key="i"
-                  class="tech-badge group flex items-center gap-1 px-1.5 py-1 rounded-sm"
+                  class="tech-badge group flex items-center gap-1.5 px-2 py-1 rounded-sm"
                   :class="{
-                    'bg-gray-700/70': themeStore.theme === 'dark',
-                    'bg-gray-100': themeStore.theme === 'light',
+                    'bg-gray-700/70 border border-gray-600':
+                      themeStore.theme === 'dark',
+                    'bg-gray-100 border border-gray-200':
+                      themeStore.theme === 'light',
                   }"
                 >
                   <div
-                    class="rounded-sm overflow-hidden flex items-center justify-center"
-                    :class="{
-                      'w-5 h-5 p-0.5': !shouldEnlargeIcon(tech.img),
-                      'w-6 h-6 p-0': shouldEnlargeIcon(tech.img),
-                    }"
-                  >
-                    <img
-                      :src="getIconUrl(tech.img) + (themeChanged ? '' : '')"
-                      :alt="`${tech.name} icon`"
-                      class="w-full h-full object-contain"
-                      :class="{ 'scale-110': shouldEnlargeIcon(tech.img) }"
-                      @error="(e) => handleTechIconError(e, tech)"
-                    />
-                  </div>
+                    class="w-2 h-2 rounded-full flex-shrink-0"
+                    :class="getTechColor(tech.name)"
+                  ></div>
                   <span
                     class="text-xs font-medium"
                     :class="{
@@ -934,6 +900,50 @@ h2.text-3xl {
 
   .project-card .relative {
     background-color: #1f1f1f; /* Fallback background if image fails */
+  }
+
+  /* GSoC and SymPy image container adjustment for small screens */
+  .gsoc-sympy-container {
+    min-height: 90px !important;
+    height: 120px !important;
+    padding: 0.5rem 0;
+  }
+
+  .gsoc-sympy-container img {
+    object-fit: contain !important;
+    max-height: 80px !important;
+  }
+
+  .gsoc-logo {
+    width: 35% !important;
+    max-width: 35% !important;
+  }
+
+  .sympy-logo {
+    width: 30% !important;
+    max-width: 30% !important;
+  }
+
+  /* Optimize for very small screens */
+  @media (max-width: 375px) {
+    .gsoc-sympy-container {
+      min-height: 80px !important;
+      height: 100px !important;
+    }
+
+    .gsoc-sympy-container img {
+      max-height: 60px !important;
+    }
+
+    .gsoc-logo {
+      width: 30% !important;
+      max-width: 30% !important;
+    }
+
+    .sympy-logo {
+      width: 25% !important;
+      max-width: 25% !important;
+    }
   }
 }
 

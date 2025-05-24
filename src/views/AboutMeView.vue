@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import Experience from "../components/Experience.vue";
 import Skills from "../components/Skills.vue";
-import Education from "../components/Education.vue";
-import Hobby from "../components/Hobby.vue";
+import EducationHobbies from "../components/EducationHobbies.vue";
 import { useThemeStore } from "../store/theme";
 import { ref } from "vue";
 
@@ -14,7 +13,7 @@ const tabs = [
   { id: "experience", title: "Experience" },
   { id: "skills", title: "Skills" },
   { id: "education", title: "Education" },
-  { id: "hobby", title: "Hobbies" },
+  { id: "hobbies", title: "Hobbies" },
 ];
 
 const setActiveTab = (tabId) => {
@@ -54,9 +53,7 @@ const setActiveTab = (tabId) => {
             class="text-gray-200 max-w-3xl mx-auto"
             :class="{ 'text-gray-600': themeStore.theme === 'light' }"
           >
-            I build effective web applications with strong front-end and
-            back-end skills. I analyze problems thoroughly and create practical
-            software that's easy for people to use.
+            I love solving problems with code and mathematics. I explore artificial intelligence, contribute to open source, and build applications that make a difference.
           </p>
         </div>
 
@@ -90,37 +87,9 @@ const setActiveTab = (tabId) => {
           </div>
         </div>
 
-        <!-- Two Column Layout for Education and Hobbies -->
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- Education Section -->
-          <div>
-            <h2
-              class="text-2xl font-bold text-black mb-6 text-center"
-              :class="{ 'text-white': themeStore.theme === 'dark' }"
-            >
-              Education
-            </h2>
-            <div
-              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 h-full border border-gray-100 dark:border-gray-700"
-            >
-              <Education />
-            </div>
-          </div>
-
-          <!-- Hobbies Section -->
-          <div>
-            <h2
-              class="text-2xl font-bold text-black mb-6 text-center"
-              :class="{ 'text-white': themeStore.theme === 'dark' }"
-            >
-              Hobbies & Interests
-            </h2>
-            <div
-              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 h-full border border-gray-100 dark:border-gray-700"
-            >
-              <Hobby />
-            </div>
-          </div>
+        <!-- Education & Hobbies Combined Section -->
+        <div>
+          <EducationHobbies />
         </div>
       </div>
     </section>
@@ -148,8 +117,7 @@ const setActiveTab = (tabId) => {
           <h1 class="text-3xl font-bold text-white mb-2">About Me</h1>
           <div class="h-1 w-16 bg-white/70 mx-auto rounded-full mb-4"></div>
           <p class="text-white/90 max-w-md mx-auto text-sm">
-            Building seamless digital experiences that
-            solve real problems through elegant code and thoughtful design.
+            I love solving problems with code and mathematics. I explore AI, contribute to open source, and build helpful applications.
           </p>
         </div>
       </div>
@@ -265,35 +233,21 @@ const setActiveTab = (tabId) => {
           }"
         >
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-2">
-            <p
-              class="text-2xl text-center font-bold text-gray-900"
-              :class="{ 'text-white': themeStore.theme === 'dark' }"
-            >
-              Education
-            </p>
-            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
-            <Education />
+            <EducationHobbies :mobile-active-tab="'education'" />
           </div>
         </div>
 
         <!-- Hobbies Tab Content -->
         <div
-          id="hobby-content"
+          id="hobbies-content"
           class="p-2"
           :class="{
-            block: activeTab === 'hobby',
-            hidden: activeTab !== 'hobby',
+            block: activeTab === 'hobbies',
+            hidden: activeTab !== 'hobbies',
           }"
         >
           <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-2">
-            <p
-              class="text-2xl text-center font-bold text-gray-900"
-              :class="{ 'text-white': themeStore.theme === 'dark' }"
-            >
-              Hobbies & Interests
-            </p>
-            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
-            <Hobby />
+            <EducationHobbies :mobile-active-tab="'hobbies'" />
           </div>
         </div>
       </div>

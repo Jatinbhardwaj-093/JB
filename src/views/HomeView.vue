@@ -1,314 +1,236 @@
 <script setup lang="ts">
 import Intro from "../components/Intro.vue";
 import { useThemeStore } from "../store/theme";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const themeStore = useThemeStore();
 const firstName = ref("Jatin");
 const lastName = ref("Bhardwaj");
-const specializations = ref(["Machine Learning", "AI", "Maths"]);
+const specializations = ref(["Cloud Computing", "Mathematics", "ML"]);
+const isLoaded = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isLoaded.value = true;
+  }, 100);
+});
 </script>
 
 <template>
-  <div class="w-full max-w-[100vw] overflow-x-hidden box-border">
+  <div class="w-full max-w-[100vw] overflow-x-hidden">
     <!-- Desktop Version -->
     <div class="hidden md:block">
       <Intro />
     </div>
 
-    <!-- Mobile Version - Custom Design -->
-    <div class="block md:hidden overflow-hidden">
-      <!-- Hero Section with Immersive Background -->
-      <div class="relative w-full">
-        <!-- Full-width background with gradient overlay -->
-        <div class="relative h-[60vh] w-full overflow-hidden">
+    <!-- Mobile Version - Complete Redesign -->
+    <div
+      class="block md:hidden min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-950"
+    >
+      <!-- Hero Section -->
+      <div class="relative min-h-screen flex items-center justify-center">
+        <!-- Floating Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
           <div
-            class="absolute inset-0 bg-gradient-to-b from-indigo-600/80 to-purple-800/90 z-0"
+            class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-indigo-400/20 to-purple-600/20 rounded-full blur-3xl"
           ></div>
           <div
-            class="absolute inset-0 bg-[url('../assets/images/profileImage/myimage2.png')] bg-cover bg-center opacity-30 z-0"
+            class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-blue-400/20 to-cyan-600/20 rounded-full blur-3xl"
           ></div>
+        </div>
 
-          <!-- Centered content with animation -->
+        <!-- Profile Section -->
+        <div class="relative z-10 text-center space-y-6 px-4">
+          <!-- Profile Image -->
           <div
-            class="relative z-10 h-full flex flex-col items-center justify-center px-4 text-center"
+            class="relative mx-auto w-32 h-32"
+            :class="{ 'animate-scale-in': isLoaded }"
           >
-            <h1 class="text-4xl font-bold text-white animate-fade-in-up">
-              {{ firstName }}
-              <span class="text-indigo-200">{{ lastName }}</span>
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full blur-lg opacity-75 animate-spin-slow"
+            ></div>
+            <div
+              class="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl"
+            >
+              <img
+                src="../assets/images/profileImage/myimage.png"
+                alt="Jatin Bhardwaj"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <!-- Online Status -->
+            <div
+              class="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-white dark:border-gray-800 flex items-center justify-center"
+            >
+              <div class="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+            </div>
+          </div>
+
+          <!-- Name and Title -->
+          <div
+            class="space-y-2"
+            :class="{ 'animate-fade-in-up delay-200': isLoaded }"
+          >
+            <h1
+              class="text-4xl font-bold bg-gradient-to-r from-gray-900 via-indigo-700 to-purple-700 dark:from-white dark:via-indigo-300 dark:to-purple-300 bg-clip-text text-transparent"
+            >
+              {{ firstName }} {{ lastName }}
             </h1>
+          </div>
 
-            <!-- Location Section -->
+          <!-- Location -->
+          <div
+            class="flex items-center justify-center space-x-2"
+            :class="{ 'animate-fade-in-up delay-300': isLoaded }"
+          >
             <div
-              class="flex items-center gap-2 mt-2 mb-2 animate-fade-in-up animation-delay-200"
+              class="flex items-center space-x-2 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg"
             >
-              <div class="relative">
-                <div
-                  class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-20 group-hover:opacity-30 transition duration-500"
-                ></div>
-                <div class="relative bg-white/10 p-2 rounded-full shadow-sm">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-white transition-transform duration-500 group-hover:scale-105"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
+              <div
+                class="w-6 h-6 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center"
+              >
+                <svg
+                  class="w-3 h-3 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                  />
+                </svg>
               </div>
-              <p class="text-base font-medium text-white/90">Delhi, India</p>
+              <span class="text-sm font-medium text-gray-700 dark:text-gray-200"
+                >Delhi, India</span
+              >
             </div>
+          </div>
 
-            <!-- Animated badges -->
-            <div
-              class="flex flex-wrap justify-center gap-2 mt-6 animate-fade-in-up animation-delay-400"
+          <!-- Specializations -->
+          <div
+            class="flex flex-wrap justify-center gap-2"
+            :class="{ 'animate-fade-in-up delay-400': isLoaded }"
+          >
+            <span
+              v-for="(spec, index) in specializations"
+              :key="index"
+              class="px-4 py-2 bg-indigo-600 dark:bg-indigo-500 text-white text-sm font-medium rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+              :style="{ 'animation-delay': `${400 + index * 100}ms` }"
             >
+              {{ spec }}
+            </span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div
+            class="flex flex-col space-y-3"
+            :class="{ 'animate-fade-in-up delay-500': isLoaded }"
+          >
+            <router-link
+              to="/projects"
+              class="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                />
+              </svg>
+              <span>View My Projects</span>
+            </router-link>
+
+            <router-link
+              to="/contact"
+              class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white py-3 px-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 border border-gray-200 dark:border-gray-700 flex items-center justify-center space-x-2"
+            >
+              <svg
+                class="w-5 h-5"
+                :class="{
+                  'text-white': themeStore.theme === 'dark',
+                  'text-black': themeStore.theme === 'light',
+                }"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
               <span
-                v-for="(tag, i) in specializations"
-                :key="i"
-                class="px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white backdrop-blur-sm"
-              >
-                {{ tag }}
-              </span>
-            </div>
-          </div>
-
-          <!-- Bottom wave decoration with overflow hidden -->
-          <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-              class="w-full h-auto fill-white dark:fill-gray-900"
-            >
-              <path
-                d="M0,192L60,181.3C120,171,240,149,360,154.7C480,160,600,192,720,192C840,192,960,160,1080,160C1200,160,1320,192,1380,208L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
-              ></path>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Floating action button -->
-        <div
-          class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-20 animate-bounce-subtle"
-        >
-          <a
-            href="#portfolio"
-            class="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-lg"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Portfolio Section -->
-      <div
-        id="portfolio"
-        class="py-12 px-4"
-        :class="{
-          'bg-gray-900': themeStore.theme === 'dark',
-          'bg-white': themeStore.theme === 'light',
-        }"
-      >
-        <h2
-          class="text-2xl font-bold text-center mb-8"
-          :class="{
-            'text-white': themeStore.theme === 'dark',
-            'text-gray-900': themeStore.theme === 'light',
-          }"
-        >
-          My Work
-        </h2>
-
-        <!-- Project Cards - Mobile Optimized -->
-        <div class="space-y-6">
-          <router-link
-            to="/projects"
-            class="block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-            :class="{
-              'bg-gray-800': themeStore.theme === 'dark',
-              'bg-gray-50': themeStore.theme === 'light',
-            }"
-          >
-            <div class="h-40 bg-indigo-600 flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-16 w-16 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                />
-              </svg>
-            </div>
-            <div class="p-5">
-              <h3
-                class="text-xl font-semibold"
                 :class="{
                   'text-white': themeStore.theme === 'dark',
-                  'text-gray-900': themeStore.theme === 'light',
+                  'text-black': themeStore.theme === 'light',
                 }"
+                >Get In Touch</span
               >
-                Projects
-              </h3>
-              <p
-                class="mt-2"
-                :class="{
-                  'text-gray-300': themeStore.theme === 'dark',
-                  'text-gray-600': themeStore.theme === 'light',
-                }"
-              >
-                Check out my recent work and applications.
-              </p>
-            </div>
-          </router-link>
+            </router-link>
+          </div>
 
-          <router-link
-            to="/about"
-            class="block rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
-            :class="{
-              'bg-gray-800': themeStore.theme === 'dark',
-              'bg-gray-50': themeStore.theme === 'light',
-            }"
+          <!-- Social Links -->
+          <div
+            class="flex justify-center space-x-4"
+            :class="{ 'animate-fade-in-up delay-600': isLoaded }"
           >
-            <div class="h-40 bg-purple-600 flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-16 w-16 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+            <a
+              href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
                 />
               </svg>
-            </div>
-            <div class="p-5">
-              <h3
-                class="text-xl font-semibold"
-                :class="{
-                  'text-white': themeStore.theme === 'dark',
-                  'text-gray-900': themeStore.theme === 'light',
-                }"
-              >
-                About Me
-              </h3>
-              <p
-                class="mt-2"
-                :class="{
-                  'text-gray-300': themeStore.theme === 'dark',
-                  'text-gray-600': themeStore.theme === 'light',
-                }"
-              >
-                Learn more about my skills, experience and background.
-              </p>
-            </div>
-          </router-link>
-        </div>
+            </a>
 
-        <!-- Contact Button -->
-        <div class="mt-10 flex justify-center">
-          <router-link
-            to="/contact"
-            class="inline-flex items-center px-6 py-3 rounded-lg bg-indigo-600 text-white font-medium shadow-md hover:bg-indigo-700 transition-colors duration-300"
-          >
-            Get in Touch
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 ml-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+            <a
+              href="https://github.com/Jatinbhardwaj-093"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-gray-900 dark:bg-gray-700 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200"
             >
-              <path
-                fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </router-link>
-        </div>
-      </div>
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+            </a>
 
-      <!-- Social Links Bar -->
-      <div class="py-6 px-4 bg-gray-50 dark:bg-gray-800 mb-10">
-        <div class="flex justify-around items-center">
-          <a
-            href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"
-            target="_blank"
-            class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-          >
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://github.com/Jatinbhardwaj-093"
-            target="_blank"
-            class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-          >
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-              />
-            </svg>
-          </a>
-          <a
-            href="https://x.com/Jatin0932"
-            target="_blank"
-            class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-          >
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-              />
-            </svg>
-          </a>
-          <a
-            href="mailto:bhardwajjatin093@gmail.com"
-            class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-          >
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"
-              />
-            </svg>
-          </a>
+            <a
+              href="https://x.com/Jatin0932"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-12 h-12 bg-black dark:bg-gray-600 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                />
+              </svg>
+            </a>
+
+            <a
+              href="mailto:bhardwajjatin093@gmail.com"
+              class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -316,15 +238,35 @@ const specializations = ref(["Machine Learning", "AI", "Maths"]);
 </template>
 
 <style scoped>
-/* Mobile-specific animations */
+/* Enhanced animations for the modern mobile design */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -333,15 +275,45 @@ const specializations = ref(["Machine Learning", "AI", "Maths"]);
   opacity: 0;
 }
 
-.animation-delay-200 {
+.animate-scale-in {
+  animation: scaleIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 3s linear infinite;
+}
+
+/* Delay classes */
+.delay-200 {
   animation-delay: 0.2s;
 }
 
-.animation-delay-400 {
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
   animation-delay: 0.4s;
 }
 
-/* Subtle bounce animation for scroll indicator */
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
+}
+
+.delay-700 {
+  animation-delay: 0.7s;
+}
+
+.delay-800 {
+  animation-delay: 0.8s;
+}
+
+/* Subtle bounce animation for interactive elements */
 @keyframes bounceSoft {
   0%,
   100% {
@@ -356,37 +328,92 @@ const specializations = ref(["Machine Learning", "AI", "Maths"]);
   animation: bounceSoft 2s infinite ease-in-out;
 }
 
-/* Smooth scrolling for anchor links */
+/* Enhanced hover effects */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+/* Smooth transitions */
+.transition-all {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glassmorphism effects */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Gradient text effects */
+.bg-clip-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Responsive design improvements */
+@media (max-width: 767px) {
+  /* Ensure smooth animations on mobile */
+  .animate-fade-in-up,
+  .animate-scale-in {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
+
+  /* Force show animations only when loaded */
+  .loaded .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .loaded .animate-scale-in {
+    animation: scaleIn 0.5s ease forwards;
+    opacity: 0;
+  }
+}
+
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Dark mode transition */
-.bg-white,
-.dark\:bg-gray-900 {
+/* Dark mode transitions */
+.dark\:bg-gray-900,
+.dark\:bg-gray-800 {
   transition: background-color 0.3s ease;
 }
 
-/* Prevent any content from creating horizontal scrollbars */
-div {
-  max-width: 100%;
-  box-sizing: border-box;
+/* Prevent horizontal scroll */
+.max-w-\[100vw\] {
+  max-width: 100vw;
 }
 
-/* Make sure SVGs and images don't overflow */
-svg,
-img {
-  max-width: 100%;
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
-/* Override any problematic animations */
-@media (max-width: 767px) {
-  .animate-fade-in-up,
-  .animation-delay-200,
-  .animation-delay-400 {
-    transform: none !important;
-    animation: none !important;
-    opacity: 1 !important;
-  }
+/* Button enhancements */
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Card hover effects */
+.hover\:shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 </style>

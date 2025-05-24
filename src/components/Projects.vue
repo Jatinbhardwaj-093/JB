@@ -10,27 +10,47 @@ import hspImage from "../assets/images/WebDevProjects/HSP.png";
 import sympyImage from "../assets/images/WebDevProjects/sympy.png";
 import gsocImage from "../assets/images/WebDevProjects/gsoc.png";
 
-// Helper function to get correct image URLs for technology icons
-const getIconUrl = (path) => {
-  // Special cases for icons in dark theme
-  if (themeStore.theme === "dark") {
-    // Special case for Flask in dark theme
-    if (path === "Flask.png") {
-      // Use the light Flask icon in dark theme
-      return new URL(
-        "../assets/images/Technology-Dark/flask-light.png",
-        import.meta.url
-      ).href;
-    }
-  }
+// Function to get technology-specific colors
+const getTechColor = (techName: string) => {
+  const colors = {
+    // Frontend
+    HTML5: "bg-orange-500",
+    CSS3: "bg-blue-500",
+    JavaScript: "bg-yellow-500",
+    "Vue.js": "bg-green-500",
+    TypeScript: "bg-blue-600",
 
-  // Special case for SymPy image (regardless of theme)
-  if (path === "SymPy.png") {
-    // Use public SymPy logo from their official site since local file might be damaged
-    return "https://sympy.org/static/images/logo.png";
-  }
+    // Backend
+    Python: "bg-yellow-600",
+    Flask: "bg-gray-700",
+    Django: "bg-green-700",
+    "Node.js": "bg-green-600",
 
-  return new URL(`../assets/images/${path}`, import.meta.url).href;
+    // Databases
+    SQLite: "bg-blue-400",
+    MongoDB: "bg-green-600",
+    MySQL: "bg-blue-600",
+    Redis: "bg-red-500",
+
+    // Tools & Libraries
+    Git: "bg-orange-600",
+    GitHub: "bg-gray-800",
+    Docker: "bg-blue-500",
+    SymPy: "bg-green-500",
+    Codecov: "bg-pink-500",
+    Celery: "bg-green-400",
+
+    // Machine Learning
+    TensorFlow: "bg-orange-500",
+    PyTorch: "bg-red-600",
+    NumPy: "bg-blue-500",
+    Pandas: "bg-purple-600",
+
+    // Default
+    default: "bg-indigo-500",
+  };
+
+  return colors[techName] || colors["default"];
 };
 
 // Get Google Doc icon based on theme
@@ -317,25 +337,21 @@ const handleImageError = (e: Event, projectId: number) => {
                 <div
                   v-for="(tech, i) in project.technologies"
                   :key="i"
-                  class="tech-badge flex items-center gap-2 px-2 py-1 rounded-md transition-all duration-200 hover:translate-y-[-2px]"
+                  class="tech-badge flex items-center gap-2 px-3 py-1.5 rounded-md transition-all duration-200 hover:translate-y-[-2px]"
                   :class="{
-                    'hover:shadow-md': themeStore.theme === 'dark',
-                    'hover:shadow-sm': themeStore.theme === 'light',
+                    'hover:shadow-md bg-gray-700/40 border border-gray-600':
+                      themeStore.theme === 'dark',
+                    'hover:shadow-sm bg-gray-50 border border-gray-200':
+                      themeStore.theme === 'light',
                   }"
                   :title="`${tech.name}`"
                 >
                   <div
-                    class="w-5 h-5 rounded-md overflow-hidden flex items-center justify-center"
-                  >
-                    <img
-                      :src="getIconUrl(tech.img)"
-                      :alt="`${tech.name} icon`"
-                      class="w-4 h-4 object-contain"
-                      loading="eager"
-                    />
-                  </div>
+                    class="w-2 h-2 rounded-full flex-shrink-0"
+                    :class="getTechColor(tech.name)"
+                  ></div>
                   <span
-                    class="text-xs font-medium"
+                    class="text-sm font-medium"
                     :class="{
                       'text-gray-200': themeStore.theme === 'dark',
                       'text-gray-700': themeStore.theme === 'light',
@@ -1022,28 +1038,47 @@ h2.text-3xl {
     justify-content: center;
   }
 
-  /* SymPy and GSoC image adjustment for small screens */
-  .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 {
+  /* GSoC and SymPy image container adjustment for small screens */
+  .gsoc-sympy-container {
     min-height: 90px !important;
-    height: auto !important;
-    padding: 0.25rem 0;
+    height: 120px !important;
+    padding: 0.5rem 0;
   }
 
-  .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 img {
+  .gsoc-sympy-container img {
     object-fit: contain !important;
-    max-height: 60px !important;
-    width: 40% !important;
+    max-height: 80px !important;
   }
 
-  /* Optimize small screen layout for project cards */
+  .gsoc-logo {
+    width: 35% !important;
+    max-width: 35% !important;
+  }
+
+  .sympy-logo {
+    width: 30% !important;
+    max-width: 30% !important;
+  }
+
+  /* Optimize for very small screens */
   @media (max-width: 375px) {
-    .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 {
-      min-height: 70px !important;
+    .gsoc-sympy-container {
+      min-height: 80px !important;
+      height: 100px !important;
     }
 
-    .min-h-\[120px\].sm\:min-h-\[160px\].h-36.sm\:h-48 img {
-      max-height: 50px !important;
-      width: 35% !important;
+    .gsoc-sympy-container img {
+      max-height: 60px !important;
+    }
+
+    .gsoc-logo {
+      width: 30% !important;
+      max-width: 30% !important;
+    }
+
+    .sympy-logo {
+      width: 25% !important;
+      max-width: 25% !important;
     }
   }
 }
@@ -1054,18 +1089,5 @@ h2.text-3xl {
   object-fit: cover;
   backface-visibility: hidden; /* Prevents glitches during animation */
   will-change: transform; /* Optimizes for animation */
-}
-
-/* Force specific sizes for GSoC and SymPy logos on mobile */
-@media (max-width: 767px) {
-  .gsoc-logo {
-    width: 20px !important;
-    max-width: 20px !important;
-  }
-
-  .sympy-logo {
-    width: 16px !important;
-    max-width: 16px !important;
-  }
 }
 </style>
