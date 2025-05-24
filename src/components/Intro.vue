@@ -526,6 +526,7 @@ onMounted(() => {
 @media (max-width: 640px) {
   .min-h-screen {
     min-height: 100vh;
+    min-width: 100vw;
     padding: 2rem 0;
   }
 

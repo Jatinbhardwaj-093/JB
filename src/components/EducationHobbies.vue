@@ -42,24 +42,18 @@ const educationData = [
     id: "cbse",
     title: "Senior Secondary (12th)",
     institution: "Central Board of Secondary Education",
-    achievement: "9.4 CGPA",
-    status: "Completed",
     year: "2021-2022",
     link: "https://www.cbse.gov.in/cbsenew/cbse.html",
     logo: new URL("../assets/images/Education/cbse.png", import.meta.url).href,
-    statusColor: "green",
     gradient: "from-green-400 to-emerald-500",
   },
   {
     id: "iitm",
     title: "BS in Data Science",
     institution: "Indian Institute of Technology Madras",
-    achievement: "Foundation Completed",
-    status: "Diploma Level (Current)",
     year: "2023-Present",
     link: "https://study.iitm.ac.in/ds/",
     logo: new URL("../assets/images/Education/IITM.png", import.meta.url).href,
-    statusColor: "blue",
     gradient: "from-blue-400 to-indigo-500",
   },
 ];
@@ -250,42 +244,6 @@ const switchTab = (tab: string) => {
                       {{ edu.year }}
                     </span>
                   </div>
-
-                  <!-- Achievement & Status -->
-                  <div class="flex flex-wrap gap-3">
-                    <span
-                      class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold"
-                      :class="`bg-${edu.statusColor}-100 text-${edu.statusColor}-800 dark:bg-${edu.statusColor}-900/50 dark:text-${edu.statusColor}-300`"
-                    >
-                      <svg
-                        class="w-4 h-4 mr-1.5"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                      {{ edu.achievement }}
-                    </span>
-                    <span
-                      v-if="edu.status.includes('Current')"
-                      class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300"
-                    >
-                      <div
-                        class="w-2 h-2 bg-orange-500 rounded-full mr-1.5 animate-pulse"
-                      ></div>
-                      {{ edu.status }}
-                    </span>
-                    <span
-                      v-else
-                      class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-                    >
-                      {{ edu.status }}
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -355,43 +313,7 @@ const switchTab = (tab: string) => {
               </div>
 
               <!-- Content -->
-              <div class="p-4 pt-3">
-                <!-- Achievements -->
-                <div class="flex flex-wrap gap-2 mb-3">
-                  <span
-                    class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold"
-                    :class="`bg-${edu.statusColor}-100 text-${edu.statusColor}-800 dark:bg-${edu.statusColor}-900/50 dark:text-${edu.statusColor}-300`"
-                  >
-                    <svg
-                      class="w-3 h-3 mr-1"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    {{ edu.achievement }}
-                  </span>
-                  <span
-                    v-if="edu.status.includes('Current')"
-                    class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300"
-                  >
-                    <div
-                      class="w-2 h-2 bg-orange-500 rounded-full mr-1 animate-pulse"
-                    ></div>
-                    {{ edu.status }}
-                  </span>
-                  <span
-                    v-else
-                    class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-                  >
-                    {{ edu.status }}
-                  </span>
-                </div>
-              </div>
+              <div class="p-4 pt-3"></div>
             </div>
           </div>
         </div>
