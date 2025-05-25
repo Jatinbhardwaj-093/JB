@@ -38,62 +38,12 @@ import ThemeTransition from "./components/ThemeTransition.vue";
   --accent-color-hover: #4f46e5;
 }
 
-/* Ensure the root container never causes overflow */
-#app {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  position: relative;
-}
-
 html,
 body {
   width: 100%;
-  max-width: 100%;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-}
-
-body {
+  max-width: 100vw;
   font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
-  position: relative; /* Helps with overflow control */
-}
-
-/* Fix for potential overflow issues in all containers */
-.app-container,
-main,
-.container {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
-/* Router view container should also respect boundaries */
-router-view,
-.router-view-wrapper {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-/* All sections need overflow control */
-section {
-  overflow-x: clip;
-  max-width: 100%;
-}
-
-/* Prevent SVGs from causing overflow */
-svg {
-  max-width: 100%;
-}
-
-/* Ensure grid and flex layouts don't cause overflow */
-.grid,
-.flex,
-[class*="grid-cols"],
-[class*="flex-"] {
-  max-width: 100%;
 }
 
 /* Remove default focus outlines */
@@ -120,21 +70,12 @@ textarea:focus-visible,
 /* Remove tap highlight color on mobile */
 * {
   -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box; /* Ensure all elements include padding in width calculations */
+  box-sizing: border-box;
 }
 
-/* Make sure images don't cause overflow */
 img {
   max-width: 100%;
   height: auto;
-}
-
-/* Handle tables and pre elements that might cause overflow */
-table,
-pre {
-  max-width: 100%;
-  overflow-x: auto;
-  display: block;
 }
 
 .page-fade-enter-active,
@@ -146,5 +87,10 @@ pre {
 .page-fade-leave-to {
   opacity: 0;
   transform: translateY(10px);
+}
+
+/* Simple fix for scroll bar flicker during transitions */
+html {
+  overflow-y: scroll;
 }
 </style>

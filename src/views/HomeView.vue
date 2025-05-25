@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full max-w-[100vw] overflow-x-hidden">
+  <div>
     <!-- Desktop Version -->
     <div class="hidden md:block">
       <Intro />
@@ -28,19 +28,23 @@ onMounted(() => {
       class="block md:hidden min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-indigo-950"
     >
       <!-- Hero Section -->
-      <div class="relative min-h-screen flex items-center justify-center">
+      <div
+        class="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
         <!-- Floating Background Elements -->
         <div class="absolute inset-0 overflow-hidden">
           <div
-            class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-indigo-400/20 to-purple-600/20 rounded-full blur-3xl"
+            class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-indigo-400/20 to-purple-600/20 rounded-full blur-3xl transform"
           ></div>
           <div
-            class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-blue-400/20 to-cyan-600/20 rounded-full blur-3xl"
+            class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-blue-400/20 to-cyan-600/20 rounded-full blur-3xl transform"
           ></div>
         </div>
 
         <!-- Profile Section -->
-        <div class="relative z-10 text-center space-y-6 px-4">
+        <div
+          class="relative z-10 text-center space-y-6 px-4 w-full max-w-sm mx-auto"
+        >
           <!-- Profile Image -->
           <div
             class="relative mx-auto w-32 h-32"
@@ -239,6 +243,24 @@ onMounted(() => {
 
 <style scoped>
 /* Enhanced animations for the modern mobile design */
+
+/* Prevent scroll during initial render */
+body:not(.loaded) {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+html:not(.loaded) {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+/* Force all elements to respect boundaries during load */
+*:not(.absolute) {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -356,6 +378,12 @@ onMounted(() => {
 
 /* Responsive design improvements */
 @media (max-width: 767px) {
+  /* Prevent scroll during load by ensuring elements are contained */
+  .block.md\:hidden {
+    position: relative;
+    contain: layout style paint;
+  }
+
   /* Ensure smooth animations on mobile */
   .animate-fade-in-up,
   .animate-scale-in {
@@ -387,13 +415,70 @@ html {
   transition: background-color 0.3s ease;
 }
 
-/* Prevent horizontal scroll */
+/* Prevent horizontal scroll - Enhanced */
 .max-w-\[100vw\] {
   max-width: 100vw;
 }
 
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* Ensure no content causes overflow during load */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Specific fixes for potential overflow elements */
+.absolute {
+  max-width: none; /* Allow absolute positioned elements to exceed container */
+}
+
+/* Prevent layout shifts during animation load */
+.animate-fade-in-up,
+.animate-scale-in {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Comprehensive overflow prevention for HomeView */
+.home-view-container {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  contain: layout style paint;
+}
+
+.mobile-home-container {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  contain: layout style paint;
+}
+
+/* Additional safety measures */
+.home-view-container *,
+.mobile-home-container * {
+  max-width: 100% !important;
+}
+
+.home-view-container .absolute,
+.mobile-home-container .absolute {
+  max-width: none !important; /* Allow absolute positioned elements */
+}
+
+/* Ensure containers never exceed viewport */
+.min-h-screen {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  width: 100% !important;
+  max-width: 100vw !important;
 }
 
 /* Button enhancements */

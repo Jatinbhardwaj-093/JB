@@ -17,9 +17,9 @@ body {
     background-color: var(--background-color);
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling on mobile */
     min-height: 100vh;
     line-height: 1.5;
+    width: 100%;
 }
 
 body.dark {
@@ -113,10 +113,4 @@ textarea {
     @page {
         margin: 1.5cm;
     }
-}
-
-/* Simple fix for horizontal scrolling issues */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
 }
