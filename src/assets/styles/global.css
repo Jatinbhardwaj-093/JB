@@ -28,7 +28,7 @@ body.dark {
 
 /* Custom thin blue scrollbar styling - Force override */
 * {
-    scrollbar-width: thin !important;
+    scrollbar-width: thin;
     scrollbar-color: #6366f1 transparent !important;
 }
 

@@ -130,23 +130,21 @@ const setActiveTab = (tabId) => {
           'bg-gray-900': themeStore.theme === 'dark',
         }"
       >
-        <div class="overflow-x-auto no-scrollbar">
-          <div class="flex space-x-3 w-max min-w-full px-2 py-1">
-            <button
-              v-for="tab in tabs"
-              :key="tab.id"
-              @click="setActiveTab(tab.id)"
-              class="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex-shrink-0"
-              :class="{
-                'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300':
-                  activeTab === tab.id,
-                'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300':
-                  activeTab !== tab.id,
-              }"
-            >
-              {{ tab.title }}
-            </button>
-          </div>
+        <div class="flex space-x-3 w-max min-w-full px-2 py-1 overflow-x-auto no-scrollbar">
+          <button
+            v-for="tab in tabs"
+            :key="tab.id"
+            @click="setActiveTab(tab.id)"
+            class="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex-shrink-0"
+            :class="{
+              'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300':
+                activeTab === tab.id,
+              'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300':
+                activeTab !== tab.id,
+            }"
+          >
+            {{ tab.title }}
+          </button>
         </div>
 
         <!-- Right scroll indicator arrow -->

@@ -502,15 +502,6 @@ function handleHoverEnd() {
   transition: transform 0.3s ease-in-out;
 }
 
-/* SVG Elements */
-.cicada-svg {
-  filter: drop-shadow(0 4px 20px rgba(99, 102, 241, 0.2));
-  transition: filter 0.4s ease-in-out;
-}
-
-.cicada-logo:hover .cicada-svg {
-  filter: drop-shadow(0 8px 40px rgba(99, 102, 241, 0.4));
-}
 
 /* Instant theme transitions for SVG elements */
 .cicada-logo.theme-animating .cicada-svg,

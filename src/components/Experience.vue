@@ -115,7 +115,7 @@ const experiences = [
             ></div>
 
             <!-- Title -->
-            <h3
+            <p
               class="font-bold text-base"
               :class="{
                 'text-gray-800': themeStore.theme === 'light',
@@ -123,7 +123,7 @@ const experiences = [
               }"
             >
               {{ exp.title }}
-            </h3>
+            </p>
           </div>
 
           <!-- Toggle Icon -->

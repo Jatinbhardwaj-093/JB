@@ -172,9 +172,9 @@ const filteredProjects = computed(() => {
                 class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"
               >
                 <div class="absolute inset-0 flex items-end p-6">
-                  <h3 class="text-2xl font-bold text-white project-title">
+                  <p class="text-lg sm:text-2xl font-bold text-white project-title">
                     {{ project.title }}
-                  </h3>
+                  </p>
                 </div>
               </div>
               <!-- Upcoming badge -->

@@ -262,11 +262,11 @@ const handleImageError = (e: Event, projectId: number) => {
 
             <!-- Project title overlay -->
             <div class="absolute inset-0 flex items-end p-4 sm:p-6">
-              <h3
-                class="text-lg sm:text-xl md:text-2xl font-bold text-white project-title"
+              <p
+                class="font-bold text-white project-title"
               >
                 {{ project.title }}
-              </h3>
+              </p>
               <div
                 v-if="project.upcoming"
                 class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
