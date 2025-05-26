@@ -71,7 +71,7 @@ const backgroundStyle = computed(() => {
     <!-- Main Content Container -->
     <div style="display: table-cell">
       <div
-        class="relative z-10 w-full max-w-4xl mx-auto mt-16 sm:mt-28 text-center"
+        class="relative z-10 w-full max-w-4xl mx-auto mt-10 sm:mt-20 text-center"
       >
         <!-- Profile Image -->
         <div
