@@ -27,11 +27,11 @@ const mouseY = ref(0);
 
 // Computed size dimensions
 const sizeMap = {
-  xs: 40,
-  sm: 50,
-  md: 65,
-  lg: 80,
-  xl: 100,
+  xs: 35,
+  sm: 45,
+  md: 55,
+  lg: 75,
+  xl: 95,
 };
 
 const logoSize = computed(() => sizeMap[props.size] || sizeMap.md);
@@ -461,7 +461,7 @@ function handleHoverEnd() {
   height: 140%;
   border-radius: 50%;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease-in-out;
   pointer-events: none;
   z-index: 1;
 }
@@ -499,13 +499,13 @@ function handleHoverEnd() {
   align-items: center;
   justify-content: center;
   transform: translate(calc(var(--mouse-x) * 0.1), calc(var(--mouse-y) * 0.1));
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease-in-out;
 }
 
 /* SVG Elements */
 .cicada-svg {
   filter: drop-shadow(0 4px 20px rgba(99, 102, 241, 0.2));
-  transition: filter 0.4s ease;
+  transition: filter 0.4s ease-in-out;
 }
 
 .cicada-logo:hover .cicada-svg {
@@ -542,7 +542,7 @@ function handleHoverEnd() {
 /* Wing Elements */
 .wing {
   filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.3));
-  transition: filter 0.4s ease;
+  transition: filter 0.4s ease-in-out;
 }
 
 .wing-main {
@@ -568,7 +568,7 @@ function handleHoverEnd() {
 /* Secondary Wings */
 .secondary-wing {
   opacity: 0.6;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease-in-out;
   animation: secondaryWingFloat 6s ease-in-out infinite;
 }
 
@@ -594,7 +594,7 @@ function handleHoverEnd() {
 /* Head and Eyes */
 .head {
   filter: drop-shadow(0 2px 8px rgba(99, 102, 241, 0.2));
-  transition: all 0.4s ease;
+  transition: all 0.4s ease-in-out;
 }
 
 .eye {
@@ -642,7 +642,7 @@ function handleHoverEnd() {
   pointer-events: none;
   z-index: 4;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .cicada-logo:hover .particles {

@@ -72,7 +72,7 @@ watch(
           to="/"
           class="logo-container flex items-center space-x-1 md:space-x-2"
         >
-          <span class="scale-75 md:scale-100"
+          <span class="p-1 scale-75 md:scale-100"
             ><CicadaLogo :animate="true"
           /></span>
           <span
