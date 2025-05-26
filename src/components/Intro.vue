@@ -59,7 +59,7 @@ const backgroundStyle = computed(() => {
         ? 'bg-slate-900 text-gray-100'
         : 'bg-gray-50 text-gray-900'
     "
-    style="display: table; width: 100%; height: 100vh"
+    style="display: table; width: 100%"
   >
     <!-- Interactive Aurora Background -->
     <div
@@ -69,9 +69,9 @@ const backgroundStyle = computed(() => {
     ></div>
 
     <!-- Main Content Container -->
-    <div style="display: table-cell; vertical-align: middle">
+    <div style="display: table-cell">
       <div
-        class="relative z-10 w-full max-w-4xl mx-auto text-center"
+        class="relative z-10 w-full max-w-4xl mx-auto mt-16 sm:mt-28 text-center"
       >
         <!-- Profile Image -->
         <div

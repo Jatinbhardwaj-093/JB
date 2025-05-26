@@ -1,6 +1,6 @@
 <template>
   <div
-    class="app-container min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500"
+    class="app-container min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500 overflow-x-hidden"
   >
     <!-- Theme transition animation overlay -->
     <ThemeTransition />
@@ -42,6 +42,7 @@ html,
 body {
   width: 100%;
   max-width: 100vw;
+  overflow-x: hidden;
   font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
 }
@@ -92,5 +93,11 @@ img {
 /* Simple fix for scroll bar flicker during transitions */
 html {
   overflow-y: scroll;
+}
+
+/* Prevent horizontal scrolling */
+.app-container {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 </style>
