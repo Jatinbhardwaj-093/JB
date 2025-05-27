@@ -115,15 +115,19 @@ const switchTab = (tab: string) => {
     <div class="mb-8">
       <!-- Desktop Tab Switcher -->
       <div class="hidden md:block text-center mb-6">
-        <h2
-          class="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+        <p
+          class="text-3xl font-bold mb-8"
+          :class="{
+            'text-white' : themeStore.theme === 'dark',
+            'text-black' : themeStore.theme === 'light',
+          }"
         >
           {{
             activeTab === "education"
               ? "Education Journey"
               : "Personal Interests"
           }}
-        </h2>
+        </p>
 
         <!-- Tab Buttons -->
         <div
@@ -170,15 +174,21 @@ const switchTab = (tab: string) => {
 
       <!-- Mobile Headers -->
       <div class="block md:hidden text-center">
-        <h2
-          class="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+        <p
+          class="text-2xl font-bold mb-2"
+          :class="{
+            'text-white' : themeStore.theme === 'dark',
+            'text-black' : themeStore.theme === 'light',
+          }"
         >
           {{
             activeTab === "education"
               ? "Education Journey"
               : "Personal Interests"
           }}
-        </h2>
+        </p>
+        <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+
       </div>
     </div>
 
