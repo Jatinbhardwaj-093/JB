@@ -7,8 +7,6 @@ const themeStore = useThemeStore();
 const firstName = ref("Jatin");
 const lastName = ref("Bhardwaj");
 const title = ref("Cloud Computing | AI & ML | Mathematics");
-const tagline = ref("Crafting intelligent solutions for a connected world.");
-const profileImageUrl = ref("../assets/images/profileImage/myimage.png");
 const location = ref("Delhi, India");
 
 const isLoaded = ref(false);
@@ -71,7 +69,7 @@ const backgroundStyle = computed(() => {
     <!-- Main Content Container -->
     <div style="display: table-cell">
       <div
-        class="relative z-10 w-full max-w-4xl mx-auto mt-10 sm:mt-20 text-center"
+        class="relative z-10 w-full max-w-4xl mx-auto mt-4 sm:mt-16 text-center"
       >
         <!-- Profile Image -->
         <div
@@ -96,7 +94,7 @@ const backgroundStyle = computed(() => {
         <div
           class="transition-all duration-1000 ease-out delay-200 transform opacity-0 translate-y-4"
           :class="{ 'opacity-100 translate-y-0': isLoaded }"
-          style="display: block; margin-top: -45px; margin-bottom: 20px;"
+          style="display: block; margin-top: -45px; margin-bottom: 20px"
         >
           <div style="display: inline-block">
             <svg
@@ -192,7 +190,220 @@ const backgroundStyle = computed(() => {
             Get in Touch
           </router-link>
         </div>
+
+        <!-- Social Links -->
+        <div
+          class="transition-all duration-1000 ease-out delay-500 transform opacity-0 translate-y-4 block"
+          :class="{ 'opacity-100 translate-y-0': isLoaded }"
+          style="margin-top: 2rem"
+        >
+          <div class="flex items-center justify-center gap-x-4 sm:gap-x-6">
+            <!-- LinkedIn -->
+            <a
+              href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <div
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+              >
+                <div
+                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'bg-gradient-to-br from-sky-900 to-indigo-900'
+                      : 'bg-gradient-to-br from-sky-100 to-indigo-200'
+                  "
+                ></div>
+                <i
+                  class="bi bi-linkedin relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'text-sky-400'
+                      : 'text-sky-600'
+                  "
+                ></i>
+                <div class="social-icon-glow"></div>
+              </div>
+            </a>
+
+            <!-- GitHub -->
+            <a
+              href="https://github.com/Jatinbhardwaj-093"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <div
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+              >
+                <div
+                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'bg-gradient-to-br from-gray-700 to-gray-900'
+                      : 'bg-gradient-to-br from-gray-200 to-gray-300'
+                  "
+                ></div>
+                <i
+                  class="bi bi-github relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'text-gray-300'
+                      : 'text-gray-800'
+                  "
+                ></i>
+                <div class="social-icon-glow"></div>
+              </div>
+            </a>
+
+            <!-- Twitter -->
+            <a
+              href="https://x.com/Jatin0932"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <div
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+              >
+                <div
+                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'bg-gradient-to-br from-blue-900 to-indigo-900'
+                      : 'bg-gradient-to-br from-blue-100 to-indigo-100'
+                  "
+                ></div>
+                <i
+                  class="bi bi-twitter-x relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'text-gray-300'
+                      : 'text-gray-800'
+                  "
+                ></i>
+                <div class="social-icon-glow"></div>
+              </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:bhardwajjatin093@gmail.com" class="social-link">
+              <div
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+              >
+                <div
+                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'bg-gradient-to-br from-indigo-900 to-purple-900'
+                      : 'bg-gradient-to-br from-indigo-100 to-purple-100'
+                  "
+                ></div>
+                <i
+                  class="bi bi-envelope relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  :class="
+                    themeStore.theme === 'dark'
+                      ? 'text-indigo-400'
+                      : 'text-indigo-600'
+                  "
+                ></i>
+                <div class="social-icon-glow"></div>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.social-link {
+  position: relative;
+  perspective: 1000px;
+}
+
+.social-icon-container {
+  position: relative;
+  overflow: visible;
+  will-change: transform;
+}
+
+/* Background appears on hover */
+.social-icon-bg {
+  transform: scale(0);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-link:hover .social-icon-bg {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Hover effect - slight float */
+.social-link:hover .social-icon-container {
+  transform: translateY(-5px);
+}
+
+/* Icon color enhancement on hover */
+.social-link:hover i {
+  filter: brightness(1.3);
+}
+
+/* Glow effect */
+.social-icon-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.4s ease-out;
+  pointer-events: none;
+}
+
+/* LinkedIn glow */
+.social-link:hover .bi-linkedin ~ .social-icon-glow {
+  opacity: 0.7;
+  box-shadow: 0 0 20px 8px rgba(0, 119, 181, 0.4);
+}
+
+/* GitHub glow */
+.social-link:hover .bi-github ~ .social-icon-glow {
+  opacity: 0.7;
+  box-shadow: 0 0 20px 8px rgba(110, 118, 129, 0.4);
+}
+
+/* Twitter/X glow */
+.social-link:hover .bi-twitter-x ~ .social-icon-glow {
+  opacity: 0.7;
+  box-shadow: 0 0 20px 8px rgba(29, 161, 242, 0.4);
+}
+
+/* Email glow */
+.social-link:hover .bi-envelope ~ .social-icon-glow {
+  opacity: 0.7;
+  box-shadow: 0 0 20px 8px rgba(124, 58, 237, 0.4);
+}
+
+/* Dark mode adjustments */
+:root[data-theme="dark"] .social-link:hover .social-icon-glow {
+  opacity: 0.6;
+}
+
+/* Pulse animation for the background on hover */
+.social-link:hover .social-icon-bg {
+  animation: socialIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes socialIconPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+</style>
