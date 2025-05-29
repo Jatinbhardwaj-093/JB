@@ -249,7 +249,7 @@ const getImageUrl = (name: string) => {
               :alt="`${tech.name} icon`"
               class="w-12 h-12 object-contain mb-2"
             />
-            <p class="text-sm font-medium text-gray-800 dark:text-white">
+            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">
               {{ tech.name }}
             </p>
           </div>
@@ -268,7 +268,7 @@ const getImageUrl = (name: string) => {
             <!-- Text Content -->
             <div class="flex-grow">
               <p
-                class="text-lg font-semibold mb-1 text-gray-800 dark:text-white"
+                class="text-lg font-semibold mb-1 text-gray-800 dark:text-gray-200"
               >
                 {{ tech.name }}
               </p>
@@ -301,7 +301,7 @@ const getImageUrl = (name: string) => {
               :alt="`${tech.name} icon`"
               class="w-12 h-12 object-contain mb-2"
             />
-            <p class="text-sm font-medium text-gray-800 dark:text-white">
+            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">
               {{ tech.name }}
             </p>
           </div>
@@ -320,7 +320,7 @@ const getImageUrl = (name: string) => {
             <!-- Text Content -->
             <div class="flex-grow">
               <p
-                class="text-lg font-semibold mb-1 text-gray-800 dark:text-white"
+                class="text-lg font-semibold mb-1 text-gray-800 dark:text-gray-200"
               >
                 {{ tech.name }}
               </p>

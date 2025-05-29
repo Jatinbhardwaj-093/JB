@@ -431,21 +431,16 @@ function handleHoverEnd() {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   overflow: hidden;
 }
 
 /* Instant theme transition when theme is animating */
 .cicada-logo.theme-animating {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cicada-logo:hover {
   transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 60px rgba(99, 102, 241, 0.2);
 }
 
 .cicada-logo.is-animating {
@@ -878,14 +873,12 @@ function handleHoverEnd() {
   background: rgba(255, 255, 255, 0.03);
   border-color: rgba(255, 255, 255, 0.08);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="light"] .cicada-logo.theme-animating {
   background: rgba(0, 0, 0, 0.02);
   border-color: rgba(0, 0, 0, 0.05);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Responsive Design */
