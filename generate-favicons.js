@@ -13,7 +13,10 @@ if (!fs.existsSync("public")) {
   fs.mkdirSync("public");
 }
 
-const SOURCE_IMAGE = path.join(__dirname, "src/assets/images/cicada.png");
+const SOURCE_IMAGE = path.join(
+  __dirname,
+  "src/assets/images/profileImage/navbar_logo.png"
+);
 
 async function generateFavicons() {
   try {

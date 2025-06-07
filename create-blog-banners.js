@@ -12,10 +12,5 @@ Required banner images:
 All images should be placed in:
 /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/BlogHeaderBanner/
 
-For now, you can copy cicada.jpg as a placeholder:
-cp /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/cicada.jpg /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/BlogHeaderBanner/gsoc.jpg
-cp /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/cicada.jpg /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/BlogHeaderBanner/sympy.jpg
-cp /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/cicada.jpg /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/BlogHeaderBanner/mathematics.jpg
-cp /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/cicada.jpg /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/BlogHeaderBanner/machine-learning.jpg
-cp /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/cicada.jpg /Users/jatinbhardwaj/Documents/JB-Portfolio/src/assets/images/BlogHeaderBanner/psychology.jpg
+You'll need to create or obtain appropriate banner images for each category.
 */

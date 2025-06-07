@@ -10,62 +10,23 @@ const title = ref("Cloud Computing | AI & ML | Mathematics");
 const location = ref("Delhi, India");
 
 const isLoaded = ref(false);
-const mouseX = ref(0);
-const mouseY = ref(0);
-
-const handleMouseMove = (event: MouseEvent) => {
-  mouseX.value = event.clientX;
-  mouseY.value = event.clientY;
-};
 
 onMounted(() => {
   setTimeout(() => {
     isLoaded.value = true;
   }, 100);
-  window.addEventListener("mousemove", handleMouseMove);
 });
 
 onUnmounted(() => {
-  window.removeEventListener("mousemove", handleMouseMove);
-});
-
-const backgroundStyle = computed(() => {
-  const xPercent = (mouseX.value / window.innerWidth) * 100;
-  const yPercent = (mouseY.value / window.innerHeight) * 100;
-  return {
-    background: `radial-gradient(circle at ${xPercent}% ${yPercent}%, 
-      ${
-        themeStore.theme === "dark"
-          ? "rgba(56, 189, 248, 0.1)"
-          : "rgba(199, 210, 254, 0.2)"
-      } 0%, 
-      ${
-        themeStore.theme === "dark"
-          ? "rgba(12, 74, 110, 0.1)"
-          : "rgba(239, 246, 255, 0.1)"
-      } 30%, 
-      transparent 70%)`,
-  };
+  // No cleanup needed
 });
 </script>
 
 <template>
   <section
     class="min-h-screen relative overflow-hidden transition-colors duration-500 text-center"
-    :class="
-      themeStore.theme === 'dark'
-        ? 'bg-slate-900 text-gray-100'
-        : 'bg-gray-50 text-gray-900'
-    "
     style="display: table; width: 100%"
   >
-    <!-- Interactive Aurora Background -->
-    <div
-      class="absolute inset-0 z-0 transition-opacity duration-1000 opacity-0"
-      :class="{ 'opacity-100': isLoaded }"
-      :style="backgroundStyle"
-    ></div>
-
     <!-- Main Content Container -->
     <div style="display: table-cell">
       <div

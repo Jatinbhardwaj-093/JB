@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from "vue";
 import { useThemeStore } from "../store/theme";
-import CicadaLogo from "./CicadaLogo.vue";
 
 const themeStore = useThemeStore();
 const navRef = ref<HTMLElement | null>(null);
@@ -64,19 +63,25 @@ watch(
     ref="navRef"
     class="navbar sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300"
   >
-    <div class="container mx-auto px-2 md:py-0 overflow-hidden">
+    <div class="container mx-auto px-2 overflow-hidden">
       <!-- Removed padding for mobile view -->
-      <div class="flex justify-between items-center h-[50px] md:h-auto">
+      <div class="flex justify-between items-center py-1.5 h-[50px] md:h-auto">
         <!-- More compact logo on mobile -->
         <router-link
           to="/"
           class="logo-container flex items-center space-x-1 md:space-x-2"
         >
-          <span class="p-1 scale-75 md:scale-100"
-            ><CicadaLogo :animate="true"
-          /></span>
+          <div
+            class="relative w-10 h-10 md:w-14 md:h-14 rounded-full bg-blue-900 m-1 p-0.5 shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+          >
+            <img
+              src="../assets/images/profileImage/navbar_logo.png"
+              alt="JB Logo"
+              class="w-full h-full rounded-full object-cover"
+            />
+          </div>
           <span
-            class="text-base md:text-xl font-bold transition-colors duration-300"
+            class="text-base md:text-2xl font-bold transition-colors duration-300"
             :class="{
               'text-white': themeStore.theme === 'dark',
               'text-black': themeStore.theme === 'light',
@@ -322,18 +327,9 @@ watch(
   }
 }
 
-/* Logo animation */
+/* Logo container */
 .logo-container {
   position: relative;
-  overflow: hidden;
-}
-
-.logo-container img {
-  transition: transform 0.3s ease;
-}
-
-.logo-container:hover img {
-  transform: scale(1.05);
 }
 
 /* Menu item hover effect with animated underline */
