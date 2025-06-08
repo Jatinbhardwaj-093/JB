@@ -6,6 +6,7 @@ import BlogPostView from "../views/BlogPostView.vue";
 import Projects from "../views/ProjectsView.vue";
 import Contact from "../views/ContactView.vue";
 import HSPDetailView from "../views/HSPDetailView.vue";
+import NotFoundView from "../views/NotFoundView.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -43,6 +44,12 @@ const routes: RouteRecordRaw[] = [
     path: "/contact",
     name: "contact",
     component: Contact,
+  },
+  // Catch-all route for 404 handling
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: NotFoundView,
   },
 ];
 

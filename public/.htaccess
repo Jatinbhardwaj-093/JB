@@ -1,0 +1,14 @@
+# Apache configuration for SPA routing with base path /JB/
+Options -MultiViews
+RewriteEngine On
+
+# Handle requests to /JB/ subdirectory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/JB/
+RewriteRule ^JB/(.*)$ /JB/index.html [QSA,L]
+
+# Handle requests to root (fallback)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]

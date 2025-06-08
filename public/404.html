@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JB Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript">
+    // GitHub Pages SPA redirect
+    // This script takes the current URL and redirects to the base path with a hash
+    // so that the Vue Router can handle the routing client-side
+    
+    var pathPrefix = '/JB';
+    var currentUrl = window.location.href;
+    var baseUrl = window.location.protocol + '//' + window.location.host + pathPrefix + '/';
+    
+    // Get the path after the domain
+    var path = window.location.pathname;
+    
+    // If we're in a subdirectory path that should be handled by Vue Router
+    if (path.startsWith(pathPrefix + '/') && path !== pathPrefix + '/') {
+      // Extract the route path
+      var routePath = path.substring(pathPrefix.length);
+      // Redirect to base with hash routing
+      window.location.replace(baseUrl + '#' + routePath + window.location.search + window.location.hash);
+    } else if (path !== pathPrefix + '/' && path !== pathPrefix) {
+      // For any other path, redirect to home
+      window.location.replace(baseUrl);
+    }
+  </script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      text-align: center;
+      max-width: 500px;
+      padding: 2rem;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    h1 { margin: 0 0 1rem; }
+    p { opacity: 0.9; }
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="spinner"></div>
+    <h1>Redirecting to JB Portfolio...</h1>
+    <p>If you are not redirected automatically, <a href="/JB/">click here to go to the homepage</a>.</p>
+  </div>
+</body>
+</html>
