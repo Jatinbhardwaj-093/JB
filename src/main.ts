@@ -17,7 +17,7 @@ themeStore.initializeTheme();
 
 // Handle GitHub Pages SPA routing
 // Check if we came from a 404 redirect with hash
-if (window.location.hash && window.location.hash.startsWith('#/')) {
+if (window.location.hash && window.location.hash.startsWith("#/")) {
   const redirectPath = window.location.hash.slice(1);
   // Use router push after it's ready
   router.isReady().then(() => {
