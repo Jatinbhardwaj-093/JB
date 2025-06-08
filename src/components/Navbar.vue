@@ -75,7 +75,7 @@ watch(
             class="relative w-10 h-10 md:w-14 md:h-14 rounded-full bg-blue-900 m-1 p-0.5 shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
           >
             <img
-              src="../assets/images/profileImage/navbar_logo.png"
+              src="../assets/images/profileImage/navbar_logo.webp"
               alt="JB Logo"
               class="w-full h-full rounded-full object-cover"
             />

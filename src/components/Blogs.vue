@@ -88,7 +88,7 @@ const bannerImagePath = computed(() => {
 
     // For other categories, use JPG
     return new URL(
-      `../assets/images/BlogHeaderBanner/${activeCategory.value}.jpg`,
+      `../assets/images/BlogHeaderBanner/${activeCategory.value}.webp`,
       import.meta.url
     ).href;
   } catch (error) {
@@ -336,7 +336,7 @@ onMounted(() => {
       >
         <div class="mb-4 sm:mb-6 flex justify-center">
           <img
-            src="../assets/images/lost/zoro_lost.jpg"
+            src="../assets/images/lost/zoro_lost.webp"
             alt="Zoro Lost"
             class="h-40 w-auto rounded-lg shadow-lg"
           />

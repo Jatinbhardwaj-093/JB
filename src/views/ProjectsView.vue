@@ -4,10 +4,10 @@ import { useThemeStore } from "../store/theme";
 import { ref, computed } from "vue";
 
 // Import the project images directly for reliable loading
-import isepImage from "../assets/images/WebDevProjects/ISEP.png";
-import hspImage from "../assets/images/WebDevProjects/HSP.png";
-import sympyImage from "../assets/images/WebDevProjects/sympy.png";
-import gsocImage from "../assets/images/WebDevProjects/gsoc.png";
+import isepImage from "../assets/images/Projects/ISEP.webp";
+import hspImage from "../assets/images/Projects/HSP.webp";
+import sympyImage from "../assets/images/Projects/sympy.webp";
+import gsocImage from "../assets/images/Projects/gsoc.webp";
 
 const themeStore = useThemeStore();
 
