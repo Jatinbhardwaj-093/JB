@@ -135,7 +135,7 @@ print(x)  # x + O(x^30)</code></pre>
       class="pt-2 font-bold text-xl sm:text-2xl md:text-2xl lg:text-3xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 inline-block"
     >
       <span
-        class="border-solid border-b-4 border-blue-500 dark:border-blue-400 rounded-b-lg pb-1"
+        class="sm:border-solid sm:border-b-4 sm:border-blue-500 sm:dark:border-blue-400 sm:rounded-b-lg sm:pb-1"
       >
         Adapting the Design in SymPy
       </span>
