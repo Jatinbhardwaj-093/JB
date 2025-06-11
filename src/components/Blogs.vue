@@ -59,7 +59,39 @@ const currentCategory = computed(() => {
 
 // Get blog posts for the active category
 const currentPosts = computed(() => {
-  return getPostsByCategory(activeCategory.value);
+  const posts = getPostsByCategory(activeCategory.value);
+  console.log(`Active category: ${activeCategory.value}`);
+  console.log("Posts found:", posts);
+  console.log("Posts length:", posts.length);
+
+  // Temporary hardcoded test
+  if (activeCategory.value === "gsoc") {
+    console.log("Returning hardcoded GSoC posts for testing");
+    return [
+      {
+        id: "gsoc-week1-fps-ring",
+        title: "GSoC-25: Week-1 - Fast FPS Ring Implementation",
+        date: "June 11, 2025",
+        minutesToRead: 8,
+        summary:
+          "First week progress on implementing formal power series domain system for SymPy. Discussing design decisions, class structure, and alignment with Flint's approach.",
+        category: "gsoc",
+        slug: "gsoc-week1-fps-ring",
+      },
+      {
+        id: "gsoc-open-source-start",
+        title: "GSoC: Tips to start with Open Source",
+        date: "May 13, 2025",
+        minutesToRead: 8,
+        summary:
+          "A beginner's guide to contributing to open source projects and preparing for Google Summer of Code.",
+        category: "gsoc",
+        slug: "gsoc-tips-to-start-with-open-source",
+      },
+    ];
+  }
+
+  return posts;
 });
 
 // Check if there are any posts for the current category
@@ -248,7 +280,7 @@ onMounted(() => {
 
     <!-- Filter Tabs - Full width with a dark background -->
     <div
-      class="w-full py-4 mb-10 shadow-md relative"
+      class="w-full py-4 shadow-md relative"
       :class="{
         'bg-gray-100': themeStore.theme === 'light',
         'bg-gray-800': themeStore.theme === 'dark',

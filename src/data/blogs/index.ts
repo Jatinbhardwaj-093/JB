@@ -17,6 +17,9 @@ const allPosts: BlogPost[] = [
   // ...psychologyPosts,
 ];
 
+console.log("All posts loaded:", allPosts);
+console.log("GSoC posts:", gsocPosts);
+
 // Get posts by category
 export const getPostsByCategory = (category: string): BlogPost[] => {
   return allPosts.filter((post) => post.category === category);
