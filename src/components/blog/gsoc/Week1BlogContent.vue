@@ -1,7 +1,20 @@
 <script setup lang="ts">
 import { useThemeStore } from "../../../store/theme";
+import { onMounted, ref } from "vue";
+import hljs from "highlight.js/lib/core";
+import python from "highlight.js/lib/languages/python";
+import "highlight.js/styles/github.css";
+import "highlight.js/styles/github-dark.css";
 
 const themeStore = useThemeStore();
+
+// Register Python language for syntax highlighting
+hljs.registerLanguage("python", python);
+
+onMounted(() => {
+  // Apply syntax highlighting to all code blocks
+  hljs.highlightAll();
+});
 </script>
 
 <template>
@@ -66,8 +79,7 @@ const themeStore = useThemeStore();
     >
       The second point is particularly important because, eventually, we want to
       use python-flint's types—specifically
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >fmpq_series and fmpz_series</strong
       >. This means the Python implementation should be as close as possible in
       structure and behavior so that when flint is installed, we can seamlessly
@@ -88,15 +100,25 @@ const themeStore = useThemeStore();
     </p>
 
     <div
-      class="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 my-4"
+      class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 my-4"
+      :class="{
+        'bg-gray-50': themeStore.theme === 'light',
+        'bg-gray-800': themeStore.theme === 'dark',
+      }"
     >
       <pre
-        class="text-sm font-mono overflow-x-auto"
+        class="text-sm font-mono whitespace-pre-wrap break-words"
         :class="{
-          'text-gray-800': themeStore.theme === 'light',
-          'text-gray-200': themeStore.theme === 'dark',
+          'hljs-github': themeStore.theme === 'light',
+          'hljs-github-dark': themeStore.theme === 'dark',
         }"
-      ><code>from flint import fmpz_series, ctx
+      ><code 
+        class="language-python"
+        :class="{
+          'hljs-github': themeStore.theme === 'light',
+          'hljs-github-dark': themeStore.theme === 'dark',
+        }"
+      >from flint import fmpz_series, ctx
 
 # This is the global context for Flint types. It contains many useful attributes. 
 # One of them is `cap`, which sets the truncation cap for the power series.
@@ -109,11 +131,15 @@ x = fmpz_series([0, 1], 30)  # Since prec is provided, it creates a new fmpz_ser
 print(x)  # x + O(x^30)</code></pre>
     </div>
 
-    <p
-      class="pt-2 font-bold text-lg sm:text-xl md:text-xl lg:text-2xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 border-b border-dashed border-gray-200 dark:border-gray-700 w-full"
+    <h2
+      class="pt-2 font-bold text-xl sm:text-2xl md:text-2xl lg:text-3xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 inline-block"
     >
-      Adapting the Design in SymPy
-    </p>
+      <span
+        class="border-solid border-b-4 border-blue-500 dark:border-blue-400 rounded-b-lg pb-1"
+      >
+        Adapting the Design in SymPy
+      </span>
+    </h2>
 
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
@@ -121,11 +147,15 @@ print(x)  # x + O(x^30)</code></pre>
       The SymPy implementation should aim to behave similarly to the above.
     </p>
 
-    <h3
-      class="font-bold text-lg sm:text-xl md:text-xl lg:text-2xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 border-b border-dashed border-gray-200 dark:border-gray-700 w-full"
+    <p
+      class="font-bold text-md sm:text-lg md:text-lg lg:text-xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 w-full flex items-center"
     >
+      <span
+        class="text-blue-500 dark:text-blue-400 mr-2 text-lg sm:text-xl md:text-xl lg:text-2xl"
+        >></span
+      >
       Representor for the series [List of Coeff]
-    </h3>
+    </p>
 
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
@@ -184,11 +214,15 @@ print(x)  # x + O(x^30)</code></pre>
       </li>
     </ul>
 
-    <h3
-      class="font-bold text-lg sm:text-xl md:text-xl lg:text-2xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 border-b border-dashed border-gray-200 dark:border-gray-700 w-full"
+    <p
+      class="font-bold text-md sm:text-lg md:text-lg lg:text-xl mt-6 mb-3 leading-snug text-gray-800 dark:text-gray-200 w-full flex items-center"
     >
+      <span
+        class="text-blue-500 dark:text-blue-400 mr-2 text-lg sm:text-xl md:text-xl lg:text-2xl"
+        >></span
+      >
       Classes for the fast fps ring series
-    </h3>
+    </p>
 
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
@@ -210,15 +244,25 @@ print(x)  # x + O(x^30)</code></pre>
     </p>
 
     <div
-      class="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 my-4"
+      class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 my-4"
+      :class="{
+        'bg-gray-50': themeStore.theme === 'light',
+        'bg-gray-800': themeStore.theme === 'dark',
+      }"
     >
       <pre
-        class="text-sm font-mono overflow-x-auto"
+        class="text-sm font-mono whitespace-pre-wrap break-words"
         :class="{
-          'text-gray-800': themeStore.theme === 'light',
-          'text-gray-200': themeStore.theme === 'dark',
+          'hljs-github': themeStore.theme === 'light',
+          'hljs-github-dark': themeStore.theme === 'dark',
         }"
-      ><code>from sympy.polys.domains.fpsring import PowerSeriesRing as fpsR, PythonSeriesContext as context
+      ><code 
+        class="language-python"
+        :class="{
+          'hljs-github': themeStore.theme === 'light',
+          'hljs-github-dark': themeStore.theme === 'dark',
+        }"
+      >from sympy.polys.domains.fpsring import PowerSeriesRing as fpsR, PythonSeriesContext as context
 from sympy import ZZ
 
 R = fpsR([0, 1], ZZ, 20)
@@ -241,8 +285,7 @@ print(y)  # y + O(y**10)</code></pre>
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
       There will also be a
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >FlintSeriesContext</strong
       >
       class that provides operations like sin, cos, antiderivative, multiply,
@@ -252,13 +295,12 @@ print(y)  # y + O(y**10)</code></pre>
     </p>
 
     <blockquote
-      class="relative p-4 sm:p-5 md:p-7 my-6 sm:my-8 mx-auto rounded-lg sm:rounded-xl md:rounded-2xl w-full sm:w-[95%] max-w-full shadow-md sm:shadow-lg overflow-hidden z-10 border border-white/25 dark:border-indigo-800/30 transform transition-transform duration-200 ease-in-out hover:-translate-y-0.5 bg-white/60 dark:bg-gray-900/65 backdrop-blur-md hover:shadow-xl"
+      class="relative p-4 sm:p-5 md:p-7 my-6 sm:my-8 mx-auto rounded-lg sm:rounded-xl md:rounded-2xl w-full sm:w-[95%] max-w-full shadow-md sm:shadow-lg overflow-hidden z-10 border border-gray-200/40 dark:border-indigo-800/30 transform transition-transform duration-200 ease-in-out hover:-translate-y-0.5 bg-white/20 dark:bg-gray-900/65 backdrop-blur-lg hover:shadow-xl"
     >
       <p
         class="mb-0 text-sm sm:text-base lg:text-lg leading-6 sm:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty"
       >
-        <strong
-          class="text-indigo-700 dark:text-indigo-300 text-[1.1em] sm:text-[1.2em] font-bold tracking-wide bg-indigo-100/10 dark:bg-indigo-900/10 py-0.5 px-2 rounded mr-1 shadow-sm"
+        <strong class="text-indigo-700 dark:text-indigo-300 font-bold"
           >Next Steps</strong
         >: This week was primarily focused on understanding the requirements and
         aligning the implementation with Flint's design patterns. The coming
@@ -271,3 +313,112 @@ print(y)  # y + O(y**10)</code></pre>
     </blockquote>
   </div>
 </template>
+
+<style scoped>
+/* Override highlight.js themes for better integration */
+pre code.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Ensure proper theme application */
+.hljs-github {
+  background: transparent !important;
+}
+
+.hljs-github-dark {
+  background: transparent !important;
+}
+
+/* Light theme syntax highlighting */
+.hljs-github pre code,
+.hljs-github code {
+  color: #24292e !important;
+  background: transparent !important;
+}
+
+.hljs-github pre {
+  color: #24292e !important;
+  background: transparent !important;
+}
+
+.hljs-github .hljs-keyword,
+.hljs-github .hljs-selector-tag,
+.hljs-github .hljs-title,
+.hljs-github .hljs-section,
+.hljs-github .hljs-doctag,
+.hljs-github .hljs-name,
+.hljs-github .hljs-strong {
+  color: #d73a49 !important;
+  font-weight: bold;
+}
+
+.hljs-github .hljs-string,
+.hljs-github .hljs-title.class_,
+.hljs-github .hljs-title.class_.inherited__,
+.hljs-github .hljs-title.function_,
+.hljs-github .hljs-params {
+  color: #032f62 !important;
+}
+
+.hljs-github .hljs-comment,
+.hljs-github .hljs-quote {
+  color: #6a737d !important;
+  font-style: italic;
+}
+
+.hljs-github .hljs-number,
+.hljs-github .hljs-literal {
+  color: #005cc5 !important;
+}
+
+.hljs-github .hljs-built_in {
+  color: #e36209 !important;
+}
+
+/* Dark theme syntax highlighting */
+.hljs-github-dark pre code,
+.hljs-github-dark code {
+  color: #e1e4e8 !important;
+  background: transparent !important;
+}
+
+.hljs-github-dark pre {
+  color: #e1e4e8 !important;
+  background: transparent !important;
+}
+
+.hljs-github-dark .hljs-keyword,
+.hljs-github-dark .hljs-selector-tag,
+.hljs-github-dark .hljs-title,
+.hljs-github-dark .hljs-section,
+.hljs-github-dark .hljs-doctag,
+.hljs-github-dark .hljs-name,
+.hljs-github-dark .hljs-strong {
+  color: #f97583 !important;
+  font-weight: bold;
+}
+
+.hljs-github-dark .hljs-string,
+.hljs-github-dark .hljs-title.class_,
+.hljs-github-dark .hljs-title.class_.inherited__,
+.hljs-github-dark .hljs-title.function_,
+.hljs-github-dark .hljs-params {
+  color: #9ecbff !important;
+}
+
+.hljs-github-dark .hljs-comment,
+.hljs-github-dark .hljs-quote {
+  color: #6a737d !important;
+  font-style: italic;
+}
+
+.hljs-github-dark .hljs-number,
+.hljs-github-dark .hljs-literal {
+  color: #79b8ff !important;
+}
+
+.hljs-github-dark .hljs-built_in {
+  color: #ffab70 !important;
+}
+</style>

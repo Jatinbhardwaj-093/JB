@@ -13,6 +13,8 @@ const allPosts = [
     // ...mlPosts,
     // ...psychologyPosts,
 ];
+console.log("All posts loaded:", allPosts);
+console.log("GSoC posts:", gsocPosts);
 // Get posts by category
 export const getPostsByCategory = (category) => {
     return allPosts.filter((post) => post.category === category);

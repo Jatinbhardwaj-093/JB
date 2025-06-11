@@ -67,7 +67,7 @@ const currentPosts = computed(() => {
   // Temporary hardcoded test
   if (activeCategory.value === "gsoc") {
     console.log("Returning hardcoded GSoC posts for testing");
-    return [
+    const gsocPosts = [
       {
         id: "gsoc-week1-fps-ring",
         title: "GSoC-25: Week-1 - Fast FPS Ring Implementation",
@@ -89,9 +89,17 @@ const currentPosts = computed(() => {
         slug: "gsoc-tips-to-start-with-open-source",
       },
     ];
+
+    // Sort posts by date in ascending order (oldest first)
+    return gsocPosts.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
   }
 
-  return posts;
+  // Sort posts by date in ascending order (oldest first) for other categories
+  return posts.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 });
 
 // Check if there are any posts for the current category

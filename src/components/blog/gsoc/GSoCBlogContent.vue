@@ -15,15 +15,14 @@ const themeStore = useThemeStore();
       This blog aims to provide some tips for getting started with the
       open-source community. While the focus is more on the community itself
       rather than specifically on GSoC, building a
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >strong foundation in open source</strong
       >
       can greatly help in achieving goals like GSoC and open-source internships.
     </p>
 
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2  rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
     >
       My Experience Contributing to Open Source
     </p>
@@ -34,13 +33,11 @@ const themeStore = useThemeStore();
       I am currently new to open source, so I am trying to learn more about the
       plans of a particular repository, understand its codebase, and more. In
       terms of pull requests(PRs), I have mainly contributed to
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >SymPy</strong
       >
       and
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >Wagtail</strong
       >
       (a CMS library).
@@ -61,8 +58,7 @@ const themeStore = useThemeStore();
       shifting from a web-focused library to something machine learning-related
       involves a drastic change in coding practices. Over time, you become more
       familiar with the library.
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >One of the fastest ways to do so is by trying to fix bugs.</strong
       >
       Debugging forces you to explore different modules in the repository, which
@@ -128,8 +124,7 @@ const themeStore = useThemeStore();
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >Key Takeaway</strong
       >
       you can take from this when working on any open-source project, the two
@@ -171,7 +166,7 @@ const themeStore = useThemeStore();
     </p>
 
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading py-2 px-2  rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
     >
       Tips on Open Source
     </p>
@@ -186,8 +181,7 @@ const themeStore = useThemeStore();
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
       One of the best things you can do when engaging with others is to have
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >empathy</strong
       >. A lot of people believe that being clear about your thoughts and having
       strong communication skills is what matters most. While that's important,
@@ -243,8 +237,7 @@ const themeStore = useThemeStore();
       video tutorials available, we often avoid reading and jump straight to
       watching content. Platforms like YouTube have made educational content
       more accessible, but
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >relying only on videos can be limiting</strong
       >. If you try reading a technical or math-related article after a long
       time, you might find it difficult to follow.
@@ -372,8 +365,7 @@ const themeStore = useThemeStore();
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
       Most of the time, you can find
-      <strong
-        class="font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50/80 dark:bg-indigo-900/20 px-2 py-0.5 rounded inline-block"
+      <strong class="font-bold text-indigo-700 dark:text-indigo-300"
         >potential project ideas</strong
       >
       from personal blogs or articles written by repository members or mentors.
@@ -408,8 +400,7 @@ const themeStore = useThemeStore();
       <p
         class="mb-0 text-sm sm:text-base lg:text-lg leading-6 sm:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty"
       >
-        <strong
-          class="text-indigo-700 dark:text-indigo-300 text-[1.1em] sm:text-[1.2em] font-bold tracking-wide bg-indigo-100/10 dark:bg-indigo-900/10 py-0.5 px-2 rounded mr-1 shadow-sm"
+        <strong class="text-indigo-700 dark:text-indigo-300 font-bold"
           >Note</strong
         >: The order of the sections matters. However, keep in mind that
         everything shared here is based on my personal opinions.
