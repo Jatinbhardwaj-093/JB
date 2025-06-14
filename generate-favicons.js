@@ -1,4 +1,4 @@
-// Script to generate favicons from cicada.png
+// Script to generate favicons from GitHub profile picture
 import sharp from "sharp";
 import * as fs from "fs";
 import * as path from "path";
@@ -15,12 +15,22 @@ if (!fs.existsSync("public")) {
 
 const SOURCE_IMAGE = path.join(
   __dirname,
-  "src/assets/images/profileImage/navbar_logo.png"
+  "src/assets/images/favicon/gihubpic.png"
 );
 
 async function generateFavicons() {
   try {
-    // Create white background images in different sizes
+    console.log(`🔍 Looking for source image: ${SOURCE_IMAGE}`);
+
+    // Check if source file exists
+    if (!fs.existsSync(SOURCE_IMAGE)) {
+      console.error(`❌ Source image not found: ${SOURCE_IMAGE}`);
+      return;
+    }
+
+    console.log(`✅ Source image found!`);
+
+    // Create favicon images in different sizes
     const sizes = [16, 32, 64, 180];
 
     for (const size of sizes) {
@@ -31,34 +41,34 @@ async function generateFavicons() {
           ? "apple-touch-icon.png"
           : `favicon-${size}x${size}.png`;
 
-      // Create a white background
-      await sharp({
-        create: {
-          width: size,
-          height: size,
-          channels: 4,
-          background: { r: 255, g: 255, b: 255, alpha: 1 },
-        },
-      })
-        .composite([
-          {
-            // Resize and overlay the cicada image
-            input: await sharp(SOURCE_IMAGE)
-              .resize({
-                width: Math.round(size * 0.8),
-                height: Math.round(size * 0.8),
-                fit: "contain",
-                background: { r: 255, g: 255, b: 255, alpha: 0 },
-              })
-              .toBuffer(),
-            gravity: "center",
-          },
-        ])
+      console.log(`🎨 Generating ${outputFilename} (${size}x${size})...`);
+
+      // Create favicon from GitHub profile picture
+      await sharp(SOURCE_IMAGE)
+        .resize(size, size, {
+          fit: "cover",
+          position: "center",
+        })
         .png()
         .toFile(`public/${outputFilename}`);
+
+      console.log(`✅ Created: ${outputFilename}`);
     }
 
-    console.log("✅ Favicons generated successfully!");
+    // Create legacy ICO favicon (32x32 for better compatibility)
+    console.log(`🎨 Generating favicon.ico (32x32)...`);
+    await sharp(SOURCE_IMAGE)
+      .resize(32, 32, {
+        fit: "cover",
+        position: "center",
+      })
+      .toFormat("png")
+      .toFile(`public/favicon.ico`);
+    console.log(`✅ Created: favicon.ico`);
+
+    console.log(
+      "🎉 All favicons generated successfully from GitHub profile picture!"
+    );
   } catch (error) {
     console.error("❌ Error generating favicons:", error);
   }
