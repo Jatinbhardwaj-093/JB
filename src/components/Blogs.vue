@@ -64,39 +64,7 @@ const currentPosts = computed(() => {
   console.log("Posts found:", posts);
   console.log("Posts length:", posts.length);
 
-  // Temporary hardcoded test
-  if (activeCategory.value === "gsoc") {
-    console.log("Returning hardcoded GSoC posts for testing");
-    const gsocPosts = [
-      {
-        id: "gsoc-week1-fps-ring",
-        title: "GSoC-25: Week-1 - Fast FPS Ring Implementation",
-        date: "June 11, 2025",
-        minutesToRead: 8,
-        summary:
-          "First week progress on implementing formal power series domain system for SymPy. Discussing design decisions, class structure, and alignment with Flint's approach.",
-        category: "gsoc",
-        slug: "gsoc-week1-fps-ring",
-      },
-      {
-        id: "gsoc-open-source-start",
-        title: "GSoC: Tips to start with Open Source",
-        date: "May 13, 2025",
-        minutesToRead: 8,
-        summary:
-          "A beginner's guide to contributing to open source projects and preparing for Google Summer of Code.",
-        category: "gsoc",
-        slug: "gsoc-tips-to-start-with-open-source",
-      },
-    ];
-
-    // Sort posts by date in ascending order (oldest first)
-    return gsocPosts.sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
-  }
-
-  // Sort posts by date in ascending order (oldest first) for other categories
+  // Sort posts by date in ascending order (oldest first)
   return posts.sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );

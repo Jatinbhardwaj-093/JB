@@ -17,6 +17,9 @@ const GSoCBlogContent = defineAsyncComponent(
 const Week1BlogContent = defineAsyncComponent(
   () => import("./gsoc/Week1BlogContent.vue")
 );
+const Week2_3BlogContent = defineAsyncComponent(
+  () => import("./gsoc/Week2_3BlogContent.vue")
+);
 
 // Format date
 const formatDate = (dateString: string) => {
@@ -34,7 +37,8 @@ onMounted(async () => {
     // We use the component for GSoC blog, and fallback to this for other blogs
     if (
       props.post.slug !== "gsoc-tips-to-start-with-open-source" &&
-      props.post.slug !== "gsoc-week1-fps-ring"
+      props.post.slug !== "gsoc-week1-fps-ring" &&
+      props.post.slug !== "gsoc-week2-3-fps-design"
     ) {
       content.value = "This blog content is coming soon!";
     }
@@ -105,6 +109,7 @@ onMounted(async () => {
         v-if="post.slug === 'gsoc-tips-to-start-with-open-source'"
       />
       <Week1BlogContent v-else-if="post.slug === 'gsoc-week1-fps-ring'" />
+      <Week2_3BlogContent v-else-if="post.slug === 'gsoc-week2-3-fps-design'" />
       <div v-else v-html="content"></div>
 
       <!-- Back button -->
