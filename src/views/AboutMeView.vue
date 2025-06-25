@@ -43,17 +43,21 @@ const setActiveTab = (tabId) => {
         <!-- About Me Header -->
         <div class="mb-12 text-center">
           <h1
-            class="text-3xl md:text-4xl font-bold text-black mb-2"
+            class="text-3xl md:text-4xl font-bold text-black mb-2 about-title"
             :class="{ 'text-white': themeStore.theme === 'dark' }"
           >
             About Me
           </h1>
-          <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-4"></div>
+          <div
+            class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-4 about-underline"
+          ></div>
           <p
             class="text-gray-200 max-w-3xl mx-auto"
             :class="{ 'text-gray-600': themeStore.theme === 'light' }"
           >
-            I love solving problems with code and mathematics. I explore artificial intelligence, contribute to open source, and build applications that make a difference.
+            I love solving problems with code and mathematics. I explore
+            artificial intelligence, contribute to open source, and build
+            applications that make a difference.
           </p>
         </div>
 
@@ -117,7 +121,8 @@ const setActiveTab = (tabId) => {
           <h1 class="text-3xl font-bold text-white mb-2">About Me</h1>
           <div class="h-1 w-16 bg-white/70 mx-auto rounded-full mb-4"></div>
           <p class="text-white/90 max-w-md mx-auto text-sm">
-            I love solving problems with code and mathematics. I explore AI, contribute to open source, and build helpful applications.
+            I love solving problems with code and mathematics. I explore AI,
+            contribute to open source, and build helpful applications.
           </p>
         </div>
       </div>
@@ -130,7 +135,9 @@ const setActiveTab = (tabId) => {
           'bg-gray-900': themeStore.theme === 'dark',
         }"
       >
-        <div class="flex space-x-3 w-max min-w-full px-2 py-1 overflow-x-auto no-scrollbar">
+        <div
+          class="flex space-x-3 w-max min-w-full px-2 py-1 overflow-x-auto no-scrollbar"
+        >
           <button
             v-for="tab in tabs"
             :key="tab.id"
@@ -263,7 +270,6 @@ const setActiveTab = (tabId) => {
 .dark\:bg-gray-800:hover {
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1),
     0 10px 20px -5px rgba(0, 0, 0, 0.04);
-  transform: translateY(-3px);
 }
 
 /* Ensure consistent section styling */
@@ -329,6 +335,40 @@ button.bg-indigo-100::after {
   50% {
     opacity: 1;
     transform: translateX(3px);
+  }
+}
+
+/* Section title animation - matching Projects component */
+.about-title {
+  position: relative;
+  display: inline-block;
+  animation: titleFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes titleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-underline {
+  animation: lineExpand 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-origin: center;
+}
+
+@keyframes lineExpand {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
   }
 }
 </style>

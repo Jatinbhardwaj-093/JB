@@ -25,6 +25,9 @@ const getTechColor = (techName: string) => {
     Flask: "bg-gray-700",
     Django: "bg-green-700",
     "Node.js": "bg-green-600",
+    C: "bg-blue-700",
+    "C++": "bg-blue-800",
+    Cython: "bg-yellow-500",
 
     // Databases
     SQLite: "bg-blue-400",
@@ -39,6 +42,8 @@ const getTechColor = (techName: string) => {
     SymPy: "bg-green-500",
     Codecov: "bg-pink-500",
     Celery: "bg-green-400",
+    pytest: "bg-blue-500",
+    hypothesis: "bg-purple-500",
 
     // Machine Learning
     TensorFlow: "bg-orange-500",
@@ -63,6 +68,11 @@ const getFigmaIcon = () => {
   return new URL("../assets/icons/figma.svg", import.meta.url).href;
 };
 
+// Get GSoC icon
+const getGSoCIcon = () => {
+  return new URL("../assets/icons/GSoC-icon.svg", import.meta.url).href;
+};
+
 // Add direct references to image paths for better reliability
 const projectImagePaths = {
   isep: isepImage,
@@ -80,8 +90,12 @@ const projects = ref([
     image: sympyImage,
     upcoming: true,
     technologies: [
-      { name: "Python", img: "Python.png" },
       { name: "SymPy", img: "SymPy.png" },
+      { name: "Python", img: "Python.png" },
+      { name: "Cython", img: "Python.png" }, // Using Python icon as placeholder
+      { name: "C", img: "C.png" },
+      { name: "Pytest", img: "Python.png" }, // Using Python icon as placeholder
+      { name: "Hypothesis", img: "Python.png" }, // Using Python icon as placeholder
       { name: "Codecov", img: "Codecov.png" },
     ],
     links: [
@@ -91,9 +105,9 @@ const projects = ref([
         icon: "bi bi-github",
       },
       {
-        type: "rss",
-        url: "https://planet.sympy.org",
-        icon: "bi bi-rss",
+        type: "gsoc",
+        url: "https://summerofcode.withgoogle.com/programs/2025/projects/8VslkGZ9",
+        icon: "bi bi-trophy", // This will be overridden by gsoc type
       },
     ],
     features: [
@@ -399,6 +413,13 @@ const handleImageError = (e: Event, projectId: number) => {
                     :src="getFigmaIcon()"
                     :alt="`${link.type} icon`"
                     class="w-5 h-5 figma-icon"
+                  />
+                  <!-- Special case for GSoC links -->
+                  <img
+                    v-else-if="link.type === 'gsoc'"
+                    :src="getGSoCIcon()"
+                    :alt="`${link.type} icon`"
+                    class="w-6 h-6 gsoc-icon"
                   />
                   <i v-else :class="link.icon" class="text-lg"></i>
                 </a>
@@ -826,7 +847,7 @@ const handleImageError = (e: Event, projectId: number) => {
 
 .link-button:hover .custom-doc-icon {
   transform: scale(1.35);
-  filter: drop-shadow(0px 3px 5px rgba(66, 133, 244, 0.4));
+  filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.4));
 }
 
 .link-button i.bi-figma {
@@ -845,6 +866,23 @@ const handleImageError = (e: Event, projectId: number) => {
 .link-button:hover .figma-icon {
   transform: scale(1.35);
   filter: drop-shadow(0px 3px 5px rgba(242, 78, 30, 0.4));
+}
+
+/* GSoC icon styling */
+.gsoc-icon {
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
+  transform: scale(1.2);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 50%;
+  background-color: white;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.link-button:hover .gsoc-icon {
+  transform: scale(1.35);
+  filter: drop-shadow(0px 3px 5px rgba(79, 70, 229, 0.4));
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Dark mode specific icon adjustments */

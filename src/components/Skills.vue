@@ -152,76 +152,95 @@ const getImageUrl = (name: string) => {
     <div class="mb-8">
       <!-- Desktop Tab Switcher -->
       <div class="hidden md:block text-center mb-6">
-        <!-- Tab Buttons -->
+        <!-- Clean Tab Switcher -->
         <div
-          class="inline-flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1 shadow-lg"
+          class="relative inline-flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1 shadow-sm"
         >
           <button
             @click="switchTab('orchestration')"
-            class="px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2"
+            class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-md':
+              'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm':
                 activeTab === 'orchestration',
               'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
                 activeTab !== 'orchestration',
             }"
           >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path
-                d="M8.34 10.52A2.001 2.001 0 0010 13a2 2 0 002-2 2.001 2.001 0 00-1.66-1.97L11 7.053C11.9 6.482 13.142 6 15 6c0-2.168-3.663-4-8-4S-1 3.832-1 6c2.667 0 5 0 5 0l1.66 1.97C4.639 8.225 4 9.033 4 10c0 1.386 1.167 2.5 2.67 2.5.871 0 1.379-.208 1.67-.48zm1.66 4.47l-.34 3.2c-2.98.18-5.192.79-8 2.79.3 1.01 0 2-1 2 1.32 0 1.999.897 2 3.01.167-.01.33 0 .5 0 3.12-1.61 5.51-2.47 10-2.5 4.49.03 6.88.89 10 2.5.17 0 .333-.01.5 0 0-2.113.68-3.01 2-3.01-1 0-1.3-.99-1-2-2.808-2-5.02-2.61-8-2.79L16.66 15c.23-.131.34-.24.34-.48 0-1.386-1.167-2.5-2.67-2.5-.871 0-1.38.208-1.67.48z"
+                d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"
               />
             </svg>
-            Orchestration
+            DevOps
           </button>
           <button
             @click="switchTab('ml')"
-            class="px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2"
+            class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow-md':
+              'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow-sm':
                 activeTab === 'ml',
               'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
                 activeTab !== 'ml',
             }"
           >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M6 5a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h4a1 1 0 100-2H7zM5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              />
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Machine Learning
+            ML/AI
           </button>
+          <!-- Simple Indicator -->
+          <span
+            class="absolute bottom-1 left-1 h-0.5 rounded bg-indigo-500 transition-all duration-200"
+            :style="{
+              width: 'calc(50% - 0.5rem)',
+              transform:
+                activeTab === 'orchestration'
+                  ? 'translateX(0)'
+                  : 'translateX(100%)',
+            }"
+          ></span>
         </div>
       </div>
     </div>
 
-    <!-- Mobile Tab Buttons -->
+    <!-- Mobile Tab Switcher -->
     <div class="flex md:hidden justify-center space-x-3 mb-6">
-
-      <div class="flex justify-center space-x-3 w-full">
+      <div
+        class="relative flex justify-center w-full bg-gray-100 dark:bg-gray-800 rounded-lg p-1 shadow-sm"
+      >
         <button
           @click="switchTab('orchestration')"
-          class="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 relative focus:outline-none"
           :class="{
-            'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 shadow-sm':
+            'bg-white text-blue-700 dark:bg-gray-700 dark:text-blue-300 shadow-sm':
               activeTab === 'orchestration',
-            'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400':
-              activeTab !== 'orchestration',
+            'text-gray-600 dark:text-gray-400': activeTab !== 'orchestration',
           }"
         >
           DevOps
         </button>
         <button
           @click="switchTab('ml')"
-          class="flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+          class="flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 relative focus:outline-none"
           :class="{
-            'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 shadow-sm':
+            'bg-white text-purple-700 dark:bg-gray-700 dark:text-purple-300 shadow-sm':
               activeTab === 'ml',
-            'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400':
-              activeTab !== 'ml',
+            'text-gray-600 dark:text-gray-400': activeTab !== 'ml',
           }"
         >
           ML/AI
         </button>
+        <!-- Simple Mobile Indicator -->
+        <span
+          class="absolute bottom-1 left-1 h-0.5 rounded bg-indigo-500 transition-all duration-200"
+          :style="{
+            width: 'calc(50% - 0.5rem)',
+            transform:
+              activeTab === 'orchestration'
+                ? 'translateX(0)'
+                : 'translateX(100%)',
+          }"
+        ></span>
       </div>
     </div>
 

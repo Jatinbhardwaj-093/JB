@@ -171,7 +171,7 @@ const experiences = [
             <li
               v-for="(point, i) in exp.points"
               :key="i"
-              class="flex items-start animate-fade-in"
+              class="flex items-start ain "
               :style="{ animationDelay: `${i * 100}ms` }"
             >
               <svg
