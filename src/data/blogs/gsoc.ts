@@ -39,6 +39,16 @@ const gsocPosts: BlogPost[] = [
     category: "gsoc",
     slug: "gsoc-week2-3-fps-design",
   },
+  {
+    id: "gsoc-week4-equality-series",
+    title: "GSoC-25: Week-4 - Power Series Equality Implementation",
+    date: "June 30, 2025",
+    minutesToRead: 4,
+    summary:
+      "Week 4 progress focusing on implementing power series equality checks. Deep dive into truncation handling, comparison logic, and studying python-flint's gr_series behavior for accurate equality determination.",
+    category: "gsoc",
+    slug: "week-4-GSoC'25",
+  },
   // More blogs can be added here in the future
 ];
 
