@@ -49,6 +49,17 @@ const gsocPosts: BlogPost[] = [
     category: "gsoc",
     slug: "week-4-GSoC'25",
   },
+  {
+    id: "gsoc-week5-6-series-algorithms",
+    title:
+      "GSoC-25: Week 5-6 - Advanced Series Algorithms & Fast Lagrange Inversion",
+    date: "July 14, 2025",
+    minutesToRead: 8,
+    summary:
+      "Weeks 5-6 progress covering implementation of efficient algorithms for series manipulation including Karatsuba multiplication, Fast Lagrange Inversion for series reversion, composition methods, and type annotations improvements.",
+    category: "gsoc",
+    slug: "week5-6-GSoC'25",
+  },
   // More blogs can be added here in the future
 ];
 
