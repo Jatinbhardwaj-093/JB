@@ -60,6 +60,16 @@ const gsocPosts: BlogPost[] = [
     category: "gsoc",
     slug: "week5-6-GSoC'25",
   },
+  {
+    id: "gsoc-week7-code-cleanup-division",
+    title: "GSoC-25: Week 7 - Code Cleanup & Series Division",
+    date: "July 21, 2025",
+    minutesToRead: 4,
+    summary:
+      "Week 7 focused on code cleanup, type annotations refinement, and implementing series division operations. Key challenges included handling divisors without invertible constant terms and synchronizing series shifts for mathematical correctness.",
+    category: "gsoc",
+    slug: "week7-GSoC'25",
+  },
   // More blogs can be added here in the future
 ];
 
