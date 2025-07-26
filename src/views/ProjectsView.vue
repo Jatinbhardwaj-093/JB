@@ -88,7 +88,7 @@ const filteredProjects = computed(() => {
       <!-- Header with animated gradient background -->
       <div class="relative overflow-hidden">
         <div
-          class="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700 z-0"
+          class="absolute inset-0 bg-gradient-to-br from-gray-600 to-gray-700 z-0"
         ></div>
         <div class="absolute inset-0 bg-grid-white/10 opacity-30 z-1"></div>
 
@@ -119,9 +119,9 @@ const filteredProjects = computed(() => {
               @click="setFilter(filter)"
               class="px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap select-none"
               :class="{
-                'bg-indigo-100 text-indigo-700 border border-indigo-200 dark:bg-indigo-900/60 dark:text-indigo-300 dark:border-indigo-700':
+                'bg-gray-200 text-gray-700 border border-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600':
                   activeFilter === filter,
-                'bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700':
+                'bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-900 dark:text-gray-400 dark:border-gray-700':
                   activeFilter !== filter,
               }"
               style="transition: none; transform: none"
@@ -139,7 +139,7 @@ const filteredProjects = computed(() => {
           <div
             v-for="project in filteredProjects"
             :key="project.id"
-            class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300"
+            class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300"
           >
             <!-- Project image with overlay -->
             <div class="relative h-64 overflow-hidden group">
@@ -182,7 +182,7 @@ const filteredProjects = computed(() => {
               <!-- Upcoming badge -->
               <div
                 v-if="project.upcoming"
-                class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
+                class="absolute top-4 right-4 bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
               >
                 Upcoming
               </div>
@@ -199,7 +199,7 @@ const filteredProjects = computed(() => {
                 <span
                   v-for="tag in project.tags"
                   :key="tag"
-                  class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                  class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                 >
                   {{ tag }}
                 </span>
@@ -209,7 +209,7 @@ const filteredProjects = computed(() => {
               <router-link
                 v-if="project.id === 2"
                 to="/projects/hsp"
-                class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
+                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
               >
                 <span class="relative">
                   View Project
@@ -235,7 +235,7 @@ const filteredProjects = computed(() => {
                 :href="project.link"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
+                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
               >
                 <span class="relative">
                   View Project
@@ -267,7 +267,7 @@ const filteredProjects = computed(() => {
           href="https://github.com/Jatinbhardwaj-093"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300"
+          class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-700 hover:bg-gray-800 transition-colors duration-300"
         >
           <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
             <path
@@ -309,7 +309,7 @@ const filteredProjects = computed(() => {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.dark\:bg-gray-800 {
+.dark\:bg-gray-900 {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -408,24 +408,24 @@ const filteredProjects = computed(() => {
 
 /* Card entrance animation - matched with desktop */
 .bg-white:not(.filter-tabs-container),
-.dark\:bg-gray-800:not(.filter-tabs-container) {
+.dark\:bg-gray-900:not(.filter-tabs-container) {
   transform-style: preserve-3d;
   transform: translateZ(0);
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bg-white:nth-child(1),
-.dark\:bg-gray-800:nth-child(1) {
+.dark\:bg-gray-900:nth-child(1) {
   animation-delay: 0.2s;
 }
 
 .bg-white:nth-child(2),
-.dark\:bg-gray-800:nth-child(2) {
+.dark\:bg-gray-900:nth-child(2) {
   animation-delay: 0.4s;
 }
 
 .bg-white:nth-child(3),
-.dark\:bg-gray-800:nth-child(3) {
+.dark\:bg-gray-900:nth-child(3) {
   animation-delay: 0.6s;
 }
 
@@ -442,7 +442,7 @@ const filteredProjects = computed(() => {
 
 /* Enhanced hover effect to match desktop */
 .bg-white:hover,
-.dark\:bg-gray-800:hover {
+.dark\:bg-gray-900:hover {
   transform: translateY(-12px) translateZ(10px) scale(1.01);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);

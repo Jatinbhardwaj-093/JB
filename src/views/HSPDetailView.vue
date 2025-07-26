@@ -227,7 +227,7 @@ onMounted(() => {
 
       <!-- Minimal Strip Indicator -->
       <div
-        class="flex justify-center space-x-2 py-2 bg-gray-100 dark:bg-gray-800"
+        class="flex justify-center space-x-2 py-2 bg-gray-100 dark:bg-gray-900"
       >
         <div
           v-for="(_, index) in images"
@@ -248,7 +248,7 @@ onMounted(() => {
     <div
       class="max-w-5xl mx-auto rounded-xl shadow-lg mb-8 overflow-hidden"
       :class="{
-        'bg-gray-800 border border-gray-700': themeStore.theme === 'dark',
+        'bg-gray-900 border border-gray-700': themeStore.theme === 'dark',
         'bg-white border border-gray-100': themeStore.theme === 'light',
       }"
     >
@@ -256,7 +256,7 @@ onMounted(() => {
       <div
         class="p-6 border-b"
         :class="{
-          'bg-gradient-to-r from-gray-900 to-gray-800 border-gray-700':
+          'bg-gradient-to-r from-black to-gray-900 border-gray-700':
             themeStore.theme === 'dark',
           'bg-gradient-to-r from-blue-50 to-indigo-50 border-gray-200':
             themeStore.theme === 'light',
@@ -330,7 +330,7 @@ onMounted(() => {
           <div
             class="p-4 rounded-lg flex items-start"
             :class="{
-              'bg-gray-700': themeStore.theme === 'dark',
+              'bg-gray-800': themeStore.theme === 'dark',
               'bg-gray-50': themeStore.theme === 'light',
             }"
           >
@@ -384,7 +384,7 @@ onMounted(() => {
           <div
             class="p-4 rounded-lg flex items-start"
             :class="{
-              'bg-gray-700': themeStore.theme === 'dark',
+              'bg-gray-800': themeStore.theme === 'dark',
               'bg-gray-50': themeStore.theme === 'light',
             }"
           >
@@ -431,7 +431,7 @@ onMounted(() => {
           <div
             class="p-4 rounded-lg flex items-start"
             :class="{
-              'bg-gray-700': themeStore.theme === 'dark',
+              'bg-gray-800': themeStore.theme === 'dark',
               'bg-gray-50': themeStore.theme === 'light',
             }"
           >
@@ -478,7 +478,7 @@ onMounted(() => {
           <div
             class="p-4 rounded-lg flex items-start"
             :class="{
-              'bg-gray-700': themeStore.theme === 'dark',
+              'bg-gray-800': themeStore.theme === 'dark',
               'bg-gray-50': themeStore.theme === 'light',
             }"
           >
@@ -526,7 +526,7 @@ onMounted(() => {
           <div
             class="p-4 rounded-lg flex items-start"
             :class="{
-              'bg-gray-700': themeStore.theme === 'dark',
+              'bg-gray-800': themeStore.theme === 'dark',
               'bg-gray-50': themeStore.theme === 'light',
             }"
           >
@@ -574,7 +574,7 @@ onMounted(() => {
           <div
             class="p-4 rounded-lg flex items-start"
             :class="{
-              'bg-gray-700': themeStore.theme === 'dark',
+              'bg-gray-800': themeStore.theme === 'dark',
               'bg-gray-50': themeStore.theme === 'light',
             }"
           >
@@ -752,7 +752,7 @@ onMounted(() => {
               rel="noopener noreferrer"
               class="resource-card flex items-center overflow-hidden group transition-all duration-300 ease-in-out"
               :class="{
-                'bg-gray-800 text-white border border-gray-700 hover:border-indigo-400':
+                'bg-gray-900 text-white border border-gray-700 hover:border-indigo-400':
                   themeStore.theme === 'dark',
                 'bg-white text-gray-800 shadow-md hover:shadow-lg border border-gray-100 hover:border-indigo-200':
                   themeStore.theme === 'light',
@@ -801,7 +801,7 @@ onMounted(() => {
               rel="noopener noreferrer"
               class="resource-card flex items-center overflow-hidden group transition-all duration-300 ease-in-out"
               :class="{
-                'bg-gray-800 text-white border border-gray-700 hover:border-indigo-400':
+                'bg-gray-900 text-white border border-gray-700 hover:border-indigo-400':
                   themeStore.theme === 'dark',
                 'bg-white text-gray-800 shadow-md hover:shadow-lg border border-gray-100 hover:border-indigo-200':
                   themeStore.theme === 'light',
@@ -846,7 +846,7 @@ onMounted(() => {
               rel="noopener noreferrer"
               class="resource-card flex items-center overflow-hidden group transition-all duration-300 ease-in-out"
               :class="{
-                'bg-gray-800 text-white border border-gray-700 hover:border-indigo-400':
+                'bg-gray-900 text-white border border-gray-700 hover:border-indigo-400':
                   themeStore.theme === 'dark',
                 'bg-white text-gray-800 shadow-md hover:shadow-lg border border-gray-100 hover:border-indigo-200':
                   themeStore.theme === 'light',

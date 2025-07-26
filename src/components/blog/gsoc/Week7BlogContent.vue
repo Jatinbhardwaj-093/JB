@@ -23,7 +23,7 @@ onMounted(() => {
   >
     <!-- Week 7 Header -->
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       GSoC'25 Week-7 Update
     </p>
@@ -51,12 +51,12 @@ onMounted(() => {
       </a>
       by <strong>Oscar</strong>. This PR introduces enhanced type annotation
       functionality for
-      <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+      <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
         >dup</span
       >
       elements, providing a
       <strong
-        ><span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        ><span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >dup</span
         >
         type alias</strong
@@ -107,11 +107,11 @@ onMounted(() => {
       >
         The primary hurdle arose when the divisor (<span class="italic">s₂</span
         >) lacked an invertible constant term, as is common with series like
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >x</span
         >
         or
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >x + x² + x³ + ...</span
         >. I initially overcomplicated this, focusing on the absence of a
         constant term and potential series shifts.

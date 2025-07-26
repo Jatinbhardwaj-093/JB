@@ -34,7 +34,7 @@ const experiences = [
       "Creating comprehensive documentation, examples, and unit tests to ensure reliability and ease of use for the new power series functionality.",
       "Optimizing the ring_series module and fixing bugs to improve performance and integration with SymPy's core symbolic computation engine.",
     ],
-    className: "border-l-indigo-600",
+    className: "border-l-gray-600",
   },
 ];
 </script>
@@ -46,7 +46,7 @@ const experiences = [
       <div
         v-for="(exp, index) in experiences"
         :key="index"
-        class="rounded-lg overflow-hidden bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900/80 shadow-md"
+        class="rounded-lg overflow-hidden bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black/80 shadow-md"
       >
         <div class="border-l-4 p-5 relative" :class="exp.className">
           <div class="flex justify-between items-center mb-3">
@@ -60,7 +60,7 @@ const experiences = [
               {{ exp.title }}
             </h3>
             <span
-              class="text-sm font-medium px-3 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+              class="text-sm font-medium px-3 py-1 rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
             >
               {{ exp.timeline }}
             </span>
@@ -73,7 +73,7 @@ const experiences = [
               class="flex items-start"
             >
               <svg
-                class="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-2 mt-0.5 flex-shrink-0"
+                class="h-5 w-5 text-gray-600 dark:text-gray-400 mr-2 mt-0.5 flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -97,7 +97,7 @@ const experiences = [
       <div
         v-for="(exp, index) in experiences"
         :key="index"
-        class="experience-card rounded-lg overflow-hidden bg-white dark:bg-gray-800/80 shadow-sm border border-gray-100 dark:border-gray-700"
+        class="experience-card rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700"
       >
         <!-- Card Header with Toggle -->
         <div
@@ -111,7 +111,7 @@ const experiences = [
             <!-- Colored dot indicator -->
             <div
               class="h-3 w-3 rounded-full flex-shrink-0"
-              :class="index === 0 ? 'bg-indigo-600' : 'bg-purple-600'"
+              :class="index === 0 ? 'bg-gray-600' : 'bg-gray-700'"
             ></div>
 
             <!-- Title -->
@@ -133,7 +133,7 @@ const experiences = [
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-7 w-7 text-indigo-600 dark:text-indigo-400"
+              class="h-7 w-7 text-gray-600 dark:text-gray-400"
               viewBox="0 0 20 20"
               fill="currentColor"
               stroke-width="1.5"
@@ -152,7 +152,7 @@ const experiences = [
           <!-- Timeline badge -->
           <div class="flex justify-start mb-2">
             <span
-              class="text-xs font-medium px-2 py-0.5 rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+              class="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
             >
               {{ exp.timeline }}
             </span>
@@ -171,11 +171,11 @@ const experiences = [
             <li
               v-for="(point, i) in exp.points"
               :key="i"
-              class="flex items-start ain "
+              class="flex items-start ain"
               :style="{ animationDelay: `${i * 100}ms` }"
             >
               <svg
-                class="h-5 w-5 text-indigo-600 dark:text-indigo-400 mr-2 mt-0.5 flex-shrink-0"
+                class="h-5 w-5 text-gray-600 dark:text-gray-400 mr-2 mt-0.5 flex-shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

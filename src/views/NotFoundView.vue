@@ -10,7 +10,7 @@
       class="max-w-md w-full text-center rounded-xl shadow-lg p-8 border"
       :class="{
         'bg-white border-gray-100': themeStore.theme === 'light',
-        'bg-gray-800 border-gray-700': themeStore.theme === 'dark',
+        'bg-gray-900 border-gray-700': themeStore.theme === 'dark',
       }"
     >
       <div class="mb-6">
@@ -48,7 +48,7 @@
 
       <router-link
         to="/"
-        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200"
+        class="inline-block bg-gray-700 hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200"
       >
         Go Back Home
       </router-link>

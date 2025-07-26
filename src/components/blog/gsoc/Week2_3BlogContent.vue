@@ -23,7 +23,7 @@ onMounted(() => {
   >
     <!-- Week 2 Section -->
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       GSoC'25 Week-2
     </p>
@@ -66,7 +66,7 @@ onMounted(() => {
       class="mb-4 sm:mb-6 rounded-lg p-4"
       :class="{
         'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-800': themeStore.theme === 'dark',
+        'bg-gray-900': themeStore.theme === 'dark',
       }"
     >
       <pre
@@ -149,7 +149,7 @@ print(x_squared)  # Output: x^2</code></pre>
 
     <!-- Week 3 Section -->
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-8 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-8 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       GSoC'25 Week 3
     </p>

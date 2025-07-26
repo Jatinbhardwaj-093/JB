@@ -37,12 +37,12 @@ const submitForm = () => {
       class="block md:hidden min-h-screen"
       :class="{
         'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-900': themeStore.theme === 'dark',
+        'bg-black': themeStore.theme === 'dark',
       }"
     >
       <!-- Header -->
       <!-- Header with wavy background -->
-      <div class="relative overflow-hidden bg-indigo-600">
+      <div class="relative overflow-hidden bg-gray-700 dark:bg-gray-800">
         <div class="absolute inset-0 opacity-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,17 +71,23 @@ const submitForm = () => {
           <!-- Email Option -->
           <a
             href="mailto:bhardwajjatin093@gmail.com"
-            class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm text-center"
+            class="group flex flex-col items-center p-4 bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
           >
             <div
-              class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-full flex items-center justify-center mb-3"
+              class="w-14 h-14 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 dark:from-gray-700 dark:via-gray-800 dark:to-gray-600 rounded-full flex items-center justify-center mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-gray-300/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+              style="
+                box-shadow: 0 6px 12px rgba(156, 163, 175, 0.15),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+              "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-indigo-600 dark:text-indigo-400"
+                class="h-7 w-7 text-gray-600 dark:text-gray-400 transform transition-all duration-300 group-hover:scale-110"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                style="filter: drop-shadow(0 2px 4px rgba(156, 163, 175, 0.3))"
               >
                 <path
                   stroke-linecap="round"
@@ -108,15 +114,21 @@ const submitForm = () => {
           <a
             href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"
             target="_blank"
-            class="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm text-center"
+            class="group flex flex-col items-center p-4 bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
           >
             <div
-              class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-full flex items-center justify-center mb-3"
+              class="w-14 h-14 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 dark:from-gray-700 dark:via-gray-800 dark:to-gray-600 rounded-full flex items-center justify-center mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-gray-300/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+              style="
+                box-shadow: 0 6px 12px rgba(156, 163, 175, 0.15),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+              "
             >
               <svg
-                class="h-6 w-6 text-indigo-600 dark:text-indigo-400"
+                class="h-7 w-7 text-gray-600 dark:text-gray-400 transform transition-all duration-300 group-hover:scale-110"
                 fill="currentColor"
                 viewBox="0 0 24 24"
+                style="filter: drop-shadow(0 2px 4px rgba(156, 163, 175, 0.3))"
               >
                 <path
                   d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
@@ -140,12 +152,15 @@ const submitForm = () => {
         <!-- Contact Form -->
         <div
           v-if="!formSubmitted"
-          class="bg-white dark:bg-gray-800 shadow-md p-5"
+          class="bg-white dark:bg-gray-900 shadow-md p-5"
         >
-          <h2 class="text-xl font-bold mb-4"
-          :class= "{ 'text-white': themeStore.theme === 'dark',
-            'text-black': themeStore.theme === 'light'
-           }">
+          <h2
+            class="text-xl font-bold mb-4"
+            :class="{
+              'text-white': themeStore.theme === 'dark',
+              'text-black': themeStore.theme === 'light',
+            }"
+          >
             Send a Message
           </h2>
 
@@ -162,7 +177,7 @@ const submitForm = () => {
                 id="name"
                 v-model="formData.name"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
                 placeholder="Your name"
               />
             </div>
@@ -179,7 +194,7 @@ const submitForm = () => {
                 id="email"
                 v-model="formData.email"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
                 placeholder="your.email@example.com"
               />
             </div>
@@ -196,7 +211,7 @@ const submitForm = () => {
                 id="subject"
                 v-model="formData.subject"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
                 placeholder="What is this about?"
               />
             </div>
@@ -213,7 +228,7 @@ const submitForm = () => {
                 v-model="formData.message"
                 rows="4"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
                 placeholder="Your message here..."
               ></textarea>
             </div>
@@ -221,7 +236,7 @@ const submitForm = () => {
             <!-- Submit Button -->
             <button
               type="submit"
-              class="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center"
+              class="w-full bg-gray-700 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors flex items-center justify-center"
               :disabled="isLoading"
             >
               <svg
@@ -253,14 +268,14 @@ const submitForm = () => {
         <!-- Success Message -->
         <div
           v-else
-          class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 text-center"
+          class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 text-center"
         >
           <div
-            class="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full mx-auto flex items-center justify-center mb-4"
+            class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full mx-auto flex items-center justify-center mb-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-green-500"
+              class="h-8 w-8 text-gray-600 dark:text-gray-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -282,7 +297,7 @@ const submitForm = () => {
           </p>
           <button
             @click="formSubmitted = false"
-            class="mt-6 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            class="mt-6 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors"
           >
             Send Another Message
           </button>
@@ -294,7 +309,7 @@ const submitForm = () => {
             Prefer to reach out directly? Email me at
             <a
               href="mailto:bhardwajjatin093@gmail.com"
-              class="text-indigo-600 dark:text-indigo-400"
+              class="text-gray-600 dark:text-gray-400"
               >bhardwajjatin093@gmail.com</a
             >
           </p>
@@ -309,7 +324,7 @@ const submitForm = () => {
 input:focus,
 textarea:focus {
   border-color: #6366f1;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  box-shadow: 0 0 0 2px rgba(156, 163, 175, 0.2);
 }
 
 /* Improve touch targets for mobile */

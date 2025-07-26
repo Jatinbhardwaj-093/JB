@@ -10,52 +10,10 @@ import hspImage from "../assets/images/Projects/HSP.webp";
 import sympyImage from "../assets/images/Projects/sympy.webp";
 import gsocImage from "../assets/images/Projects/gsoc.webp";
 
-// Function to get technology-specific colors
+// Function to get technology-specific colors (monochrome - all same shade)
 const getTechColor = (techName: string) => {
-  const colors = {
-    // Frontend
-    HTML5: "bg-orange-500",
-    CSS3: "bg-blue-500",
-    JavaScript: "bg-yellow-500",
-    "Vue.js": "bg-green-500",
-    TypeScript: "bg-blue-600",
-
-    // Backend
-    Python: "bg-yellow-600",
-    Flask: "bg-gray-700",
-    Django: "bg-green-700",
-    "Node.js": "bg-green-600",
-    C: "bg-blue-700",
-    "C++": "bg-blue-800",
-    Cython: "bg-yellow-500",
-
-    // Databases
-    SQLite: "bg-blue-400",
-    MongoDB: "bg-green-600",
-    MySQL: "bg-blue-600",
-    Redis: "bg-red-500",
-
-    // Tools & Libraries
-    Git: "bg-orange-600",
-    GitHub: "bg-gray-800",
-    Docker: "bg-blue-500",
-    SymPy: "bg-green-500",
-    Codecov: "bg-pink-500",
-    Celery: "bg-green-400",
-    pytest: "bg-blue-500",
-    hypothesis: "bg-purple-500",
-
-    // Machine Learning
-    TensorFlow: "bg-orange-500",
-    PyTorch: "bg-red-600",
-    NumPy: "bg-blue-500",
-    Pandas: "bg-purple-600",
-
-    // Default
-    default: "bg-indigo-500",
-  };
-
-  return colors[techName] || colors["default"];
+  // All technologies use the same gray shade for consistent monochrome design
+  return "bg-gray-600";
 };
 
 // Get Google Doc icon based on theme
@@ -222,7 +180,7 @@ const handleImageError = (e: Event, projectId: number) => {
         >
           Featured Projects
         </h2>
-        <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full"></div>
+        <div class="h-1 w-24 bg-gray-600 mx-auto rounded-full"></div>
         <p
           class="mt-4 max-w-2xl mx-auto"
           :class="{
@@ -292,7 +250,7 @@ const handleImageError = (e: Event, projectId: number) => {
               </h3>
               <div
                 v-if="project.upcoming"
-                class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
+                class="absolute top-4 right-4 bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
               >
                 Upcoming
               </div>
@@ -393,9 +351,9 @@ const handleImageError = (e: Event, projectId: number) => {
                   rel="noopener noreferrer"
                   class="link-button p-2 rounded-full transition-colors duration-300"
                   :class="{
-                    'text-gray-400 hover:text-indigo-400 hover:bg-gray-700':
+                    'text-gray-400 hover:text-gray-200 hover:bg-gray-700':
                       themeStore.theme === 'dark' && link.type !== 'figma',
-                    'text-gray-600 hover:text-indigo-600 hover:bg-indigo-50':
+                    'text-gray-600 hover:text-gray-800 hover:bg-gray-50':
                       themeStore.theme === 'light' && link.type !== 'figma',
                   }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
@@ -428,7 +386,7 @@ const handleImageError = (e: Event, projectId: number) => {
               <router-link
                 v-if="project.id === 2"
                 to="/projects/hsp"
-                class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
+                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
               >
                 View Project
                 <svg
@@ -451,7 +409,7 @@ const handleImageError = (e: Event, projectId: number) => {
                 :href="project.links[0].url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 btn-view-project"
+                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
               >
                 View Project
                 <svg
@@ -480,7 +438,7 @@ const handleImageError = (e: Event, projectId: number) => {
           href="https://github.com/Jatinbhardwaj-093"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-300"
+          class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-700 hover:bg-gray-800 transition-colors duration-300"
         >
           <i class="bi bi-github mr-2"></i>
           View More on GitHub
@@ -881,7 +839,7 @@ const handleImageError = (e: Event, projectId: number) => {
 
 .link-button:hover .gsoc-icon {
   transform: scale(1.35);
-  filter: drop-shadow(0px 3px 5px rgba(79, 70, 229, 0.4));
+  filter: drop-shadow(0px 3px 5px rgba(156, 163, 175, 0.4));
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -950,7 +908,7 @@ a.inline-flex:hover svg {
 
 .mt-8 a:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px -10px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 10px 25px -10px rgba(156, 163, 175, 0.6);
 }
 
 .mt-8 a:hover::before {
@@ -1027,7 +985,7 @@ h2.text-3xl {
   .btn-view-project {
     padding: 0.625rem 1rem;
     border-radius: 0.375rem;
-    background-color: rgba(79, 70, 229, 0.1);
+    background-color: rgba(156, 163, 175, 0.1);
     font-weight: 600;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -1039,7 +997,7 @@ h2.text-3xl {
 
   .dark .btn-view-project,
   [data-theme="dark"] .btn-view-project {
-    background-color: rgba(79, 70, 229, 0.15);
+    background-color: rgba(156, 163, 175, 0.15);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 

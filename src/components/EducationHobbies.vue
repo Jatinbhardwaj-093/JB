@@ -45,7 +45,7 @@ const educationData = [
     year: "2021-2022",
     link: "https://www.cbse.gov.in/cbsenew/cbse.html",
     logo: new URL("../assets/images/Education/cbse.png", import.meta.url).href,
-    gradient: "from-green-400 to-emerald-500",
+    gradient: "from-gray-500 to-gray-600",
   },
   {
     id: "iitm",
@@ -54,7 +54,7 @@ const educationData = [
     year: "2023-Present",
     link: "https://study.iitm.ac.in/ds/",
     logo: new URL("../assets/images/Education/IITM.png", import.meta.url).href,
-    gradient: "from-blue-400 to-indigo-500",
+    gradient: "from-gray-400 to-gray-500",
   },
 ];
 
@@ -70,7 +70,7 @@ const hobbiesData = [
             .href
         : new URL("../assets/images/Dark/Maths_dark.png", import.meta.url).href
     ),
-    gradient: "from-purple-400 to-pink-500",
+    gradient: "from-gray-500 to-gray-600",
   },
   {
     id: "psychology",
@@ -85,7 +85,7 @@ const hobbiesData = [
         : new URL("../assets/images/Dark/Psychology_dark.png", import.meta.url)
             .href
     ),
-    gradient: "from-indigo-400 to-purple-500",
+    gradient: "from-gray-400 to-gray-600",
   },
   {
     id: "ml",
@@ -96,7 +96,7 @@ const hobbiesData = [
         ? new URL("../assets/images/light/ML_light.png", import.meta.url).href
         : new URL("../assets/images/Dark/Ml_dark.png", import.meta.url).href
     ),
-    gradient: "from-blue-400 to-indigo-500",
+    gradient: "from-gray-500 to-gray-700",
   },
 ];
 
@@ -137,41 +137,29 @@ const switchTab = (tab: string) => {
             @click="switchTab('education')"
             class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm':
+              'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 shadow-sm':
                 activeTab === 'education',
               'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
                 activeTab !== 'education',
             }"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.75 2.524z"
-              />
-            </svg>
             Education
           </button>
           <button
             @click="switchTab('hobbies')"
             class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow-sm':
+              'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 shadow-sm':
                 activeTab === 'hobbies',
               'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
                 activeTab !== 'hobbies',
             }"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                clip-rule="evenodd"
-              />
-            </svg>
             Hobbies
           </button>
           <!-- Simple Indicator -->
           <span
-            class="absolute bottom-1 left-1 h-0.5 rounded bg-indigo-500 transition-all duration-200"
+            class="absolute bottom-1 left-1 h-0.5 rounded bg-gray-500 transition-all duration-200"
             :style="{
               width: 'calc(50% - 0.5rem)',
               transform:
@@ -198,7 +186,7 @@ const switchTab = (tab: string) => {
               : "Personal Interests"
           }}
         </p>
-        <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+        <div class="h-1 w-24 bg-gray-600 mx-auto rounded-full mb-6"></div>
       </div>
     </div>
 
@@ -209,7 +197,7 @@ const switchTab = (tab: string) => {
         <div class="relative">
           <!-- Timeline Line -->
           <div
-            class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-purple-500"
+            class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-400 to-gray-600"
           ></div>
 
           <!-- Education Cards -->
@@ -259,7 +247,7 @@ const switchTab = (tab: string) => {
                       </p>
                     </div>
                     <span
-                      class="text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full"
+                      class="text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"
                     >
                       {{ edu.year }}
                     </span>
@@ -324,7 +312,7 @@ const switchTab = (tab: string) => {
                       {{ edu.institution }}
                     </p>
                     <span
-                      class="inline-block text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md"
+                      class="inline-block text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md"
                     >
                       {{ edu.year }}
                     </span>

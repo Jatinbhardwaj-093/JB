@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useThemeStore = defineStore("theme", {
   state: () => ({
     // Only check localStorage, ignore system preferences
-    theme: localStorage.getItem("theme") || "light", // Default to light if no preference saved
+    theme: localStorage.getItem("theme") || "dark", // Default to dark if no preference saved
     isAnimating: false, // Track animation state
   }),
 
@@ -34,9 +34,9 @@ export const useThemeStore = defineStore("theme", {
     },
 
     initializeTheme() {
-      // Only use saved preference, or default to light
+      // Only use saved preference, or default to dark
       const savedTheme = localStorage.getItem("theme");
-      this.theme = savedTheme || "light";
+      this.theme = savedTheme || "dark";
       this.applyTheme();
     },
   },

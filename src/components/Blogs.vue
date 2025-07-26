@@ -209,7 +209,7 @@ onMounted(() => {
     class="w-full max-w-[100vw] overflow-x-hidden"
     :class="{
       'bg-gray-50': themeStore.theme === 'light',
-      'bg-gray-900': themeStore.theme === 'dark',
+      'bg-black': themeStore.theme === 'dark',
     }"
   >
     <!-- Banner Image - Full width without container -->
@@ -259,7 +259,7 @@ onMounted(() => {
       class="w-full py-4 shadow-md relative"
       :class="{
         'bg-gray-100': themeStore.theme === 'light',
-        'bg-gray-800': themeStore.theme === 'dark',
+        'bg-gray-900': themeStore.theme === 'dark',
       }"
     >
       <div
@@ -274,7 +274,7 @@ onMounted(() => {
             @click="handleCategoryChange(category.id)"
             class="px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200"
             :class="{
-              'bg-indigo-600 text-white': activeCategory === category.id,
+              'bg-gray-700 text-white': activeCategory === category.id,
               'bg-white text-gray-700 hover:bg-gray-200 shadow':
                 activeCategory !== category.id && themeStore.theme === 'light',
               'bg-gray-700 text-gray-300 hover:bg-gray-600 shadow':
@@ -298,7 +298,7 @@ onMounted(() => {
           :class="{
             'bg-gradient-to-l from-gray-100 to-white/90':
               themeStore.theme === 'light',
-            'bg-gradient-to-l from-gray-800 to-gray-900/90':
+            'bg-gradient-to-l from-gray-900 to-black/90':
               themeStore.theme === 'dark',
           }"
         >
@@ -306,8 +306,8 @@ onMounted(() => {
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 animate-arrow-pulse"
             :class="{
-              'text-indigo-600': themeStore.theme === 'light',
-              'text-indigo-400': themeStore.theme === 'dark',
+              'text-gray-600': themeStore.theme === 'light',
+              'text-gray-400': themeStore.theme === 'dark',
             }"
             fill="none"
             viewBox="0 0 24 24"
@@ -339,7 +339,7 @@ onMounted(() => {
         class="rounded-xl shadow-lg p-4 sm:p-6 md:p-8 text-center max-w-2xl mx-auto border"
         :class="{
           'bg-white border-gray-100': themeStore.theme === 'light',
-          'bg-gray-800 border-gray-700': themeStore.theme === 'dark',
+          'bg-gray-900 border-gray-700': themeStore.theme === 'dark',
         }"
       >
         <div class="mb-4 sm:mb-6 flex justify-center">
@@ -364,9 +364,8 @@ onMounted(() => {
         <div
           class="p-3 sm:p-4 rounded-lg border"
           :class="{
-            'bg-indigo-50 border-indigo-100': themeStore.theme === 'light',
-            'bg-indigo-900/20 border-indigo-800/30':
-              themeStore.theme === 'dark',
+            'bg-gray-50 border-gray-100': themeStore.theme === 'light',
+            'bg-gray-900/20 border-gray-800/30': themeStore.theme === 'dark',
           }"
         >
           <p
@@ -423,7 +422,7 @@ onMounted(() => {
 /* Newsletter subscription glow effect */
 .newsletter-glow-box {
   position: relative;
-  box-shadow: 0 0 25px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 0 25px rgba(156, 163, 175, 0.15);
   transition: all 0.3s ease;
   overflow: hidden;
 }
@@ -434,9 +433,9 @@ onMounted(() => {
   inset: -1px;
   background: linear-gradient(
     90deg,
-    rgba(79, 70, 229, 0.3),
-    rgba(129, 140, 248, 0.3),
-    rgba(79, 70, 229, 0.3)
+    rgba(156, 163, 175, 0.3),
+    rgba(209, 213, 219, 0.3),
+    rgba(156, 163, 175, 0.3)
   );
   background-size: 200% 100%;
   border-radius: 0.75rem; /* matches rounded-xl */

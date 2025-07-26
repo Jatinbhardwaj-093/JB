@@ -61,7 +61,7 @@ const technologyData = {
     description:
       "Container orchestration, CI/CD, and infrastructure management",
     icon: "🐳",
-    gradient: "from-blue-400 to-cyan-500",
+    gradient: "from-gray-400 to-gray-600",
     technologies: [
       {
         name: "Go",
@@ -100,7 +100,7 @@ const technologyData = {
     title: "Machine Learning & Data Science",
     description: "AI/ML frameworks, data analysis, and visualization tools",
     icon: "🤖",
-    gradient: "from-purple-400 to-pink-500",
+    gradient: "from-gray-500 to-gray-700",
     technologies: [
       {
         name: "Python",
@@ -160,37 +160,29 @@ const getImageUrl = (name: string) => {
             @click="switchTab('orchestration')"
             class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm':
+              'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 shadow-sm':
                 activeTab === 'orchestration',
               'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
                 activeTab !== 'orchestration',
             }"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"
-              />
-            </svg>
             DevOps
           </button>
           <button
             @click="switchTab('ml')"
             class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-700 text-purple-600 dark:text-purple-400 shadow-sm':
+              'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 shadow-sm':
                 activeTab === 'ml',
               'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
                 activeTab !== 'ml',
             }"
           >
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
             ML/AI
           </button>
           <!-- Simple Indicator -->
           <span
-            class="absolute bottom-1 left-1 h-0.5 rounded bg-indigo-500 transition-all duration-200"
+            class="absolute bottom-1 left-1 h-0.5 rounded bg-gray-600 transition-all duration-200"
             :style="{
               width: 'calc(50% - 0.5rem)',
               transform:
@@ -212,7 +204,7 @@ const getImageUrl = (name: string) => {
           @click="switchTab('orchestration')"
           class="flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 relative focus:outline-none"
           :class="{
-            'bg-white text-blue-700 dark:bg-gray-700 dark:text-blue-300 shadow-sm':
+            'bg-white text-gray-700 dark:bg-gray-700 dark:text-gray-300 shadow-sm':
               activeTab === 'orchestration',
             'text-gray-600 dark:text-gray-400': activeTab !== 'orchestration',
           }"
@@ -223,7 +215,7 @@ const getImageUrl = (name: string) => {
           @click="switchTab('ml')"
           class="flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 relative focus:outline-none"
           :class="{
-            'bg-white text-purple-700 dark:bg-gray-700 dark:text-purple-300 shadow-sm':
+            'bg-white text-gray-700 dark:bg-gray-700 dark:text-gray-300 shadow-sm':
               activeTab === 'ml',
             'text-gray-600 dark:text-gray-400': activeTab !== 'ml',
           }"
@@ -232,7 +224,7 @@ const getImageUrl = (name: string) => {
         </button>
         <!-- Simple Mobile Indicator -->
         <span
-          class="absolute bottom-1 left-1 h-0.5 rounded bg-indigo-500 transition-all duration-200"
+          class="absolute bottom-1 left-1 h-0.5 rounded bg-gray-600 transition-all duration-200"
           :style="{
             width: 'calc(50% - 0.5rem)',
             transform:

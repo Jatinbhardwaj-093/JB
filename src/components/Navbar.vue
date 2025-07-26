@@ -61,7 +61,7 @@ watch(
   <nav
     :data-theme="themeStore.theme"
     ref="navRef"
-    class="navbar sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300"
+    class="navbar sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300"
   >
     <div class="container mx-auto px-2 overflow-hidden">
       <!-- Removed padding for mobile view -->
@@ -71,15 +71,12 @@ watch(
           to="/"
           class="logo-container flex items-center space-x-1 md:space-x-2"
         >
-          <div
-            class="relative w-10 h-10 md:w-14 md:h-14 rounded-full bg-blue-900 m-1 p-0.5 shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
-          >
-            <img
-              src="../assets/images/profileImage/navbar_logo.webp"
-              alt="JB Logo"
-              class="w-full h-full rounded-full object-cover"
-            />
-          </div>
+          <img
+            src="../assets/images/profileImage/navbar_logo.webp"
+            alt="JB Logo"
+            class="w-24 h-16 rounded-full object-cover"
+          />
+
           <span
             class="text-base md:text-2xl font-bold transition-colors duration-300"
             :class="{
@@ -102,60 +99,20 @@ watch(
             ]"
             :key="index"
             :to="{ name: link.name }"
-            class="nav-link font-medium text-gray-600 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300"
+            class="nav-link font-medium text-gray-600 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-300"
             :class="
-              $route.name === link.name
-                ? 'text-indigo-600 dark:text-indigo-400'
-                : ''
+              $route.name === link.name ? 'text-gray-900 dark:text-gray-50' : ''
             "
           >
             {{ link.text }}
           </router-link>
-
-          <!-- Theme Toggle -->
-          <button
-            @click="toggleTheme"
-            class="theme-toggle p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none transition-colors duration-300"
-            aria-label="Toggle theme"
-          >
-            <svg
-              v-if="themeStore.theme === 'light'"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-              />
-            </svg>
-            <svg
-              v-else
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-              />
-            </svg>
-          </button>
         </div>
 
         <!-- Completely redesigned hamburger menu button with improved hit area -->
         <div class="md:hidden relative z-50">
           <button
             @click.stop="toggleMobileMenu"
-            class="mobile-menu-button block w-10 h-10 rounded-lg focus:outline-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            class="mobile-menu-button block w-10 h-10 rounded-lg focus:outline-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
             aria-label="Toggle menu"
             style="touch-action: manipulation"
           >
@@ -205,7 +162,7 @@ watch(
         'menu-open': isMobileMenuOpen,
         'menu-closed': !isMobileMenuOpen,
         'bg-white border-gray-200': themeStore.theme === 'light',
-        'bg-gray-900 border-gray-700': themeStore.theme === 'dark',
+        'bg-black border-gray-700': themeStore.theme === 'dark',
       }"
     >
       <div class="p-6 min-h-full flex flex-col">
@@ -213,7 +170,7 @@ watch(
         <div class="flex justify-end mb-4">
           <button
             @click="closeMobileMenu"
-            class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
+            class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none"
             aria-label="Close menu"
           >
             <svg
@@ -245,57 +202,15 @@ watch(
             :key="index"
             :to="{ name: link.name }"
             @click="closeMobileMenu"
-            class="nav-link px-3 py-4 text-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
+            class="nav-link px-3 py-4 text-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors duration-200"
             :class="
               $route.name === link.name
-                ? 'text-indigo-600 dark:text-indigo-400'
+                ? 'text-gray-900 dark:text-gray-50'
                 : 'text-gray-700 dark:text-gray-200'
             "
           >
             {{ link.text }}
           </router-link>
-
-          <!-- Theme toggle in mobile menu - simplified animation -->
-          <button
-            @click="toggleTheme"
-            class="mobile-theme-toggle mt-auto px-3 py-4 flex items-center space-x-3 font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
-          >
-            <span v-if="themeStore.theme === 'light'">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                />
-              </svg>
-            </span>
-            <span v-else>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-            </span>
-            <span class="text-lg">{{
-              themeStore.theme === "light" ? "Dark Mode" : "Light Mode"
-            }}</span>
-          </button>
         </div>
       </div>
     </div>
@@ -359,18 +274,44 @@ watch(
 }
 
 .nav-link:hover {
-  color: #4f46e5;
+  color: #1f2937;
 }
 
 .router-link-active {
-  color: #4f46e5;
+  color: #111827;
   font-weight: 600;
 }
 
-/* Simplified theme toggle animation */
+/* Enhanced 3D theme toggle animation */
 .theme-toggle {
   position: relative;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle:active {
+  transform: translateY(0) scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode 3D effect */
+[data-theme="dark"] .theme-toggle {
+  background: linear-gradient(145deg, #374151, #1f2937);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
 
 /* Mobile-specific theme toggle with even more subtle animation */
@@ -447,7 +388,7 @@ watch(
 /* Dark mode specific styles */
 :root[data-theme="dark"] .nav-link:hover,
 :root[data-theme="dark"] .router-link-active {
-  color: #818cf8;
+  color: #f9fafb;
 }
 
 /* Additional mobile responsiveness improvements */

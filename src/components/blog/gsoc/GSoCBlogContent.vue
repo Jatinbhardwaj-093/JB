@@ -22,7 +22,7 @@ const themeStore = useThemeStore();
     </p>
 
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       My Experience Contributing to Open Source
     </p>
@@ -166,7 +166,7 @@ const themeStore = useThemeStore();
     </p>
 
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       Tips on Open Source
     </p>
@@ -209,7 +209,7 @@ const themeStore = useThemeStore();
     </p>
 
     <p
-      class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty italic text-gray-600 dark:text-gray-400 bg-white/50 dark:bg-gray-800/40 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-300 p-3 sm:p-4 rounded-lg shadow-sm hover:shadow border-b border-dashed border-gray-200 dark:border-gray-700 w-full relative overflow-hidden"
+      class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty italic text-gray-600 dark:text-gray-400 bg-white/50 dark:bg-gray-900/40 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-300 p-3 sm:p-4 rounded-lg shadow-sm hover:shadow border-b border-dashed border-gray-200 dark:border-gray-700 w-full relative overflow-hidden"
     >
       <span
         class="absolute inset-0 bg-gradient-to-r from-indigo-50/40 dark:from-indigo-900/10 to-white/0 dark:to-gray-900/0 -z-10"
@@ -253,7 +253,7 @@ const themeStore = useThemeStore();
     </p>
 
     <p
-      class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty italic text-gray-600 dark:text-gray-400 bg-white/50 dark:bg-gray-800/40 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-300 p-3 sm:p-4 rounded-lg shadow-sm hover:shadow border-b border-dashed border-gray-200 dark:border-gray-700 w-full relative overflow-hidden"
+      class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty italic text-gray-600 dark:text-gray-400 bg-white/50 dark:bg-gray-900/40 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-300 p-3 sm:p-4 rounded-lg shadow-sm hover:shadow border-b border-dashed border-gray-200 dark:border-gray-700 w-full relative overflow-hidden"
     >
       <span
         class="absolute inset-0 bg-gradient-to-r from-indigo-50/40 dark:from-indigo-900/10 to-white/0 dark:to-gray-900/0 -z-10"

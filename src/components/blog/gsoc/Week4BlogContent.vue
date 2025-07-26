@@ -23,7 +23,7 @@ onMounted(() => {
   >
     <!-- Week 4 Section -->
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       GSoC'25 Week-4
     </p>
@@ -73,7 +73,7 @@ onMounted(() => {
         class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
       >
         Example:
-        <strong class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <strong class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >s = 1 + x^2 + 4x^3 + 7x^4 + O(x^5)</strong
         >
       </p>
@@ -97,7 +97,7 @@ onMounted(() => {
         class="mb-4 sm:mb-6 rounded-lg p-4"
         :class="{
           'bg-gray-100': themeStore.theme === 'light',
-          'bg-gray-800': themeStore.theme === 'dark',
+          'bg-gray-900': themeStore.theme === 'dark',
         }"
       >
         <pre
@@ -141,7 +141,7 @@ R2(s) == s2  # returns None</code></pre>
         class="mb-4 sm:mb-6 rounded-lg p-4"
         :class="{
           'bg-gray-100': themeStore.theme === 'light',
-          'bg-gray-800': themeStore.theme === 'dark',
+          'bg-gray-900': themeStore.theme === 'dark',
         }"
       >
         <pre
@@ -187,7 +187,7 @@ R2(s) == s2  # returns False</code></pre>
         class="mb-4 sm:mb-6 rounded-lg p-4"
         :class="{
           'bg-gray-100': themeStore.theme === 'light',
-          'bg-gray-800': themeStore.theme === 'dark',
+          'bg-gray-900': themeStore.theme === 'dark',
         }"
       >
         <pre

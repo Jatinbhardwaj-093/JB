@@ -48,7 +48,7 @@ const educationData = [
     <!-- Section Header -->
     <div class="mb-8 text-center">
       <h2
-        class="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+        class="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-gray-50 dark:to-yellow-50 bg-clip-text text-transparent"
       >
         Education Journey
       </h2>
@@ -74,7 +74,7 @@ const educationData = [
             <!-- Timeline Dot -->
             <div class="relative z-10 mr-6">
               <div
-                class="w-16 h-16 rounded-full bg-white dark:bg-gray-800 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center"
+                class="w-16 h-16 rounded-full bg-white dark:bg-gray-900 shadow-lg border-4 border-white dark:border-gray-900 flex items-center justify-center"
               >
                 <a :href="edu.link" target="_blank" rel="noopener noreferrer">
                   <div
@@ -93,7 +93,7 @@ const educationData = [
 
             <!-- Card Content -->
             <div
-              class="flex-1 bg-white dark:bg-gray-800/90 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm"
+              class="flex-1 bg-white dark:bg-gray-900/90 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm"
             >
               <div class="p-6">
                 <!-- Header -->
@@ -109,7 +109,7 @@ const educationData = [
                     </p>
                   </div>
                   <span
-                    class="text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full"
+                    class="text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"
                   >
                     {{ edu.year }}
                   </span>
@@ -145,7 +145,7 @@ const educationData = [
                   </span>
                   <span
                     v-else
-                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                   >
                     {{ edu.status }}
                   </span>
@@ -160,7 +160,7 @@ const educationData = [
                     <span>Diploma Level</span>
                   </div>
                   <div
-                    class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2"
+                    class="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2"
                   >
                     <div
                       class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full relative overflow-hidden"
@@ -191,7 +191,7 @@ const educationData = [
         >
           <!-- Card -->
           <div
-            class="bg-white dark:bg-gray-800/90 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm overflow-hidden"
+            class="bg-white dark:bg-gray-900/90 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm overflow-hidden"
           >
             <!-- Header with Gradient -->
             <div class="relative p-4 pb-0">
@@ -228,7 +228,7 @@ const educationData = [
                     {{ edu.institution }}
                   </p>
                   <span
-                    class="inline-block text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md"
+                    class="inline-block text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md"
                   >
                     {{ edu.year }}
                   </span>
@@ -268,7 +268,7 @@ const educationData = [
                 </span>
                 <span
                   v-else
-                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                 >
                   {{ edu.status }}
                 </span>
@@ -283,7 +283,7 @@ const educationData = [
                   <span>60%</span>
                 </div>
                 <div
-                  class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5"
+                  class="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-1.5"
                 >
                   <div
                     class="bg-gradient-to-r from-blue-500 to-indigo-600 h-1.5 rounded-full relative overflow-hidden"

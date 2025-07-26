@@ -43,17 +43,19 @@ const setActiveTab = (tabId) => {
         <!-- About Me Header -->
         <div class="mb-12 text-center">
           <h1
-            class="text-3xl md:text-4xl font-bold text-black mb-2 about-title"
-            :class="{ 'text-white': themeStore.theme === 'dark' }"
+            class="text-3xl md:text-4xl font-bold text-black mb-2 about-title bg-gradient-to-r from-gray-900 to-gray-900 dark:from-gray-50 dark:to-white bg-clip-text text-transparent"
           >
             About Me
           </h1>
           <div
-            class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-4 about-underline"
+            class="h-1 w-24 bg-gray-600 dark:bg-gray-400 mx-auto rounded-full mb-4 about-underline"
           ></div>
           <p
-            class="text-gray-200 max-w-3xl mx-auto"
-            :class="{ 'text-gray-600': themeStore.theme === 'light' }"
+            class="max-w-3xl mx-auto"
+            :class="{
+              'text-gray-600': themeStore.theme === 'light',
+              'text-gray-200': themeStore.theme === 'dark',
+            }"
           >
             I love solving problems with code and mathematics. I explore
             artificial intelligence, contribute to open source, and build
@@ -64,13 +66,16 @@ const setActiveTab = (tabId) => {
         <!-- Experience Section -->
         <div class="mb-12">
           <h2
-            class="text-2xl md:text-3xl font-bold text-black mb-6 text-center"
-            :class="{ 'text-white': themeStore.theme === 'dark' }"
+            class="text-2xl md:text-3xl font-bold mb-6 text-center"
+            :class="{
+              'text-gray-900': themeStore.theme === 'light',
+              'text-white': themeStore.theme === 'dark',
+            }"
           >
             Professional Experience
           </h2>
           <div
-            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700"
+            class="bg-white dark:bg-black rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700"
           >
             <Experience />
           </div>
@@ -79,13 +84,16 @@ const setActiveTab = (tabId) => {
         <!-- Skills Section -->
         <div class="mb-12">
           <h2
-            class="text-2xl md:text-3xl font-bold text-black mb-6 text-center"
-            :class="{ 'text-white': themeStore.theme === 'dark' }"
+            class="text-2xl md:text-3xl font-bold mb-6 text-center"
+            :class="{
+              'text-gray-900': themeStore.theme === 'light',
+              'text-white': themeStore.theme === 'dark',
+            }"
           >
             Current Technology
           </h2>
           <div
-            class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700"
+            class="bg-white dark:bg-black rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700"
           >
             <Skills />
           </div>
@@ -103,7 +111,7 @@ const setActiveTab = (tabId) => {
       class="block md:hidden bg-gray-50 dark:bg-gray-900/30 w-full overflow-hidden"
     >
       <!-- Hero Banner -->
-      <div class="relative bg-indigo-600 overflow-hidden">
+      <div class="relative bg-gray-700 dark:bg-gray-800 overflow-hidden">
         <div class="absolute inset-0 z-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +140,7 @@ const setActiveTab = (tabId) => {
         class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden"
         :class="{
           'bg-white': themeStore.theme === 'light',
-          'bg-gray-900': themeStore.theme === 'dark',
+          'bg-gray-800': themeStore.theme === 'dark',
         }"
       >
         <div
@@ -144,7 +152,7 @@ const setActiveTab = (tabId) => {
             @click="setActiveTab(tab.id)"
             class="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex-shrink-0"
             :class="{
-              'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300':
+              'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200':
                 activeTab === tab.id,
               'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300':
                 activeTab !== tab.id,
@@ -163,7 +171,7 @@ const setActiveTab = (tabId) => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-indigo-500 dark:text-indigo-400 animate-pulse-gentle"
+              class="h-5 w-5 text-gray-500 dark:text-gray-400 animate-pulse-gentle"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -194,12 +202,17 @@ const setActiveTab = (tabId) => {
             class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-2"
           >
             <p
-              class="text-2xl text-center font-bold text-gray-900"
-              :class="{ 'text-white': themeStore.theme === 'dark' }"
+              class="text-2xl text-center font-bold"
+              :class="{
+                'text-gray-900': themeStore.theme === 'light',
+                'text-white': themeStore.theme === 'dark',
+              }"
             >
               Experience
             </p>
-            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+            <div
+              class="h-1 w-24 bg-gray-600 dark:bg-gray-400 mx-auto rounded-full mb-6"
+            ></div>
 
             <Experience />
           </div>
@@ -218,12 +231,17 @@ const setActiveTab = (tabId) => {
             class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-2"
           >
             <p
-              class="text-2xl text-center font-bold text-gray-900"
-              :class="{ 'text-white': themeStore.theme === 'dark' }"
+              class="text-2xl text-center font-bold"
+              :class="{
+                'text-gray-900': themeStore.theme === 'light',
+                'text-white': themeStore.theme === 'dark',
+              }"
             >
               Current Technology
             </p>
-            <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+            <div
+              class="h-1 w-24 bg-gray-600 dark:bg-gray-400 mx-auto rounded-full mb-6"
+            ></div>
             <Skills />
           </div>
         </div>
@@ -237,7 +255,7 @@ const setActiveTab = (tabId) => {
             hidden: activeTab !== 'education',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-2">
+          <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-5 mb-2">
             <EducationHobbies :mobile-active-tab="'education'" />
           </div>
         </div>
@@ -251,7 +269,7 @@ const setActiveTab = (tabId) => {
             hidden: activeTab !== 'hobbies',
           }"
         >
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 mb-2">
+          <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-5 mb-2">
             <EducationHobbies :mobile-active-tab="'hobbies'" />
           </div>
         </div>
@@ -262,12 +280,12 @@ const setActiveTab = (tabId) => {
 
 <style scoped>
 .bg-white,
-.dark\:bg-gray-800 {
+.dark\:bg-gray-900 {
   transition: all 0.3s ease;
 }
 
 .bg-white:hover,
-.dark\:bg-gray-800:hover {
+.dark\:bg-gray-900:hover {
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1),
     0 10px 20px -5px rgba(0, 0, 0, 0.04);
 }
@@ -295,14 +313,14 @@ div {
 }
 
 /* Tab indicator animation */
-button.bg-indigo-100::after {
+button.bg-gray-200::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #6366f1;
+  background-color: #4b5563;
   transform: scaleX(1);
   transform-origin: bottom left;
   transition: transform 0.3s ease-out;

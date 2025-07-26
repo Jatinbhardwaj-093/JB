@@ -34,7 +34,7 @@ onMounted(() => {
     class="flex-grow py-8 sm:py-12"
     :class="{
       'bg-gray-50': themeStore.theme === 'light',
-      'bg-gray-900': themeStore.theme === 'dark',
+      'bg-black': themeStore.theme === 'dark',
     }"
   >
     <div v-if="post">

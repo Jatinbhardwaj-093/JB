@@ -23,7 +23,7 @@ onMounted(() => {
   >
     <!-- Week 5 Section -->
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       GSoC'25 Week-5
     </p>
@@ -34,7 +34,7 @@ onMounted(() => {
       This week was highly productive. The focus was on implementing efficient
       algorithms for series manipulation, particularly for operations that were
       previously missing or handled suboptimally in the
-      <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+      <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
         >dense*</span
       >
       modules of SymPy.
@@ -58,7 +58,7 @@ onMounted(() => {
         >
           <strong>Multiplication</strong>: Uses the basic Cauchy product for
           small series (<span
-            class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+            class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >n &lt; 100</span
           >), and Karatsuba multiplication with adaptive truncation for larger
           series.
@@ -73,11 +73,11 @@ onMounted(() => {
           class="text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7"
         >
           <strong>Multiplicative Inverse</strong>: Already available via
-          <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >dup_revert</span
           >
           in
-          <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >densetools.py</span
           >.
         </li>
@@ -92,11 +92,11 @@ onMounted(() => {
         class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
       >
         To compute series composition, the existing Horner's method (<span
-          class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >dup_compose</span
         >) was not sufficient for performance. We introduced a faster approach
         in
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >dup_series_compose</span
         >, using a divide-and-conquer strategy with truncation enabled. While
         its optimality is still under evaluation, it performs reasonably well
@@ -122,7 +122,7 @@ onMounted(() => {
           rel="noopener noreferrer"
           >A Fast Algorithm for Reversion of Power Series</a
         >. This algorithm avoids Newton iteration by precomputing powers of
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >h, h², h³, ..., hᵐ</span
         >, allowing efficient coefficient extraction using Lagrange's formula.
       </p>
@@ -192,7 +192,7 @@ onMounted(() => {
           class="min-w-full border-collapse border border-gray-300 dark:border-gray-600"
         >
           <thead>
-            <tr class="bg-gray-100 dark:bg-gray-800">
+            <tr class="bg-gray-100 dark:bg-gray-900">
               <th
                 class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-left"
               >
@@ -234,7 +234,7 @@ onMounted(() => {
                 0.54 ms
               </td>
             </tr>
-            <tr class="bg-gray-50 dark:bg-gray-800/50">
+            <tr class="bg-gray-50 dark:bg-gray-900/50">
               <td
                 class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono"
               >
@@ -270,7 +270,7 @@ onMounted(() => {
                 2100 ms
               </td>
             </tr>
-            <tr class="bg-gray-50 dark:bg-gray-800/50">
+            <tr class="bg-gray-50 dark:bg-gray-900/50">
               <td
                 class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono"
               >
@@ -305,14 +305,14 @@ onMounted(() => {
       >
         Additionally, a helper function was implemented for small precision
         reversion (<span
-          class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >n ≥ 4</span
         >). This delivers up to <strong>60× speedup</strong> compared to general
         algorithms. While currently limited to
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >n = 4</span
         >, we plan to extend support to
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >n = 5, 6, ...</span
         >
         in the future.
@@ -329,7 +329,7 @@ onMounted(() => {
         class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
       >
         Three helper functions were added to
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >densbasic.py</span
         >:
       </p>
@@ -338,21 +338,21 @@ onMounted(() => {
         <li
           class="text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7"
         >
-          <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >dup_truncate</span
           >: Efficiently truncate series to a given length
         </li>
         <li
           class="text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7"
         >
-          <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >dup_from_list</span
           >: Construct a series from a coefficient list
         </li>
         <li
           class="text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7"
         >
-          <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >dup_print</span
           >: A prototype function for formatted series output (to be improved
           later)
@@ -381,7 +381,7 @@ onMounted(() => {
 
     <!-- Week 6 Section -->
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-8 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-8 mb-4 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       GSoC'25 Week-6
     </p>
@@ -432,7 +432,7 @@ onMounted(() => {
         class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
       >
         Each of these methods relies on new
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >dup_series_*</span
         >
         routines that are integrated with the Series Ring class logic.
@@ -450,7 +450,7 @@ onMounted(() => {
           rel="noopener noreferrer"
           >gh-28177</a
         >. This improves type safety for series operations, as we use the
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >DUP</span
         >
         representation — a list of ground domain coefficients. For example:
@@ -460,7 +460,7 @@ onMounted(() => {
         <li
           class="text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7"
         >
-          <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >DUP[MPZ]</span
           >
           for integers (ℤ)
@@ -468,7 +468,7 @@ onMounted(() => {
         <li
           class="text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7"
         >
-          <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+          <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
             >DUP[MPQ]</span
           >
           for rationals (ℚ)
@@ -480,11 +480,11 @@ onMounted(() => {
       >
         This allows solid and specific type checking, moving away from loosely
         typed
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >Any</span
         >
         or generic
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >TypeVar</span
         >.
       </p>
@@ -500,7 +500,7 @@ onMounted(() => {
         class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
       >
         A new structure was proposed for test files. Instead of using
-        <span class="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded"
+        <span class="font-mono bg-gray-100 dark:bg-gray-900 px-1 rounded"
           >pytest.mark.parametrize</span
         >, we now leverage <strong>pytest fixtures</strong> for greater
         modularity and clarity.

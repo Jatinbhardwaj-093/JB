@@ -80,9 +80,9 @@ const formatDate = (dateString: string) => {
           :to="`/blog/${post.slug}`"
           class="inline-flex items-center px-4 py-2 rounded text-sm font-medium transition-colors duration-200"
           :class="{
-            'bg-indigo-50 text-indigo-700 hover:bg-indigo-100':
+            'bg-gray-50 text-gray-700 hover:bg-gray-100':
               themeStore.theme === 'light',
-            'bg-indigo-900/30 text-indigo-300 hover:bg-indigo-800/40':
+            'bg-gray-900/30 text-gray-300 hover:bg-gray-800/40':
               themeStore.theme === 'dark',
           }"
         >

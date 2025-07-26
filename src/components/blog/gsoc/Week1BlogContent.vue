@@ -40,7 +40,7 @@ onMounted(() => {
     </p>
 
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       Project Goals
     </p>
@@ -87,7 +87,7 @@ onMounted(() => {
     </p>
 
     <p
-      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-800/40 w-full"
+      class="font-bold text-xl sm:text-3xl md:text-3xl lg:text-4xl mt-6 mb-2 leading-tight py-2 px-2 rounded-md bg-gray-100/70 dark:bg-gray-900/40 w-full"
     >
       Current Understanding and Decisions Made
     </p>
@@ -103,7 +103,7 @@ onMounted(() => {
       class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 my-4"
       :class="{
         'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-800': themeStore.theme === 'dark',
+        'bg-gray-900': themeStore.theme === 'dark',
       }"
     >
       <pre
@@ -247,7 +247,7 @@ print(x)  # x + O(x^30)</code></pre>
       class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 my-4"
       :class="{
         'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-800': themeStore.theme === 'dark',
+        'bg-gray-900': themeStore.theme === 'dark',
       }"
     >
       <pre

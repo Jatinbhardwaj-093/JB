@@ -36,7 +36,7 @@ const mlImg = computed(() =>
           class="w-10 h-10 p-1 rounded-md shadow-md"
           :class="{
             'bg-white shadow-black/30': themeStore.theme === 'light',
-            'bg-gray-800 shadow-white/10': themeStore.theme === 'dark',
+            'bg-gray-900 shadow-white/10': themeStore.theme === 'dark',
           }"
         >
           <img :src="mathsImg" alt="Math" />
@@ -56,7 +56,7 @@ const mlImg = computed(() =>
           class="w-10 h-10 p-1 rounded-md shadow-md"
           :class="{
             'bg-white shadow-black/30': themeStore.theme === 'light',
-            'bg-gray-800 shadow-white/10': themeStore.theme === 'dark',
+            'bg-gray-900 shadow-white/10': themeStore.theme === 'dark',
           }"
         >
           <img :src="psychologyImg" alt="Psychology" />
@@ -76,7 +76,7 @@ const mlImg = computed(() =>
           class="w-10 h-10 p-1 rounded-md shadow-md"
           :class="{
             'bg-white shadow-black/30': themeStore.theme === 'light',
-            'bg-gray-800 shadow-white/10': themeStore.theme === 'dark',
+            'bg-gray-900 shadow-white/10': themeStore.theme === 'dark',
           }"
         >
           <img :src="mlImg" alt="Machine Learning" />

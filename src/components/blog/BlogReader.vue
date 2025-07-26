@@ -99,8 +99,8 @@ onMounted(async () => {
         <span
           class="font-medium px-2 py-0.5 rounded"
           :class="{
-            'bg-green-50 text-green-700': themeStore.theme === 'light',
-            'bg-green-900/30 text-green-300': themeStore.theme === 'dark',
+            'bg-gray-100 text-gray-700': themeStore.theme === 'light',
+            'bg-gray-800/30 text-gray-300': themeStore.theme === 'dark',
           }"
         >
           {{ post.minutesToRead }} min read
@@ -139,9 +139,9 @@ onMounted(async () => {
           @click="$router.go(-1)"
           class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
           :class="{
-            'bg-indigo-50 text-indigo-700 hover:bg-indigo-100':
+            'bg-gray-100 text-gray-700 hover:bg-gray-200':
               themeStore.theme === 'light',
-            'bg-indigo-900/30 text-indigo-300 hover:bg-indigo-800/40':
+            'bg-gray-800/30 text-gray-300 hover:bg-gray-700/40':
               themeStore.theme === 'dark',
           }"
         >

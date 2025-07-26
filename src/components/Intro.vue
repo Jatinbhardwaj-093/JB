@@ -39,7 +39,7 @@ onUnmounted(() => {
         >
           <div class="relative w-60 h-60 mx-auto">
             <img
-              src="../../src/assets/images/profileImage/myimage.png"
+              src="../../src/assets/images/profileImage/myimage.webp"
               alt="Profile Photo"
               class="relative w-full h-full object-cover rounded-full border-4 shadow-xl"
               :class="
@@ -62,7 +62,7 @@ onUnmounted(() => {
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5 inline-block align-middle mr-1"
               :class="
-                themeStore.theme === 'dark' ? 'text-sky-400' : 'text-sky-600'
+                themeStore.theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               "
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -95,8 +95,8 @@ onUnmounted(() => {
               class="bg-clip-text text-transparent"
               :class="
                 themeStore.theme === 'dark'
-                  ? 'bg-gradient-to-r from-sky-300 via-indigo-400 to-purple-400'
-                  : 'bg-gradient-to-r from-sky-600 via-indigo-700 to-purple-700'
+                  ? 'bg-gradient-to-r from-gray-50 via-white to-gray-100'
+                  : 'bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900'
               "
             >
               {{ firstName }} {{ lastName }}
@@ -132,8 +132,8 @@ onUnmounted(() => {
             style="max-width: 300px"
             :class="
               themeStore.theme === 'dark'
-                ? 'bg-sky-500 hover:bg-sky-400 text-white focus:ring-sky-400 focus:ring-offset-slate-900'
-                : 'bg-sky-600 hover:bg-sky-700 text-white focus:ring-sky-600 focus:ring-offset-gray-50'
+                ? 'bg-gray-600 hover:bg-gray-500 text-white focus:ring-gray-500 focus:ring-offset-slate-900'
+                : 'bg-gray-700 hover:bg-gray-800 text-white focus:ring-gray-700 focus:ring-offset-gray-50'
             "
           >
             Explore Projects
@@ -144,8 +144,8 @@ onUnmounted(() => {
             style="max-width: 300px"
             :class="
               themeStore.theme === 'dark'
-                ? 'bg-transparent border-2 border-indigo-400 text-indigo-300 hover:bg-indigo-400 hover:text-slate-900 focus:ring-indigo-400 focus:ring-offset-slate-900'
-                : 'bg-transparent border-2 border-indigo-600 text-indigo-700 hover:bg-indigo-600 hover:text-white focus:ring-indigo-600 focus:ring-offset-gray-50'
+                ? 'bg-transparent border-2 border-gray-400 text-gray-300 hover:bg-gray-400 hover:text-slate-900 focus:ring-gray-400 focus:ring-offset-slate-900'
+                : 'bg-transparent border-2 border-gray-600 text-gray-700 hover:bg-gray-600 hover:text-white focus:ring-gray-600 focus:ring-offset-gray-50'
             "
           >
             Get in Touch
@@ -164,28 +164,26 @@ onUnmounted(() => {
               href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"
               target="_blank"
               rel="noopener noreferrer"
-              class="social-link"
+              class="social-link group"
             >
               <div
-                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-200/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-300"
+                style="
+                  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+                  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+                "
               >
-                <div
-                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'bg-gradient-to-br from-sky-900 to-indigo-900'
-                      : 'bg-gradient-to-br from-sky-100 to-indigo-200'
-                  "
-                ></div>
                 <i
-                  class="bi bi-linkedin relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  class="bi bi-linkedin relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
                   :class="
                     themeStore.theme === 'dark'
-                      ? 'text-sky-400'
-                      : 'text-sky-600'
+                      ? 'text-gray-300'
+                      : 'text-gray-600'
                   "
+                  style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
-                <div class="social-icon-glow"></div>
               </div>
             </a>
 
@@ -194,28 +192,26 @@ onUnmounted(() => {
               href="https://github.com/Jatinbhardwaj-093"
               target="_blank"
               rel="noopener noreferrer"
-              class="social-link"
+              class="social-link group"
             >
               <div
-                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-200/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-300"
+                style="
+                  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+                  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+                "
               >
-                <div
-                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'bg-gradient-to-br from-gray-700 to-gray-900'
-                      : 'bg-gradient-to-br from-gray-200 to-gray-300'
-                  "
-                ></div>
                 <i
-                  class="bi bi-github relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  class="bi bi-github relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
                   :class="
                     themeStore.theme === 'dark'
                       ? 'text-gray-300'
-                      : 'text-gray-800'
+                      : 'text-gray-600'
                   "
+                  style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
-                <div class="social-icon-glow"></div>
               </div>
             </a>
 
@@ -224,53 +220,52 @@ onUnmounted(() => {
               href="https://x.com/Jatin0932"
               target="_blank"
               rel="noopener noreferrer"
-              class="social-link"
+              class="social-link group"
             >
               <div
-                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-200/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-300"
+                style="
+                  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+                  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+                "
               >
-                <div
-                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'bg-gradient-to-br from-blue-900 to-indigo-900'
-                      : 'bg-gradient-to-br from-blue-100 to-indigo-100'
-                  "
-                ></div>
                 <i
-                  class="bi bi-twitter-x relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  class="bi bi-twitter-x relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
                   :class="
                     themeStore.theme === 'dark'
                       ? 'text-gray-300'
-                      : 'text-gray-800'
+                      : 'text-gray-600'
                   "
+                  style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
-                <div class="social-icon-glow"></div>
               </div>
             </a>
 
             <!-- Email -->
-            <a href="mailto:bhardwajjatin093@gmail.com" class="social-link">
+            <a
+              href="mailto:bhardwajjatin093@gmail.com"
+              class="social-link group"
+            >
               <div
-                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500"
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-200/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-300"
+                style="
+                  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+                  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+                    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+                "
               >
-                <div
-                  class="social-icon-bg absolute inset-0 rounded-full transition-all duration-300 opacity-0"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'bg-gradient-to-br from-indigo-900 to-purple-900'
-                      : 'bg-gradient-to-br from-indigo-100 to-purple-100'
-                  "
-                ></div>
                 <i
-                  class="bi bi-envelope relative z-10 text-2xl sm:text-3xl transition-all duration-300"
+                  class="bi bi-envelope relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
                   :class="
                     themeStore.theme === 'dark'
-                      ? 'text-indigo-400'
-                      : 'text-indigo-600'
+                      ? 'text-gray-300'
+                      : 'text-gray-600'
                   "
+                  style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
-                <div class="social-icon-glow"></div>
               </div>
             </a>
           </div>
@@ -283,7 +278,8 @@ onUnmounted(() => {
 <style scoped>
 .social-link {
   position: relative;
-  perspective: 1000px;
+  perspective: 1200px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-icon-container {
@@ -292,79 +288,55 @@ onUnmounted(() => {
   will-change: transform;
 }
 
-/* Background appears on hover */
-.social-icon-bg {
-  transform: scale(0);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* Enhanced 3D hover effects */
+.group:hover .social-icon-container {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5), inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
-.social-link:hover .social-icon-bg {
-  opacity: 1;
-  transform: scale(1.2);
+.group:active .social-icon-container {
+  transform: translateY(-6px) rotateY(8deg) rotateX(5deg) scale(1.02) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Hover effect - slight float */
-.social-link:hover .social-icon-container {
-  transform: translateY(-5px);
+/* Monochrome hover effects - subtle color enhancement */
+.group:hover .bi-linkedin,
+.group:hover .bi-github,
+.group:hover .bi-twitter-x,
+.group:hover .bi-envelope {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25)) brightness(1.1);
 }
 
-/* Icon color enhancement on hover */
-.social-link:hover i {
-  filter: brightness(1.3);
+/* Dark mode specific 3D adjustments */
+[data-theme="dark"] .group:hover .social-icon-container {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3),
+    inset 0 3px 0 rgba(255, 255, 255, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
-/* Glow effect */
-.social-icon-glow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  opacity: 0;
-  transition: all 0.4s ease-out;
-  pointer-events: none;
+/* Background color adjustments for dark mode */
+[data-theme="dark"] .group .social-icon-container {
+  background: linear-gradient(145deg, #374151, #1f2937) !important;
+  border-color: rgba(107, 114, 128, 0.5) !important;
 }
 
-/* LinkedIn glow */
-.social-link:hover .bi-linkedin ~ .social-icon-glow {
-  opacity: 0.7;
-  box-shadow: 0 0 20px 8px rgba(0, 119, 181, 0.4);
+[data-theme="dark"] .group:hover .social-icon-container {
+  border-color: rgba(156, 163, 175, 0.8) !important;
 }
 
-/* GitHub glow */
-.social-link:hover .bi-github ~ .social-icon-glow {
-  opacity: 0.7;
-  box-shadow: 0 0 20px 8px rgba(110, 118, 129, 0.4);
+/* Smooth transitions for all elements */
+.social-icon-container,
+.social-icon-container * {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Twitter/X glow */
-.social-link:hover .bi-twitter-x ~ .social-icon-glow {
-  opacity: 0.7;
-  box-shadow: 0 0 20px 8px rgba(29, 161, 242, 0.4);
+/* Ensure proper stacking */
+.social-link {
+  z-index: 1;
 }
 
-/* Email glow */
-.social-link:hover .bi-envelope ~ .social-icon-glow {
-  opacity: 0.7;
-  box-shadow: 0 0 20px 8px rgba(124, 58, 237, 0.4);
-}
-
-/* Dark mode adjustments */
-:root[data-theme="dark"] .social-link:hover .social-icon-glow {
-  opacity: 0.6;
-}
-
-/* Pulse animation for the background on hover */
-.social-link:hover .social-icon-bg {
-  animation: socialIconPulse 2s ease-in-out infinite;
-}
-
-@keyframes socialIconPulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
+.group:hover {
+  z-index: 10;
 }
 </style>
