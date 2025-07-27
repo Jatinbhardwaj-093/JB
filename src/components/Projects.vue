@@ -18,12 +18,19 @@ const getTechColor = (techName: string) => {
 
 // Get Google Doc icon based on theme
 const getGoogleDocIcon = () => {
-  return new URL("../assets/icons/google-docs.svg", import.meta.url).href;
+  return new URL("../assets/images/Projects/Links/gdocs.webp", import.meta.url)
+    .href;
 };
 
 // Get Figma icon
 const getFigmaIcon = () => {
-  return new URL("../assets/icons/figma.svg", import.meta.url).href;
+  return new URL("../assets/images/Projects/Links/figma.webp", import.meta.url)
+    .href;
+};
+
+// Get GitHub icon
+const getGitHubIcon = () => {
+  return new URL("../assets/images/GitHub.png", import.meta.url).href;
 };
 
 // Get GSoC icon
@@ -358,28 +365,20 @@ const handleImageError = (e: Event, projectId: number) => {
                   }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
                 >
-                  <!-- Special case for Google Docs links -->
-                  <img
-                    v-if="link.type === 'drive'"
-                    :src="getGoogleDocIcon()"
-                    :alt="`${link.type} icon`"
-                    class="w-5 h-5 custom-doc-icon"
-                  />
-                  <!-- Special case for Figma links -->
-                  <img
-                    v-else-if="link.type === 'figma'"
-                    :src="getFigmaIcon()"
-                    :alt="`${link.type} icon`"
-                    class="w-5 h-5 figma-icon"
-                  />
-                  <!-- Special case for GSoC links -->
-                  <img
-                    v-else-if="link.type === 'gsoc'"
-                    :src="getGSoCIcon()"
-                    :alt="`${link.type} icon`"
-                    class="w-6 h-6 gsoc-icon"
-                  />
-                  <i v-else :class="link.icon" class="text-lg"></i>
+                  <!-- All link types as styled text -->
+                  <span v-if="link.type === 'github'" class="github-text"
+                    >GitHub</span
+                  >
+                  <span v-else-if="link.type === 'drive'" class="github-text"
+                    >Google Docs</span
+                  >
+                  <span v-else-if="link.type === 'figma'" class="github-text"
+                    >Figma</span
+                  >
+                  <span v-else-if="link.type === 'gsoc'" class="github-text"
+                    >GSoC</span
+                  >
+                  <span v-else class="github-text">{{ link.type }}</span>
                 </a>
               </div>
 
@@ -703,14 +702,11 @@ const handleImageError = (e: Event, projectId: number) => {
 }
 
 /* Technology badges with simplified effects */
+
 .tech-badge {
   position: relative;
-  transition: all 0.2s ease;
   overflow: hidden;
-}
-
-.tech-badge:hover {
-  transform: translateY(-2px);
+  /* No transition, no hover effect */
 }
 
 /* Technology section simplified */
@@ -745,42 +741,18 @@ const handleImageError = (e: Event, projectId: number) => {
 }
 
 /* Enhanced link button effects */
+
 .link-button {
   position: relative;
   overflow: hidden;
-  width: 36px;
-  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0.5rem 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.link-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: currentColor;
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(0);
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-.link-button:hover {
-  transform: translateY(-3px);
-}
-
-.link-button:hover::before {
-  opacity: 0.1;
-  transform: scale(1);
-}
-
-.link-button:active {
-  transform: translateY(0) scale(0.95);
+  border-radius: 0.5rem;
+  /* No transition, no transform, no hover bg */
 }
 
 .link-button i {
@@ -795,6 +767,63 @@ const handleImageError = (e: Event, projectId: number) => {
   transform: translateY(1px);
 }
 
+/* GitHub text styling */
+.github-text {
+  font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b7280;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+/* Sliding underline for all link texts */
+.link-button span,
+.link-button .custom-doc-icon,
+.link-button .figma-icon,
+.link-button .gsoc-icon {
+  position: relative;
+  z-index: 1;
+}
+
+.link-button span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0.7;
+}
+
+.link-button:hover span::after {
+  transform: scaleX(1);
+}
+
+/* Remove all icon scaling/hover effects */
+.link-button .custom-doc-icon,
+.link-button .figma-icon,
+.link-button .gsoc-icon {
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.link-button:hover .custom-doc-icon,
+.link-button:hover .figma-icon,
+.link-button:hover .gsoc-icon {
+  filter: none !important;
+  transform: none !important;
+}
+
+/* Google Docs icon styling */
 .custom-doc-icon {
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
   transform: scale(1.25);
@@ -806,11 +835,6 @@ const handleImageError = (e: Event, projectId: number) => {
 .link-button:hover .custom-doc-icon {
   transform: scale(1.35);
   filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.4));
-}
-
-.link-button i.bi-figma {
-  font-size: 1.35rem;
-  color: #f24e1e; /* Figma's brand color */
 }
 
 /* Figma icon styling */
@@ -841,13 +865,6 @@ const handleImageError = (e: Event, projectId: number) => {
   transform: scale(1.35);
   filter: drop-shadow(0px 3px 5px rgba(156, 163, 175, 0.4));
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Dark mode specific icon adjustments */
-:root[data-theme="dark"] .link-button i.bi-figma,
-.dark .link-button i.bi-figma,
-[data-theme="dark"] .link-button i.bi-figma {
-  color: #ff7262; /* Brighter version of Figma's color for dark mode */
 }
 
 /* View Project link animation */

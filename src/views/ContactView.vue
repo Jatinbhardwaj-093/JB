@@ -33,16 +33,10 @@ const submitForm = () => {
     </div>
 
     <!-- Mobile Version - Custom Design -->
-    <div
-      class="block md:hidden min-h-screen"
-      :class="{
-        'bg-gray-50': themeStore.theme === 'light',
-        'bg-black': themeStore.theme === 'dark',
-      }"
-    >
+    <div class="block md:hidden min-h-screen bg-black">
       <!-- Header -->
       <!-- Header with wavy background -->
-      <div class="relative overflow-hidden bg-gray-700 dark:bg-gray-800">
+      <div class="relative overflow-hidden bg-gray-800">
         <div class="absolute inset-0 opacity-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,10 +65,10 @@ const submitForm = () => {
           <!-- Email Option -->
           <a
             href="mailto:bhardwajjatin093@gmail.com"
-            class="group flex flex-col items-center p-4 bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+            class="group flex flex-col items-center p-4 bg-gray-900 rounded-xl shadow-lg hover:shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
           >
             <div
-              class="w-14 h-14 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 dark:from-gray-700 dark:via-gray-800 dark:to-gray-600 rounded-full flex items-center justify-center mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-gray-300/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+              class="w-14 h-14 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-600 rounded-full flex items-center justify-center mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-gray-600/50 group-hover:border-gray-500"
               style="
                 box-shadow: 0 6px 12px rgba(156, 163, 175, 0.15),
                   inset 0 2px 0 rgba(255, 255, 255, 0.3),
@@ -83,7 +77,7 @@ const submitForm = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-7 w-7 text-gray-600 dark:text-gray-400 transform transition-all duration-300 group-hover:scale-110"
+                class="h-7 w-7 text-gray-400 transform transition-all duration-300 group-hover:scale-110"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -97,27 +91,18 @@ const submitForm = () => {
                 />
               </svg>
             </div>
-            <h3
-              class="text-sm font-medium text-gray-900"
-              :class="{
-                'text-white': themeStore.theme === 'dark',
-              }"
-            >
-              Email
-            </h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Send a message
-            </p>
+            <h3 class="text-sm font-medium text-white">Email</h3>
+            <p class="text-xs text-gray-400 mt-1">Send a message</p>
           </a>
 
           <!-- LinkedIn Option -->
           <a
             href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"
             target="_blank"
-            class="group flex flex-col items-center p-4 bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+            class="group flex flex-col items-center p-4 bg-gray-900 rounded-xl shadow-lg hover:shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:-translate-y-2"
           >
             <div
-              class="w-14 h-14 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 dark:from-gray-700 dark:via-gray-800 dark:to-gray-600 rounded-full flex items-center justify-center mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-gray-300/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-500"
+              class="w-14 h-14 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-600 rounded-full flex items-center justify-center mb-3 transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-gray-600/50 group-hover:border-gray-500"
               style="
                 box-shadow: 0 6px 12px rgba(156, 163, 175, 0.15),
                   inset 0 2px 0 rgba(255, 255, 255, 0.3),
@@ -125,7 +110,7 @@ const submitForm = () => {
               "
             >
               <svg
-                class="h-7 w-7 text-gray-600 dark:text-gray-400 transform transition-all duration-300 group-hover:scale-110"
+                class="h-7 w-7 text-gray-400 transform transition-all duration-300 group-hover:scale-110"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 style="filter: drop-shadow(0 2px 4px rgba(156, 163, 175, 0.3))"
@@ -135,41 +120,21 @@ const submitForm = () => {
                 />
               </svg>
             </div>
-            <h3
-              class="text-sm font-medium text-gray-900"
-              :class="{
-                'text-white': themeStore.theme === 'dark',
-              }"
-            >
-              LinkedIn
-            </h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Connect with me
-            </p>
+            <h3 class="text-sm font-medium text-white">LinkedIn</h3>
+            <p class="text-xs text-gray-400 mt-1">Connect with me</p>
           </a>
         </div>
 
         <!-- Contact Form -->
-        <div
-          v-if="!formSubmitted"
-          class="bg-white dark:bg-gray-900 shadow-md p-5"
-        >
-          <h2
-            class="text-xl font-bold mb-4"
-            :class="{
-              'text-white': themeStore.theme === 'dark',
-              'text-black': themeStore.theme === 'light',
-            }"
-          >
-            Send a Message
-          </h2>
+        <div v-if="!formSubmitted" class="bg-gray-900 shadow-md p-5">
+          <h2 class="text-xl font-bold mb-4 text-white">Send a Message</h2>
 
           <form @submit.prevent="submitForm" class="space-y-4">
             <!-- Name Input -->
             <div>
               <label
                 for="name"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                class="block text-sm font-medium text-gray-300 mb-1"
                 >Name</label
               >
               <input
@@ -177,7 +142,7 @@ const submitForm = () => {
                 id="name"
                 v-model="formData.name"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-800 text-white"
                 placeholder="Your name"
               />
             </div>
@@ -186,7 +151,7 @@ const submitForm = () => {
             <div>
               <label
                 for="email"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                class="block text-sm font-medium text-gray-300 mb-1"
                 >Email</label
               >
               <input
@@ -194,7 +159,7 @@ const submitForm = () => {
                 id="email"
                 v-model="formData.email"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-800 text-white"
                 placeholder="your.email@example.com"
               />
             </div>
@@ -203,7 +168,7 @@ const submitForm = () => {
             <div>
               <label
                 for="subject"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                class="block text-sm font-medium text-gray-300 mb-1"
                 >Subject</label
               >
               <input
@@ -211,7 +176,7 @@ const submitForm = () => {
                 id="subject"
                 v-model="formData.subject"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-800 text-white"
                 placeholder="What is this about?"
               />
             </div>
@@ -220,7 +185,7 @@ const submitForm = () => {
             <div>
               <label
                 for="message"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                class="block text-sm font-medium text-gray-300 mb-1"
                 >Message</label
               >
               <textarea
@@ -228,7 +193,7 @@ const submitForm = () => {
                 v-model="formData.message"
                 rows="4"
                 required
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-800 dark:text-white"
+                class="w-full px-3 py-2 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-800 text-white"
                 placeholder="Your message here..."
               ></textarea>
             </div>
@@ -266,16 +231,13 @@ const submitForm = () => {
         </div>
 
         <!-- Success Message -->
-        <div
-          v-else
-          class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 text-center"
-        >
+        <div v-else class="bg-gray-900 rounded-xl shadow-md p-6 text-center">
           <div
-            class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full mx-auto flex items-center justify-center mb-4"
+            class="w-16 h-16 bg-gray-800 rounded-full mx-auto flex items-center justify-center mb-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-8 w-8 text-gray-600 dark:text-gray-400"
+              class="h-8 w-8 text-gray-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -288,10 +250,8 @@ const submitForm = () => {
               />
             </svg>
           </div>
-          <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-            Message Sent!
-          </h2>
-          <p class="text-gray-600 dark:text-gray-300">
+          <h2 class="text-xl font-bold text-white mb-2">Message Sent!</h2>
+          <p class="text-gray-300">
             Thank you for reaching out. I'll get back to you as soon as
             possible.
           </p>
@@ -305,11 +265,9 @@ const submitForm = () => {
 
         <!-- Alternate Contact Info -->
         <div class="mt-8 text-center pb-12">
-          <p class="text-gray-600 dark:text-gray-300 text-sm">
+          <p class="text-gray-300 text-sm">
             Prefer to reach out directly? Email me at
-            <a
-              href="mailto:bhardwajjatin093@gmail.com"
-              class="text-gray-600 dark:text-gray-400"
+            <a href="mailto:bhardwajjatin093@gmail.com" class="text-gray-400"
               >bhardwajjatin093@gmail.com</a
             >
           </p>

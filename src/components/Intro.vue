@@ -41,12 +41,7 @@ onUnmounted(() => {
             <img
               src="../../src/assets/images/profileImage/myimage.webp"
               alt="Profile Photo"
-              class="relative w-full h-full object-cover rounded-full border-4 shadow-xl"
-              :class="
-                themeStore.theme === 'dark'
-                  ? 'border-slate-700'
-                  : 'border-white'
-              "
+              class="relative w-full h-full object-cover rounded-full border-4 shadow-xl border-slate-700"
             />
           </div>
         </div>
@@ -60,10 +55,7 @@ onUnmounted(() => {
           <div style="display: inline-block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 inline-block align-middle mr-1"
-              :class="
-                themeStore.theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-              "
+              class="h-5 w-5 inline-block align-middle mr-1 text-gray-300"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -73,12 +65,7 @@ onUnmounted(() => {
                 clip-rule="evenodd"
               />
             </svg>
-            <span
-              class="text-sm align-middle"
-              :class="
-                themeStore.theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-              "
-            >
+            <span class="text-sm align-middle text-gray-400">
               {{ location }}
             </span>
           </div>
@@ -92,12 +79,7 @@ onUnmounted(() => {
         >
           <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
             <span
-              class="bg-clip-text text-transparent"
-              :class="
-                themeStore.theme === 'dark'
-                  ? 'bg-gradient-to-r from-gray-50 via-white to-gray-100'
-                  : 'bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900'
-              "
+              class="bg-clip-text text-transparent bg-gradient-to-r from-gray-50 via-white to-gray-100"
             >
               {{ firstName }} {{ lastName }}
             </span>
@@ -110,12 +92,7 @@ onUnmounted(() => {
           :class="{ 'opacity-100 translate-y-0': isLoaded }"
           style="margin-top: 0.75rem"
         >
-          <p
-            class="text-lg sm:text-xl font-light tracking-wide"
-            :class="
-              themeStore.theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
-            "
-          >
+          <p class="text-lg sm:text-xl font-light tracking-wide text-gray-300">
             {{ title }}
           </p>
         </div>
@@ -128,25 +105,15 @@ onUnmounted(() => {
         >
           <router-link
             to="/projects"
-            class="block sm:inline-block px-6 py-3 sm:px-8 sm:py-3.5 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 mx-auto sm:mx-2 mb-4 sm:mb-0"
+            class="block sm:inline-block px-6 py-3 sm:px-8 sm:py-3.5 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 mx-auto sm:mx-2 mb-4 sm:mb-0 bg-gray-600 hover:bg-gray-500 text-white focus:ring-gray-500 focus:ring-offset-slate-900"
             style="max-width: 300px"
-            :class="
-              themeStore.theme === 'dark'
-                ? 'bg-gray-600 hover:bg-gray-500 text-white focus:ring-gray-500 focus:ring-offset-slate-900'
-                : 'bg-gray-700 hover:bg-gray-800 text-white focus:ring-gray-700 focus:ring-offset-gray-50'
-            "
           >
             Explore Projects
           </router-link>
           <router-link
             to="/contact"
-            class="block sm:inline-block px-6 py-3 sm:px-8 sm:py-3.5 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 mx-auto sm:mx-2"
+            class="block sm:inline-block px-6 py-3 sm:px-8 sm:py-3.5 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 mx-auto sm:mx-2 bg-transparent border-2 border-gray-400 text-gray-300 hover:bg-gray-400 hover:text-slate-900 focus:ring-gray-400 focus:ring-offset-slate-900"
             style="max-width: 300px"
-            :class="
-              themeStore.theme === 'dark'
-                ? 'bg-transparent border-2 border-gray-400 text-gray-300 hover:bg-gray-400 hover:text-slate-900 focus:ring-gray-400 focus:ring-offset-slate-900'
-                : 'bg-transparent border-2 border-gray-600 text-gray-700 hover:bg-gray-600 hover:text-white focus:ring-gray-600 focus:ring-offset-gray-50'
-            "
           >
             Get in Touch
           </router-link>
@@ -176,12 +143,7 @@ onUnmounted(() => {
                 "
               >
                 <i
-                  class="bi bi-linkedin relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
-                  "
+                  class="bi bi-linkedin relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110 text-gray-300"
                   style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
               </div>
@@ -195,21 +157,16 @@ onUnmounted(() => {
               class="social-link group"
             >
               <div
-                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-200/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-300"
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-600/50 group-hover:border-gray-300"
                 style="
-                  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+                  background: linear-gradient(145deg, #374151, #1f2937);
                   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
                     inset 0 2px 0 rgba(255, 255, 255, 0.4),
                     inset 0 -2px 0 rgba(0, 0, 0, 0.1);
                 "
               >
                 <i
-                  class="bi bi-github relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
-                  "
+                  class="bi bi-github relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110 text-gray-300"
                   style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
               </div>
@@ -223,21 +180,16 @@ onUnmounted(() => {
               class="social-link group"
             >
               <div
-                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-200/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-300"
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-600/50 group-hover:border-gray-300"
                 style="
-                  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+                  background: linear-gradient(145deg, #374151, #1f2937);
                   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
                     inset 0 2px 0 rgba(255, 255, 255, 0.4),
                     inset 0 -2px 0 rgba(0, 0, 0, 0.1);
                 "
               >
                 <i
-                  class="bi bi-twitter-x relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
-                  "
+                  class="bi bi-twitter-x relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110 text-gray-300"
                   style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
               </div>
@@ -249,21 +201,16 @@ onUnmounted(() => {
               class="social-link group"
             >
               <div
-                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-200/50 dark:border-gray-600/50 group-hover:border-gray-400 dark:group-hover:border-gray-300"
+                class="social-icon-container flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-all duration-500 transform group-hover:scale-110 group-hover:-translate-y-2 group-hover:rotate-6 border-2 border-gray-600/50 group-hover:border-gray-300"
                 style="
-                  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
+                  background: linear-gradient(145deg, #374151, #1f2937);
                   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1),
                     inset 0 2px 0 rgba(255, 255, 255, 0.4),
                     inset 0 -2px 0 rgba(0, 0, 0, 0.1);
                 "
               >
                 <i
-                  class="bi bi-envelope relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110"
-                  :class="
-                    themeStore.theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
-                  "
+                  class="bi bi-envelope relative z-10 text-xl sm:text-2xl transition-all duration-300 transform group-hover:scale-110 text-gray-300"
                   style="filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))"
                 ></i>
               </div>

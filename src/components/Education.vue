@@ -44,7 +44,7 @@ const educationData = [
 </script>
 
 <template>
-  <div :data-theme="themeStore.theme" class="w-full">
+  <div data-theme="dark" class="w-full">
     <!-- Section Header -->
     <div class="mb-8 text-center">
       <h2

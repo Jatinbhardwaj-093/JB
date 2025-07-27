@@ -32,13 +32,7 @@ const setActiveTab = (tabId) => {
 <template>
   <div class="about-view">
     <!-- Desktop Version -->
-    <section
-      class="hidden md:block py-8 md:py-12 lg:py-16"
-      :class="{
-        'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-900/30': themeStore.theme === 'dark',
-      }"
-    >
+    <section class="hidden md:block py-8 md:py-12 lg:py-16 bg-gray-900/30">
       <div class="container mx-auto px-4 md:px-6 overflow-y-hidden">
         <!-- About Me Header -->
         <div class="mb-12 text-center">
@@ -50,13 +44,7 @@ const setActiveTab = (tabId) => {
           <div
             class="h-1 w-24 bg-gray-600 dark:bg-gray-400 mx-auto rounded-full mb-4 about-underline"
           ></div>
-          <p
-            class="max-w-3xl mx-auto"
-            :class="{
-              'text-gray-600': themeStore.theme === 'light',
-              'text-gray-200': themeStore.theme === 'dark',
-            }"
-          >
+          <p class="max-w-3xl mx-auto text-gray-200">
             I love solving problems with code and mathematics. I explore
             artificial intelligence, contribute to open source, and build
             applications that make a difference.
@@ -66,11 +54,7 @@ const setActiveTab = (tabId) => {
         <!-- Experience Section -->
         <div class="mb-12">
           <h2
-            class="text-2xl md:text-3xl font-bold mb-6 text-center"
-            :class="{
-              'text-gray-900': themeStore.theme === 'light',
-              'text-white': themeStore.theme === 'dark',
-            }"
+            class="text-2xl md:text-3xl font-bold mb-6 text-center text-white"
           >
             Professional Experience
           </h2>
@@ -84,11 +68,7 @@ const setActiveTab = (tabId) => {
         <!-- Skills Section -->
         <div class="mb-12">
           <h2
-            class="text-2xl md:text-3xl font-bold mb-6 text-center"
-            :class="{
-              'text-gray-900': themeStore.theme === 'light',
-              'text-white': themeStore.theme === 'dark',
-            }"
+            class="text-2xl md:text-3xl font-bold mb-6 text-center text-white"
           >
             Current Technology
           </h2>
@@ -137,11 +117,7 @@ const setActiveTab = (tabId) => {
 
       <!-- Tab Navigation -->
       <div
-        class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden"
-        :class="{
-          'bg-white': themeStore.theme === 'light',
-          'bg-gray-800': themeStore.theme === 'dark',
-        }"
+        class="sticky top-16 z-20 shadow-md px-2 py-3 w-full max-w-[100vw] overflow-hidden bg-gray-800"
       >
         <div
           class="flex space-x-3 w-max min-w-full px-2 py-1 overflow-x-auto no-scrollbar"
@@ -201,15 +177,7 @@ const setActiveTab = (tabId) => {
           <div
             class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-2"
           >
-            <p
-              class="text-2xl text-center font-bold"
-              :class="{
-                'text-gray-900': themeStore.theme === 'light',
-                'text-white': themeStore.theme === 'dark',
-              }"
-            >
-              Experience
-            </p>
+            <p class="text-2xl text-center font-bold text-white">Experience</p>
             <div
               class="h-1 w-24 bg-gray-600 dark:bg-gray-400 mx-auto rounded-full mb-6"
             ></div>
@@ -230,13 +198,7 @@ const setActiveTab = (tabId) => {
           <div
             class="bg-white dark:bg-gray-800 rounded-xl shadow-md px-2 py-5 mb-2"
           >
-            <p
-              class="text-2xl text-center font-bold"
-              :class="{
-                'text-gray-900': themeStore.theme === 'light',
-                'text-white': themeStore.theme === 'dark',
-              }"
-            >
+            <p class="text-2xl text-center font-bold text-white">
               Current Technology
             </p>
             <div

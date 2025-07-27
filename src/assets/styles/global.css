@@ -5,11 +5,7 @@
     font-family: 'Work Sans', sans-serif;
 }
 
-:root[data-theme="light"] {
-    --background-color: #ffffff;
-}
-
-:root[data-theme="dark"] {
+:root {
     --background-color: #000000;
 }
 
@@ -22,14 +18,10 @@ body {
     width: 100%;
 }
 
-body.dark {
-    background-color: var(--background-color); 
-}
-
-/* Custom gray scrollbar styling for monochrome theme */
+/* Dark theme scrollbar styling */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #9ca3af #f3f4f6 !important;
+    scrollbar-color: #6b7280 #374151 !important;
 }
 
 *::-webkit-scrollbar {
@@ -38,35 +30,17 @@ body.dark {
 }
 
 *::-webkit-scrollbar-track {
-    background: #f3f4f6 !important;
+    background: #374151 !important;
     border-radius: 4px !important;
 }
 
 *::-webkit-scrollbar-thumb {
-    background: #9ca3af !important;
+    background: #6b7280 !important;
     border-radius: 4px !important;
-    border: 1px solid #e5e7eb !important;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-    background: #6b7280 !important;
-}
-
-/* Dark theme scrollbar styling */
-.dark * {
-    scrollbar-color: #6b7280 #374151 !important;
-}
-
-.dark *::-webkit-scrollbar-track {
-    background: #374151 !important;
-}
-
-.dark *::-webkit-scrollbar-thumb {
-    background: #6b7280 !important;
     border: 1px solid #4b5563 !important;
 }
 
-.dark *::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
     background: #9ca3af !important;
 }
 

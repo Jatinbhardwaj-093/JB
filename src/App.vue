@@ -1,10 +1,7 @@
 <template>
   <div
-    class="app-container min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white dark:from-black dark:to-gray-900 transition-colors duration-500 overflow-x-hidden"
+    class="app-container min-h-screen flex flex-col bg-gradient-to-br from-black to-gray-900 transition-colors duration-500 overflow-x-hidden"
   >
-    <!-- Theme transition animation overlay -->
-    <ThemeTransition />
-
     <Navbar />
     <main class="container mx-auto flex-grow">
       <router-view v-slot="{ Component }">
@@ -13,10 +10,8 @@
         </transition>
       </router-view>
     </main>
-    <footer class="py-6 border-t border-gray-200 dark:border-gray-700 mt-auto">
-      <div
-        class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400"
-      >
+    <footer class="py-6 border-t border-gray-700 mt-auto">
+      <div class="container mx-auto px-4 text-center text-gray-400">
         <p>
           © {{ new Date().getFullYear() }} Jatin Bhardwaj. All rights reserved.
         </p>
@@ -27,7 +22,6 @@
 
 <script setup>
 import Navbar from "./components/Navbar.vue";
-import ThemeTransition from "./components/ThemeTransition.vue";
 </script>
 
 <style>

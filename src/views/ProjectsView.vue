@@ -78,13 +78,7 @@ const filteredProjects = computed(() => {
     </div>
 
     <!-- Mobile Version - Custom Design -->
-    <div
-      class="block md:hidden min-h-screen"
-      :class="{
-        'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-900': themeStore.theme === 'dark',
-      }"
-    >
+    <div class="block md:hidden min-h-screen bg-gray-900">
       <!-- Header with animated gradient background -->
       <div class="relative overflow-hidden">
         <div
@@ -105,11 +99,7 @@ const filteredProjects = computed(() => {
 
       <!-- Filter tabs -->
       <div
-        class="sticky top-16 z-20 px-4 py-4 filter-tabs-container"
-        :class="{
-          'bg-white': themeStore.theme === 'light',
-          'bg-gray-900': themeStore.theme === 'dark',
-        }"
+        class="sticky top-16 z-20 px-4 py-4 filter-tabs-container bg-gray-900"
       >
         <div class="overflow-x-auto no-scrollbar">
           <div class="flex space-x-2 min-w-full w-max">

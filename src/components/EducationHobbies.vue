@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useThemeStore } from "../store/theme";
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 const themeStore = useThemeStore();
 
@@ -64,38 +64,25 @@ const hobbiesData = [
     id: "maths",
     title: "Mathematics",
     description: "Exploring mathematical concepts and problem-solving",
-    icon: computed(() =>
-      themeStore.theme === "dark"
-        ? new URL("../assets/images/light/Maths_light.png", import.meta.url)
-            .href
-        : new URL("../assets/images/Dark/Maths_dark.png", import.meta.url).href
-    ),
+    icon: new URL("../assets/images/light/Maths_light.png", import.meta.url)
+      .href,
     gradient: "from-gray-500 to-gray-600",
   },
   {
     id: "psychology",
     title: "Human Psychology",
     description: "Understanding human behavior and mental processes",
-    icon: computed(() =>
-      themeStore.theme === "dark"
-        ? new URL(
-            "../assets/images/light/Psychology_light.png",
-            import.meta.url
-          ).href
-        : new URL("../assets/images/Dark/Psychology_dark.png", import.meta.url)
-            .href
-    ),
+    icon: new URL(
+      "../assets/images/light/Psychology_light.png",
+      import.meta.url
+    ).href,
     gradient: "from-gray-400 to-gray-600",
   },
   {
     id: "ml",
     title: "Machine Learning",
     description: "Exploring AI algorithms and data science concepts",
-    icon: computed(() =>
-      themeStore.theme === "dark"
-        ? new URL("../assets/images/light/ML_light.png", import.meta.url).href
-        : new URL("../assets/images/Dark/Ml_dark.png", import.meta.url).href
-    ),
+    icon: new URL("../assets/images/light/ML_light.png", import.meta.url).href,
     gradient: "from-gray-500 to-gray-700",
   },
 ];
@@ -110,18 +97,12 @@ const switchTab = (tab: string) => {
 </script>
 
 <template>
-  <div :data-theme="themeStore.theme" class="w-full">
+  <div data-theme="dark" class="w-full">
     <!-- Section Header with Tab Switcher for Desktop -->
     <div class="mb-8">
       <!-- Desktop Tab Switcher -->
       <div class="hidden md:block text-center mb-6">
-        <p
-          class="text-3xl font-bold mb-8"
-          :class="{
-            'text-white': themeStore.theme === 'dark',
-            'text-black': themeStore.theme === 'light',
-          }"
-        >
+        <p class="text-3xl font-bold mb-8 text-white">
           {{
             activeTab === "education"
               ? "Education Journey"
@@ -173,13 +154,7 @@ const switchTab = (tab: string) => {
 
       <!-- Mobile Headers -->
       <div class="block md:hidden text-center">
-        <p
-          class="text-2xl font-bold mb-2"
-          :class="{
-            'text-white': themeStore.theme === 'dark',
-            'text-black': themeStore.theme === 'light',
-          }"
-        >
+        <p class="text-2xl font-bold mb-2 text-white">
           {{
             activeTab === "education"
               ? "Education Journey"
@@ -357,7 +332,7 @@ const switchTab = (tab: string) => {
                     :class="`bg-gradient-to-br ${hobby.gradient}`"
                   >
                     <img
-                      :src="hobby.icon.value"
+                      :src="hobby.icon"
                       :alt="hobby.title"
                       class="w-full h-full object-contain p-3"
                     />
@@ -410,7 +385,7 @@ const switchTab = (tab: string) => {
                     :class="`bg-gradient-to-br ${hobby.gradient}`"
                   >
                     <img
-                      :src="hobby.icon.value"
+                      :src="hobby.icon"
                       :alt="hobby.title"
                       class="w-full h-full object-contain p-2"
                     />

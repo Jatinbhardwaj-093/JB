@@ -113,11 +113,7 @@ onMounted(() => {
     <div class="fixed top-20 right-4 z-40 md:hidden">
       <button
         @click="goBack"
-        class="flex items-center justify-center w-10 h-10 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
-        :class="{
-          'bg-blue-600 text-white': themeStore.theme === 'dark',
-          'bg-indigo-500 text-white': themeStore.theme === 'light',
-        }"
+        class="flex items-center justify-center w-10 h-10 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 bg-blue-600 text-white"
         aria-label="Back to projects"
       >
         <svg
@@ -141,13 +137,7 @@ onMounted(() => {
     <div class="hidden md:flex justify-end mb-3">
       <button
         @click="goBack"
-        class="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-lg transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-x-0.5"
-        :class="{
-          'bg-gradient-to-r from-blue-600 to-indigo-600 text-white':
-            themeStore.theme === 'dark',
-          'bg-gradient-to-r from-blue-500 to-indigo-500 text-white':
-            themeStore.theme === 'light',
-        }"
+        class="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-lg transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-x-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -169,24 +159,12 @@ onMounted(() => {
 
     <!-- Project Header -->
     <div class="text-center mb-6">
-      <h1
-        class="text-4xl font-bold mb-3"
-        :class="{
-          'text-white': themeStore.theme === 'dark',
-          'text-gray-900': themeStore.theme === 'light',
-        }"
-      >
+      <h1 class="text-4xl font-bold mb-3 text-white">
         <span class="hidden sm:inline">HouseHold Service Platform</span>
         <span class="sm:hidden">HomeServe</span>
       </h1>
       <div class="h-1 w-24 bg-indigo-600 mx-auto rounded-full"></div>
-      <p
-        class="mt-2 max-w-3xl mx-auto text-base"
-        :class="{
-          'text-gray-300': themeStore.theme === 'dark',
-          'text-gray-600': themeStore.theme === 'light',
-        }"
-      >
+      <p class="mt-2 max-w-3xl mx-auto text-base text-gray-300">
         A comprehensive platform connecting home service providers with
         customers, featuring real-time tracking, secure payments, and a robust
         review system.

@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
 const navRef = ref<HTMLElement | null>(null);
-const selectedTheme = ref<string>(
-  themeStore.theme.charAt(0).toUpperCase() + themeStore.theme.slice(1)
-);
 const isMobileMenuOpen = ref<boolean>(false);
-
-// Removed all swipe detection variables and functions
 
 const handleClickOutside = (event: MouseEvent) => {
   if (navRef.value && !navRef.value.contains(event.target as Node)) {
@@ -19,12 +14,10 @@ const handleClickOutside = (event: MouseEvent) => {
 
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
-  // Removed touch event listeners
 });
 
 onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
-  // Removed touch event listeners
 });
 
 const toggleMobileMenu = (event?: Event) => {
@@ -41,27 +34,13 @@ const toggleMobileMenu = (event?: Event) => {
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false;
 };
-
-const toggleTheme = () => {
-  themeStore.theme = themeStore.theme === "light" ? "dark" : "light";
-  themeStore.applyTheme();
-  selectedTheme.value =
-    themeStore.theme.charAt(0).toUpperCase() + themeStore.theme.slice(1);
-};
-
-watch(
-  () => themeStore.theme,
-  (newTheme) => {
-    selectedTheme.value = newTheme.charAt(0).toUpperCase() + newTheme.slice(1);
-  }
-);
 </script>
 
 <template>
   <nav
-    :data-theme="themeStore.theme"
+    data-theme="dark"
     ref="navRef"
-    class="navbar sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-black/70 border-b border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300"
+    class="navbar sticky top-0 z-50 backdrop-blur-md bg-black/70 border-b border-gray-700 shadow-sm transition-all duration-300"
   >
     <div class="container mx-auto px-2 overflow-hidden">
       <!-- Removed padding for mobile view -->
@@ -78,11 +57,7 @@ watch(
           />
 
           <span
-            class="text-base md:text-2xl font-bold transition-colors duration-300"
-            :class="{
-              'text-white': themeStore.theme === 'dark',
-              'text-black': themeStore.theme === 'light',
-            }"
+            class="text-base md:text-2xl font-bold transition-colors duration-300 text-white"
             >JB</span
           >
         </router-link>
@@ -99,10 +74,8 @@ watch(
             ]"
             :key="index"
             :to="{ name: link.name }"
-            class="nav-link font-medium text-gray-600 dark:text-gray-200 hover:text-gray-800 dark:hover:text-gray-100 transition-colors duration-300"
-            :class="
-              $route.name === link.name ? 'text-gray-900 dark:text-gray-50' : ''
-            "
+            class="nav-link font-medium text-gray-200 hover:text-gray-100 transition-colors duration-300"
+            :class="$route.name === link.name ? 'text-gray-50' : ''"
           >
             {{ link.text }}
           </router-link>
@@ -112,7 +85,7 @@ watch(
         <div class="md:hidden relative z-50">
           <button
             @click.stop="toggleMobileMenu"
-            class="mobile-menu-button block w-10 h-10 rounded-lg focus:outline-none bg-transparent hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+            class="mobile-menu-button block w-10 h-10 rounded-lg focus:outline-none bg-transparent hover:bg-gray-900 transition-colors"
             aria-label="Toggle menu"
             style="touch-action: manipulation"
           >
@@ -121,7 +94,7 @@ watch(
               <svg
                 v-if="!isMobileMenuOpen"
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-7 w-7 text-gray-700 dark:text-gray-200"
+                class="h-7 w-7 text-gray-200"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -137,7 +110,7 @@ watch(
               <svg
                 v-else
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-7 w-7 text-gray-700 dark:text-gray-200"
+                class="h-7 w-7 text-gray-200"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -157,12 +130,10 @@ watch(
 
     <!-- Mobile menu with overlay styling - moved outside the container -->
     <div
-      class="mobile-menu fixed md:hidden right-0 top-0 h-screen w-4/5 max-w-sm z-50 border-l overflow-y-auto transition-colors duration-300"
+      class="mobile-menu fixed md:hidden right-0 top-0 h-screen w-4/5 max-w-sm z-50 border-l overflow-y-auto transition-colors duration-300 bg-black border-gray-700"
       :class="{
         'menu-open': isMobileMenuOpen,
         'menu-closed': !isMobileMenuOpen,
-        'bg-white border-gray-200': themeStore.theme === 'light',
-        'bg-black border-gray-700': themeStore.theme === 'dark',
       }"
     >
       <div class="p-6 min-h-full flex flex-col">
@@ -170,12 +141,12 @@ watch(
         <div class="flex justify-end mb-4">
           <button
             @click="closeMobileMenu"
-            class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none"
+            class="p-2 rounded-md hover:bg-gray-900 focus:outline-none"
             aria-label="Close menu"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-gray-600 dark:text-gray-300"
+              class="h-6 w-6 text-gray-300"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -202,11 +173,9 @@ watch(
             :key="index"
             :to="{ name: link.name }"
             @click="closeMobileMenu"
-            class="nav-link px-3 py-4 text-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-900 rounded-lg transition-colors duration-200"
+            class="nav-link px-3 py-4 text-lg font-medium hover:bg-gray-900 rounded-lg transition-colors duration-200"
             :class="
-              $route.name === link.name
-                ? 'text-gray-900 dark:text-gray-50'
-                : 'text-gray-700 dark:text-gray-200'
+              $route.name === link.name ? 'text-gray-50' : 'text-gray-200'
             "
           >
             {{ link.text }}
@@ -274,49 +243,12 @@ watch(
 }
 
 .nav-link:hover {
-  color: #1f2937;
+  color: #f9fafb;
 }
 
 .router-link-active {
-  color: #111827;
+  color: #f9fafb;
   font-weight: 600;
-}
-
-/* Enhanced 3D theme toggle animation */
-.theme-toggle {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: linear-gradient(145deg, #f3f4f6, #e5e7eb);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-}
-
-.theme-toggle:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-}
-
-.theme-toggle:active {
-  transform: translateY(0) scale(0.95);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Dark mode 3D effect */
-[data-theme="dark"] .theme-toggle {
-  background: linear-gradient(145deg, #374151, #1f2937);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .theme-toggle:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.4);
-}
-
-/* Mobile-specific theme toggle with even more subtle animation */
-.mobile-theme-toggle {
-  transition: background-color 0.2s ease;
 }
 
 /* Mobile menu button improvements for better tap response */
@@ -385,12 +317,6 @@ watch(
   }
 }
 
-/* Dark mode specific styles */
-:root[data-theme="dark"] .nav-link:hover,
-:root[data-theme="dark"] .router-link-active {
-  color: #f9fafb;
-}
-
 /* Additional mobile responsiveness improvements */
 @media (max-width: 640px) {
   .navbar {
@@ -413,9 +339,7 @@ watch(
   .navbar,
   .logo-container img,
   .nav-link,
-  .theme-toggle,
   .mobile-menu-button,
-  .mobile-theme-toggle,
   .mobile-menu {
     transition: none !important;
     animation: none !important;

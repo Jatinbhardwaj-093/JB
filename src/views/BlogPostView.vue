@@ -30,13 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main
-    class="flex-grow py-8 sm:py-12"
-    :class="{
-      'bg-gray-50': themeStore.theme === 'light',
-      'bg-black': themeStore.theme === 'dark',
-    }"
-  >
+  <main class="flex-grow py-8 sm:py-12 bg-black">
     <div v-if="post">
       <BlogReader :post="post" />
     </div>

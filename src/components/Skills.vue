@@ -147,7 +147,7 @@ const getImageUrl = (name: string) => {
 </script>
 
 <template>
-  <div :data-theme="themeStore.theme" class="w-full">
+  <div data-theme="dark" class="w-full">
     <!-- Section Header with Tab Switcher -->
     <div class="mb-8">
       <!-- Desktop Tab Switcher -->

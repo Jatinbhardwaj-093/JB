@@ -205,13 +205,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="w-full max-w-[100vw] overflow-x-hidden"
-    :class="{
-      'bg-gray-50': themeStore.theme === 'light',
-      'bg-black': themeStore.theme === 'dark',
-    }"
-  >
+  <div class="w-full max-w-[100vw] overflow-x-hidden bg-black">
     <!-- Banner Image - Full width without container -->
     <div class="relative w-full">
       <div
@@ -255,13 +249,7 @@ onMounted(() => {
     </div>
 
     <!-- Filter Tabs - Full width with a dark background -->
-    <div
-      class="w-full py-4 shadow-md relative"
-      :class="{
-        'bg-gray-100': themeStore.theme === 'light',
-        'bg-gray-900': themeStore.theme === 'dark',
-      }"
-    >
+    <div class="w-full py-4 shadow-md relative bg-gray-900">
       <div
         class="overflow-x-auto no-scrollbar scroll-smooth"
         ref="filterTabsContainer"
@@ -275,10 +263,8 @@ onMounted(() => {
             class="px-6 py-2 rounded-full text-sm font-medium transition-colors duration-200"
             :class="{
               'bg-gray-700 text-white': activeCategory === category.id,
-              'bg-white text-gray-700 hover:bg-gray-200 shadow':
-                activeCategory !== category.id && themeStore.theme === 'light',
               'bg-gray-700 text-gray-300 hover:bg-gray-600 shadow':
-                activeCategory !== category.id && themeStore.theme === 'dark',
+                activeCategory !== category.id,
             }"
           >
             {{ category.name }}
@@ -294,21 +280,11 @@ onMounted(() => {
         @click="scrollFilterTabs('right')"
       >
         <div
-          class="flex items-center justify-center h-10 w-10 rounded-l-full shadow-md backdrop-blur-sm"
-          :class="{
-            'bg-gradient-to-l from-gray-100 to-white/90':
-              themeStore.theme === 'light',
-            'bg-gradient-to-l from-gray-900 to-black/90':
-              themeStore.theme === 'dark',
-          }"
+          class="flex items-center justify-center h-10 w-10 rounded-l-full shadow-md backdrop-blur-sm bg-gradient-to-l from-gray-900 to-black/90"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 animate-arrow-pulse"
-            :class="{
-              'text-gray-600': themeStore.theme === 'light',
-              'text-gray-400': themeStore.theme === 'dark',
-            }"
+            class="h-6 w-6 animate-arrow-pulse text-gray-400"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -336,11 +312,7 @@ onMounted(() => {
       <!-- Coming Soon Section when no posts are available -->
       <div
         v-else
-        class="rounded-xl shadow-lg p-4 sm:p-6 md:p-8 text-center max-w-2xl mx-auto border"
-        :class="{
-          'bg-white border-gray-100': themeStore.theme === 'light',
-          'bg-gray-900 border-gray-700': themeStore.theme === 'dark',
-        }"
+        class="rounded-xl shadow-lg p-4 sm:p-6 md:p-8 text-center max-w-2xl mx-auto border bg-gray-900 border-gray-700"
       >
         <div class="mb-4 sm:mb-6 flex justify-center">
           <img
@@ -350,31 +322,20 @@ onMounted(() => {
           />
         </div>
         <p
-          class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-black mb-2 sm:mb-4"
-          :class="{ 'text-white': themeStore.theme === 'dark' }"
+          class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-4"
         >
           More Content Coming Soon
         </p>
         <p
-          class="text-xs sm:text-sm md:text-base lg:text-lg text-gray-600 dark:text-gray-300 mb-4 sm:mb-6"
+          class="text-xs sm:text-sm md:text-base lg:text-lg text-gray-300 mb-4 sm:mb-6"
         >
           I'm working on new articles about programming, mathematics, and my
           experiences with open source projects. Check back soon for updates.
         </p>
         <div
-          class="p-3 sm:p-4 rounded-lg border"
-          :class="{
-            'bg-gray-50 border-gray-100': themeStore.theme === 'light',
-            'bg-gray-900/20 border-gray-800/30': themeStore.theme === 'dark',
-          }"
+          class="p-3 sm:p-4 rounded-lg border bg-gray-900/20 border-gray-800/30"
         >
-          <p
-            class="text-xs sm:text-sm md:text-base italic"
-            :class="{
-              'text-gray-700': themeStore.theme === 'light',
-              'text-gray-300': themeStore.theme === 'dark',
-            }"
-          >
+          <p class="text-xs sm:text-sm md:text-base italic text-gray-300">
             "Like Zoro, I've wandered off the path. Don't worry, I'll find my
             way back with new content soon!"
           </p>

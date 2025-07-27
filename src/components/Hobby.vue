@@ -26,70 +26,34 @@ const mlImg = computed(() =>
 </script>
 
 <template>
-  <div :data-theme="themeStore.theme">
+  <div data-theme="dark">
     <!-- Removed duplicate Hobbies heading -->
 
     <!-- Changed to flex-col layout for all screen sizes -->
     <div class="flex flex-col items-start justify-start gap-4">
       <div class="flex justify-start items-center gap-2">
         <div
-          class="w-10 h-10 p-1 rounded-md shadow-md"
-          :class="{
-            'bg-white shadow-black/30': themeStore.theme === 'light',
-            'bg-gray-900 shadow-white/10': themeStore.theme === 'dark',
-          }"
+          class="w-10 h-10 p-1 rounded-md shadow-md bg-gray-900 shadow-white/10"
         >
           <img :src="mathsImg" alt="Math" />
         </div>
-        <p
-          class="font-semibold text-xl"
-          :class="{
-            'text-white': themeStore.theme === 'dark',
-            'text-black': themeStore.theme === 'light',
-          }"
-        >
-          Mathematics
-        </p>
+        <p class="font-semibold text-xl text-white">Mathematics</p>
       </div>
       <div class="flex justify-start items-center gap-2">
         <div
-          class="w-10 h-10 p-1 rounded-md shadow-md"
-          :class="{
-            'bg-white shadow-black/30': themeStore.theme === 'light',
-            'bg-gray-900 shadow-white/10': themeStore.theme === 'dark',
-          }"
+          class="w-10 h-10 p-1 rounded-md shadow-md bg-gray-900 shadow-white/10"
         >
           <img :src="psychologyImg" alt="Psychology" />
         </div>
-        <p
-          class="font-semibold text-xl"
-          :class="{
-            'text-white': themeStore.theme === 'dark',
-            'text-black': themeStore.theme === 'light',
-          }"
-        >
-          Human Psychology
-        </p>
+        <p class="font-semibold text-xl text-white">Human Psychology</p>
       </div>
       <div class="flex justify-start items-center gap-2">
         <div
-          class="w-10 h-10 p-1 rounded-md shadow-md"
-          :class="{
-            'bg-white shadow-black/30': themeStore.theme === 'light',
-            'bg-gray-900 shadow-white/10': themeStore.theme === 'dark',
-          }"
+          class="w-10 h-10 p-1 rounded-md shadow-md bg-gray-900 shadow-white/10"
         >
           <img :src="mlImg" alt="Machine Learning" />
         </div>
-        <p
-          class="font-semibold text-xl"
-          :class="{
-            'text-white': themeStore.theme === 'dark',
-            'text-black': themeStore.theme === 'light',
-          }"
-        >
-          Machine Learning
-        </p>
+        <p class="font-semibold text-xl text-white">Machine Learning</p>
       </div>
     </div>
   </div>

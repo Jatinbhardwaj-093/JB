@@ -1,17 +1,7 @@
 <template>
-  <div
-    class="min-h-screen flex items-center justify-center px-4"
-    :class="{
-      'bg-gray-50': themeStore.theme === 'light',
-      'bg-gray-900': themeStore.theme === 'dark',
-    }"
-  >
+  <div class="min-h-screen flex items-center justify-center px-4 bg-gray-900">
     <div
-      class="max-w-md w-full text-center rounded-xl shadow-lg p-8 border"
-      :class="{
-        'bg-white border-gray-100': themeStore.theme === 'light',
-        'bg-gray-900 border-gray-700': themeStore.theme === 'dark',
-      }"
+      class="max-w-md w-full text-center rounded-xl shadow-lg p-8 border bg-gray-900 border-gray-700"
     >
       <div class="mb-6">
         <img
@@ -21,25 +11,9 @@
         />
       </div>
 
-      <h1
-        class="text-4xl font-bold mb-4"
-        :class="{
-          'text-gray-900': themeStore.theme === 'light',
-          'text-white': themeStore.theme === 'dark',
-        }"
-      >
-        404
-      </h1>
+      <h1 class="text-4xl font-bold mb-4 text-white">404</h1>
 
-      <h2
-        class="text-xl font-semibold mb-4"
-        :class="{
-          'text-gray-700': themeStore.theme === 'light',
-          'text-gray-300': themeStore.theme === 'dark',
-        }"
-      >
-        Page Not Found
-      </h2>
+      <h2 class="text-xl font-semibold mb-4 text-gray-300">Page Not Found</h2>
 
       <p class="text-gray-600 dark:text-gray-400 mb-6">
         Like Zoro, this page seems to have wandered off! The page you're looking
