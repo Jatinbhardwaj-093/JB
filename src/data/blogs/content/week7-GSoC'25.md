@@ -1,4 +1,4 @@
-# GSoC-25: Week 7 Update
+# GSoC-25: Week 7
 
 This week focused heavily on **code cleanup**, particularly refining **type annotations** and ensuring **method consistency**. While progress was slower than anticipated due to my programming exam, I've made significant strides towards completing my current Pull Request.
 

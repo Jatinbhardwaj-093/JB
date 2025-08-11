@@ -53,6 +53,14 @@ const gsocPosts = [
         category: "gsoc",
         slug: "week7-GSoC'25",
     },
-    // More blogs can be added here in the future
+    {
+        id: "gsoc-week8-9-10-series-module",
+        title: "GSoC-25: Weeks 8, 9, 10 - Series Module Merged & Transcendental Functions",
+        date: "August 11, 2025",
+        minutesToRead: 7,
+        summary: "Major progress: Series Module merged, transcendental functions added, and new algorithms for power series in SymPy. Includes usage examples and next steps.",
+        category: "gsoc",
+        slug: "week8-9-10-GSoC'25",
+    },
 ];
 export default gsocPosts;
