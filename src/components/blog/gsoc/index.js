@@ -6,4 +6,5 @@ import Week4BlogContent from "./Week4BlogContent.vue";
 import Week5_6BlogContent from "./Week5_6BlogContent.vue";
 import Week7BlogContent from "./Week7BlogContent.vue";
 import Week8_9_10BlogContent from "./Week8_9_10BlogContent.vue";
-export { GSoCBlogContent, Week1BlogContent, Week2_3BlogContent, Week4BlogContent, Week5_6BlogContent, Week7BlogContent, Week8_9_10BlogContent, };
+import Week11BlogContent from "./Week11BlogContent.vue";
+export { GSoCBlogContent, Week1BlogContent, Week2_3BlogContent, Week4BlogContent, Week5_6BlogContent, Week7BlogContent, Week8_9_10BlogContent, Week11BlogContent, };

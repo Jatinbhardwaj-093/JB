@@ -62,5 +62,14 @@ const gsocPosts = [
         category: "gsoc",
         slug: "week8-9-10-GSoC'25",
     },
+    {
+        id: "gsoc-week11-final-pr",
+        title: "GSoC-25: Week 11 - Final PR Implementation",
+        date: "August 18, 2025",
+        minutesToRead: 6,
+        summary: "Final week implementation of PowerSeriesRing, PowerSeriesElement, and Series domain classes. Completing the power series framework with proper ring structure and enhanced power_series_ring function.",
+        category: "gsoc",
+        slug: "week11-GSoC'25",
+    },
 ];
 export default gsocPosts;
