@@ -34,50 +34,94 @@ onMounted(() => {
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
-      The PR 
+      The PR
       <a
         href="https://github.com/sympy/sympy/pull/28325"
         class="text-blue-600 dark:text-blue-400 underline font-bold"
         >gh-28325</a
-      > implements three classes:
+      >
+      implements three classes:
     </p>
-    
+
     <div class="mb-6">
       <div class="mb-4">
         <h3 class="font-bold text-base sm:text-lg md:text-xl mb-2">
-          <strong>Ring</strong> (<code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PowerSeriesRing</code>)
+          <strong>Ring</strong> (<code
+            class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+            >PowerSeriesRing</code
+          >)
         </h3>
         <p
           class="mb-2 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%] ml-4"
         >
-          The <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">PowerSeriesRing</code> class maintains a base ring (<code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">self.ring</code>) that represents a lower-level ring defined by the domain and ground type (e.g., Python, Flint). The base ring supplies the core logic for operations such as addition, inversion, logarithm, and exponentiation.
+          The
+          <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+            >PowerSeriesRing</code
+          >
+          class maintains a base ring (<code
+            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+            >self.ring</code
+          >) that represents a lower-level ring defined by the domain and ground
+          type (e.g., Python, Flint). The base ring supplies the core logic for
+          operations such as addition, inversion, logarithm, and exponentiation.
         </p>
         <p
           class="mb-2 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%] ml-4"
         >
-          Additionally, this class extends functionality with methods for converting or constructing ring elements from various types (e.g., expressions, lists, integers).
+          Additionally, this class extends functionality with methods for
+          converting or constructing ring elements from various types (e.g.,
+          expressions, lists, integers).
         </p>
       </div>
 
       <div class="mb-4">
         <h3 class="font-bold text-base sm:text-lg md:text-xl mb-2">
-          <strong>Element</strong> (<code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">PowerSeriesElement</code>)
+          <strong>Element</strong> (<code
+            class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+            >PowerSeriesElement</code
+          >)
         </h3>
         <p
           class="mb-2 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%] ml-4"
         >
-          The <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">PowerSeriesElement</code> class provides a structured representation of ring elements, supporting standard arithmetic operations (<code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">+</code>, <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">-</code>, <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">/</code>, etc.). This implementation also supports an explicit Order term. If the external order term exceeds the precision of the ring, it is truncated to the ring's precision.
+          The
+          <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+            >PowerSeriesElement</code
+          >
+          class provides a structured representation of ring elements,
+          supporting standard arithmetic operations (<code
+            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+            >+</code
+          >,
+          <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">-</code
+          >,
+          <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">/</code
+          >, etc.). This implementation also supports an explicit Order term. If
+          the external order term exceeds the precision of the ring, it is
+          truncated to the ring's precision.
         </p>
       </div>
 
       <div class="mb-4">
         <h3 class="font-bold text-base sm:text-lg md:text-xl mb-2">
-          <strong>Domain</strong> (<code class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">Series</code>)
+          <strong>Domain</strong> (<code
+            class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded"
+            >Series</code
+          >)
         </h3>
         <p
           class="mb-2 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%] ml-4"
         >
-          The <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">Series</code> domain class includes the associated ring (<code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">self.ring</code>) as metadata, which can be extracted for ring-specific operations. It provides methods for converting elements from other domains into its own data type.
+          The
+          <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+            >Series</code
+          >
+          domain class includes the associated ring (<code
+            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+            >self.ring</code
+          >) as metadata, which can be extracted for ring-specific operations.
+          It provides methods for converting elements from other domains into
+          its own data type.
         </p>
       </div>
     </div>
@@ -85,14 +129,22 @@ onMounted(() => {
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
-      This functionality or design is similar to the <strong>Multivariate Polynomial Ring</strong> of SymPy.
+      This functionality or design is similar to the
+      <strong>Multivariate Polynomial Ring</strong> of SymPy.
     </p>
 
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
-      There is also a change for the <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">power_series_ring</code> function.
-      Now instead of returning the lower ring, it returns the <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">PowerSeriesRing</code> instance with the ring generator. This works something like this now:
+      There is also a change for the
+      <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+        >power_series_ring</code
+      >
+      function. Now instead of returning the lower ring, it returns the
+      <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded"
+        >PowerSeriesRing</code
+      >
+      instance with the ring generator. This works something like this now:
     </p>
 
     <pre class="mb-6"><code class="language-python">>>> from sympy import QQ
@@ -105,7 +157,10 @@ onMounted(() => {
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty max-w-full sm:max-w-[95%] md:max-w-[90%]"
     >
-      As week 12 is starting tomorrow, this is going to be the last stretch of the project. This class needs some more methods and proper type annotations, then it will be ready to merge into master, finishing my project.
+      As week 12 is starting tomorrow, this is going to be the last stretch of
+      the project. This class needs some more methods and proper type
+      annotations, then it will be ready to merge into master, finishing my
+      project.
     </p>
   </div>
 </template>
