@@ -91,6 +91,16 @@ const gsocPosts: BlogPost[] = [
     category: "gsoc",
     slug: "week11-GSoC'25",
   },
+  {
+    id: "gsoc-week12-completion",
+    title: "GSoC '25: Week 12 - Project Completion",
+    date: "September 3, 2025",
+    minutesToRead: 1,
+    summary:
+      "GSoC project wrap-up and completion. Reflecting on the journey, accomplishments, and sharing resources including the final report, proposal, and merged pull requests.",
+    category: "gsoc",
+    slug: "week12-GSoC'25",
+  },
 ];
 
 export default gsocPosts;
