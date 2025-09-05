@@ -22,7 +22,6 @@ const projects = ref([
       "Implementing a formal power series domain system for SymPy to enhance its symbolic mathematics capabilities, with expected completion in Summer 2025.",
     tags: ["SymPy", "Python", "Cython", "C", "Pytest", "Hypothesis", "Codecov"],
     link: "https://summerofcode.withgoogle.com/programs/2025/projects/8VslkGZ9",
-    upcoming: true,
   },
   {
     id: 1,
@@ -169,13 +168,7 @@ const filteredProjects = computed(() => {
                   </p>
                 </div>
               </div>
-              <!-- Upcoming badge -->
-              <div
-                v-if="project.upcoming"
-                class="absolute top-4 right-4 bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
-              >
-                Upcoming
-              </div>
+              
             </div>
 
             <!-- Project details -->

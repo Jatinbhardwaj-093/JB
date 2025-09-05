@@ -51,9 +51,8 @@ const projects = ref([
     id: 3,
     title: "Google Summer of Code at SymPy",
     description:
-      "Implementing a formal power series domain system for SymPy to enhance its symbolic mathematics capabilities, with expected completion in Summer 2025.",
+      "Implemented a formal power series domain system for SymPy to enhance its symbolic mathematics capabilities as part of Google Summer of Code 2025.",
     image: sympyImage,
-    upcoming: true,
     technologies: [
       { name: "SymPy", img: "SymPy.png" },
       { name: "Python", img: "Python.png" },
@@ -76,11 +75,12 @@ const projects = ref([
       },
     ],
     features: [
-      "Enhancing ring_series module with PowerSeriesRing domain system",
-      "Implementing efficient series expansions over diverse coefficient domains (QQ, RR)",
-      "Developing Taylor expansions for common functions (sin, exp)",
-      "Creating comprehensive documentation and improving performance",
-    ],
+    "Two-level class architecture for Univariate FPS ring over arbitrary rings",
+    "Dual backend architecture with pure Python and optimized Cython implementations (python-flint)",
+    "Achieved 85x-1680x performance improvements against global series methods with enhanced series computation",
+    "2.5x-42x speedup in ring_series module operations",
+    "Robust testing infrastructure with pytest, Hypothesis",
+  ],
   },
   {
     id: 1,
@@ -255,12 +255,6 @@ const handleImageError = (e: Event, projectId: number) => {
               >
                 {{ project.title }}
               </h3>
-              <div
-                v-if="project.upcoming"
-                class="absolute top-4 right-4 bg-gray-700 text-white text-xs font-bold px-2 py-1 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105"
-              >
-                Upcoming
-              </div>
             </div>
           </div>
 
