@@ -5,7 +5,6 @@ import BlogView from "../views/BlogView.vue";
 import BlogPostView from "../views/BlogPostView.vue";
 import Projects from "../views/ProjectsView.vue";
 import Contact from "../views/ContactView.vue";
-import HSPDetailView from "../views/HSPDetailView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const routes: RouteRecordRaw[] = [
@@ -34,11 +33,6 @@ const routes: RouteRecordRaw[] = [
     path: "/projects",
     name: "projects",
     component: Projects,
-  },
-  {
-    path: "/projects/hsp",
-    name: "hsp-detail",
-    component: HSPDetailView,
   },
   {
     path: "/contact",
