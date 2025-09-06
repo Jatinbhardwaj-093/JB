@@ -75,12 +75,12 @@ const projects = ref([
       },
     ],
     features: [
-    "Two-level class architecture for Univariate FPS ring over arbitrary rings",
-    "Dual backend architecture with pure Python and optimized Cython implementations (python-flint)",
-    "Achieved 85x-1680x performance improvements against global series methods with enhanced series computation",
-    "2.5x-42x speedup in ring_series module operations",
-    "Robust testing infrastructure with pytest, Hypothesis",
-  ],
+      "Two-level class architecture for Univariate FPS ring over arbitrary rings",
+      "Dual backend architecture with pure Python and optimized Cython implementations (python-flint)",
+      "Achieved 85x-1680x performance improvements against global series methods with enhanced series computation",
+      "2.5x-42x speedup in ring_series module operations",
+      "Robust testing infrastructure with pytest, Hypothesis",
+    ],
   },
   {
     id: 1,
@@ -376,29 +376,7 @@ const handleImageError = (e: Event, projectId: number) => {
                 </a>
               </div>
 
-              <router-link
-                v-if="project.id === 2"
-                to="/projects/hsp"
-                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
-              >
-                View Project
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="ml-1 h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </router-link>
               <a
-                v-else
                 :href="project.links[0].url"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -553,14 +531,6 @@ const handleImageError = (e: Event, projectId: number) => {
 .btn-view-project:hover::after {
   width: 100%;
   opacity: 1;
-}
-
-.btn-view-project svg {
-  transition: transform 0.3s ease-in-out;
-}
-
-.btn-view-project:hover svg {
-  transform: translateX(3px); /* Slightly reduced movement */
 }
 
 /* Dark mode specific adjustments */
