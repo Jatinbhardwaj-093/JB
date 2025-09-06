@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Projects from "../components/Projects.vue";
-import { useThemeStore } from "../store/theme";
 import { ref, computed } from "vue";
 
 // Import the project images directly for reliable loading
@@ -8,8 +7,6 @@ import isepImage from "../assets/images/Projects/ISEP.webp";
 import hspImage from "../assets/images/Projects/HSP.webp";
 import sympyImage from "../assets/images/Projects/sympy.webp";
 import gsocImage from "../assets/images/Projects/gsoc.webp";
-
-const themeStore = useThemeStore();
 
 // Projects data for mobile view - Updated with direct image imports
 const projects = ref([
@@ -107,12 +104,11 @@ const filteredProjects = computed(() => {
               :key="filter"
               @click="setFilter(filter)"
               class="px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap select-none"
-              :class="{
-                'bg-gray-200 text-gray-700 border border-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600':
-                  activeFilter === filter,
-                'bg-gray-100 text-gray-700 border border-gray-200 dark:bg-gray-900 dark:text-gray-400 dark:border-gray-700':
-                  activeFilter !== filter,
-              }"
+              :class="
+                activeFilter === filter
+                  ? 'bg-gray-700 text-gray-200 border border-gray-600'
+                  : 'bg-gray-800 text-gray-400 border border-gray-700'
+              "
               style="transition: none; transform: none"
             >
               {{ filter === "all" ? "All Projects" : filter }}
@@ -128,7 +124,7 @@ const filteredProjects = computed(() => {
           <div
             v-for="project in filteredProjects"
             :key="project.id"
-            class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300"
+            class="bg-gray-900 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300"
           >
             <!-- Project image with overlay -->
             <div class="relative h-64 overflow-hidden group">
@@ -168,12 +164,11 @@ const filteredProjects = computed(() => {
                   </p>
                 </div>
               </div>
-              
             </div>
 
             <!-- Project details -->
             <div class="p-4">
-              <p class="text-gray-700 dark:text-gray-300 text-sm mb-4">
+              <p class="text-gray-300 text-sm mb-4">
                 {{ project.description }}
               </p>
 
@@ -182,43 +177,18 @@ const filteredProjects = computed(() => {
                 <span
                   v-for="tag in project.tags"
                   :key="tag"
-                  class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                  class="px-2 py-1 text-xs font-medium rounded-full bg-gray-800 text-gray-300"
                 >
                   {{ tag }}
                 </span>
               </div>
 
               <!-- Project link - matched with desktop -->
-              <router-link
-                v-if="project.id === 2"
-                to="/projects/hsp"
-                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
-              >
-                <span class="relative">
-                  View Project
-                  <span
-                    class="absolute bottom-0 left-0 w-full h-0.5 bg-current transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"
-                  ></span>
-                </span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="ml-1 h-4 w-4 transition-transform duration-300"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </router-link>
               <a
-                v-else
                 :href="project.link"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
+                class="inline-flex items-center text-sm font-semibold text-gray-300 hover:text-white btn-view-project"
               >
                 <span class="relative">
                   View Project

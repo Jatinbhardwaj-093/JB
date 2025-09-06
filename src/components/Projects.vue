@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useThemeStore } from "../store/theme";
-
-const themeStore = useThemeStore();
 
 // Import project images directly
 import isepImage from "../assets/images/Projects/ISEP.webp";
@@ -178,23 +175,9 @@ const handleImageError = (e: Event, projectId: number) => {
   <section class="py-10">
     <div class="container mx-auto px-4">
       <div class="mb-10 text-center">
-        <h2
-          class="text-3xl font-bold mb-2"
-          :class="{
-            'text-white': themeStore.theme === 'dark',
-            'text-black': themeStore.theme === 'light',
-          }"
-        >
-          Featured Projects
-        </h2>
+        <h2 class="text-3xl font-bold mb-2 text-white">Featured Projects</h2>
         <div class="h-1 w-24 bg-gray-600 mx-auto rounded-full"></div>
-        <p
-          class="mt-4 max-w-2xl mx-auto"
-          :class="{
-            'text-gray-300': themeStore.theme === 'dark',
-            'text-gray-600': themeStore.theme === 'light',
-          }"
-        >
+        <p class="mt-4 max-w-2xl mx-auto text-gray-300">
           Explore my latest web development and open source contributions,
           showcasing elegant design with powerful functionality.
         </p>
@@ -210,8 +193,7 @@ const handleImageError = (e: Event, projectId: number) => {
           :class="{
             'transform-gpu hover:-translate-y-2': index % 2 === 0,
             'transform-gpu hover:translate-y-2': index % 2 !== 0,
-            'bg-gray-800/60 border-gray-700': themeStore.theme === 'dark',
-            'bg-white border-gray-100': themeStore.theme === 'light',
+            'bg-gray-800/60 border-gray-700': true,
           }"
         >
           <!-- Image -->
@@ -260,35 +242,18 @@ const handleImageError = (e: Event, projectId: number) => {
 
           <!-- Content -->
           <div class="p-5 space-y-3">
-            <p
-              :class="{
-                'text-gray-300': themeStore.theme === 'dark',
-                'text-gray-700': themeStore.theme === 'light',
-              }"
-            >
+            <p class="text-gray-300">
               {{ project.description }}
             </p>
 
             <!-- Features -->
             <div class="space-y-2">
-              <h4
-                class="font-semibold"
-                :class="{
-                  'text-white': themeStore.theme === 'dark',
-                  'text-black': themeStore.theme === 'light',
-                }"
-              >
-                Key Features:
-              </h4>
+              <h4 class="font-semibold text-white">Key Features:</h4>
               <ul class="list-disc pl-5 space-y-1">
                 <li
                   v-for="(feature, i) in project.features"
                   :key="i"
-                  class="text-sm"
-                  :class="{
-                    'text-gray-300': themeStore.theme === 'dark',
-                    'text-gray-700': themeStore.theme === 'light',
-                  }"
+                  class="text-sm text-gray-300"
                 >
                   {{ feature }}
                 </li>
@@ -298,11 +263,7 @@ const handleImageError = (e: Event, projectId: number) => {
             <!-- Technologies -->
             <div class="mt-5 rounded-lg tech-section">
               <h4
-                class="text-lg font-semibold my-3 flex items-center"
-                :class="{
-                  'text-white': themeStore.theme === 'dark',
-                  'text-black': themeStore.theme === 'light',
-                }"
+                class="text-lg font-semibold my-3 flex items-center text-white"
               >
                 Technologies Used
               </h4>
@@ -310,27 +271,16 @@ const handleImageError = (e: Event, projectId: number) => {
                 <div
                   v-for="(tech, i) in project.technologies"
                   :key="i"
-                  class="tech-badge flex items-center gap-2 px-3 py-1.5 rounded-md transition-all duration-200 hover:translate-y-[-2px]"
-                  :class="{
-                    'hover:shadow-md bg-gray-700/40 border border-gray-600':
-                      themeStore.theme === 'dark',
-                    'hover:shadow-sm bg-gray-50 border border-gray-200':
-                      themeStore.theme === 'light',
-                  }"
+                  class="tech-badge flex items-center gap-2 px-3 py-1.5 rounded-md transition-all duration-200 hover:translate-y-[-2px] hover:shadow-md bg-gray-700/40 border border-gray-600"
                   :title="`${tech.name}`"
                 >
                   <div
                     class="w-2 h-2 rounded-full flex-shrink-0"
                     :class="getTechColor(tech.name)"
                   ></div>
-                  <span
-                    class="text-sm font-medium"
-                    :class="{
-                      'text-gray-200': themeStore.theme === 'dark',
-                      'text-gray-700': themeStore.theme === 'light',
-                    }"
-                    >{{ tech.name }}</span
-                  >
+                  <span class="text-sm font-medium text-gray-200">{{
+                    tech.name
+                  }}</span>
                 </div>
               </div>
             </div>
@@ -338,10 +288,7 @@ const handleImageError = (e: Event, projectId: number) => {
             <!-- Links -->
             <div
               class="pt-3 mt-3 border-t flex justify-between items-center"
-              :class="{
-                'border-gray-700': themeStore.theme === 'dark',
-                'border-gray-100': themeStore.theme === 'light',
-              }"
+              :class="{ 'border-gray-700': true }"
             >
               <div class="flex space-x-3">
                 <a
@@ -353,9 +300,7 @@ const handleImageError = (e: Event, projectId: number) => {
                   class="link-button p-2 rounded-full transition-colors duration-300"
                   :class="{
                     'text-gray-400 hover:text-gray-200 hover:bg-gray-700':
-                      themeStore.theme === 'dark' && link.type !== 'figma',
-                    'text-gray-600 hover:text-gray-800 hover:bg-gray-50':
-                      themeStore.theme === 'light' && link.type !== 'figma',
+                      link.type !== 'figma',
                   }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
                 >
@@ -380,7 +325,7 @@ const handleImageError = (e: Event, projectId: number) => {
                 :href="project.links[0].url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 btn-view-project"
+                class="inline-flex items-center text-sm font-semibold text-gray-300 hover:text-white btn-view-project"
               >
                 View Project
                 <svg

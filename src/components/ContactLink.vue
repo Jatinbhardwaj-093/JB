@@ -11,7 +11,7 @@
       class="social-link"
     >
       <div
-        class="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-300 rounded-xl transform transition-all duration-500 ease-in-out hover:from-gray-300 hover:via-gray-200 hover:to-gray-400 hover:shadow-2xl hover:shadow-gray-300/40 dark:from-gray-800 dark:via-gray-900 dark:to-gray-700 dark:hover:from-gray-700 dark:hover:via-gray-600 dark:hover:to-gray-500 dark:hover:shadow-gray-500/30 border border-gray-300/50 dark:border-gray-600/50 hover:border-gray-400 dark:hover:border-gray-400"
+        class="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-700 rounded-xl transform transition-all duration-500 ease-in-out hover:from-gray-700 hover:via-gray-600 hover:to-gray-500 hover:shadow-2xl hover:shadow-gray-500/30 border border-gray-600/50 hover:border-gray-400"
         style="
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1),
             inset 0 2px 0 rgba(255, 255, 255, 0.3),
@@ -24,7 +24,7 @@
           <svg
             v-if="link.icon === 'gmail'"
             viewBox="0 0 24 24"
-            class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 fill-gray-600 group-hover:fill-gray-800 transition-colors duration-300 dark:fill-gray-300 dark:group-hover:fill-gray-100"
+            class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 fill-gray-300 group-hover:fill-gray-100 transition-colors duration-300"
           >
             <path
               d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"
@@ -34,12 +34,12 @@
           <i
             v-else
             :class="link.icon"
-            class="text-2xl sm:text-3xl md:text-4xl text-gray-600 group-hover:text-gray-800 transition-colors duration-300 dark:text-gray-300 dark:group-hover:text-gray-100"
+            class="text-2xl sm:text-3xl md:text-4xl text-gray-300 group-hover:text-gray-100 transition-colors duration-300"
           ></i>
         </div>
 
         <span
-          class="absolute -bottom-8 opacity-0 group-hover:opacity-100 text-gray-700 font-bold text-sm sm:text-base transform transition-all duration-300 group-hover:-translate-y-1 dark:text-gray-200"
+          class="absolute -bottom-8 opacity-0 group-hover:opacity-100 text-gray-200 font-bold text-sm sm:text-base transform transition-all duration-300 group-hover:-translate-y-1"
         >
           {{ link.label }}
         </span>
@@ -158,14 +158,14 @@ const socialLinks = [
   }
 }
 
-/* Dark mode adjustments */
-:root[data-theme="dark"] .social-link:hover div {
+/* Unified monochrome/dark style */
+.social-link:hover div {
   box-shadow: 0 20px 40px rgba(168, 85, 247, 0.3),
     0 10px 20px rgba(168, 85, 247, 0.2), inset 0 3px 0 rgba(255, 255, 255, 0.2),
     inset 0 -3px 0 rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(168, 85, 247, 0.4);
 }
 
-:root[data-theme="dark"] .social-link:active div {
+.social-link:active div {
   box-shadow: 0 10px 20px rgba(168, 85, 247, 0.25),
     0 5px 10px rgba(168, 85, 247, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
@@ -179,11 +179,6 @@ const socialLinks = [
 
 .group:hover svg,
 .group:hover i {
-  filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.3));
-}
-
-:root[data-theme="dark"] .group:hover svg,
-:root[data-theme="dark"] .group:hover i {
   filter: drop-shadow(0 4px 8px rgba(168, 85, 247, 0.4));
 }
 </style>

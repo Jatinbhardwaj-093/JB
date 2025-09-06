@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useThemeStore } from "../store/theme";
 import { ref, onMounted, watch } from "vue";
-
-const themeStore = useThemeStore();
 
 // Props
 const props = defineProps<{
@@ -97,7 +94,7 @@ const switchTab = (tab: string) => {
 </script>
 
 <template>
-  <div data-theme="dark" class="w-full">
+  <div class="w-full">
     <!-- Section Header with Tab Switcher for Desktop -->
     <div class="mb-8">
       <!-- Desktop Tab Switcher -->
@@ -111,17 +108,13 @@ const switchTab = (tab: string) => {
         </p>
 
         <!-- Clean Tab Switcher -->
-        <div
-          class="relative inline-flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1 shadow-sm"
-        >
+        <div class="relative inline-flex bg-gray-800 rounded-lg p-1 shadow-sm">
           <button
             @click="switchTab('education')"
             class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 shadow-sm':
-                activeTab === 'education',
-              'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
-                activeTab !== 'education',
+              'bg-gray-800 text-gray-300 shadow-sm': activeTab === 'education',
+              'text-gray-400 hover:text-gray-200': activeTab !== 'education',
             }"
           >
             Education
@@ -130,10 +123,8 @@ const switchTab = (tab: string) => {
             @click="switchTab('hobbies')"
             class="px-4 py-2 rounded-md font-medium transition-all duration-200 flex items-center gap-2 relative focus:outline-none"
             :class="{
-              'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 shadow-sm':
-                activeTab === 'hobbies',
-              'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200':
-                activeTab !== 'hobbies',
+              'bg-gray-800 text-gray-300 shadow-sm': activeTab === 'hobbies',
+              'text-gray-400 hover:text-gray-200': activeTab !== 'hobbies',
             }"
           >
             Hobbies
@@ -187,7 +178,7 @@ const switchTab = (tab: string) => {
               <!-- Timeline Dot -->
               <div class="relative z-10 mr-6">
                 <div
-                  class="w-16 h-16 rounded-full bg-white dark:bg-gray-800 shadow-lg border-4 border-white dark:border-gray-800 flex items-center justify-center"
+                  class="w-16 h-16 rounded-full bg-gray-900 shadow-lg border-4 border-gray-900 flex items-center justify-center"
                 >
                   <a :href="edu.link" target="_blank" rel="noopener noreferrer">
                     <div
@@ -206,23 +197,21 @@ const switchTab = (tab: string) => {
 
               <!-- Card Content -->
               <div
-                class="flex-1 bg-white dark:bg-gray-800/90 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm"
+                class="flex-1 bg-gray-900/90 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 backdrop-blur-sm"
               >
                 <div class="p-6">
                   <!-- Header -->
                   <div class="flex items-start justify-between mb-4">
                     <div>
-                      <p
-                        class="text-xl font-bold text-gray-600 dark:text-gray-300 mb-1"
-                      >
+                      <p class="text-xl font-bold text-gray-300 mb-1">
                         {{ edu.title }}
                       </p>
-                      <p class="text-gray-600 dark:text-gray-300 font-medium">
+                      <p class="text-gray-300 font-medium">
                         {{ edu.institution }}
                       </p>
                     </div>
                     <span
-                      class="text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"
+                      class="text-sm font-semibold text-gray-400 bg-gray-800 px-3 py-1 rounded-full"
                     >
                       {{ edu.year }}
                     </span>
@@ -246,7 +235,7 @@ const switchTab = (tab: string) => {
           >
             <!-- Card -->
             <div
-              class="bg-white dark:bg-gray-800/90 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm overflow-hidden"
+              class="bg-gray-900/90 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700 backdrop-blur-sm overflow-hidden"
             >
               <!-- Header with Gradient -->
               <div class="relative p-4 pb-0">
@@ -279,15 +268,15 @@ const switchTab = (tab: string) => {
                   <!-- Info -->
                   <div class="flex-1 min-w-0">
                     <p
-                      class="font-bold text-lg text-gray-600 dark:text-gray-300 mb-1 leading-tight"
+                      class="font-bold text-lg text-gray-300 mb-1 leading-tight"
                     >
                       {{ edu.title }}
                     </p>
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    <p class="text-sm text-gray-300 mb-2">
                       {{ edu.institution }}
                     </p>
                     <span
-                      class="inline-block text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md"
+                      class="inline-block text-xs font-medium text-gray-400 bg-gray-800 px-2 py-1 rounded-md"
                     >
                       {{ edu.year }}
                     </span>
@@ -316,7 +305,7 @@ const switchTab = (tab: string) => {
             :style="{ 'animation-delay': `${index * 200}ms` }"
           >
             <div
-              class="bg-white dark:bg-gray-800/90 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm overflow-hidden group"
+              class="bg-gray-900/90 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 backdrop-blur-sm overflow-hidden group"
             >
               <!-- Header with Gradient -->
               <div class="relative p-6 pb-4">
@@ -339,16 +328,12 @@ const switchTab = (tab: string) => {
                   </div>
 
                   <!-- Title -->
-                  <p
-                    class="text-xl font-bold mb-2 text-gray-600 dark:text-gray-300"
-                  >
+                  <p class="text-xl font-bold mb-2 text-gray-300">
                     {{ hobby.title }}
                   </p>
 
                   <!-- Description -->
-                  <p
-                    class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"
-                  >
+                  <p class="text-gray-300 text-sm leading-relaxed">
                     {{ hobby.description }}
                   </p>
                 </div>
@@ -375,7 +360,7 @@ const switchTab = (tab: string) => {
             :style="{ 'animation-delay': `${index * 150}ms` }"
           >
             <div
-              class="bg-white dark:bg-gray-800/90 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm overflow-hidden"
+              class="bg-gray-900/90 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700 backdrop-blur-sm overflow-hidden"
             >
               <div class="p-4">
                 <div class="flex items-center gap-3">
@@ -393,12 +378,10 @@ const switchTab = (tab: string) => {
 
                   <!-- Info -->
                   <div class="flex-1">
-                    <p
-                      class="font-bold text-lg text-gray-600 dark:text-gray-300 mb-1"
-                    >
+                    <p class="font-bold text-lg text-gray-300 mb-1">
                       {{ hobby.title }}
                     </p>
-                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                    <p class="text-sm text-gray-300">
                       {{ hobby.description }}
                     </p>
                   </div>

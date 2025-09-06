@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useThemeStore } from "../store/theme";
 
 const WEB3FORMS_ACCESS_KEY = "f19ff89a-d669-4a51-8d08-47e392f4a85f";
-const themeStore = useThemeStore();
 
 // Reactive form data
 const name = ref("");
@@ -185,25 +183,16 @@ const contactInfo = [
 </script>
 
 <template>
-  <section
-    class="py-10 md:py-18"
-    :class="{
-      'bg-gray-50': themeStore.theme === 'light',
-      'bg-gray-900': themeStore.theme === 'dark',
-    }"
-  >
+  <section class="py-10 md:py-18 bg-gray-900 text-white">
     <div class="container mx-auto px-4">
       <div class="max-w-5xl mx-auto">
         <!-- Section Header -->
         <div class="text-center mb-12">
-          <h1
-            class="text-3xl md:text-4xl font-bold mb-2 text-black"
-            :class="{ 'text-white': themeStore.theme === 'dark' }"
-          >
+          <h1 class="text-3xl md:text-4xl font-bold mb-2 text-white">
             Get in Touch
           </h1>
           <div class="h-1 w-24 bg-gray-600 mx-auto rounded-full mb-4"></div>
-          <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p class="text-gray-300 max-w-2xl mx-auto">
             Have a project in mind or want to collaborate? Feel free to reach
             out and let's discuss how we can work together.
           </p>
@@ -212,17 +201,17 @@ const contactInfo = [
         <div class="flex flex-col lg:flex-row gap-8">
           <!-- Left Side: Contact Form -->
           <div
-            class="w-full lg:w-7/12 bg-white dark:bg-gray-900 rounded-xl shadow-xl p-6 md:p-8"
+            class="w-full lg:w-7/12 bg-gray-900 rounded-xl shadow-xl p-6 md:p-8 border border-gray-800"
           >
             <!-- Error Message -->
             <div
               v-if="errorMessage"
-              class="mb-6 p-4 rounded-lg bg-gray-100 border-l-4 border-gray-500 dark:bg-gray-800 dark:border-gray-600"
+              class="mb-6 p-4 rounded-lg bg-gray-800 border-l-4 border-gray-600"
             >
               <div class="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 text-gray-600 dark:text-gray-400 mr-2"
+                  class="h-5 w-5 text-gray-400 mr-2"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -232,7 +221,7 @@ const contactInfo = [
                     clip-rule="evenodd"
                   />
                 </svg>
-                <p class="text-gray-700 dark:text-gray-300 font-medium">
+                <p class="text-gray-300 font-medium">
                   {{ errorMessage }}
                 </p>
               </div>
@@ -245,9 +234,9 @@ const contactInfo = [
                 <div>
                   <label
                     for="name"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    class="block text-sm font-medium text-gray-300 mb-1"
                   >
-                    Name <span class="text-gray-600 dark:text-gray-400">*</span>
+                    Name <span class="text-gray-400">*</span>
                   </label>
                   <div class="relative">
                     <div
@@ -259,12 +248,10 @@ const contactInfo = [
                       id="name"
                       type="text"
                       v-model="name"
-                      class="pl-10 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
+                      class="pl-10 w-full px-4 py-2 border rounded-lg bg-gray-900 text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
                       :class="{
                         'border-gray-600': errors.name,
-                        'border-gray-300 dark:border-gray-600': !errors.name,
-                        'bg-white dark:bg-gray-900': true,
-                        'text-gray-900 dark:text-white': true,
+                        'border-gray-700': !errors.name,
                       }"
                       placeholder="John Doe"
                     />
@@ -272,7 +259,7 @@ const contactInfo = [
                   <p
                     v-if="errors.name"
                     id="name-error"
-                    class="mt-1 text-sm text-gray-600 dark:text-gray-400"
+                    class="mt-1 text-sm text-gray-400"
                   >
                     {{ errors.name }}
                   </p>
@@ -282,10 +269,10 @@ const contactInfo = [
                 <div>
                   <label
                     for="email"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                    class="block text-sm font-medium text-gray-300 mb-1"
                   >
                     Email
-                    <span class="text-gray-600 dark:text-gray-400">*</span>
+                    <span class="text-gray-400">*</span>
                   </label>
                   <div class="relative">
                     <div
@@ -297,12 +284,10 @@ const contactInfo = [
                       id="email"
                       type="email"
                       v-model="email"
-                      class="pl-10 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
+                      class="pl-10 w-full px-4 py-2 border rounded-lg bg-gray-900 text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
                       :class="{
                         'border-gray-600': errors.email,
-                        'border-gray-300 dark:border-gray-600': !errors.email,
-                        'bg-white dark:bg-gray-900': true,
-                        'text-gray-900 dark:text-white': true,
+                        'border-gray-700': !errors.email,
                       }"
                       placeholder="john@example.com"
                     />
@@ -310,7 +295,7 @@ const contactInfo = [
                   <p
                     v-if="errors.email"
                     id="email-error"
-                    class="mt-1 text-sm text-gray-600 dark:text-gray-400"
+                    class="mt-1 text-sm text-gray-400"
                   >
                     {{ errors.email }}
                   </p>
@@ -321,10 +306,10 @@ const contactInfo = [
               <div class="mb-6">
                 <label
                   for="subject"
-                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  class="block text-sm font-medium text-gray-300 mb-1"
                 >
                   Subject
-                  <span class="text-gray-600 dark:text-gray-400">*</span>
+                  <span class="text-gray-400">*</span>
                 </label>
                 <div class="relative">
                   <div
@@ -336,12 +321,10 @@ const contactInfo = [
                     id="subject"
                     type="text"
                     v-model="subject"
-                    class="pl-10 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
+                    class="pl-10 w-full px-4 py-2 border rounded-lg bg-gray-900 text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
                     :class="{
                       'border-gray-600': errors.subject,
-                      'border-gray-300 dark:border-gray-600': !errors.subject,
-                      'bg-white dark:bg-gray-900': true,
-                      'text-gray-900 dark:text-white': true,
+                      'border-gray-700': !errors.subject,
                     }"
                     placeholder="Project Inquiry"
                   />
@@ -349,7 +332,7 @@ const contactInfo = [
                 <p
                   v-if="errors.subject"
                   id="subject-error"
-                  class="mt-1 text-sm text-gray-600 dark:text-gray-400"
+                  class="mt-1 text-sm text-gray-400"
                 >
                   {{ errors.subject }}
                 </p>
@@ -359,22 +342,20 @@ const contactInfo = [
               <div class="mb-6">
                 <label
                   for="message"
-                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  class="block text-sm font-medium text-gray-300 mb-1"
                 >
                   Message
-                  <span class="text-gray-600 dark:text-gray-400">*</span>
+                  <span class="text-gray-400">*</span>
                 </label>
                 <div class="relative">
                   <textarea
                     id="message"
                     rows="5"
                     v-model="message"
-                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
+                    class="w-full px-4 py-2 border rounded-lg bg-gray-900 text-white focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-all duration-300"
                     :class="{
                       'border-gray-600': errors.message,
-                      'border-gray-300 dark:border-gray-600': !errors.message,
-                      'bg-white dark:bg-gray-900': true,
-                      'text-gray-900 dark:text-white': true,
+                      'border-gray-700': !errors.message,
                     }"
                     placeholder="I'd like to discuss a project idea..."
                   ></textarea>
@@ -382,7 +363,7 @@ const contactInfo = [
                 <p
                   v-if="errors.message"
                   id="message-error"
-                  class="mt-1 text-sm text-gray-600 dark:text-gray-400"
+                  class="mt-1 text-sm text-gray-400"
                 >
                   {{ errors.message }}
                 </p>
@@ -484,14 +465,14 @@ const contactInfo = [
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn backdrop-blur-sm"
     >
       <div
-        class="bg-white dark:bg-gray-900 rounded-xl shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all animate-scaleIn"
+        class="bg-gray-900 rounded-xl shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all animate-scaleIn border border-gray-800"
       >
         <div class="text-center">
           <div
-            class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4"
+            class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-gray-800 mb-4"
           >
             <svg
-              class="h-10 w-10 text-gray-600 dark:text-gray-400"
+              class="h-10 w-10 text-gray-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -505,10 +486,8 @@ const contactInfo = [
               ></path>
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Message Sent!
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-6">
+          <h3 class="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+          <p class="text-gray-300 mb-6">
             Thank you for reaching out! I'll get back to you as soon as
             possible.
           </p>

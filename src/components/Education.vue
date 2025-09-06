@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useThemeStore } from "../store/theme";
 import { ref, onMounted } from "vue";
-
-const themeStore = useThemeStore();
 
 // Animation states
 const cardsVisible = ref(false);
@@ -44,11 +41,11 @@ const educationData = [
 </script>
 
 <template>
-  <div data-theme="dark" class="w-full">
+  <div class="w-full">
     <!-- Section Header -->
     <div class="mb-8 text-center">
       <h2
-        class="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-gray-50 dark:to-yellow-50 bg-clip-text text-transparent"
+        class="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-gray-200 to-gray-50 bg-clip-text text-transparent"
       >
         Education Journey
       </h2>
@@ -59,7 +56,7 @@ const educationData = [
       <div class="relative">
         <!-- Timeline Line -->
         <div
-          class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-purple-500"
+          class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-600 to-gray-400"
         ></div>
 
         <!-- Education Cards -->
@@ -74,12 +71,11 @@ const educationData = [
             <!-- Timeline Dot -->
             <div class="relative z-10 mr-6">
               <div
-                class="w-16 h-16 rounded-full bg-white dark:bg-gray-900 shadow-lg border-4 border-white dark:border-gray-900 flex items-center justify-center"
+                class="w-16 h-16 rounded-full bg-gray-900 shadow-lg border-4 border-gray-900 flex items-center justify-center"
               >
                 <a :href="edu.link" target="_blank" rel="noopener noreferrer">
                   <div
-                    class="w-12 h-12 rounded-full overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-                    :class="`bg-gradient-to-br ${edu.gradient}`"
+                    class="w-12 h-12 rounded-full overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-gray-800"
                   >
                     <img
                       :src="edu.logo"
@@ -93,23 +89,21 @@ const educationData = [
 
             <!-- Card Content -->
             <div
-              class="flex-1 bg-white dark:bg-gray-900/90 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm"
+              class="flex-1 bg-gray-900/90 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700 backdrop-blur-sm"
             >
               <div class="p-6">
                 <!-- Header -->
                 <div class="flex items-start justify-between mb-4">
                   <div>
-                    <h3
-                      class="text-xl font-bold text-gray-900 dark:text-white mb-1"
-                    >
+                    <h3 class="text-xl font-bold text-white mb-1">
                       {{ edu.title }}
                     </h3>
-                    <p class="text-gray-600 dark:text-gray-300 font-medium">
+                    <p class="text-gray-300 font-medium">
                       {{ edu.institution }}
                     </p>
                   </div>
                   <span
-                    class="text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full"
+                    class="text-sm font-semibold text-gray-400 bg-gray-800 px-3 py-1 rounded-full"
                   >
                     {{ edu.year }}
                   </span>
@@ -118,8 +112,7 @@ const educationData = [
                 <!-- Achievement & Status -->
                 <div class="flex flex-wrap gap-3">
                   <span
-                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold"
-                    :class="`bg-${edu.statusColor}-100 text-${edu.statusColor}-800 dark:bg-${edu.statusColor}-900/50 dark:text-${edu.statusColor}-300`"
+                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-800 text-gray-300"
                   >
                     <svg
                       class="w-4 h-4 mr-1.5"
@@ -136,16 +129,16 @@ const educationData = [
                   </span>
                   <span
                     v-if="edu.status.includes('Current')"
-                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300"
+                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-800 text-gray-300"
                   >
                     <div
-                      class="w-2 h-2 bg-orange-500 rounded-full mr-1.5 animate-pulse"
+                      class="w-2 h-2 bg-gray-400 rounded-full mr-1.5 animate-pulse"
                     ></div>
                     {{ edu.status }}
                   </span>
                   <span
                     v-else
-                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-gray-800 text-gray-300"
                   >
                     {{ edu.status }}
                   </span>
@@ -153,17 +146,13 @@ const educationData = [
 
                 <!-- Progress Bar for Current Education -->
                 <div v-if="edu.status.includes('Current')" class="mt-4">
-                  <div
-                    class="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1"
-                  >
+                  <div class="flex justify-between text-sm text-gray-400 mb-1">
                     <span>Progress</span>
                     <span>Diploma Level</span>
                   </div>
-                  <div
-                    class="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2"
-                  >
+                  <div class="w-full bg-gray-800 rounded-full h-2">
                     <div
-                      class="bg-gradient-to-r from-blue-500 to-indigo-600 h-2 rounded-full relative overflow-hidden"
+                      class="bg-gradient-to-r from-gray-500 to-gray-300 h-2 rounded-full relative overflow-hidden"
                       style="width: 60%"
                     >
                       <div
@@ -191,13 +180,12 @@ const educationData = [
         >
           <!-- Card -->
           <div
-            class="bg-white dark:bg-gray-900/90 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm overflow-hidden"
+            class="bg-gray-900/90 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700 backdrop-blur-sm overflow-hidden"
           >
             <!-- Header with Gradient -->
             <div class="relative p-4 pb-0">
               <div
-                class="absolute inset-0 bg-gradient-to-r opacity-5"
-                :class="`${edu.gradient}`"
+                class="absolute inset-0 bg-gradient-to-r from-gray-500 to-gray-700 opacity-5"
               ></div>
 
               <div class="relative flex items-start gap-3">
@@ -205,8 +193,7 @@ const educationData = [
                 <div class="flex-shrink-0">
                   <a :href="edu.link" target="_blank" rel="noopener noreferrer">
                     <div
-                      class="w-14 h-14 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-                      :class="`bg-gradient-to-br ${edu.gradient}`"
+                      class="w-14 h-14 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-gray-800"
                     >
                       <img
                         :src="edu.logo"
@@ -219,16 +206,14 @@ const educationData = [
 
                 <!-- Info -->
                 <div class="flex-1 min-w-0">
-                  <h3
-                    class="font-bold text-lg text-gray-900 dark:text-white mb-1 leading-tight"
-                  >
+                  <h3 class="font-bold text-lg text-white mb-1 leading-tight">
                     {{ edu.title }}
                   </h3>
-                  <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                  <p class="text-sm text-gray-300 mb-2">
                     {{ edu.institution }}
                   </p>
                   <span
-                    class="inline-block text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md"
+                    class="inline-block text-xs font-medium text-gray-400 bg-gray-800 px-2 py-1 rounded-md"
                   >
                     {{ edu.year }}
                   </span>
@@ -241,8 +226,7 @@ const educationData = [
               <!-- Achievements -->
               <div class="flex flex-wrap gap-2 mb-3">
                 <span
-                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold"
-                  :class="`bg-${edu.statusColor}-100 text-${edu.statusColor}-800 dark:bg-${edu.statusColor}-900/50 dark:text-${edu.statusColor}-300`"
+                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-800 text-gray-300"
                 >
                   <svg
                     class="w-3 h-3 mr-1"
@@ -259,16 +243,16 @@ const educationData = [
                 </span>
                 <span
                   v-if="edu.status.includes('Current')"
-                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300"
+                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-800 text-gray-300"
                 >
                   <div
-                    class="w-2 h-2 bg-orange-500 rounded-full mr-1 animate-pulse"
+                    class="w-2 h-2 bg-gray-400 rounded-full mr-1 animate-pulse"
                   ></div>
                   {{ edu.status }}
                 </span>
                 <span
                   v-else
-                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                  class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-800 text-gray-300"
                 >
                   {{ edu.status }}
                 </span>
@@ -276,17 +260,13 @@ const educationData = [
 
               <!-- Progress Bar for Current Education -->
               <div v-if="edu.status.includes('Current')" class="mt-3">
-                <div
-                  class="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1"
-                >
+                <div class="flex justify-between text-xs text-gray-400 mb-1">
                   <span>Academic Progress</span>
                   <span>60%</span>
                 </div>
-                <div
-                  class="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-1.5"
-                >
+                <div class="w-full bg-gray-800 rounded-full h-1.5">
                   <div
-                    class="bg-gradient-to-r from-blue-500 to-indigo-600 h-1.5 rounded-full relative overflow-hidden"
+                    class="bg-gradient-to-r from-gray-500 to-gray-300 h-1.5 rounded-full relative overflow-hidden"
                     style="width: 60%"
                   >
                     <div
@@ -420,10 +400,10 @@ const educationData = [
   }
 }
 
-/* Dark mode specific animations */
-[data-theme="dark"] .education-card-desktop::before {
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1);
+/* Unified animation visuals */
+.education-card-desktop::before {
+  background: linear-gradient(135deg, #9ca3af, #e5e7eb);
+  box-shadow: 0 0 0 4px rgba(156, 163, 175, 0.1);
 }
 
 /* Gradient text animation */
@@ -462,8 +442,9 @@ h2 {
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-[data-theme="dark"] .education-card-desktop > div:hover,
-[data-theme="dark"] .education-card-mobile > div:hover {
+/* Stronger shadow suitable for dark UI */
+.education-card-desktop > div:hover,
+.education-card-mobile > div:hover {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
     0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }

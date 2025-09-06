@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import { useThemeStore } from "../store/theme";
 import { getPostsByCategory } from "../data/blogs/index";
 import BlogCard from "./blog/BlogCard.vue";
 
-const themeStore = useThemeStore();
 const filterTabsContainer = ref<HTMLElement | null>(null);
 
 // Define blog categories with descriptions
@@ -205,7 +203,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full max-w-[100vw] overflow-x-hidden bg-black">
+  <div class="w-full max-w-[100vw] overflow-x-hidden bg-black text-white">
     <!-- Banner Image - Full width without container -->
     <div class="relative w-full">
       <div
@@ -238,7 +236,7 @@ onMounted(() => {
                 </span>
               </p>
               <p
-                class="text-xs sm:text-xs md:text-sm text-gray-200 max-w-3xl hidden md:block"
+                class="text-xs sm:text-xs md:text-sm text-gray-300 max-w-3xl hidden md:block"
               >
                 {{ currentCategory.description }}
               </p>
