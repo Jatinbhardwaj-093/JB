@@ -183,7 +183,7 @@ const contactInfo = [
 </script>
 
 <template>
-  <section class="py-10 md:py-18 bg-gray-900 text-white">
+  <section class="py-10 md:py-18 text-white">
     <div class="container mx-auto px-4">
       <div class="max-w-5xl mx-auto">
         <!-- Section Header -->

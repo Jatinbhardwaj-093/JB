@@ -203,7 +203,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full max-w-[100vw] overflow-x-hidden bg-black text-white">
+  <div class="w-full max-w-[100vw] overflow-x-hidden text-white">
     <!-- Banner Image - Full width without container -->
     <div class="relative w-full">
       <div

@@ -44,7 +44,7 @@ const closeMobileMenu = () => {
   >
     <div class="container mx-auto px-2 overflow-hidden">
       <!-- Removed padding for mobile view -->
-      <div class="flex justify-between items-center py-1.5 h-[50px] md:h-auto">
+      <div class="flex justify-between items-center  h-[50px] md:h-auto">
         <!-- More compact logo on mobile -->
         <router-link
           to="/"

@@ -32,7 +32,7 @@ const setActiveTab = (tabId) => {
 <template>
   <div class="about-view">
     <!-- Desktop Version -->
-    <section class="hidden md:block py-8 md:py-12 lg:py-16 bg-gray-900/30">
+    <section class="hidden md:block py-8 md:py-12 lg:py-16">
       <div class="container mx-auto px-4 md:px-6 overflow-y-hidden">
         <!-- About Me Header -->
         <div class="mb-12 text-center">
