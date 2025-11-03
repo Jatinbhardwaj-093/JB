@@ -1,35 +1,11 @@
 <script setup lang="ts">
-import { useThemeStore } from "../store/theme";
-import { computed } from "vue";
-
-const themeStore = useThemeStore();
-
-// Switch the theme folders - use dark images for light theme and light images for dark theme
-const mathsImg = computed(() =>
-  themeStore.theme === "dark"
-    ? new URL("../assets/images/light/Maths_light.png", import.meta.url).href
-    : new URL("../assets/images/Dark/Maths_dark.png", import.meta.url).href
-);
-
-const psychologyImg = computed(() =>
-  themeStore.theme === "dark"
-    ? new URL("../assets/images/light/Psychology_light.png", import.meta.url)
-        .href
-    : new URL("../assets/images/Dark/Psychology_dark.png", import.meta.url).href
-);
-
-const mlImg = computed(() =>
-  themeStore.theme === "dark"
-    ? new URL("../assets/images/light/ML_light.png", import.meta.url).href
-    : new URL("../assets/images/Dark/Ml_dark.png", import.meta.url).href
-);
+const mathsImg =  new URL("../assets/images/light/Maths.png", import.meta.url).href;
+const psychologyImg =  new URL("../assets/images/light/psychology.png", import.meta.url).href;
+const mlImg =  new URL("../assets/images/light/ML.png", import.meta.url).href;
 </script>
 
 <template>
-  <div data-theme="dark">
-    <!-- Removed duplicate Hobbies heading -->
-
-    <!-- Changed to flex-col layout for all screen sizes -->
+  <div>
     <div class="flex flex-col items-start justify-start gap-4">
       <div class="flex justify-start items-center gap-2">
         <div

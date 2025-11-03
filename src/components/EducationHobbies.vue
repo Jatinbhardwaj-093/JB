@@ -61,7 +61,7 @@ const hobbiesData = [
     id: "maths",
     title: "Mathematics",
     description: "Exploring mathematical concepts and problem-solving",
-    icon: new URL("../assets/images/light/Maths_light.png", import.meta.url)
+    icon: new URL("../assets/images/light/Maths.png", import.meta.url)
       .href,
     gradient: "from-gray-500 to-gray-600",
   },
@@ -70,7 +70,7 @@ const hobbiesData = [
     title: "Human Psychology",
     description: "Understanding human behavior and mental processes",
     icon: new URL(
-      "../assets/images/light/Psychology_light.png",
+      "../assets/images/light/psychology.png",
       import.meta.url
     ).href,
     gradient: "from-gray-400 to-gray-600",
@@ -79,7 +79,7 @@ const hobbiesData = [
     id: "ml",
     title: "Machine Learning",
     description: "Exploring AI algorithms and data science concepts",
-    icon: new URL("../assets/images/light/ML_light.png", import.meta.url).href,
+    icon: new URL("../assets/images/light/ML.png", import.meta.url).href,
     gradient: "from-gray-500 to-gray-700",
   },
 ];
