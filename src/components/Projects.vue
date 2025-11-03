@@ -152,6 +152,17 @@ const projects = ref([
 
 const activeTab = ref("all");
 
+// Feature preview & expand state per project
+const previewCount = 2; // show first 2 features by default
+const expanded = ref<Record<number, boolean>>({});
+
+const isExpanded = (id: number) => !!expanded.value[id];
+
+const toggleExpand = (id: number) => {
+  // preserve reactivity by replacing the object
+  expanded.value = { ...expanded.value, [id]: !expanded.value[id] };
+};
+
 // Improved error handling for images
 const handleImageError = (e: Event, projectId: number) => {
   const target = e.target as HTMLImageElement;
@@ -168,6 +179,13 @@ const handleImageError = (e: Event, projectId: number) => {
       target.src = projectImagePaths.sympy;
     }
   }
+};
+
+// Return the GitHub repo URL if present, otherwise fallback to first available link or '#'
+const getRepoUrl = (links: Array<{ type: string; url: string }>) => {
+  if (!links || links.length === 0) return "#";
+  const gh = links.find((l) => l.type === "github");
+  return gh ? gh.url : links[0].url;
 };
 </script>
 
@@ -246,18 +264,37 @@ const handleImageError = (e: Event, projectId: number) => {
               {{ project.description }}
             </p>
 
-            <!-- Features -->
+            <!-- Features with toggle preview -->
             <div class="space-y-2">
               <h4 class="font-semibold text-white">Key Features:</h4>
-              <ul class="list-disc pl-5 space-y-1">
+
+              <ul
+                :id="`features-${project.id}`"
+                class="list-disc pl-5 space-y-1"
+              >
                 <li
-                  v-for="(feature, i) in project.features"
-                  :key="i"
+                  v-for="(feature, i) in isExpanded(project.id)
+                    ? project.features
+                    : project.features.slice(0, previewCount)"
+                  :key="`${project.id}-feature-${i}`"
                   class="text-sm text-gray-300"
                 >
                   {{ feature }}
                 </li>
               </ul>
+
+              <button
+                v-if="project.features.length > previewCount"
+                @click="toggleExpand(project.id)"
+                class="text-sm text-gray-400 hover:text-gray-200 mt-1 focus:outline-none"
+                :aria-expanded="isExpanded(project.id)"
+                :aria-controls="`features-${project.id}`"
+              >
+                <span v-if="!isExpanded(project.id)"
+                  >Show {{ project.features.length - previewCount }} more</span
+                >
+                <span v-else>Show less</span>
+              </button>
             </div>
 
             <!-- Technologies -->
@@ -292,7 +329,9 @@ const handleImageError = (e: Event, projectId: number) => {
             >
               <div class="flex space-x-3">
                 <a
-                  v-for="(link, i) in project.links"
+                  v-for="(link, i) in project.links.filter(
+                    (l) => l.type !== 'github'
+                  )"
                   :key="i"
                   :href="link.url"
                   target="_blank"
@@ -304,11 +343,8 @@ const handleImageError = (e: Event, projectId: number) => {
                   }"
                   :aria-label="`Link to ${link.type} for ${project.title}`"
                 >
-                  <!-- All link types as styled text -->
-                  <span v-if="link.type === 'github'" class="github-text"
-                    >GitHub</span
-                  >
-                  <span v-else-if="link.type === 'drive'" class="github-text"
+                  <!-- Link text for remaining link types (exclude github) -->
+                  <span v-if="link.type === 'drive'" class="github-text"
                     >Google Docs</span
                   >
                   <span v-else-if="link.type === 'figma'" class="github-text"
@@ -322,26 +358,13 @@ const handleImageError = (e: Event, projectId: number) => {
               </div>
 
               <a
-                :href="project.links[0].url"
+                :href="getRepoUrl(project.links)"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center text-sm font-semibold text-gray-300 hover:text-white btn-view-project"
+                :aria-label="`Open Github repo for ${project.title}`"
               >
-                View Project
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="ml-1 h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
+                Github repo &gt;
               </a>
             </div>
           </div>
