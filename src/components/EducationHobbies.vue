@@ -238,7 +238,7 @@ const switchTab = (tab: string) => {
               class="bg-gray-900/90 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700 backdrop-blur-sm overflow-hidden"
             >
               <!-- Header with Gradient -->
-              <div class="relative p-4 pb-0">
+              <div class="relative p-4">
                 <div
                   class="absolute inset-0 bg-gradient-to-r opacity-5"
                   :class="`${edu.gradient}`"
@@ -283,9 +283,6 @@ const switchTab = (tab: string) => {
                   </div>
                 </div>
               </div>
-
-              <!-- Content -->
-              <div class="p-4 pt-3"></div>
             </div>
           </div>
         </div>
