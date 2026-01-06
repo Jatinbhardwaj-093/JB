@@ -165,7 +165,7 @@ const contactInfo = [
     icon: "bi-linkedin",
     label: "LinkedIn",
     value: "Jatin Bhardwaj",
-    link: "https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/",
+    link: "https://www.linkedin.com/in/jatin-bhardwaj093/",
   },
   {
     icon: "bi-github",

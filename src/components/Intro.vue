@@ -128,7 +128,7 @@ onUnmounted(() => {
           <div class="flex items-center justify-center gap-x-4 sm:gap-x-6">
             <!-- LinkedIn -->
             <a
-              href="https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/"
+              href="https://www.linkedin.com/in/jatin-bhardwaj093/"
               target="_blank"
               rel="noopener noreferrer"
               class="social-link group"

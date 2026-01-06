@@ -51,7 +51,7 @@
 <script setup>
 const socialLinks = [
   {
-    url: "https://www.linkedin.com/in/jatin-bhardwaj-b5962921a/",
+    url: "https://www.linkedin.com/in/jatin-bhardwaj093/",
     icon: "bi bi-linkedin",
     label: "LinkedIn",
   },
