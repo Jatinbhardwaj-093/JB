@@ -6,22 +6,23 @@ import gsocPosts from "./gsoc";
 // import psychologyPosts from './psychology';
 // Combine all posts in one array
 const allPosts = [
-    ...gsocPosts,
-    // Add other categories when available
-    // ...sympyPosts,
-    // ...mathPosts,
-    // ...mlPosts,
-    // ...psychologyPosts,
+  ...gsocPosts,
+  // Add other categories when available
+  // ...sympyPosts,
+  // ...mathPosts,
+  // ...mlPosts,
+  // ...psychologyPosts,
 ];
 console.log("All posts loaded:", allPosts);
 console.log("GSoC posts:", gsocPosts);
 // Get posts by category
 export const getPostsByCategory = (category) => {
-    return allPosts.filter((post) => post.category === category);
+  if (category === "all") return allPosts;
+  return allPosts.filter((post) => post.category === category);
 };
 // Get a specific post by slug
 export const getPostBySlug = (slug) => {
-    return allPosts.find((post) => post.slug === slug);
+  return allPosts.find((post) => post.slug === slug);
 };
 export { gsocPosts };
 export default allPosts;

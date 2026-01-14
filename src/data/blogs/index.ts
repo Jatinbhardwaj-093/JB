@@ -22,6 +22,7 @@ console.log("GSoC posts:", gsocPosts);
 
 // Get posts by category
 export const getPostsByCategory = (category: string): BlogPost[] => {
+  if (category === "all") return allPosts;
   return allPosts.filter((post) => post.category === category);
 };
 

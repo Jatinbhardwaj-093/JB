@@ -25,15 +25,15 @@ const isMobile = computed(() => {
 const experiences = [
   {
     title: "Google Summer of Code @Sympy",
-    timeline: "May 2025 - Present",
+    timeline: "May 2025 - Sept 2025",
     summary:
-      "Contributing to open source software development through Google Summer of Code from May 2025 to present.",
+      "Contributing to open source software development through Google Summer of Code from May 2025 to Sept 2025.",
     points: [
-  "Designed and implemented a comprehensive two-level class architecture for representing Univariate Power Series over arbitrary rings, enhancing SymPy's symbolic computation capabilities.",
-  "Developed robust testing infrastructure using pytest with fixtures and parametrization, complemented by property-based testing with Hypothesis framework to ensure code reliability and mathematical correctness.",
-  "Built dual backend architecture supporting both pure Python and optimized Cython implementations (using python-flint) to balance accessibility with high-performance computing requirements.",
-  "Achieved significant performance improvements: Against global series methods gained 85x-1680x speedup with Python-Flint backend, while aginst ring_series module operations improved by 2.5x-42x respectively, dramatically enhancing series computation efficiency.",
-],
+      "Designed and implemented a comprehensive two-level class architecture for representing Univariate Power Series over arbitrary rings, enhancing SymPy's symbolic computation capabilities.",
+      "Developed robust testing infrastructure using pytest with fixtures and parametrization, complemented by property-based testing with Hypothesis framework to ensure code reliability and mathematical correctness.",
+      "Built dual backend architecture supporting both pure Python and optimized Cython implementations (using python-flint) to balance accessibility with high-performance computing requirements.",
+      "Achieved significant performance improvements: Against global series methods gained 85x-1680x speedup with Python-Flint backend, while aginst ring_series module operations improved by 2.5x-42x respectively, dramatically enhancing series computation efficiency.",
+    ],
     className: "border-l-gray-600",
   },
 ];

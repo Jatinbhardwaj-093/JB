@@ -8,44 +8,23 @@ const filterTabsContainer = ref<HTMLElement | null>(null);
 // Define blog categories with descriptions
 const categories = ref([
   {
+    id: "all",
+    name: "All",
+    title: "All Posts",
+    description:
+      "Browse everything in one place, starting with my detailed Google Summer of Code journey and future write-ups.",
+  },
+  {
     id: "gsoc",
     name: "GSoC",
     title: "Google Summer of Code",
     description:
       "My journey and contributions during Google Summer of Code. Sharing experiences, challenges, and the open-source projects I've worked on.",
   },
-  {
-    id: "sympy",
-    name: "SymPy",
-    title: "SymPy Library",
-    description:
-      "Exploring symbolic mathematics with Python using SymPy. Tutorials, project insights, and advancements in computer algebra systems.",
-  },
-  {
-    id: "mathematics",
-    name: "Mathematics",
-    title: "Mathematical Explorations",
-    description:
-      "Delving into mathematical concepts, theorems, and applications. From pure mathematics to practical problem-solving approaches.",
-  },
-  {
-    id: "machine-learning",
-    name: "Machine Learning",
-    title: "Machine Learning Research",
-    description:
-      "Research papers, implementations, and insights in machine learning. Covering neural networks, algorithms, and cutting-edge AI developments.",
-  },
-  {
-    id: "psychology",
-    name: "Psychology",
-    title: "Psychology Studies",
-    description:
-      "Exploring the human mind, behavior, and cognitive processes. Bridging technology with psychological insights and research.",
-  },
 ]);
 
 // Track active category
-const activeCategory = ref("gsoc");
+const activeCategory = ref("all");
 
 // Get the current category object based on active ID
 const currentCategory = computed(() => {
@@ -78,32 +57,6 @@ const setActiveCategory = (categoryId: string) => {
   activeCategory.value = categoryId;
 };
 
-// Banner image path based on active category
-const bannerImagePath = computed(() => {
-  try {
-    // Special cases for GIF images
-    if (
-      activeCategory.value === "mathematics" ||
-      activeCategory.value === "machine-learning"
-    ) {
-      return new URL(
-        `../assets/images/BlogHeaderBanner/${activeCategory.value}.gif`,
-        import.meta.url
-      ).href;
-    }
-
-    // For other categories, use JPG
-    return new URL(
-      `../assets/images/BlogHeaderBanner/${activeCategory.value}.webp`,
-      import.meta.url
-    ).href;
-  } catch (error) {
-    // Fallback to cicada image if the file doesn't exist
-    return new URL("../assets/images/cicada.jpg", import.meta.url).href;
-  }
-});
-
-// Update banner image whenever active category changes
 const handleCategoryChange = (categoryId: string) => {
   setActiveCategory(categoryId);
 
@@ -204,50 +157,8 @@ onMounted(() => {
 
 <template>
   <div class="w-full max-w-[100vw] overflow-x-hidden text-white">
-    <!-- Banner Image - Full width without container -->
-    <div class="relative w-full">
-      <div
-        class="h-[15vh] md:h-[25vh] lg:h-[25vh] xl:h-[30vh] w-full overflow-hidden"
-      >
-        <img
-          :src="bannerImagePath"
-          :alt="`${currentCategory.name} Banner`"
-          class="w-full h-full object-contain object-center"
-        />
-        <div
-          class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end"
-        >
-          <div class="p-4 md:p-6 w-full">
-            <div class="w-full px-4 sm:px-6">
-              <p
-                class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-2"
-              >
-                <span class="hidden sm:inline">{{
-                  currentCategory.title
-                }}</span>
-                <span class="sm:hidden">
-                  {{
-                    currentCategory.id === "gsoc"
-                      ? "GSoC"
-                      : currentCategory.id === "machine-learning"
-                      ? "ML Research"
-                      : currentCategory.title
-                  }}
-                </span>
-              </p>
-              <p
-                class="text-xs sm:text-xs md:text-sm text-gray-300 max-w-3xl hidden md:block"
-              >
-                {{ currentCategory.description }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Filter Tabs - Full width with a dark background -->
-    <div class="w-full py-4 shadow-md relative bg-gray-900">
+    <!-- Filter Tabs - Transparent background -->
+    <div class="w-full py-6 pb-0 relative">
       <div
         class="overflow-x-auto no-scrollbar scroll-smooth"
         ref="filterTabsContainer"
@@ -298,7 +209,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="container mx-auto px-4 max-w-6xl overflow-hidden py-8 md:py-14">
+    <div class="container mx-auto px-4 max-w-6xl overflow-hidden py-6 md:py-10">
       <!-- Blog Posts Grid when posts are available -->
       <div
         v-if="hasPosts"

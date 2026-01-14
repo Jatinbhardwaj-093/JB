@@ -6,7 +6,7 @@ const themeStore = useThemeStore();
 
 const firstName = ref("Jatin");
 const lastName = ref("Bhardwaj");
-const title = ref("Cloud Computing | AI & ML | Mathematics");
+const title = ref("Cloud Computing | Machine Learning | Mathematics");
 const location = ref("Delhi, India");
 
 const isLoaded = ref(false);
