@@ -53,24 +53,24 @@ const techCategories = [
         description: "Numerical computing",
       },
       {
-        name: "Pandas",
-        img: "Pandas.svg",
-        description: "Data manipulation",
-      },
-      {
         name: "scikit-learn",
         img: "scikit-learn.svg",
         description: "Machine learning",
       },
       {
-        name: "PyTorch",
-        img: "PyTorch.svg",
-        description: "Deep learning framework",
-      },
-      {
         name: "Matplotlib",
         img: "Matplotlib.svg",
         description: "Data visualization",
+      },
+      {
+        name: "Pandas",
+        img: "Pandas.svg",
+        description: "Data manipulation",
+      },
+      {
+        name: "PyTorch",
+        img: "PyTorch.svg",
+        description: "Deep learning framework",
       },
       {
         name: "Seaborn",
