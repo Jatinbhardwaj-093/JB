@@ -40,11 +40,12 @@ const closeMobileMenu = () => {
   <nav
     data-theme="dark"
     ref="navRef"
-    class="navbar sticky top-0 z-50 backdrop-blur-md bg-black/70 border-b border-gray-700 shadow-sm transition-all duration-300"
+    class="navbar sticky top-0 z-50 backdrop-blur-md bg-black/70 shadow-sm transition-all duration-300 pt-1"
   >
-    <div class="container mx-auto px-2 overflow-hidden">
-      <!-- Removed padding for mobile view -->
-      <div class="flex justify-between items-center  h-[50px] md:h-auto">
+    <div class="flex justify-center">
+      <div class="w-full max-w-4xl px-2 overflow-hidden">
+        <!-- Removed padding for mobile view -->
+        <div class="flex justify-between items-center  h-[50px] md:h-auto">
         <!-- More compact logo on mobile -->
         <router-link
           to="/"
@@ -124,7 +125,10 @@ const closeMobileMenu = () => {
           </button>
         </div>
       </div>
+      </div>
     </div>
+    <!-- Divider line -->
+    <div class="h-px bg-gradient-to-r from-transparent via-gray-400 dark:via-gray-600 to-transparent my-1"></div>
 
     <!-- Mobile menu with overlay styling - moved outside the container -->
     <div
