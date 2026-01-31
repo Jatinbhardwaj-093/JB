@@ -66,8 +66,6 @@ const closeMobileMenu = () => {
         <div class="hidden md:flex items-center space-x-6">
           <router-link
             v-for="(link, index) in [
-              { name: 'home', text: 'Home' },
-              { name: 'about', text: 'About' },
               { name: 'projects', text: 'Projects' },
               { name: 'blogs', text: 'Blog' },
               { name: 'contact', text: 'Contact' },
@@ -164,8 +162,6 @@ const closeMobileMenu = () => {
         <div class="flex flex-col space-y-5 flex-grow mt-6">
           <router-link
             v-for="(link, index) in [
-              { name: 'home', text: 'Home' },
-              { name: 'about', text: 'About' },
               { name: 'projects', text: 'Projects' },
               { name: 'blogs', text: 'Blog' },
               { name: 'contact', text: 'Contact' },
