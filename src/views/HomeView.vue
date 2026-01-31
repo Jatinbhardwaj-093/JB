@@ -40,7 +40,7 @@ onUnmounted(() => {
 <template>
   <div class="overflow-hidden w-full smooth-scroll">
     <!-- Intro Section -->
-    <section id="intro" class="min-h-screen">
+    <section id="intro" class="min-h-[90vh]">
       <Intro />
     </section>
 

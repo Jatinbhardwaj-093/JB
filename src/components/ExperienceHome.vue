@@ -46,7 +46,7 @@ const experiences = [
       <div
         v-for="(exp, index) in experiences"
         :key="index"
-        class="rounded-lg overflow-hidden bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black/80 shadow-md"
+        class="rounded-lg overflow-hidden bg-gray-50/50 dark:bg-gray-900/30 shadow-sm border border-gray-200 dark:border-gray-800"
       >
         <div class="border-l-4 p-5 relative" :class="exp.className">
           <div class="flex justify-between items-center mb-3">
