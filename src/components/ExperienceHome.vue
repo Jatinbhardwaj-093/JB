@@ -42,101 +42,73 @@ const experiences = [
 <template>
   <div>
     <!-- Desktop Experience View -->
-    <div class="hidden md:block space-y-8">
+    <div class="hidden md:block mt-6">
       <div
         v-for="(exp, index) in experiences"
         :key="index"
-        class="rounded-lg overflow-hidden bg-gray-50/50 dark:bg-gray-900/30 shadow-sm border border-gray-200 dark:border-gray-800"
+        class="py-6 border-b border-gray-200 dark:border-gray-800 last:border-b-0"
       >
-        <div class="border-l-4 p-5 relative" :class="exp.className">
-          <div class="flex justify-between items-center mb-3">
+        <div class="flex justify-between items-start mb-4">
+          <div>
             <h3
-              class="text-xl font-bold"
-              :class="{
-                'text-gray-700': themeStore.theme === 'light',
-                'text-white': themeStore.theme === 'dark',
-              }"
+              class="text-xl font-semibold text-gray-900 dark:text-white mb-2"
             >
               {{ exp.title }}
             </h3>
             <span
-              class="text-sm font-medium px-3 py-1 rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+              class="text-sm text-gray-500 dark:text-gray-400"
             >
               {{ exp.timeline }}
             </span>
           </div>
-
-          <ul class="space-y-3">
-            <li
-              v-for="(point, i) in exp.points"
-              :key="i"
-              class="flex items-start"
-            >
-              <svg
-                class="h-5 w-5 text-gray-600 dark:text-gray-400 mr-2 mt-0.5 flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-              <p class="text-gray-700 dark:text-gray-300">{{ point }}</p>
-            </li>
-          </ul>
         </div>
+
+        <ul class="space-y-2.5">
+          <li
+            v-for="(point, i) in exp.points"
+            :key="i"
+            class="flex items-start"
+          >
+            <span class="text-gray-400 dark:text-gray-500 mr-3 mt-1 text-sm">•</span>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{{ point }}</p>
+          </li>
+        </ul>
       </div>
     </div>
 
     <!-- Mobile Experience View with Accordion -->
-    <div class="md:hidden space-y-4">
+    <div class="md:hidden mt-6">
       <div
         v-for="(exp, index) in experiences"
         :key="index"
-        class="experience-card rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700"
+        class="experience-card py-4 border-b border-gray-200 dark:border-gray-800 last:border-b-0"
       >
         <!-- Card Header with Toggle -->
         <div
-          class="p-4 flex items-center justify-between cursor-pointer"
-          :class="{
-            'border-b border-gray-100 dark:border-gray-700': isExpanded(index),
-          }"
+          class="flex items-start justify-between cursor-pointer mb-3"
           @click="toggleExpand(index)"
         >
-          <div class="flex items-center space-x-3">
-            <!-- Colored dot indicator -->
-            <div
-              class="h-3 w-3 rounded-full flex-shrink-0"
-              :class="index === 0 ? 'bg-gray-600' : 'bg-gray-700'"
-            ></div>
-
-            <!-- Title -->
-            <p
-              class="font-bold text-base"
-              :class="{
-                'text-gray-800': themeStore.theme === 'light',
-                'text-white': themeStore.theme === 'dark',
-              }"
+          <div class="flex-1">
+            <h3
+              class="font-semibold text-base text-gray-900 dark:text-white mb-1"
             >
               {{ exp.title }}
-            </p>
+            </h3>
+            <span class="text-xs text-gray-500 dark:text-gray-400">
+              {{ exp.timeline }}
+            </span>
           </div>
 
           <!-- Toggle Icon -->
           <div
-            class="transform transition-transform"
+            class="transform transition-transform duration-200 ml-3 mt-1"
             :class="isExpanded(index) ? 'rotate-180' : ''"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-7 w-7 text-gray-600 dark:text-gray-400"
+              class="h-5 w-5 text-gray-400 dark:text-gray-500"
               viewBox="0 0 20 20"
               fill="currentColor"
-              stroke-width="1.5"
             >
               <path
                 fill-rule="evenodd"
@@ -147,17 +119,9 @@ const experiences = [
           </div>
         </div>
 
-        <!-- Brief Summary and Timeline (Always visible) -->
-        <div class="px-4 pb-1 pt-0">
-          <!-- Timeline badge -->
-          <div class="flex justify-start mb-2">
-            <span
-              class="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-            >
-              {{ exp.timeline }}
-            </span>
-          </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400">
+        <!-- Brief Summary -->
+        <div class="mb-3">
+          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
             {{ exp.summary }}
           </p>
         </div>
@@ -165,30 +129,17 @@ const experiences = [
         <!-- Expandable Content -->
         <div
           v-show="isExpanded(index)"
-          class="px-4 pb-4 pt-2 animate-expand-content"
+          class="animate-expand-content"
         >
-          <ul class="space-y-3 mt-2">
+          <ul class="space-y-2.5 mt-3">
             <li
               v-for="(point, i) in exp.points"
               :key="i"
-              class="flex items-start ain"
+              class="flex items-start"
               :style="{ animationDelay: `${i * 100}ms` }"
             >
-              <svg
-                class="h-5 w-5 text-gray-600 dark:text-gray-400 mr-2 mt-0.5 flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2.5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-              <p class="text-sm text-gray-600 dark:text-gray-300">
+              <span class="text-gray-400 dark:text-gray-500 mr-3 mt-1 text-sm">•</span>
+              <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                 {{ point }}
               </p>
             </li>
@@ -200,24 +151,10 @@ const experiences = [
 </template>
 
 <style scoped>
-/* Subtle hover effect for experience items */
-.rounded-lg {
-  transition: all 0.3s ease;
-}
-
-.rounded-lg:hover {
-  transform: translateX(3px);
-}
-
-/* Mobile specific animations */
-.experience-card {
-  transition: all 0.3s ease;
-}
-
+/* Expand animation */
 .animate-expand-content {
-  animation: expandContent 0.3s ease-out forwards;
+  animation: expandContent 0.25s ease-out forwards;
   transform-origin: top;
-  overflow: hidden;
 }
 
 @keyframes expandContent {
@@ -228,28 +165,6 @@ const experiences = [
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Card touch feedback for mobile */
-@media (max-width: 767px) {
-  .experience-card {
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-  }
-
-  .experience-card:active {
-    transform: scale(0.98);
   }
 }
 </style>
