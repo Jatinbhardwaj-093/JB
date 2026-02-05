@@ -10,10 +10,13 @@
         </transition>
       </router-view>
     </main>
-    <footer class="py-6 border-t border-gray-700 mt-auto">
-      <div class="container mx-auto px-4 text-center text-gray-400">
-        <p>
-          © {{ new Date().getFullYear() }} Jatin Bhardwaj. All rights reserved.
+    <footer class="relative mt-auto py-8">
+      <!-- Fading Divider -->
+      <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-50"></div>
+      
+      <div class="container mx-auto px-4 flex flex-col items-center justify-center gap-2">
+        <p class="text-gray-400 text-sm">
+          Design by <span class="text-white font-medium">Jatin Bhardwaj</span>
         </p>
       </div>
     </footer>
