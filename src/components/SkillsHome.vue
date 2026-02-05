@@ -27,6 +27,7 @@ const technologies = [
   // Languages
   { name: "Python", img: "Python.svg" },
   { name: "C++", img: "C++ (CPlusPlus).svg" },
+  { name: "C", img: "C.svg" },
   { name: "Rust", img: "Rust.svg" },
   // ML & Data Science
   { name: "PyTorch", img: "PyTorch.svg" },
@@ -34,8 +35,10 @@ const technologies = [
   { name: "Pandas", img: "Pandas.svg" },
   { name: "scikit-learn", img: "scikit-learn.svg" },
   { name: "Matplotlib", img: "Matplotlib.svg" },
+  { name: "Seaborn", img: "seaborn.svg" },
   // DevOps & Tools
   { name: "Git", img: "Git.svg" },
+  { name: "GitHub", img: "GitHub.svg" },
   { name: "Docker", img: "Docker.svg" },
   { name: "Kubernetes", img: "Kubernetes.svg" },
   { name: "Neovim", img: "nvim.svg" },
@@ -85,43 +88,24 @@ const getImageUrl = (name: string) => {
 }
 
 .tech-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
-@media (min-width: 640px) {
-  .tech-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    max-width: 550px;
-  }
-}
-
-@media (min-width: 768px) {
-  .tech-grid {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
-    max-width: 800px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .tech-grid {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1.25rem;
-    max-width: 900px;
-  }
-}
+/* Remove grid media queries as flex handles wrapping naturally */
 
 .tech-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 7.5rem;
+  height: 7.5rem;
   gap: 0.5rem;
   padding: 1rem 0.5rem;
   background: white;

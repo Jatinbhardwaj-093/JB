@@ -99,7 +99,7 @@ onUnmounted(() => {
           <h1
             class="text-2xl md:text-3xl font-semibold mb-2 text-gray-900 dark:text-white"
           >
-            Projects
+            Featured Projects
           </h1>
           <div
             class="h-px w-16 bg-gray-600 dark:bg-gray-400 rounded-full mb-4"

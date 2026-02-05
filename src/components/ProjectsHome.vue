@@ -45,33 +45,6 @@ const projectImagePaths = {
 
 const projects = ref([
   {
-    id: 3,
-    title: "Google Summer of Code at SymPy",
-    description:
-      "Formal power series system for symbolic mathematics.",
-    image: sympyImage,
-    technologies: [
-      { name: "Python" },
-      { name: "Cython" },
-      { name: "SymPy" },
-    ],
-    links: [
-      {
-        type: "github",
-        url: "https://github.com/sympy/sympy/pulls?q=author%3AJatinbhardwaj-093",
-      },
-      {
-        type: "gsoc",
-        url: "https://summerofcode.withgoogle.com/programs/2025/projects/8VslkGZ9",
-      },
-    ],
-    features: [
-      "Dual backend architecture with Python and Cython",
-      "85x-1680x performance improvements",
-      "Comprehensive testing with pytest and Hypothesis",
-    ],
-  },
-  {
     id: 1,
     title: "Influencer-Sponsor Platform",
     description:
@@ -159,102 +132,100 @@ const getRepoUrl = (links: Array<{ type: string; url: string }>) => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 projects-container">
-        <div
-          v-for="(project, index) in projects"
-          :key="project.id"
-          class="project-card rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl border"
-          :class="{
-            'transform-gpu hover:-translate-y-2': index % 2 === 0,
-            'transform-gpu hover:translate-y-2': index % 2 !== 0,
-            'bg-gray-800/60 border-gray-700': true,
-          }"
-        >
-          <!-- Image -->
-          <div class="relative overflow-hidden group h-32">
-            <template v-if="project.id === 3">
-              <div
-                class="flex items-center justify-center w-full h-full px-2 overflow-hidden"
-              >
-                <img
-                  :src="gsocImage"
-                  alt="GSoC logo"
-                  class="w-1/3 h-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                  loading="eager"
-                />
-                <img
-                  :src="sympyImage"
-                  alt="SymPy logo"
-                  class="w-1/4 h-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                  loading="eager"
-                  @error="handleImageError($event, project.id)"
-                />
-              </div>
-            </template>
-            <template v-else>
-              <img
-                :src="project.image"
-                :alt="`${project.title} screenshot`"
-                class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                loading="eager"
-                @error="handleImageError($event, project.id)"
-              />
-            </template>
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"
-            ></div>
+  <div class="flex flex-col items-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 projects-container w-full mb-8">
+      <div
+        v-for="(project, index) in projects"
+        :key="project.id"
+        class="project-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 border bg-gray-800 border-gray-700 flex flex-col h-full"
+      >
+        <!-- Image -->
+        <div class="relative overflow-hidden group h-48 flex-shrink-0">
+          <img
+            :src="project.image"
+            :alt="`${project.title} screenshot`"
+            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+            loading="eager"
+            @error="handleImageError($event, project.id)"
+          />
+          <div
+            class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"
+          ></div>
+        </div>
 
-            <!-- Project title overlay -->
-            <div class="absolute inset-0 flex items-end p-2">
-              <h3
-                class="text-xs font-semibold text-white leading-tight"
-              >
-                {{ project.title }}
-              </h3>
-            </div>
+        <!-- Content -->
+        <div class="p-5 flex flex-col flex-grow">
+          <h3 class="text-xl font-bold text-white mb-2 line-clamp-1">
+            {{ project.title }}
+          </h3>
+          
+          <p class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
+            {{ project.description }}
+          </p>
+          
+          <!-- Tech Stack -->
+          <div class="flex flex-wrap gap-2 mb-4">
+             <span 
+               v-for="tech in project.technologies" 
+               :key="tech.name"
+               class="px-2 py-1 text-xs font-medium bg-gray-700/50 text-gray-300 rounded-md border border-gray-600/50"
+             >
+               {{ tech.name }}
+             </span>
           </div>
 
-          <!-- Content -->
-          <div class="p-3">
-            <a
+          <!-- Footer -->
+          <div class="pt-4 border-t border-gray-700 flex items-center justify-between mt-auto">
+             <a
               :href="getRepoUrl(project.links)"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-xs text-gray-400 hover:text-gray-200 flex items-center justify-center gap-1"
+              class="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors group/link"
             >
-              <span>View</span>
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              <svg class="w-5 h-5 text-gray-400 group-hover/link:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
               </svg>
+              <span>View Source</span>
             </a>
           </div>
         </div>
+      </div>
+    </div>
+    
+    <router-link
+      to="/projects"
+      class="group inline-flex items-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full transition-all duration-300 hover:shadow-lg border border-gray-700 hover:border-gray-600"
+    >
+      <span class="font-medium">View All Projects</span>
+      <svg 
+        class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </router-link>
   </div>
 </template>
 
 <style scoped>
 .project-card {
-  transition: all 0.3s ease;
-  background: #1f2937;
   opacity: 0;
   animation: fadeIn 0.4s ease-out forwards;
-  overflow: hidden;
 }
 
 .project-card:nth-child(1) {
-  animation-delay: 0.05s;
-}
-.project-card:nth-child(2) {
   animation-delay: 0.1s;
 }
-.project-card:nth-child(3) {
-  animation-delay: 0.15s;
+.project-card:nth-child(2) {
+  animation-delay: 0.2s;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -263,21 +234,7 @@ const getRepoUrl = (links: Array<{ type: string; url: string }>) => {
 }
 
 .project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.project-card img {
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover img {
-  transform: scale(1.08);
-}
-
-@media (max-width: 768px) {
-  .project-card {
-    margin-bottom: 0;
-  }
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 </style>
