@@ -99,12 +99,6 @@ onUnmounted(() => {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </router-link>
-          <router-link
-            to="/contact"
-            class="inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg transition-all duration-200 border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-gray-900 dark:hover:border-white hover:text-gray-900 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 min-w-[200px]"
-          >
-            Get in Touch
-          </router-link>
         </div>
       </div>
 

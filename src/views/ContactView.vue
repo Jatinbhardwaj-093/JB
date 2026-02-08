@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ContactMail from "../components/ContactMail.vue";
 import { ref } from "vue";
 import { useThemeStore } from "../store/theme";
 
@@ -27,11 +26,6 @@ const submitForm = () => {
 
 <template>
   <div class="contact-view">
-    <!-- Desktop Version -->
-    <div class="hidden md:block">
-      <ContactMail />
-    </div>
-
     <!-- Mobile Version - Custom Design -->
     <div class="block md:hidden min-h-screen bg-white dark:bg-gray-950 px-4 py-12">
       <!-- Header -->

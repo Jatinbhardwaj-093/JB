@@ -69,7 +69,6 @@ const closeMobileMenu = () => {
             v-for="(link, index) in [
               { name: 'projects', text: 'Projects' },
               { name: 'blogs', text: 'Blog' },
-              { name: 'contact', text: 'Contact' },
             ]"
             :key="index"
             :to="{ name: link.name }"
@@ -168,7 +167,6 @@ const closeMobileMenu = () => {
             v-for="(link, index) in [
               { name: 'projects', text: 'Projects' },
               { name: 'blogs', text: 'Blog' },
-              { name: 'contact', text: 'Contact' },
             ]"
             :key="index"
             :to="{ name: link.name }"

@@ -3,7 +3,6 @@ import Home from "../views/HomeView.vue";
 import BlogView from "../views/BlogView.vue";
 import BlogPostView from "../views/BlogPostView.vue";
 import Projects from "../views/ProjectsView.vue";
-import Contact from "../views/ContactView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const routes: RouteRecordRaw[] = [
@@ -27,11 +26,6 @@ const routes: RouteRecordRaw[] = [
     path: "/projects",
     name: "projects",
     component: Projects,
-  },
-  {
-    path: "/contact",
-    name: "contact",
-    component: Contact,
   },
   // Catch-all route for 404 handling
   {
