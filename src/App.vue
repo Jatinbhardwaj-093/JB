@@ -14,10 +14,47 @@
       <!-- Fading Divider -->
       <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-50"></div>
       
-      <div class="container mx-auto px-4 flex flex-col items-center justify-center gap-2">
-        <p class="text-gray-400 text-sm">
-          Design by <span class="text-white font-medium">Jatin Bhardwaj</span>
+      <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-gray-400 text-sm hidden md:block">
+          <span class="text-white font-medium">Jatin Bhardwaj</span>
         </p>
+
+        <div class="flex items-center gap-4">
+          <a
+            href="https://www.linkedin.com/in/jatin-bhardwaj093/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-white transition-colors duration-200"
+            aria-label="LinkedIn"
+          >
+            <i class="bi bi-linkedin text-xl"></i>
+          </a>
+          <a
+            href="https://github.com/Jatinbhardwaj-093"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-white transition-colors duration-200"
+            aria-label="GitHub"
+          >
+            <i class="bi bi-github text-xl"></i>
+          </a>
+          <a
+            href="https://x.com/Jatin0932"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-white transition-colors duration-200"
+            aria-label="Twitter"
+          >
+            <i class="bi bi-twitter-x text-xl"></i>
+          </a>
+          <a
+            href="mailto:bhardwajjatin093@gmail.com"
+            class="text-gray-400 hover:text-white transition-colors duration-200"
+            aria-label="Email"
+          >
+            <i class="bi bi-envelope text-xl"></i>
+          </a>
+        </div>
       </div>
     </footer>
   </div>
