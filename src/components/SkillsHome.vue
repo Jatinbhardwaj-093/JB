@@ -97,8 +97,6 @@ const getImageUrl = (name: string) => {
   margin: 0 auto;
 }
 
-/* Remove grid media queries as flex handles wrapping naturally */
-
 .tech-card {
   display: flex;
   flex-direction: column;
@@ -108,19 +106,12 @@ const getImageUrl = (name: string) => {
   height: 7.5rem;
   gap: 0.5rem;
   padding: 1rem 0.5rem;
-  background: white;
+  background: #1f2937;
   border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #374151;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   opacity: 0;
-}
-
-@media (prefers-color-scheme: dark) {
-  .tech-card {
-    background: #1f2937;
-    border-color: #374151;
-  }
 }
 
 .tech-card.animate-scale-in {
@@ -129,15 +120,8 @@ const getImageUrl = (name: string) => {
 
 .tech-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  border-color: #3b82f6;
-}
-
-@media (prefers-color-scheme: dark) {
-  .tech-card:hover {
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-    border-color: #60a5fa;
-  }
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  border-color: #60a5fa;
 }
 
 .tech-icon {
@@ -172,7 +156,7 @@ const getImageUrl = (name: string) => {
 .tech-label {
   font-size: 0.75rem;
   font-weight: 500;
-  color: #374151;
+  color: #e5e7eb;
   text-align: center;
   line-height: 1.2;
   transition: color 0.3s ease;
@@ -184,20 +168,8 @@ const getImageUrl = (name: string) => {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .tech-label {
-    color: #e5e7eb;
-  }
-}
-
 .tech-card:hover .tech-label {
-  color: #3b82f6;
-}
-
-@media (prefers-color-scheme: dark) {
-  .tech-card:hover .tech-label {
-    color: #60a5fa;
-  }
+  color: #60a5fa;
 }
 
 @keyframes scaleIn {

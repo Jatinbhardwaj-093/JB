@@ -4,7 +4,7 @@ import Intro from "../components/Intro.vue";
 import ExperienceHome from "../components/ExperienceHome.vue";
 import SkillsHome from "../components/SkillsHome.vue";
 import ProjectsHome from "../components/ProjectsHome.vue";
-import BlogsHome from "../components/BlogsHome.vue";
+
 import { useThemeStore } from "../store/theme";
 
 const themeStore = useThemeStore();
@@ -107,26 +107,10 @@ onUnmounted(() => {
         </div>
         <ProjectsHome />
       </div>
-      <!-- Subtle divider with fade -->
-      <div class="absolute left-0 right-0 bottom-0 my-12 h-px bg-gradient-to-r from-transparent via-gray-400 dark:via-gray-600 to-transparent"></div>
+
     </section>
 
-    <!-- Blogs Section -->
-    <section id="blogs" class="pt-2 pb-16 md:pb-20 px-4 md:px-6 scroll-reveal flex justify-center">
-      <div class="w-full max-w-4xl">
-        <div class="mb-8 scroll-reveal">
-          <h1
-            class="text-2xl md:text-3xl font-semibold mb-2 text-gray-900 dark:text-white"
-          >
-            Blog
-          </h1>
-          <div
-            class="h-px w-16 bg-gray-600 dark:bg-gray-400 rounded-full mb-4"
-          ></div>
-        </div>
-        <BlogsHome />
-      </div>
-    </section>
+
   </div>
 </template>
 
