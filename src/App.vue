@@ -3,12 +3,14 @@
     class="app-container min-h-screen flex flex-col bg-gradient-to-br from-black to-gray-900 transition-colors duration-500 overflow-x-hidden"
   >
     <Navbar />
-    <main class="container mx-auto flex-grow">
-      <router-view v-slot="{ Component }">
-        <transition name="page-fade" mode="out-in">
-          <component :is="Component" />
-        </transition>
-      </router-view>
+    <main class="container mx-auto flex-grow relative">
+      <div class="min-h-[80vh]">
+        <router-view v-slot="{ Component }">
+          <transition name="page-fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </div>
     </main>
     <footer class="relative mt-auto py-8">
       <!-- Fading Divider -->
@@ -133,5 +135,9 @@ html {
 .app-container {
   overflow-x: hidden;
   max-width: 100vw;
+}
+
+[v-cloak] {
+  display: none !important;
 }
 </style>

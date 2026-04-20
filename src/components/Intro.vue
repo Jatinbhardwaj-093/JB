@@ -12,9 +12,8 @@ const location = ref("Delhi, India");
 const isLoaded = ref(false);
 
 onMounted(() => {
-  setTimeout(() => {
-    isLoaded.value = true;
-  }, 100);
+  // Set isLoaded immediately on mount to prevent layout flicker
+  isLoaded.value = true;
 });
 
 onUnmounted(() => {

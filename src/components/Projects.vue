@@ -28,27 +28,28 @@ const projects = ref([
   },
   {
     id: 5,
-    title: "Musical Classification Model",
-    subtitle: "Visual Transformer",
+    title: "Music Genre Classification",
+    subtitle: "Vision Transformer",
     description:
-      "A Vision Transformer-based model for classifying musical genres from audio spectrograms. Leverages transfer learning and attention mechanisms to capture temporal and frequency patterns, achieving robust genre classification across diverse audio samples.",
+      "A machine learning system that analyzes audio files and classifies them into primary musical genres. It converts audio into visual spectrograms and leverages Vision Transformers to identify patterns, predicting the top matches with probability scores.",
     technologies: [
-      { name: "NumPy" },
-      { name: "Pandas" },
-      { name: "Librosa" },
       { name: "PyTorch" },
       { name: "Hugging Face" },
-      { name: "Weights & Biases" },
+      { name: "Librosa" },
+      { name: "NumPy" },
+      { name: "Gradio" },
+      { name: "W&B" },
     ],
     links: [
-      { type: "github", url: "#" },
-      { type: "kaggle", url: "#" },
+      { type: "github", url: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier" },
+      { type: "hfspace", url: "https://huggingface.co/spaces/jatin-093/ViT_Music_Classification" },
+      { type: "colab", url: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier" },
     ],
     features: [
-      "Vision Transformer architecture for spectrogram analysis",
-      "Transfer learning with pretrained models from Hugging Face",
-      "Experiment tracking with Weights & Biases",
-      "Audio preprocessing pipeline with Librosa",
+      "Spectrogram-based audio processing with Librosa",
+      "End-to-End ViT Model tailored for music classification",
+      "Interactive Web UI deployed on Hugging Face Spaces",
+      "Real-time experiment tracking using Weights & Biases",
     ],
   },
   {
@@ -160,30 +161,18 @@ const toggleExpand = (id: number) => {
   expanded.value = { ...expanded.value, [id]: !expanded.value[id] };
 };
 
-// Return the GitHub repo URL if present
-const getRepoUrl = (links: Array<{ type: string; url: string }>) => {
-  if (!links || links.length === 0) return "#";
-  const gh = links.find((l) => l.type === "github");
-  return gh ? gh.url : links[0].url;
-};
-
-// Return the Kaggle URL if present
-const getKaggleUrl = (links: Array<{ type: string; url: string }>) => {
-  const kg = links.find((l) => l.type === "kaggle");
-  return kg ? kg.url : "";
-};
-
-// Get non-primary links (not github/kaggle)
-const getSecondaryLinks = (links: Array<{ type: string; url: string }>) => {
-  return links.filter((l) => l.type !== "github" && l.type !== "kaggle");
-};
+// Links are rendered uniformly so no specific getters are needed
 
 // Label for link type
 const getLinkLabel = (type: string) => {
   const labels: Record<string, string> = {
+    github: "GitHub",
+    kaggle: "Kaggle",
     drive: "Google Docs",
     figma: "Figma",
     gsoc: "GSoC",
+    hfspace: "HF Space",
+    colab: "Colab Notebook",
   };
   return labels[type] || type;
 };
@@ -260,58 +249,14 @@ const getLinkLabel = (type: string) => {
             </div>
 
             <!-- Footer Links -->
-            <div
-              class="pt-3 border-t border-gray-700 flex items-center gap-3 mt-auto flex-wrap"
-            >
-              <!-- GitHub -->
+            <div class="pt-3 border-t border-gray-700 flex items-center gap-5 mt-auto flex-wrap">
               <a
-                :href="getRepoUrl(project.links)"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-1.5 text-sm text-gray-300 hover:text-white transition-colors"
-              >
-                <svg
-                  class="w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span>GitHub</span>
-              </a>
-
-              <!-- Kaggle -->
-              <a
-                v-if="getKaggleUrl(project.links)"
-                :href="getKaggleUrl(project.links)"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-1.5 text-sm text-gray-300 hover:text-white transition-colors"
-              >
-                <svg
-                  class="w-4 h-4"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.281.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.075.378z"
-                  />
-                </svg>
-                <span>Kaggle</span>
-              </a>
-
-              <!-- Secondary links (Docs, Figma, GSoC, etc.) -->
-              <a
-                v-for="link in getSecondaryLinks(project.links)"
+                v-for="link in project.links"
                 :key="link.type"
                 :href="link.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-sm text-gray-400 hover:text-gray-200 transition-colors"
+                class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
               >
                 {{ getLinkLabel(link.type) }}
               </a>

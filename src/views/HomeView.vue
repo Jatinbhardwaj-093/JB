@@ -22,8 +22,8 @@ onMounted(() => {
       });
     },
     {
-      threshold: 0.1,
-      rootMargin: "0px 0px -100px 0px",
+      threshold: 0.05,
+      rootMargin: "0px",
     }
   );
 
@@ -38,7 +38,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="overflow-hidden w-full smooth-scroll">
+  <div class="overflow-hidden w-full smooth-scroll" v-cloak>
     <!-- Intro Section -->
     <section id="intro" class="min-h-[90vh]">
       <Intro />
@@ -137,8 +137,8 @@ section {
 /* Scroll reveal animations */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .scroll-reveal.is-visible {
