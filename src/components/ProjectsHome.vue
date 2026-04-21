@@ -4,10 +4,10 @@ import { ref } from "vue";
 const projects = ref([
   {
     id: 1,
-    title: "Comment Emotion Classifier",
+    title: "NLP Comment Classification",
     subtitle: "Natural Language Processing",
     description:
-      "An NLP pipeline that classifies emotions in user comments using ensemble learning. Processes raw text through feature extraction, sentiment analysis, and multi-label classification to detect nuanced emotional tones across diverse comment datasets.",
+      "An end-to-end NLP pipeline that analyzes textual entries from a discussion system and predicts how each entry is ultimately categorized by the platform using a LightGBM classification model.",
     technologies: [
       { name: "NumPy" },
       { name: "Pandas" },
@@ -15,14 +15,9 @@ const projects = ref([
       { name: "Matplotlib" },
       { name: "LightGBM" },
     ],
-    features: [
-      "Multi-label emotion classification from raw text",
-      "Feature extraction with TF-IDF and word embeddings",
-      "Ensemble model with LightGBM for improved accuracy"
-    ],
     links: {
-      github: "#",
-      kaggle: "#",
+      github: "https://github.com/Jatinbhardwaj-093/NLP_Comment_Classification",
+      colab: "https://colab.research.google.com/drive/1OOmKKJ_ixLJAsQqT5l0emED68jTJC7Cg?usp=share_link",
     },
   },
   {
@@ -37,11 +32,6 @@ const projects = ref([
       { name: "Librosa" },
       { name: "NumPy" },
       { name: "Gradio" },
-    ],
-    features: [
-      "Spectrogram-based audio processing with Librosa",
-      "End-to-End ViT Model tailored for music classification",
-      "Interactive Web UI deployed on Hugging Face Spaces"
     ],
     links: {
       github: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier",
@@ -72,23 +62,11 @@ const projects = ref([
             {{ project.title }}
           </h3>
 
-          <p class="text-gray-300 text-sm leading-relaxed mb-4 flex-grow line-clamp-3 hover:line-clamp-none transition-all">
+          <p class="text-gray-300 text-sm leading-relaxed mb-4 flex-grow transition-all">
             {{ project.description }}
           </p>
 
-          <h4 class="text-xs font-semibold text-white mb-2 pt-2 border-t border-gray-700/50">Core Features</h4>
-          <ul class="space-y-1.5 mb-5 flex-grow">
-            <li
-              v-for="(feature, i) in project.features.slice(0, 2)"
-              :key="i"
-              class="flex items-start text-xs text-gray-400"
-            >
-              <svg class="w-3.5 h-3.5 text-gray-400 mr-2 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="line-clamp-1">{{ feature }}</span>
-            </li>
-          </ul>
+
 
           <!-- Tech Stack -->
           <div class="flex flex-wrap gap-2 mb-5">
@@ -112,15 +90,7 @@ const projects = ref([
             >
               GitHub
             </a>
-            <a
-              v-if="project.links.kaggle"
-              :href="project.links.kaggle"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
-            >
-              Kaggle
-            </a>
+
             <a
               v-if="project.links.hfspace"
               :href="project.links.hfspace"

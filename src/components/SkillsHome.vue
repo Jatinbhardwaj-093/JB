@@ -33,6 +33,7 @@ const technologies = [
   { name: "PyTorch", img: "PyTorch.svg" },
   { name: "NumPy", img: "NumPy.svg" },
   { name: "Pandas", img: "Pandas.svg" },
+  { name: "Hugging Face", img: "hf-logo.svg" },
   { name: "scikit-learn", img: "scikit-learn.svg" },
   { name: "Matplotlib", img: "Matplotlib.svg" },
   { name: "Seaborn", img: "seaborn.svg" },

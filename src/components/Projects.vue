@@ -4,10 +4,10 @@ import { ref } from "vue";
 const projects = ref([
   {
     id: 4,
-    title: "Comment Emotion Classifier",
+    title: "NLP Comment Classification",
     subtitle: "Natural Language Processing",
     description:
-      "An NLP pipeline that classifies emotions in user comments using ensemble learning. Processes raw text through feature extraction, sentiment analysis, and multi-label classification to detect nuanced emotional tones across diverse comment datasets.",
+      "An end-to-end NLP pipeline that analyzes textual entries from a discussion system and predicts how each entry is ultimately categorized by the platform using a LightGBM classification model.",
     technologies: [
       { name: "NumPy" },
       { name: "Pandas" },
@@ -16,8 +16,8 @@ const projects = ref([
       { name: "LightGBM" },
     ],
     links: [
-      { type: "github", url: "#" },
-      { type: "kaggle", url: "#" },
+      { type: "github", url: "https://github.com/Jatinbhardwaj-093/NLP_Comment_Classification" },
+      { type: "colab", url: "https://colab.research.google.com/drive/1OOmKKJ_ixLJAsQqT5l0emED68jTJC7Cg?usp=share_link" },
     ],
     features: [
       "Multi-label emotion classification from raw text",

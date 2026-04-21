@@ -5,14 +5,14 @@ import { ref, computed } from "vue";
 const projects = ref([
   {
     id: 4,
-    title: "Comment Emotion Classifier",
+    title: "NLP Comment Classification",
     subtitle: "Natural Language Processing",
     description:
-      "An NLP pipeline that classifies emotions in user comments using ensemble learning. Processes raw text through feature extraction and multi-label classification.",
+      "An end-to-end NLP pipeline that analyzes textual entries from a discussion system and predicts how each entry is ultimately categorized by the platform using a LightGBM classification model.",
     tags: ["NumPy", "Pandas", "sklearn", "Matplotlib", "LightGBM"],
     links: {
-      github: "#",
-      kaggle: "#",
+      github: "https://github.com/Jatinbhardwaj-093/NLP_Comment_Classification",
+      colab: "https://colab.research.google.com/drive/1OOmKKJ_ixLJAsQqT5l0emED68jTJC7Cg?usp=share_link",
     },
   },
   {
@@ -61,7 +61,7 @@ const projects = ref([
 const activeFilter = ref("all");
 const filters = ["all", "ML/AI", "Web Dev", "Open Source"];
 
-const setFilter = (filter) => {
+const setFilter = (filter: string) => {
   activeFilter.value = filter;
 };
 
@@ -173,15 +173,7 @@ const filteredProjects = computed(() => {
                   >
                     GitHub
                   </a>
-                  <a
-                    v-if="project.links.kaggle"
-                    :href="project.links.kaggle"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
-                  >
-                    Kaggle
-                  </a>
+
                   <a
                     v-if="project.links.hfspace"
                     :href="project.links.hfspace"
