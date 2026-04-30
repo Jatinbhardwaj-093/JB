@@ -25,7 +25,7 @@ const projects = ref([
     links: {
       github: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier",
       hfspace: "https://huggingface.co/spaces/jatin-093/ViT_Music_Classification",
-      colab: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier",
+      colab: "https://colab.research.google.com/drive/1D8tOYiKZtWHG531RT097Wj-OJZ1_lJ-y",
     },
   },
   {

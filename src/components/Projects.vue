@@ -43,7 +43,7 @@ const projects = ref([
     links: [
       { type: "github", url: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier" },
       { type: "hfspace", url: "https://huggingface.co/spaces/jatin-093/ViT_Music_Classification" },
-      { type: "colab", url: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier" },
+      { type: "colab", url: "https://colab.research.google.com/drive/1D8tOYiKZtWHG531RT097Wj-OJZ1_lJ-y" },
     ],
     features: [
       "Spectrogram-based audio processing with Librosa",
