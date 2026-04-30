@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../../store/theme";
 import { onMounted } from "vue";
 import hljs from "highlight.js/lib/core";
 import python from "highlight.js/lib/languages/python";
 import "highlight.js/styles/github.css";
 import "highlight.js/styles/github-dark.css";
 
-const themeStore = useThemeStore();
 
 // Register Python language for syntax highlighting
 hljs.registerLanguage("python", python);

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useThemeStore } from "../store/theme";
 
-const themeStore = useThemeStore();
 
 // Animation states
 const cardsVisible = ref(false);

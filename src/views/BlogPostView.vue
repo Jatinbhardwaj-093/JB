@@ -3,14 +3,12 @@ import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { getPostBySlug } from "../data/blogs";
 import BlogReader from "../components/blog/BlogReader.vue";
-import { useThemeStore } from "../store/theme";
 
 const props = defineProps<{
   slug: string;
 }>();
 
 const router = useRouter();
-const themeStore = useThemeStore();
 
 // Get blog post data
 const post = computed(() => {

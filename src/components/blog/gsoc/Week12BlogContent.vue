@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../../store/theme";
 
-const themeStore = useThemeStore();
 </script>
 
 <template>
   <div>
     <p
       :class="{
-        'text-gray-700': themeStore.theme === 'light',
-        'text-gray-300': themeStore.theme === 'dark',
+        'text-gray-700': false,
+        'text-gray-300': true,
       }"
     >
       A few days ago, my GSoC project was wrapped up and completed. I am very
@@ -19,8 +17,8 @@ const themeStore = useThemeStore();
 
     <p
       :class="{
-        'text-gray-700': themeStore.theme === 'light',
-        'text-gray-300': themeStore.theme === 'dark',
+        'text-gray-700': false,
+        'text-gray-300': true,
       }"
     >
       There are many things accomplished in this project, and everything is
@@ -31,8 +29,8 @@ const themeStore = useThemeStore();
 
     <p
       :class="{
-        'text-gray-700': themeStore.theme === 'light',
-        'text-gray-300': themeStore.theme === 'dark',
+        'text-gray-700': false,
+        'text-gray-300': true,
       }"
     >
       I hope to write a separate blog post explaining how this system works, how
@@ -42,14 +40,14 @@ const themeStore = useThemeStore();
 
     <p class="mt-4"
       :class="{
-        'text-gray-700': themeStore.theme === 'light',
-        'text-gray-300': themeStore.theme === 'dark',
+        'text-gray-700': false,
+        'text-gray-300': true,
       }"
     >
       <span
         :class="{
-          'text-gray-900': themeStore.theme === 'light',
-          'text-white': themeStore.theme === 'dark',
+          'text-gray-900': false,
+          'text-white': true,
         }"
         >Final Report:</span
       >
@@ -58,8 +56,8 @@ const themeStore = useThemeStore();
         target="_blank"
         rel="noopener noreferrer"
         :class="{
-          'text-blue-600 hover:text-blue-800': themeStore.theme === 'light',
-          'text-blue-400 hover:text-blue-300': themeStore.theme === 'dark',
+          'text-blue-600 hover:text-blue-800': false,
+          'text-blue-400 hover:text-blue-300': true,
         }"
         > SymPy Wiki</a
       >
@@ -67,14 +65,14 @@ const themeStore = useThemeStore();
 
     <p
       :class="{
-        'text-gray-700': themeStore.theme === 'light',
-        'text-gray-300': themeStore.theme === 'dark',
+        'text-gray-700': false,
+        'text-gray-300': true,
       }"
     >
       <span
         :class="{
-          'text-gray-900': themeStore.theme === 'light',
-          'text-white': themeStore.theme === 'dark',
+          'text-gray-900': false,
+          'text-white': true,
         }"
         >Original Proposal:</span
       >
@@ -83,8 +81,8 @@ const themeStore = useThemeStore();
         target="_blank"
         rel="noopener noreferrer"
         :class="{
-          'text-blue-600 hover:text-blue-800': themeStore.theme === 'light',
-          'text-blue-400 hover:text-blue-300': themeStore.theme === 'dark',
+          'text-blue-600 hover:text-blue-800': false,
+          'text-blue-400 hover:text-blue-300': true,
         }"
         > Google Docs</a
       >
@@ -92,14 +90,14 @@ const themeStore = useThemeStore();
 
     <p
       :class="{
-        'text-gray-700': themeStore.theme === 'light',
-        'text-gray-300': themeStore.theme === 'dark',
+        'text-gray-700': false,
+        'text-gray-300': true,
       }"
     >
       <span
         :class="{
-          'text-gray-900': themeStore.theme === 'light',
-          'text-white': themeStore.theme === 'dark',
+          'text-gray-900': false,
+          'text-white': true,
         }"
         >Related Pull Requests:</span
       >
@@ -108,8 +106,8 @@ const themeStore = useThemeStore();
         target="_blank"
         rel="noopener noreferrer"
         :class="{
-          'text-blue-600 hover:text-blue-800': themeStore.theme === 'light',
-          'text-blue-400 hover:text-blue-300': themeStore.theme === 'dark',
+          'text-blue-600 hover:text-blue-800': false,
+          'text-blue-400 hover:text-blue-300': true,
         }"
         > GitHub</a
       >

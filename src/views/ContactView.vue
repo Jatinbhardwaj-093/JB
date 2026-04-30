@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useThemeStore } from "../store/theme";
 
-const themeStore = useThemeStore();
 const formSubmitted = ref(false);
 const isLoading = ref(false);
 

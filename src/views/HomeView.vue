@@ -5,9 +5,7 @@ import ExperienceHome from "../components/ExperienceHome.vue";
 import SkillsHome from "../components/SkillsHome.vue";
 import ProjectsHome from "../components/ProjectsHome.vue";
 
-import { useThemeStore } from "../store/theme";
 
-const themeStore = useThemeStore();
 
 let observer: IntersectionObserver | null = null;
 

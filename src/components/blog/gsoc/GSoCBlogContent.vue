@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../../store/theme";
 
 // Define props or component logic for the GSoC blog
-const themeStore = useThemeStore();
 </script>
 
 <template>

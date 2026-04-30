@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../../store/theme";
 import { onMounted, ref } from "vue";
 import hljs from "highlight.js/lib/core";
 import python from "highlight.js/lib/languages/python";
 import "highlight.js/styles/github.css";
 import "highlight.js/styles/github-dark.css";
 
-const themeStore = useThemeStore();
 
 // Register Python language for syntax highlighting
 hljs.registerLanguage("python", python);
@@ -102,21 +100,21 @@ onMounted(() => {
     <div
       class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 my-4"
       :class="{
-        'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-900': themeStore.theme === 'dark',
+        'bg-gray-50': false,
+        'bg-gray-900': true,
       }"
     >
       <pre
         class="text-sm font-mono whitespace-pre-wrap break-words"
         :class="{
-          'hljs-github': themeStore.theme === 'light',
-          'hljs-github-dark': themeStore.theme === 'dark',
+          'hljs-github': false,
+          'hljs-github-dark': true,
         }"
       ><code 
         class="language-python"
         :class="{
-          'hljs-github': themeStore.theme === 'light',
-          'hljs-github-dark': themeStore.theme === 'dark',
+          'hljs-github': false,
+          'hljs-github-dark': true,
         }"
       >from flint import fmpz_series, ctx
 
@@ -168,8 +166,8 @@ print(x)  # x + O(x^30)</code></pre>
     <p
       class="mb-3 sm:mb-4 text-sm sm:text-base md:text-base lg:text-lg leading-6 sm:leading-7 md:leading-7 tracking-[0.01em] sm:tracking-[0.015em] text-wrap-pretty font-semibold"
       :class="{
-        'text-indigo-700': themeStore.theme === 'light',
-        'text-indigo-300': themeStore.theme === 'dark',
+        'text-indigo-700': false,
+        'text-indigo-300': true,
       }"
     >
       Why this?
@@ -246,21 +244,21 @@ print(x)  # x + O(x^30)</code></pre>
     <div
       class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 my-4"
       :class="{
-        'bg-gray-50': themeStore.theme === 'light',
-        'bg-gray-900': themeStore.theme === 'dark',
+        'bg-gray-50': false,
+        'bg-gray-900': true,
       }"
     >
       <pre
         class="text-sm font-mono whitespace-pre-wrap break-words"
         :class="{
-          'hljs-github': themeStore.theme === 'light',
-          'hljs-github-dark': themeStore.theme === 'dark',
+          'hljs-github': false,
+          'hljs-github-dark': true,
         }"
       ><code 
         class="language-python"
         :class="{
-          'hljs-github': themeStore.theme === 'light',
-          'hljs-github-dark': themeStore.theme === 'dark',
+          'hljs-github': false,
+          'hljs-github-dark': true,
         }"
       >from sympy.polys.domains.fpsring import PowerSeriesRing as fpsR, PythonSeriesContext as context
 from sympy import ZZ

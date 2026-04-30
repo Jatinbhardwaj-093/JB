@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import { useThemeStore } from "../store/theme";
 
-const themeStore = useThemeStore();
 
 const firstName = ref("Jatin");
 const lastName = ref("Bhardwaj");

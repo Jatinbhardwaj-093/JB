@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../../store/theme";
 import { onMounted } from "vue";
 import hljs from "highlight.js/lib/core";
 import python from "highlight.js/lib/languages/python";
 import "highlight.js/styles/github.css";
 import "highlight.js/styles/github-dark.css";
 
-const themeStore = useThemeStore();
 
 // Register Python language for syntax highlighting
 hljs.registerLanguage("python", python);
@@ -86,8 +84,8 @@ onMounted(() => {
       <div
         class="rounded-lg p-4 mb-4 border-l-4 border-blue-500"
         :class="{
-          'bg-gray-50': themeStore.theme === 'light',
-          'bg-gray-900': themeStore.theme === 'dark',
+          'bg-gray-50': false,
+          'bg-gray-900': true,
         }"
       >
         <ol class="list-decimal list-inside space-y-2 text-sm sm:text-base">
@@ -120,15 +118,15 @@ onMounted(() => {
       <div
         class="rounded-lg p-4 mb-4 border-l-4 border-green-500"
         :class="{
-          'bg-green-50': themeStore.theme === 'light',
-          'bg-green-900/20': themeStore.theme === 'dark',
+          'bg-green-50': false,
+          'bg-green-900/20': true,
         }"
       >
         <p
           class="font-semibold mb-2 text-md"
           :class="{
-            'text-green-800': themeStore.theme === 'light',
-            'text-green-300': themeStore.theme === 'dark',
+            'text-green-800': false,
+            'text-green-300': true,
           }"
         >
           Solution Found
@@ -136,8 +134,8 @@ onMounted(() => {
         <p
           class="text-xs sm:text-sm"
           :class="{
-            'text-green-700': themeStore.theme === 'light',
-            'text-green-200': themeStore.theme === 'dark',
+            'text-green-700': false,
+            'text-green-200': true,
           }"
         >
           However, the solution was simpler: the key is to

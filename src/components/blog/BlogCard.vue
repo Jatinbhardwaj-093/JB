@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../store/theme";
 import type { BlogPost } from "../../data/blogs/index";
 
 const props = defineProps<{
   post: BlogPost;
 }>();
 
-const themeStore = useThemeStore();
 
 // Format date to be more readable
 const formatDate = (dateString: string) => {
@@ -23,8 +21,8 @@ const formatDate = (dateString: string) => {
   <div
     class="blog-card rounded-xl overflow-hidden shadow-md transition-all duration-300 h-full flex flex-col hover:shadow-lg"
     :class="{
-      'bg-white border border-gray-100': themeStore.theme === 'light',
-      'bg-gray-800 border border-gray-700': themeStore.theme === 'dark',
+      'bg-white border border-gray-100': false,
+      'bg-gray-800 border border-gray-700': true,
     }"
   >
     <!-- Card Content -->
@@ -34,8 +32,8 @@ const formatDate = (dateString: string) => {
         <p
           class="font-bold text-medium sm:text-xl mb-2 line-clamp-2"
           :class="{
-            'text-gray-800': themeStore.theme === 'light',
-            'text-white': themeStore.theme === 'dark',
+            'text-gray-800': false,
+            'text-white': true,
           }"
         >
           {{ post.title }}
@@ -45,8 +43,8 @@ const formatDate = (dateString: string) => {
         <div
           class="flex items-center mb-3 text-xs"
           :class="{
-            'text-gray-500': themeStore.theme === 'light',
-            'text-gray-400': themeStore.theme === 'dark',
+            'text-gray-500': false,
+            'text-gray-400': true,
           }"
         >
           <span>{{ formatDate(post.date) }}</span>
@@ -54,8 +52,8 @@ const formatDate = (dateString: string) => {
           <span
             class="font-medium px-2 py-0.5 rounded"
             :class="{
-              'bg-green-50 text-green-700': themeStore.theme === 'light',
-              'bg-green-900/30 text-green-300': themeStore.theme === 'dark',
+              'bg-green-50 text-green-700': false,
+              'bg-green-900/30 text-green-300': true,
             }"
           >
             {{ post.minutesToRead }} min read
@@ -66,8 +64,8 @@ const formatDate = (dateString: string) => {
         <p
           class="text-sm mb-4 line-clamp-3"
           :class="{
-            'text-gray-600': themeStore.theme === 'light',
-            'text-gray-300': themeStore.theme === 'dark',
+            'text-gray-600': false,
+            'text-gray-300': true,
           }"
         >
           {{ post.summary }}
@@ -81,9 +79,9 @@ const formatDate = (dateString: string) => {
           class="inline-flex items-center px-4 py-2 rounded text-sm font-medium transition-colors duration-200"
           :class="{
             'bg-gray-50 text-gray-700 hover:bg-gray-100':
-              themeStore.theme === 'light',
+              false,
             'bg-gray-900/30 text-gray-300 hover:bg-gray-800/40':
-              themeStore.theme === 'dark',
+              true,
           }"
         >
           Read More

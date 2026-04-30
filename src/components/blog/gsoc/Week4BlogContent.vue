@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../../store/theme";
 import { onMounted, ref } from "vue";
 import hljs from "highlight.js/lib/core";
 import python from "highlight.js/lib/languages/python";
 import "highlight.js/styles/github.css";
 import "highlight.js/styles/github-dark.css";
 
-const themeStore = useThemeStore();
 
 // Register Python language for syntax highlighting
 hljs.registerLanguage("python", python);
@@ -96,21 +94,21 @@ onMounted(() => {
       <div
         class="mb-4 sm:mb-6 rounded-lg p-4"
         :class="{
-          'bg-gray-100': themeStore.theme === 'light',
-          'bg-gray-900': themeStore.theme === 'dark',
+          'bg-gray-100': false,
+          'bg-gray-900': true,
         }"
       >
         <pre
           class="text-sm font-mono whitespace-pre-wrap break-words"
           :class="{
-            'hljs-github': themeStore.theme === 'light',
-            'hljs-github-dark': themeStore.theme === 'dark',
+            'hljs-github': false,
+            'hljs-github-dark': true,
           }"
         ><code 
           class="language-python"
           :class="{
-            'hljs-github': themeStore.theme === 'light',
-            'hljs-github-dark': themeStore.theme === 'dark',
+            'hljs-github': false,
+            'hljs-github-dark': true,
           }"
         >import flint.types._gr as gr
 R = gr.gr_series_ctx.new(gr.gr_fmpq_ctx, 4)
@@ -140,21 +138,21 @@ R2(s) == s2  # returns None</code></pre>
       <div
         class="mb-4 sm:mb-6 rounded-lg p-4"
         :class="{
-          'bg-gray-100': themeStore.theme === 'light',
-          'bg-gray-900': themeStore.theme === 'dark',
+          'bg-gray-100': false,
+          'bg-gray-900': true,
         }"
       >
         <pre
           class="text-sm font-mono whitespace-pre-wrap break-words"
           :class="{
-            'hljs-github': themeStore.theme === 'light',
-            'hljs-github-dark': themeStore.theme === 'dark',
+            'hljs-github': false,
+            'hljs-github-dark': true,
           }"
         ><code 
           class="language-python"
           :class="{
-            'hljs-github': themeStore.theme === 'light',
-            'hljs-github-dark': themeStore.theme === 'dark',
+            'hljs-github': false,
+            'hljs-github-dark': true,
           }"
         >s2 = 1 + x2**2 + x2**3 + x2**10
 R2(s) == s2  # returns False</code></pre>
@@ -186,21 +184,21 @@ R2(s) == s2  # returns False</code></pre>
       <div
         class="mb-4 sm:mb-6 rounded-lg p-4"
         :class="{
-          'bg-gray-100': themeStore.theme === 'light',
-          'bg-gray-900': themeStore.theme === 'dark',
+          'bg-gray-100': false,
+          'bg-gray-900': true,
         }"
       >
         <pre
           class="text-sm font-mono whitespace-pre-wrap break-words"
           :class="{
-            'hljs-github': themeStore.theme === 'light',
-            'hljs-github-dark': themeStore.theme === 'dark',
+            'hljs-github': false,
+            'hljs-github-dark': true,
           }"
         ><code 
           class="language-python"
           :class="{
-            'hljs-github': themeStore.theme === 'light',
-            'hljs-github-dark': themeStore.theme === 'dark',
+            'hljs-github': false,
+            'hljs-github-dark': true,
           }"
         >def _useries_equality(s1: USeries[T], s2: USeries[T], dom: Domain) -> bool | None:
     """Check if two power series are equal."""

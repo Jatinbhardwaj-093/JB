@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import { useThemeStore } from "../store/theme";
 
-const themeStore = useThemeStore();
 const navRef = ref<HTMLElement | null>(null);
 const isMobileMenuOpen = ref<boolean>(false);
 

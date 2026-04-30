@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, defineAsyncComponent } from "vue";
-import { useThemeStore } from "../../store/theme";
 import type { BlogPost } from "../../data/blogs/index";
 
 const props = defineProps<{
   post: BlogPost;
 }>();
 
-const themeStore = useThemeStore();
 const content = ref("");
 
 // Lazy load blog components based on slug
@@ -77,23 +75,23 @@ onMounted(async () => {
   <div
     class="blog-reader max-w-5xl mx-auto px-0 sm:px-6"
     :class="{
-      'text-gray-800 dark': themeStore.theme === 'dark',
-      'text-gray-800': themeStore.theme === 'light',
+      'text-gray-800 dark': true,
+      'text-gray-800': false,
     }"
   >
     <!-- Blog Header -->
     <header
       class="mb-4 border-b sm:pl-0 pl-2"
       :class="{
-        'border-gray-200': themeStore.theme === 'light',
-        'border-gray-700': themeStore.theme === 'dark',
+        'border-gray-200': false,
+        'border-gray-700': true,
       }"
     >
       <p
         class="text-2xl sm:text-3xl font-bold mb-4"
         :class="{
-          'text-gray-900': themeStore.theme === 'light',
-          'text-white': themeStore.theme === 'dark',
+          'text-gray-900': false,
+          'text-white': true,
         }"
       >
         {{ post.title }}
@@ -102,8 +100,8 @@ onMounted(async () => {
       <div
         class="flex items-center text-sm mb-2"
         :class="{
-          'text-gray-600': themeStore.theme === 'light',
-          'text-gray-400': themeStore.theme === 'dark',
+          'text-gray-600': false,
+          'text-gray-400': true,
         }"
       >
         <span class="ml-3">{{ formatDate(post.date) }}</span>
@@ -111,8 +109,8 @@ onMounted(async () => {
         <span
           class="font-medium px-2 py-0.5 rounded"
           :class="{
-            'bg-gray-100 text-gray-700': themeStore.theme === 'light',
-            'bg-gray-800/30 text-gray-300': themeStore.theme === 'dark',
+            'bg-gray-100 text-gray-700': false,
+            'bg-gray-800/30 text-gray-300': true,
           }"
         >
           {{ post.minutesToRead }} min read
@@ -124,8 +122,8 @@ onMounted(async () => {
     <div
       class="blog-content prose prose-lg max-w-none mx-auto px-4 sm:px-8"
       :class="{
-        'prose-gray': themeStore.theme === 'light',
-        'prose-invert': themeStore.theme === 'dark',
+        'prose-gray': false,
+        'prose-invert': true,
       }"
     >
       <!-- Render component or HTML content -->
@@ -146,8 +144,8 @@ onMounted(async () => {
       <div
         class="mt-6 border-t"
         :class="{
-          'border-gray-200': themeStore.theme === 'light',
-          'border-gray-700': themeStore.theme === 'dark',
+          'border-gray-200': false,
+          'border-gray-700': true,
         }"
       >
         <button
@@ -155,9 +153,9 @@ onMounted(async () => {
           class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
           :class="{
             'bg-gray-100 text-gray-700 hover:bg-gray-200':
-              themeStore.theme === 'light',
+              false,
             'bg-gray-800/30 text-gray-300 hover:bg-gray-700/40':
-              themeStore.theme === 'dark',
+              true,
           }"
         >
           <svg

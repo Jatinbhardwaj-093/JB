@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useThemeStore } from "../../../store/theme";
 import { onMounted } from "vue";
 import hljs from "highlight.js/lib/core";
 import python from "highlight.js/lib/languages/python";
 import "highlight.js/styles/github.css";
 import "highlight.js/styles/github-dark.css";
 
-const themeStore = useThemeStore();
 
 // Register Python language for syntax highlighting
 hljs.registerLanguage("python", python);
@@ -162,8 +160,8 @@ onMounted(() => {
       <div
         class="mb-4 sm:mb-6 rounded-lg p-4 border-l-4 border-blue-500"
         :class="{
-          'bg-blue-50': themeStore.theme === 'light',
-          'bg-blue-900/20': themeStore.theme === 'dark',
+          'bg-blue-50': false,
+          'bg-blue-900/20': true,
         }"
       >
         <p class="text-sm sm:text-base italic">

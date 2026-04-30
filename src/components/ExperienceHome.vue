@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { useThemeStore } from "../store/theme";
 import { ref, computed } from "vue";
 
-const themeStore = useThemeStore();
 const expandedItems = ref<number[]>([]);
 
 // Function to check if item is expanded
