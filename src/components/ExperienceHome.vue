@@ -22,6 +22,17 @@ const isMobile = computed(() => {
 
 const experiences = [
   {
+    title: "PgmPy Mentorship",
+    timeline: "May 2026 - Present",
+    summary:
+      "Selected for the pgmpy mentorship program to develop statistical estimation tools for causal discovery.",
+    points: [
+      "Implementing the bootstrap estimator for causal discovery algorithms to assess structure reliability",
+      "Developing methods to quantify uncertainty and calculate confidence intervals for learned DAGs",
+    ],
+    className: "border-l-gray-600",
+  },
+  {
     title: "Google Summer of Code @SymPy",
     timeline: "May 2025 - Sept 2025",
     summary:
@@ -44,7 +55,7 @@ const experiences = [
       <div
         v-for="(exp, index) in experiences"
         :key="index"
-        class="py-6 border-b border-gray-200 dark:border-gray-800 last:border-b-0"
+        class="py-6"
       >
         <div class="flex justify-between items-start mb-4">
           <div>
@@ -79,7 +90,7 @@ const experiences = [
       <div
         v-for="(exp, index) in experiences"
         :key="index"
-        class="experience-card py-4 border-b border-gray-200 dark:border-gray-800 last:border-b-0"
+        class="experience-card py-4"
       >
         <!-- Card Header with Toggle -->
         <div

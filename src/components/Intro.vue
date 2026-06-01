@@ -27,8 +27,8 @@ onUnmounted(() => {
     <div class="relative z-10 w-full max-w-4xl mx-auto text-center">
       <!-- Profile Image -->
       <div
-        class="transition-all duration-1000 ease-out transform opacity-0 scale-90"
-        :class="{ 'opacity-100 scale-100': isLoaded }"
+        class="transition-all duration-1000 ease-out transform"
+        :class="isLoaded ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-90 invisible'"
       >
         <div class="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-3">
           <img
@@ -41,8 +41,8 @@ onUnmounted(() => {
 
       <!-- Name -->
       <div
-        class="transition-all duration-1000 ease-out delay-100 transform opacity-0 translate-y-4"
-        :class="{ 'opacity-100 translate-y-0': isLoaded }"
+        class="transition-all duration-1000 ease-out delay-100 transform"
+        :class="isLoaded ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'"
       >
         <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-2 text-gray-900 dark:text-white">
           {{ firstName }} {{ lastName }}
@@ -51,8 +51,8 @@ onUnmounted(() => {
 
       <!-- Title -->
       <div
-        class="transition-all duration-1000 ease-out delay-200 transform opacity-0 translate-y-4"
-        :class="{ 'opacity-100 translate-y-0': isLoaded }"
+        class="transition-all duration-1000 ease-out delay-200 transform"
+        :class="isLoaded ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'"
       >
         <p class="text-lg sm:text-xl font-light tracking-wide text-gray-600 dark:text-gray-400 mb-3">
           {{ title }}
@@ -61,8 +61,8 @@ onUnmounted(() => {
 
       <!-- Location -->
       <div
-        class="transition-all duration-1000 ease-out delay-300 transform opacity-0 translate-y-4 mb-8"
-        :class="{ 'opacity-100 translate-y-0': isLoaded }"
+        class="transition-all duration-1000 ease-out delay-300 transform mb-8"
+        :class="isLoaded ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'"
       >
         <div class="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-500">
           <svg
@@ -83,8 +83,8 @@ onUnmounted(() => {
 
       <!-- Action Buttons -->
       <div
-        class="transition-all duration-1000 ease-out delay-400 transform opacity-0 translate-y-4 mb-10"
-        :class="{ 'opacity-100 translate-y-0': isLoaded }"
+        class="transition-all duration-1000 ease-out delay-400 transform mb-10"
+        :class="isLoaded ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'"
       >
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <router-link
@@ -101,8 +101,8 @@ onUnmounted(() => {
 
       <!-- Social Links -->
       <div
-        class="transition-all duration-1000 ease-out delay-500 transform opacity-0 translate-y-4"
-        :class="{ 'opacity-100 translate-y-0': isLoaded }"
+        class="transition-all duration-1000 ease-out delay-500 transform"
+        :class="isLoaded ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible'"
       >
         <div class="flex items-center justify-center gap-4">
           <!-- LinkedIn -->
