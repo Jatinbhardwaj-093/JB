@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import Blogs from "../components/Blogs.vue";
 import { onMounted } from "vue";
 

@@ -1,10 +1,13 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, watch } from "vue";
 
 // Props
-const props = defineProps<{
-  mobileActiveTab?: string;
-}>();
+const props = defineProps({
+  mobileActiveTab: {
+    type: String,
+    default: "education"
+  }
+});
 
 // Animation states
 const cardsVisible = ref(false);

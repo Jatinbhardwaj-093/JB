@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted } from "vue";
 
 
@@ -11,14 +11,6 @@ onMounted(() => {
     cardsVisible.value = true;
   }, 150);
 });
-
-interface Skill {
-  name: string;
-  img: string;
-  description: string;
-  category: string;
-  gradient: string;
-}
 
 // All technologies in one array
 const technologies = [
@@ -43,7 +35,7 @@ const technologies = [
   { name: "Neovim", img: "nvim.svg" },
 ];
 
-const getImageUrl = (name: string) => {
+const getImageUrl = (name) => {
   try {
     return new URL(`../assets/images/Technology/${name}`, import.meta.url).href;
   } catch (error) {

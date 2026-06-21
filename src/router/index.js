@@ -4,41 +4,44 @@ import BlogView from "../views/BlogView.vue";
 import BlogPostView from "../views/BlogPostView.vue";
 import Projects from "../views/ProjectsView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+
 const routes = [
-    {
-        path: "/",
-        name: "home",
-        component: Home,
-    },
-    {
-        path: "/blogs",
-        name: "blogs",
-        component: BlogView,
-    },
-    {
-        path: "/blog/:slug",
-        name: "blog-post",
-        component: BlogPostView,
-        props: true,
-    },
-    {
-        path: "/projects",
-        name: "projects",
-        component: Projects,
-    },
-    // Catch-all route for 404 handling
-    {
-        path: "/:pathMatch(.*)*",
-        name: "not-found",
-        component: NotFoundView,
-    },
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+  },
+  {
+    path: "/blogs",
+    name: "blogs",
+    component: BlogView,
+  },
+  {
+    path: "/blog/:slug",
+    name: "blog-post",
+    component: BlogPostView,
+    props: true,
+  },
+  {
+    path: "/projects",
+    name: "projects",
+    component: Projects,
+  },
+  // Catch-all route for 404 handling
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: NotFoundView,
+  },
 ];
+
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes,
-    scrollBehavior() {
-        // always scroll to top when navigating to a new route
-        return { top: 0 };
-    },
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
+  scrollBehavior() {
+    // always scroll to top when navigating to a new route
+    return { top: 0 };
+  },
 });
+
 export default router;

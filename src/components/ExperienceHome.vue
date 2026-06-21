@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup>
 import { ref, computed } from "vue";
 
-const expandedItems = ref<number[]>([]);
+const expandedItems = ref([]);
 
 // Function to check if item is expanded
-const isExpanded = (index: number) => expandedItems.value.includes(index);
+const isExpanded = (index) => expandedItems.value.includes(index);
 
 // Function to toggle expand/collapse
-const toggleExpand = (index: number) => {
+const toggleExpand = (index) => {
   if (isExpanded(index)) {
     expandedItems.value = expandedItems.value.filter((i) => i !== index);
   } else {

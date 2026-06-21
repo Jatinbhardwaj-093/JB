@@ -1,88 +1,34 @@
-<script setup lang="ts">
+<script setup>
 import Projects from "../components/Projects.vue";
 import { ref, computed } from "vue";
-
-const projects = ref([
-  {
-    id: 4,
-    title: "NLP Comment Classification",
-    subtitle: "Natural Language Processing",
-    description:
-      "An end-to-end NLP pipeline that analyzes textual entries from a discussion system and predicts how each entry is ultimately categorized by the platform using a LightGBM classification model.",
-    tags: ["NumPy", "Pandas", "sklearn", "Matplotlib", "LightGBM"],
-    links: {
-      github: "https://github.com/Jatinbhardwaj-093/NLP_Comment_Classification",
-      colab: "https://colab.research.google.com/drive/1OOmKKJ_ixLJAsQqT5l0emED68jTJC7Cg?usp=share_link",
-    },
-  },
-  {
-    id: 5,
-    title: "Music Genre Classification",
-    subtitle: "Vision Transformer",
-    description:
-      "A machine learning system that analyzes audio files and classifies them into primary musical genres. It converts audio into visual spectrograms and leverages Vision Transformers to identify patterns, predicting the top matches with probability scores.",
-    tags: ["PyTorch", "Hugging Face", "Librosa", "NumPy", "Gradio", "W&B"],
-    links: {
-      github: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier",
-      hfspace: "https://huggingface.co/spaces/jatin-093/ViT_Music_Classification",
-      colab: "https://colab.research.google.com/drive/1D8tOYiKZtWHG531RT097Wj-OJZ1_lJ-y",
-    },
-  },
-  {
-    id: 3,
-    title: "Google Summer of Code at SymPy",
-    subtitle: "Open Source",
-    description:
-      "Implementing a formal power series domain system for SymPy to enhance its symbolic mathematics capabilities.",
-    tags: ["SymPy", "Python", "Cython", "C", "Pytest", "Hypothesis", "Codecov"],
-    link: "https://summerofcode.withgoogle.com/programs/2025/projects/8VslkGZ9",
-  },
-  {
-    id: 1,
-    title: "Influencer-Sponsor Engagement Platform",
-    subtitle: "Web Development",
-    description:
-      "A comprehensive collaboration platform connecting influencers with sponsors and sponsorship opportunities.",
-    tags: ["HTML/CSS", "JavaScript", "Flask", "SQLite"],
-    link: "https://github.com/Jatinbhardwaj-093/Infulencer-Sponsor-Engagement-Platform",
-  },
-  {
-    id: 2,
-    title: "HouseHold Service Platform",
-    subtitle: "Web Development",
-    description:
-      "A booking service platform that helps users find and schedule household services with verified service providers.",
-    tags: ["Vue.js", "Flask", "SQLite", "Redis"],
-    link: "https://github.com/Jatinbhardwaj-093/HouseHold-Service-Platform",
-  },
-]);
+import projects from "../data/projects";
 
 // Filter state
 const activeFilter = ref("all");
 const filters = ["all", "ML/AI", "Web Dev", "Open Source"];
 
-const setFilter = (filter: string) => {
+const setFilter = (filter) => {
   activeFilter.value = filter;
 };
 
 const filteredProjects = computed(() => {
-  if (activeFilter.value === "all") return projects.value;
-
-  return projects.value.filter((project) => {
-    if (activeFilter.value === "ML/AI") {
-      return [4, 5].includes(project.id);
-    }
-    if (activeFilter.value === "Web Dev") {
-      return project.tags.some((tag) =>
-        ["HTML/CSS", "JavaScript", "Vue.js", "Flask"].includes(tag)
-      );
-    }
-    if (activeFilter.value === "Open Source") {
-      return project.id === 3;
-    }
-    return true;
-  });
+  if (activeFilter.value === "all") return projects;
+  return projects.filter((project) => project.category === activeFilter.value);
 });
+
+// Label for link type
+const getLinkLabel = (type) => {
+  const labels = {
+    github: "GitHub",
+    kaggle: "Kaggle",
+    drive: "Google Docs",
+    figma: "Figma",
+    gsoc: "GSoC",
+    hfspace: "HF Space",
+    colab: "Colab Notebook",
+  };
+  return labels[type] || type;
+};
 </script>
 
 <template>
@@ -150,57 +96,28 @@ const filteredProjects = computed(() => {
                 {{ project.description }}
               </p>
 
-              <!-- Tags -->
+              <!-- Technologies -->
               <div class="flex flex-wrap gap-1.5 mb-3">
                 <span
-                  v-for="tag in project.tags"
-                  :key="tag"
+                  v-for="tech in project.technologies"
+                  :key="tech"
                   class="px-2 py-0.5 text-xs font-medium rounded-md bg-gray-700/50 text-gray-300 border border-gray-600/50"
                 >
-                  {{ tag }}
+                  {{ tech }}
                 </span>
               </div>
 
               <!-- Links -->
               <div class="pt-3 border-t border-gray-700 flex items-center gap-5 flex-wrap">
-                <template v-if="project.links">
-                  <a
-                    v-if="project.links.github"
-                    :href="project.links.github"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
-                  >
-                    GitHub
-                  </a>
-
-                  <a
-                    v-if="project.links.hfspace"
-                    :href="project.links.hfspace"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
-                  >
-                    HF Space
-                  </a>
-                  <a
-                    v-if="project.links.colab"
-                    :href="project.links.colab"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
-                  >
-                    Colab
-                  </a>
-                </template>
                 <a
-                  v-else-if="project.link"
-                  :href="project.link"
+                  v-for="(url, type) in project.links"
+                  :key="type"
+                  :href="url"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
                 >
-                  View Project
+                  {{ getLinkLabel(type) }}
                 </a>
               </div>
             </div>

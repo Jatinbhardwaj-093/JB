@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { onMounted, onUnmounted } from "vue";
 import Intro from "../components/Intro.vue";
 import ExperienceHome from "../components/ExperienceHome.vue";
@@ -7,7 +7,7 @@ import ProjectsHome from "../components/ProjectsHome.vue";
 
 
 
-let observer: IntersectionObserver | null = null;
+let observer = null;
 
 onMounted(() => {
   // Create intersection observer for scroll animations

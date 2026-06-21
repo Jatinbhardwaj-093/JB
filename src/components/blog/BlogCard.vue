@@ -1,14 +1,14 @@
-<script setup lang="ts">
-import type { BlogPost } from "../../data/blogs/index";
-
-const props = defineProps<{
-  post: BlogPost;
-}>();
-
+<script setup>
+const props = defineProps({
+  post: {
+    type: Object,
+    required: true,
+  },
+});
 
 // Format date to be more readable
-const formatDate = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = {
+const formatDate = (dateString) => {
+  const options = {
     year: "numeric",
     month: "long",
     day: "numeric",

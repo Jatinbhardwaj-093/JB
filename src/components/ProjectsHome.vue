@@ -1,52 +1,16 @@
-<script setup lang="ts">
-import { ref } from "vue";
+<script setup>
+import { computed } from "vue";
+import projectsData from "../data/projects";
 
-const projects = ref([
-  {
-    id: 1,
-    title: "NLP Comment Classification",
-    subtitle: "Natural Language Processing",
-    description:
-      "An end-to-end NLP pipeline that analyzes textual entries from a discussion system and predicts how each entry is ultimately categorized by the platform using a LightGBM classification model.",
-    technologies: [
-      { name: "NumPy" },
-      { name: "Pandas" },
-      { name: "sklearn" },
-      { name: "Matplotlib" },
-      { name: "LightGBM" },
-    ],
-    links: {
-      github: "https://github.com/Jatinbhardwaj-093/NLP_Comment_Classification",
-      colab: "https://colab.research.google.com/drive/1OOmKKJ_ixLJAsQqT5l0emED68jTJC7Cg?usp=share_link",
-    },
-  },
-  {
-    id: 2,
-    title: "Music Genre Classification",
-    subtitle: "Vision Transformer",
-    description:
-      "A machine learning system that analyzes audio files and classifies them into primary musical genres. It converts audio into visual spectrograms and leverages Vision Transformers to identify patterns, predicting the top matches with probability scores.",
-    technologies: [
-      { name: "PyTorch" },
-      { name: "Hugging Face" },
-      { name: "Librosa" },
-      { name: "NumPy" },
-      { name: "Gradio" },
-    ],
-    links: {
-      github: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier",
-      hfspace: "https://huggingface.co/spaces/jatin-093/ViT_Music_Classification",
-      colab: "https://colab.research.google.com/drive/1D8tOYiKZtWHG531RT097Wj-OJZ1_lJ-y",
-    },
-  },
-]);
+// Show the first two projects on the homepage
+const homeProjects = computed(() => projectsData.slice(0, 2));
 </script>
 
 <template>
   <div class="flex flex-col items-center w-full max-w-6xl mx-auto px-4 md:px-6">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 projects-container w-full mb-10">
       <div
-        v-for="(project, index) in projects"
+        v-for="project in homeProjects"
         :key="project.id"
         class="project-card relative rounded-2xl overflow-hidden transition-all duration-300 border bg-gradient-to-br from-gray-800/80 to-gray-900/90 border-gray-700/60 hover:border-gray-500/60 hover:shadow-xl hover:shadow-gray-900/20 flex flex-col h-full backdrop-blur-sm"
       >
@@ -66,16 +30,14 @@ const projects = ref([
             {{ project.description }}
           </p>
 
-
-
           <!-- Tech Stack -->
           <div class="flex flex-wrap gap-2 mb-5">
             <span
               v-for="tech in project.technologies"
-              :key="tech.name"
+              :key="tech"
               class="px-2 py-1 text-[10px] font-semibold bg-gray-700/50 text-gray-300 rounded border border-gray-600/50 uppercase tracking-wider"
             >
-              {{ tech.name }}
+              {{ tech }}
             </span>
           </div>
 
@@ -100,6 +62,7 @@ const projects = ref([
             >
               HF Space
             </a>
+            
             <a
               v-if="project.links.colab"
               :href="project.links.colab"

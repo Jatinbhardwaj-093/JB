@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup>
 import { ref, computed, onMounted } from "vue";
 import { getPostsByCategory } from "../data/blogs/index";
 import BlogCard from "./blog/BlogCard.vue";
 
-const filterTabsContainer = ref<HTMLElement | null>(null);
+const filterTabsContainer = ref(null);
 
 // Define blog categories with descriptions
 const categories = ref([
@@ -53,11 +53,11 @@ const hasPosts = computed(() => {
 });
 
 // Function to set active category
-const setActiveCategory = (categoryId: string) => {
+const setActiveCategory = (categoryId) => {
   activeCategory.value = categoryId;
 };
 
-const handleCategoryChange = (categoryId: string) => {
+const handleCategoryChange = (categoryId) => {
   setActiveCategory(categoryId);
 
   // Scroll to center the selected category button

@@ -1,12 +1,15 @@
-<script setup lang="ts">
+<script setup>
 import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { getPostBySlug } from "../data/blogs";
 import BlogReader from "../components/blog/BlogReader.vue";
 
-const props = defineProps<{
-  slug: string;
-}>();
+const props = defineProps({
+  slug: {
+    type: String,
+    required: true,
+  },
+});
 
 const router = useRouter();
 

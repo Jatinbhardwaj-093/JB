@@ -1,171 +1,20 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from "vue";
-
-const projects = ref([
-  {
-    id: 4,
-    title: "NLP Comment Classification",
-    subtitle: "Natural Language Processing",
-    description:
-      "An end-to-end NLP pipeline that analyzes textual entries from a discussion system and predicts how each entry is ultimately categorized by the platform using a LightGBM classification model.",
-    technologies: [
-      { name: "NumPy" },
-      { name: "Pandas" },
-      { name: "sklearn" },
-      { name: "Matplotlib" },
-      { name: "LightGBM" },
-    ],
-    links: [
-      { type: "github", url: "https://github.com/Jatinbhardwaj-093/NLP_Comment_Classification" },
-      { type: "colab", url: "https://colab.research.google.com/drive/1OOmKKJ_ixLJAsQqT5l0emED68jTJC7Cg?usp=share_link" },
-    ],
-    features: [
-      "Multi-label emotion classification from raw text",
-      "Feature extraction with TF-IDF and word embeddings",
-      "Ensemble model with LightGBM for improved accuracy",
-      "Comprehensive data visualization and analysis",
-    ],
-  },
-  {
-    id: 5,
-    title: "Music Genre Classification",
-    subtitle: "Vision Transformer",
-    description:
-      "A machine learning system that analyzes audio files and classifies them into primary musical genres. It converts audio into visual spectrograms and leverages Vision Transformers to identify patterns, predicting the top matches with probability scores.",
-    technologies: [
-      { name: "PyTorch" },
-      { name: "Hugging Face" },
-      { name: "Librosa" },
-      { name: "NumPy" },
-      { name: "Gradio" },
-      { name: "W&B" },
-    ],
-    links: [
-      { type: "github", url: "https://github.com/Jatinbhardwaj-093/ViT_Music_Classifier" },
-      { type: "hfspace", url: "https://huggingface.co/spaces/jatin-093/ViT_Music_Classification" },
-      { type: "colab", url: "https://colab.research.google.com/drive/1D8tOYiKZtWHG531RT097Wj-OJZ1_lJ-y" },
-    ],
-    features: [
-      "Spectrogram-based audio processing with Librosa",
-      "End-to-End ViT Model tailored for music classification",
-      "Interactive Web UI deployed on Hugging Face Spaces",
-      "Real-time experiment tracking using Weights & Biases",
-    ],
-  },
-  {
-    id: 3,
-    title: "Google Summer of Code at SymPy",
-    subtitle: "Open Source",
-    description:
-      "Implemented a formal power series domain system for SymPy to enhance its symbolic mathematics capabilities as part of Google Summer of Code 2025.",
-    technologies: [
-      { name: "SymPy" },
-      { name: "Python" },
-      { name: "Cython" },
-      { name: "C" },
-      { name: "Pytest" },
-      { name: "Hypothesis" },
-      { name: "Codecov" },
-    ],
-    links: [
-      {
-        type: "github",
-        url: "https://github.com/sympy/sympy/pulls?q=author%3AJatinbhardwaj-093",
-      },
-      {
-        type: "gsoc",
-        url: "https://summerofcode.withgoogle.com/programs/2025/projects/8VslkGZ9",
-      },
-    ],
-    features: [
-      "Two-level class architecture for Univariate FPS ring over arbitrary rings",
-      "Dual backend architecture with pure Python and optimized Cython implementations (python-flint)",
-      "Achieved 85x-1680x performance improvements against global series methods",
-      "2.5x-42x speedup in ring_series module operations",
-      "Robust testing infrastructure with pytest, Hypothesis",
-    ],
-  },
-  {
-    id: 1,
-    title: "Influencer-Sponsor Engagement Platform",
-    subtitle: "Web Development",
-    description:
-      "A comprehensive collaboration platform connecting influencers with sponsors and sponsorship opportunities.",
-    technologies: [
-      { name: "HTML5" },
-      { name: "CSS3" },
-      { name: "JavaScript" },
-      { name: "Flask" },
-      { name: "SQLite" },
-    ],
-    links: [
-      {
-        type: "github",
-        url: "https://github.com/Jatinbhardwaj-093/Infulencer-Sponsor-Engagement-Platform",
-      },
-      {
-        type: "drive",
-        url: "https://drive.google.com/drive/folders/1SLRgwuTLKnKVfdY9br0idI0x_NHyb0Qn?usp=drive_link",
-      },
-    ],
-    features: [
-      "Profile matching for influencers and sponsors",
-      "Detailed analytics dashboard",
-      "Secure messaging system",
-      "Contract management tools",
-    ],
-  },
-  {
-    id: 2,
-    title: "HouseHold Service Platform",
-    subtitle: "Web Development",
-    description:
-      "A booking service platform that helps users find and schedule household services with verified service providers.",
-    technologies: [
-      { name: "Vue.js" },
-      { name: "Flask" },
-      { name: "SQLite" },
-      { name: "Redis" },
-      { name: "Celery" },
-    ],
-    links: [
-      {
-        type: "github",
-        url: "https://github.com/Jatinbhardwaj-093/HouseHold-Service-Platform",
-      },
-      {
-        type: "drive",
-        url: "https://drive.google.com/drive/folders/1YR5UsPf4jtXYstgQJDPUFEjy33uew83I?usp=drive_link",
-      },
-      {
-        type: "figma",
-        url: "https://www.figma.com/design/a5MomTlXdFQ1qz7lAzog7E/Househod-Service-MAD-1?node-id=0-1&t=Xo1ho1DEgCnSpn03-1",
-      },
-    ],
-    features: [
-      "Real-time service provider tracking",
-      "Secure payment processing",
-      "Rating and review system",
-      "Service provider verification process",
-    ],
-  },
-]);
+import projects from "../data/projects";
 
 // Feature preview & expand state per project
 const previewCount = 2;
-const expanded = ref<Record<number, boolean>>({});
+const expanded = ref({});
 
-const isExpanded = (id: number) => !!expanded.value[id];
+const isExpanded = (id) => !!expanded.value[id];
 
-const toggleExpand = (id: number) => {
+const toggleExpand = (id) => {
   expanded.value = { ...expanded.value, [id]: !expanded.value[id] };
 };
 
-// Links are rendered uniformly so no specific getters are needed
-
 // Label for link type
-const getLinkLabel = (type: string) => {
-  const labels: Record<string, string> = {
+const getLinkLabel = (type) => {
+  const labels = {
     github: "GitHub",
     kaggle: "Kaggle",
     drive: "Google Docs",
@@ -188,7 +37,7 @@ const getLinkLabel = (type: string) => {
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div
-          v-for="(project, index) in projects"
+          v-for="project in projects"
           :key="project.id"
           class="project-card rounded-xl overflow-hidden transition-all duration-300 border bg-gray-800/60 border-gray-700 flex flex-col"
         >
@@ -241,24 +90,24 @@ const getLinkLabel = (type: string) => {
             <div class="flex flex-wrap gap-1.5 mb-4">
               <span
                 v-for="tech in project.technologies"
-                :key="tech.name"
+                :key="tech"
                 class="px-2 py-1 text-xs font-medium bg-gray-700/50 text-gray-300 rounded-md border border-gray-600/50"
               >
-                {{ tech.name }}
+                {{ tech }}
               </span>
             </div>
 
             <!-- Footer Links -->
             <div class="pt-3 border-t border-gray-700 flex items-center gap-5 mt-auto flex-wrap">
               <a
-                v-for="link in project.links"
-                :key="link.type"
-                :href="link.url"
+                v-for="(url, type) in project.links"
+                :key="type"
+                :href="url"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
               >
-                {{ getLinkLabel(link.type) }}
+                {{ getLinkLabel(type) }}
               </a>
             </div>
           </div>

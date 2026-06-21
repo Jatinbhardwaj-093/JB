@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 
-const navRef = ref<HTMLElement | null>(null);
-const isMobileMenuOpen = ref<boolean>(false);
+const navRef = ref(null);
+const isMobileMenuOpen = ref(false);
 
-const handleClickOutside = (event: MouseEvent) => {
-  if (navRef.value && !navRef.value.contains(event.target as Node)) {
+const handleClickOutside = (event) => {
+  if (navRef.value && !navRef.value.contains(event.target)) {
     isMobileMenuOpen.value = false;
   }
 };
@@ -18,7 +18,7 @@ onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-const toggleMobileMenu = (event?: Event) => {
+const toggleMobileMenu = (event) => {
   // Prevent event from bubbling up to document
   if (event) {
     event.stopPropagation();
