@@ -1,9 +1,7 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { getPostsByCategory } from "../data/blogs/index";
 import BlogCard from "./blog/BlogCard.vue";
-
-const filterTabsContainer = ref(null);
 
 // Define blog categories with descriptions
 const categories = ref([
