@@ -5,14 +5,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        ubuntu: ["Ubuntu", "sans-serif"], // Adding Ubuntu font to the config
-      },
-      width: {
-        4.5: "1.125rem", // 18px
-      },
-      height: {
-        4.5: "1.125rem", // 18px
-      },
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+      }
     },
   },
   plugins: [],

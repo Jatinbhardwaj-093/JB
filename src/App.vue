@@ -1,60 +1,55 @@
 <template>
   <div
-    class="app-container min-h-screen flex flex-col bg-gradient-to-br from-black to-gray-900 transition-colors duration-500 overflow-x-hidden"
+    class="bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-50 transition-colors duration-300 antialiased min-h-screen flex flex-col justify-between selection:bg-stone-400/20 selection:text-stone-500 dark:selection:text-stone-400 relative"
   >
-    <Navbar />
-    <main class="container mx-auto flex-grow relative">
-      <div class="min-h-[80vh]">
-        <router-view v-slot="{ Component }">
-          <transition name="page-fade" mode="out-in">
-            <component :is="Component" />
-          </transition>
-        </router-view>
-      </div>
-    </main>
-    <footer class="relative mt-auto py-8">
-      <!-- Fading Divider -->
-      <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-50"></div>
-      
-      <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-gray-400 text-sm hidden md:block">
-          <span class="text-white font-medium">Jatin Bhardwaj</span>
-        </p>
+    <!-- Top Glow Accent -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[1px] bg-gradient-to-r from-transparent via-stone-200 dark:via-stone-800 to-transparent"></div>
 
-        <div class="flex items-center gap-4">
-          <a
-            href="https://www.linkedin.com/in/jatin-bhardwaj093/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-white transition-colors duration-200"
-            aria-label="LinkedIn"
-          >
-            <i class="bi bi-linkedin text-xl"></i>
-          </a>
-          <a
-            href="https://github.com/Jatinbhardwaj-093"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-white transition-colors duration-200"
-            aria-label="GitHub"
-          >
-            <i class="bi bi-github text-xl"></i>
-          </a>
-          <a
-            href="https://x.com/Jatin0932"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-white transition-colors duration-200"
-            aria-label="Twitter"
-          >
-            <i class="bi bi-twitter-x text-xl"></i>
-          </a>
-          <a
-            href="mailto:bhardwajjatin093@gmail.com"
-            class="text-gray-400 hover:text-white transition-colors duration-200"
+    <Navbar />
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-6 py-12 flex-grow relative w-full">
+      <router-view v-slot="{ Component }">
+        <transition name="page-fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="border-t border-stone-200 dark:border-stone-900 py-12 mt-24">
+      <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6 text-xs text-stone-400 dark:text-stone-500 font-mono">
+        <div>
+          © 2026 Jatin Bhardwaj
+        </div>
+        <div class="flex items-center gap-5 text-sm">
+          <a 
+            href="mailto:jatinbhardwaj093@gmail.com" 
+            class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors" 
+            title="Email"
             aria-label="Email"
           >
-            <i class="bi bi-envelope text-xl"></i>
+            <i class="bi bi-envelope"></i>
+          </a>
+          <a 
+            href="https://github.com/Jatinbhardwaj-093" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors" 
+            title="GitHub"
+            aria-label="GitHub"
+          >
+            <i class="bi bi-github"></i>
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/jatin-bhardwaj093/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors" 
+            title="LinkedIn"
+            aria-label="LinkedIn"
+          >
+            <i class="bi bi-linkedin"></i>
           </a>
         </div>
       </div>
@@ -64,80 +59,24 @@
 
 <script setup>
 import Navbar from "./components/Navbar.vue";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  // Initialize light/dark theme class on mount
+  const theme = localStorage.getItem("theme");
+  const html = document.documentElement;
+  if (theme === "light") {
+    html.classList.remove("dark");
+  } else {
+    html.classList.add("dark");
+  }
+});
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-
-:root {
-  --accent-color: #6366f1;
-  --accent-color-hover: #4f46e5;
-}
-
-html,
-body {
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-  font-family: "Inter", sans-serif;
-  scroll-behavior: smooth;
-}
-
-/* Remove default focus outlines */
-button:focus,
-a:focus,
-input:focus,
-select:focus,
-textarea:focus,
-[role="button"]:focus {
-  outline: none;
-}
-
-/* For accessibility, add a subtle focus style for keyboard navigation */
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-[role="button"]:focus-visible {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 2px;
-}
-
-/* Remove tap highlight color on mobile */
-* {
-  -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.page-fade-enter-active,
-.page-fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.page-fade-enter-from,
-.page-fade-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-/* Simple fix for scroll bar flicker during transitions */
-html {
-  overflow-y: scroll;
-}
-
-/* Prevent horizontal scrolling */
-.app-container {
+/* Remove default app wrapper styles if any, global transitions managed here */
+html, body {
   overflow-x: hidden;
   max-width: 100vw;
-}
-
-[v-cloak] {
-  display: none !important;
 }
 </style>

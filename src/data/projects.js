@@ -1,5 +1,21 @@
 const projects = [
   {
+    id: 6,
+    title: "Causal Discovery & Parameter Estimation",
+    subtitle: "pgmpy Mentorship",
+    category: "Open Source",
+    description: "Selected for the pgmpy mentorship program. Developed statistical estimation tools and bootstrap estimators to discover causal structures from data.",
+    technologies: ["pgmpy", "Python", "NetworkX", "Causal Inference", "Statistical Estimation"],
+    features: [
+      "Implementing bootstrap estimators to evaluate the reliability of learned networks",
+      "Developing statistical methods to quantify uncertainty in causal discovery",
+      "Integrating parameter estimation routines and structural constraint resolution"
+    ],
+    links: {
+      github: "https://github.com/pgmpy/pgmpy"
+    }
+  },
+  {
     id: 4,
     title: "NLP Comment Classification",
     subtitle: "Natural Language Processing",
@@ -41,14 +57,13 @@ const projects = [
     title: "Google Summer of Code at SymPy",
     subtitle: "Open Source",
     category: "Open Source",
-    description: "Implemented a formal power series domain system for SymPy to enhance its symbolic mathematics capabilities as part of Google Summer of Code 2025.",
+    description: "Implemented a formal mathematical series module for SymPy to improve calculation speeds and usability as part of Google Summer of Code 2025.",
     technologies: ["SymPy", "Python", "Cython", "C", "Pytest", "Hypothesis", "Codecov"],
     features: [
-      "Two-level class architecture for Univariate FPS ring over arbitrary rings",
-      "Dual backend architecture with pure Python and optimized Cython implementations (python-flint)",
-      "Achieved 85x-1680x performance improvements against global series methods",
-      "2.5x-42x speedup in ring_series module operations",
-      "Robust testing infrastructure with pytest, Hypothesis"
+      "Implemented formal mathematical series logic and class frameworks",
+      "Built pure Python and optimized Cython backends for performance",
+      "Achieved up to 1000x calculation speedups in comparison to default methods",
+      "Developed a comprehensive test suite to validate correctness"
     ],
     links: {
       github: "https://github.com/sympy/sympy/pulls?q=author%3AJatinbhardwaj-093",

@@ -1,5 +1,4 @@
 <script setup>
-import Projects from "../components/Projects.vue";
 import { ref, computed } from "vue";
 import projects from "../data/projects";
 
@@ -15,6 +14,12 @@ const filteredProjects = computed(() => {
   if (activeFilter.value === "all") return projects;
   return projects.filter((project) => project.category === activeFilter.value);
 });
+
+// Accordion details toggle states
+const expandedProjects = ref({});
+const toggleProjectDetails = (id) => {
+  expandedProjects.value[id] = !expandedProjects.value[id];
+};
 
 // Label for link type
 const getLinkLabel = (type) => {
@@ -32,130 +37,133 @@ const getLinkLabel = (type) => {
 </script>
 
 <template>
-  <div>
-    <!-- Desktop Version -->
-    <div class="hidden md:block">
-      <Projects />
+  <div class="space-y-12 w-full text-stone-900 dark:text-stone-50">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div class="space-y-2">
+        <h2 class="mono-text text-xs text-stone-500 dark:text-stone-400 tracking-widest uppercase font-medium">Selected Works</h2>
+        <h3 class="text-2xl font-light tracking-tight text-stone-900 dark:text-stone-100">Engineering Portfolio</h3>
+        <p class="text-xs text-stone-500 dark:text-stone-400 font-light max-w-xl leading-relaxed">
+          Open-source algorithms, symbolic computing systems, machine learning pipelines, and web developments.
+        </p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="flex items-center gap-2 font-mono text-[11px] border border-stone-200 dark:border-stone-900 p-1 rounded-lg self-start sm:self-auto">
+        <button 
+          v-for="filter in filters"
+          :key="filter"
+          @click="setFilter(filter)"
+          class="px-2.5 py-1 rounded transition-colors whitespace-nowrap"
+          :class="activeFilter === filter 
+            ? 'bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900' 
+            : 'text-stone-500 hover:text-stone-900 dark:hover:text-stone-200'"
+        >
+          {{ filter === "all" ? "All" : filter }}
+        </button>
+      </div>
     </div>
 
-    <!-- Mobile Version -->
-    <div class="block md:hidden min-h-screen bg-gray-900">
-      <!-- Header -->
-      <div class="relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 z-0"></div>
-        <div class="relative z-10 px-4 py-10 text-center">
-          <h1 class="text-2xl font-bold text-white mb-2">My Projects</h1>
-          <div class="h-px w-16 bg-gray-600 mx-auto rounded-full mb-3"></div>
-          <p class="text-gray-400 text-sm max-w-md mx-auto">
-            Web development, ML, and open source projects.
-          </p>
-        </div>
-      </div>
-
-      <!-- Filter tabs -->
-      <div class="sticky top-16 z-20 px-4 py-3 bg-gray-900">
-        <div class="overflow-x-auto no-scrollbar">
-          <div class="flex space-x-2 min-w-full w-max">
-            <button
-              v-for="filter in filters"
-              :key="filter"
-              @click="setFilter(filter)"
-              class="px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap select-none"
-              :class="
-                activeFilter === filter
-                  ? 'bg-gray-700 text-gray-200 border border-gray-600'
-                  : 'bg-gray-800 text-gray-400 border border-gray-700'
-              "
-              style="transition: none; transform: none"
-            >
-              {{ filter === "all" ? "All Projects" : filter }}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projects list -->
-      <div class="px-4 py-4">
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div
+        v-for="project in filteredProjects"
+        :key="project.id"
+        class="project-card border border-stone-200 dark:border-stone-900 rounded-xl p-6 bg-stone-100/20 dark:bg-stone-900/10 flex flex-col justify-between hover:border-stone-300 dark:hover:border-stone-800 transition-all group animate-fade-in"
+      >
         <div class="space-y-4">
-          <div
-            v-for="project in filteredProjects"
-            :key="project.id"
-            class="rounded-xl overflow-hidden border bg-gray-800/60 border-gray-700"
-          >
-            <div class="p-4">
-              <!-- Subtitle -->
-              <span class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1.5 block">
-                {{ project.subtitle }}
-              </span>
+          <div class="flex justify-between items-start">
+            <span class="mono-text text-xs text-stone-400 uppercase">
+              {{ project.subtitle }}
+            </span>
+          </div>
+          <h4 class="text-lg font-light tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-stone-950 dark:group-hover:text-stone-100 transition-colors">
+            {{ project.title }}
+          </h4>
+          <p class="text-xs text-stone-600 dark:text-stone-400 font-light leading-relaxed">
+            {{ project.description }}
+          </p>
 
-              <h3 class="text-base font-semibold text-white mb-2">
-                {{ project.title }}
-              </h3>
+          <!-- Clickable Details Accordion Toggle -->
+          <div v-if="project.features && project.features.length" class="pt-1">
+            <button 
+              @click="toggleProjectDetails(project.id)"
+              class="text-[10px] font-mono border border-stone-200 dark:border-stone-800/80 rounded px-1.5 py-0.5 text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 hover:bg-stone-50 dark:hover:bg-stone-900 transition-colors flex items-center gap-1 focus:outline-none cursor-pointer"
+            >
+              <span>{{ expandedProjects[project.id] ? '[-]' : '[+]' }}</span>
+              <span>{{ expandedProjects[project.id] ? 'hide_details' : 'view_details' }}</span>
+            </button>
 
-              <p class="text-gray-400 text-sm mb-3">
-                {{ project.description }}
-              </p>
-
-              <!-- Technologies -->
-              <div class="flex flex-wrap gap-1.5 mb-3">
-                <span
-                  v-for="tech in project.technologies"
-                  :key="tech"
-                  class="px-2 py-0.5 text-xs font-medium rounded-md bg-gray-700/50 text-gray-300 border border-gray-600/50"
-                >
-                  {{ tech }}
-                </span>
-              </div>
-
-              <!-- Links -->
-              <div class="pt-3 border-t border-gray-700 flex items-center gap-5 flex-wrap">
-                <a
-                  v-for="(url, type) in project.links"
-                  :key="type"
-                  :href="url"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-sm font-medium text-gray-300 transition-colors duration-300 hover:text-white relative after:absolute after:-bottom-0.5 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:duration-300 after:ease-out"
-                >
-                  {{ getLinkLabel(type) }}
-                </a>
-              </div>
-            </div>
+            <transition name="page-fade">
+              <ul v-if="expandedProjects[project.id]" class="mt-3 space-y-2 text-xs text-stone-500 dark:text-stone-400 font-light">
+                <li v-for="feat in project.features" :key="feat" class="flex items-start gap-2">
+                  <span class="text-stone-400 dark:text-stone-600 mt-0.5">•</span>
+                  <span>{{ feat }}</span>
+                </li>
+              </ul>
+            </transition>
           </div>
         </div>
-      </div>
 
-      <!-- GitHub Link -->
-      <div class="px-4 py-6 text-center">
-        <a
-          href="https://github.com/Jatinbhardwaj-093"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium rounded-full text-white bg-gray-800 hover:bg-gray-700 border border-gray-700"
-        >
-          <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-          </svg>
-          More on GitHub
-        </a>
+        <!-- Technologies -->
+        <div class="flex flex-wrap gap-1.5 mt-4">
+          <span 
+            v-for="tech in project.technologies" 
+            :key="tech"
+            class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-stone-200/80 dark:border-stone-800/80 bg-stone-100/50 dark:bg-stone-900/30 text-stone-600 dark:text-stone-400 select-none"
+          >
+            {{ tech }}
+          </span>
+        </div>
+
+        <!-- Links -->
+        <div class="flex gap-4 mt-6 border-t border-stone-100 dark:border-stone-900/60 pt-3">
+          <a
+            v-for="(url, type) in project.links"
+            :key="type"
+            :href="url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[11px] font-mono text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 transition-colors"
+          >
+            [{{ getLinkLabel(type) }}]
+          </a>
+        </div>
       </div>
+    </div>
+
+    <!-- More Works bottom section -->
+    <div class="pt-8 text-center">
+      <a
+        href="https://github.com/Jatinbhardwaj-093"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-2.5 bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 text-xs font-mono rounded hover:opacity-90 transition-opacity border border-stone-800 dark:border-stone-200"
+      >
+        <span>[GitHub] view_more_repositories</span>
+      </a>
     </div>
   </div>
 </template>
 
 <style scoped>
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.project-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+.project-card:hover {
+  transform: translateY(-2px);
 }
-
-@media (max-width: 640px) {
-  .sticky button {
-    transition: none !important;
-    transform: none !important;
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
