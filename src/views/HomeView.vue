@@ -161,9 +161,9 @@ const getLinkClass = (type) => {
             <h4 class="font-medium text-sm text-gruv-fg mt-1">pgmpy</h4>
             <!-- Separate technology tags -->
             <div class="flex flex-wrap gap-1.5 mt-2.5">
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Causal Discovery</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">pgmpy</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Python</span>
+              <span class="tech-badge">Causal Discovery</span>
+              <span class="tech-badge">pgmpy</span>
+              <span class="tech-badge">Python</span>
             </div>
           </div>
           <div class="md:col-span-9 space-y-3">
@@ -175,7 +175,7 @@ const getLinkClass = (type) => {
             <div class="pt-1">
               <button 
                 @click="toggleContribution('pgmpy')"
-                class="text-[10px] font-mono border border-gruv-border dark:border-gruv-border/80 rounded px-1.5 py-0.5 text-gruv-muted hover:border-gruv-purple/50 hover:text-gruv-purple hover:bg-gruv-purple/5 transition-colors flex items-center gap-1 focus:outline-none cursor-pointer"
+                class="btn-details flex items-center gap-1 focus:outline-none"
               >
                 <span>{{ expandedContributions.pgmpy ? '[-]' : '[+]' }}</span>
                 <span>{{ expandedContributions.pgmpy ? 'hide_details' : 'view_details' }}</span>
@@ -204,11 +204,11 @@ const getLinkClass = (type) => {
             <h4 class="font-medium text-sm text-gruv-fg mt-1">SymPy (Core Library)</h4>
             <!-- Separate technology tags -->
             <div class="flex flex-wrap gap-1.5 mt-2.5">
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Algebra</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Series Ring</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">SymPy</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Python</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Cython</span>
+              <span class="tech-badge">Algebra</span>
+              <span class="tech-badge">Series Ring</span>
+              <span class="tech-badge">SymPy</span>
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">Cython</span>
             </div>
           </div>
           <div class="md:col-span-9 space-y-3">
@@ -220,7 +220,7 @@ const getLinkClass = (type) => {
             <div class="pt-1">
               <button 
                 @click="toggleContribution('sympy')"
-                class="text-[10px] font-mono border border-gruv-border dark:border-gruv-border/80 rounded px-1.5 py-0.5 text-gruv-muted hover:border-gruv-purple/50 hover:text-gruv-purple hover:bg-gruv-purple/5 transition-colors flex items-center gap-1 focus:outline-none cursor-pointer"
+                class="btn-details flex items-center gap-1 focus:outline-none"
               >
                 <span>{{ expandedContributions.sympy ? '[-]' : '[+]' }}</span>
                 <span>{{ expandedContributions.sympy ? 'hide_details' : 'view_details' }}</span>
@@ -263,27 +263,27 @@ const getLinkClass = (type) => {
         <div class="flex items-center gap-2 font-mono text-[10px] border border-gruv-border p-1 rounded-lg">
           <button 
             @click="setFilter('all')"
-            class="px-2.5 py-1 rounded transition-colors border border-transparent"
+            class="px-2.5 py-1 rounded border border-transparent transition-colors"
             :class="activeFilter === 'all' 
-              ? 'bg-gruv-accent/15 text-gruv-accent border-gruv-accent/30' 
+              ? 'filter-btn-active' 
               : 'text-gruv-muted hover:text-gruv-accent'"
           >
             All
           </button>
           <button 
             @click="setFilter('math')"
-            class="px-2.5 py-1 rounded transition-colors border border-transparent"
+            class="px-2.5 py-1 rounded border border-transparent transition-colors"
             :class="activeFilter === 'math' 
-              ? 'bg-gruv-accent/15 text-gruv-accent border-gruv-accent/30' 
+              ? 'filter-btn-active' 
               : 'text-gruv-muted hover:text-gruv-accent'"
           >
             Algorithms/Math
           </button>
           <button 
             @click="setFilter('systems')"
-            class="px-2.5 py-1 rounded transition-colors border border-transparent"
+            class="px-2.5 py-1 rounded border border-transparent transition-colors"
             :class="activeFilter === 'systems' 
-              ? 'bg-gruv-accent/15 text-gruv-accent border-gruv-accent/30' 
+              ? 'filter-btn-active' 
               : 'text-gruv-muted hover:text-gruv-accent'"
           >
             Systems/Web
@@ -296,7 +296,7 @@ const getLinkClass = (type) => {
         <div
           v-for="project in filteredProjects"
           :key="project.id"
-          class="project-card border-x border-b border-t-2 border-gruv-border border-t-gruv-purple rounded-xl p-6 bg-gruv-card flex flex-col justify-between hover:border-gruv-purple/60 hover:shadow-sm hover:shadow-gruv-purple/5 transition-all group"
+          class="project-card border-x border-b border-t-2 border-gruv-border border-t-gruv-purple rounded-xl p-6 bg-gruv-card flex flex-col justify-between group"
         >
           <div class="space-y-4">
             <div class="flex justify-between items-start">
@@ -315,7 +315,7 @@ const getLinkClass = (type) => {
             <div v-if="project.features && project.features.length" class="pt-1">
               <button 
                 @click="toggleProjectDetails(project.id)"
-                class="text-[10px] font-mono border border-gruv-border dark:border-gruv-border/80 rounded px-1.5 py-0.5 text-gruv-muted hover:border-gruv-purple/50 hover:text-gruv-purple hover:bg-gruv-purple/5 transition-colors flex items-center gap-1 focus:outline-none cursor-pointer"
+                class="btn-details flex items-center gap-1 focus:outline-none"
               >
                 <span>{{ expandedProjects[project.id] ? '[-]' : '[+]' }}</span>
                 <span>{{ expandedProjects[project.id] ? 'hide_details' : 'view_details' }}</span>
@@ -336,7 +336,7 @@ const getLinkClass = (type) => {
             <span 
               v-for="tech in project.technologies" 
               :key="tech"
-              class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none transition-colors"
+              class="tech-badge"
             >
               {{ tech }}
             </span>

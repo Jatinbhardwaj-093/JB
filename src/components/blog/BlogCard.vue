@@ -30,7 +30,7 @@ const getCategoryLabel = (category) => {
 
 <template>
   <div 
-    class="border border-gruv-border rounded-xl p-6 bg-gruv-card flex flex-col justify-between transition-all group h-full hover:border-gruv-accent/40 hover:shadow-sm hover:shadow-gruv-accent/5"
+    class="blog-card border border-gruv-border rounded-xl p-6 bg-gruv-card flex flex-col justify-between group h-full"
   >
     <div class="space-y-4">
       <div class="flex justify-between items-center text-xs text-gruv-muted font-mono">

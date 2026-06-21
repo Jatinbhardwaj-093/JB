@@ -74,7 +74,7 @@ const handleCategoryChange = (categoryId) => {
           @click="handleCategoryChange(cat.id)"
           class="px-2.5 py-1 rounded border border-transparent transition-colors whitespace-nowrap"
           :class="activeCategory === cat.id 
-            ? 'bg-gruv-accent/15 text-gruv-accent border-gruv-accent/30' 
+            ? 'filter-btn-active' 
             : 'text-gruv-muted hover:text-gruv-accent'"
         >
           {{ cat.name }}

@@ -40,7 +40,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 w-full bg-gruv-bg/80 backdrop-blur-md border-b border-gruv-border">
+  <header class="sticky top-0 z-50 w-full sticky-header border-b border-gruv-border">
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
       <router-link to="/" class="mono-text tracking-wider font-medium text-sm flex items-center gap-2 group text-gruv-fg">
         <span class="w-1.5 h-1.5 rounded-full bg-gruv-orange group-hover:scale-125 transition-transform"></span>

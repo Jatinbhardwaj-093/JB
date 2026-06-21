@@ -110,3 +110,89 @@ textarea:focus {
   opacity: 0;
   transform: translateY(4px);
 }
+
+/* Custom CSS helper utilities to handle valid opacity mapping with custom variables */
+.tech-badge {
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    user-select: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+.dark .tech-badge {
+    border-color: rgba(168, 153, 132, 0.2); /* --text-muted (#a89984) at 20% opacity */
+    color: rgba(168, 153, 132, 0.65); /* --text-muted (#a89984) at 65% opacity */
+    background-color: rgba(60, 56, 54, 0.2); /* --card-bg at 20% opacity */
+}
+
+.filter-btn-active {
+    background-color: rgba(175, 58, 3, 0.15) !important; /* --accent-color light (#af3a03) */
+    color: var(--accent-color) !important;
+    border-color: rgba(175, 58, 3, 0.3) !important;
+}
+.dark .filter-btn-active {
+    background-color: rgba(254, 128, 25, 0.15) !important; /* --accent-color dark (#fe8019) */
+    color: var(--accent-color) !important;
+    border-color: rgba(254, 128, 25, 0.3) !important;
+}
+
+.btn-details {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    background: transparent;
+}
+.btn-details:hover {
+    border-color: rgba(143, 63, 113, 0.5); /* --gruv-purple light (#8f3f71) */
+    color: #8f3f71;
+    background-color: rgba(143, 63, 113, 0.05);
+}
+.dark .btn-details:hover {
+    border-color: rgba(211, 134, 155, 0.5); /* --gruv-purple dark (#d3869b) */
+    color: #d3869b;
+    background-color: rgba(211, 134, 155, 0.05);
+}
+
+.project-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.project-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(143, 63, 113, 0.6) !important; /* --gruv-purple light (#8f3f71) */
+    box-shadow: 0 4px 12px -2px rgba(143, 63, 113, 0.08) !important;
+}
+.dark .project-card:hover {
+    border-color: rgba(211, 134, 155, 0.6) !important; /* --gruv-purple dark (#d3869b) */
+    box-shadow: 0 4px 12px -2px rgba(211, 134, 155, 0.08) !important;
+}
+
+.blog-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.blog-card:hover {
+    border-color: rgba(175, 58, 3, 0.4) !important; /* --accent-color light (#af3a03) */
+    box-shadow: 0 4px 12px -2px rgba(175, 58, 3, 0.08) !important;
+}
+.dark .blog-card:hover {
+    border-color: rgba(254, 128, 25, 0.4) !important; /* --accent-color dark (#fe8019) */
+    box-shadow: 0 4px 12px -2px rgba(254, 128, 25, 0.08) !important;
+}
+
+.sticky-header {
+    background-color: rgba(250, 246, 232, 0.8) !important; /* light bg (#faf6e8) at 80% opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.dark .sticky-header {
+    background-color: rgba(29, 32, 33, 0.8) !important; /* dark bg (#1d2021) at 80% opacity */
+}

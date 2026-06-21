@@ -67,7 +67,7 @@ const getLinkClass = (type) => {
           @click="setFilter(filter)"
           class="px-2.5 py-1 rounded border border-transparent transition-colors whitespace-nowrap"
           :class="activeFilter === filter 
-            ? 'bg-gruv-accent/15 text-gruv-accent border-gruv-accent/30' 
+            ? 'filter-btn-active' 
             : 'text-gruv-muted hover:text-gruv-accent'"
         >
           {{ filter === "all" ? "All" : filter }}
@@ -80,7 +80,7 @@ const getLinkClass = (type) => {
       <div
         v-for="project in filteredProjects"
         :key="project.id"
-        class="project-card border-x border-b border-t-2 border-gruv-border border-t-gruv-purple rounded-xl p-6 bg-gruv-card flex flex-col justify-between hover:border-gruv-purple/60 hover:shadow-sm hover:shadow-gruv-purple/5 transition-all group animate-fade-in"
+        class="project-card border-x border-b border-t-2 border-gruv-border border-t-gruv-purple rounded-xl p-6 bg-gruv-card flex flex-col justify-between group animate-fade-in"
       >
         <div class="space-y-4">
           <div class="flex justify-between items-start">
@@ -99,7 +99,7 @@ const getLinkClass = (type) => {
           <div v-if="project.features && project.features.length" class="pt-1">
             <button 
               @click="toggleProjectDetails(project.id)"
-              class="text-[10px] font-mono border border-gruv-border dark:border-gruv-border/80 rounded px-1.5 py-0.5 text-gruv-muted hover:border-gruv-purple/50 hover:text-gruv-purple hover:bg-gruv-purple/5 transition-colors flex items-center gap-1 focus:outline-none cursor-pointer"
+              class="btn-details flex items-center gap-1 focus:outline-none"
             >
               <span>{{ expandedProjects[project.id] ? '[-]' : '[+]' }}</span>
               <span>{{ expandedProjects[project.id] ? 'hide_details' : 'view_details' }}</span>
@@ -121,7 +121,7 @@ const getLinkClass = (type) => {
           <span 
             v-for="tech in project.technologies" 
             :key="tech"
-            class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none transition-colors"
+            class="tech-badge"
           >
             {{ tech }}
           </span>
