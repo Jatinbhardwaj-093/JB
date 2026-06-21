@@ -57,27 +57,27 @@ const handleCategoryChange = (categoryId) => {
 </script>
 
 <template>
-  <div class="w-full text-stone-900 dark:text-stone-50 space-y-12">
+  <div class="w-full text-gruv-fg dark:text-gruv-fg space-y-12">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div class="space-y-2">
-        <h2 class="mono-text text-xs text-stone-500 dark:text-stone-400 tracking-widest uppercase font-medium">Logbook & Articles</h2>
-        <h3 class="text-2xl font-light tracking-tight text-stone-900 dark:text-stone-100">{{ currentCategory.title }}</h3>
-        <p class="text-xs text-stone-500 dark:text-stone-400 font-light max-w-xl leading-relaxed">
+        <h2 class="mono-text text-xs text-gruv-muted tracking-widest uppercase font-medium">Logbook & Articles</h2>
+        <h3 class="text-2xl font-light tracking-tight text-gruv-fg">{{ currentCategory.title }}</h3>
+        <p class="text-xs text-gruv-fg dark:text-gruv-muted font-light max-w-xl leading-relaxed">
           {{ currentCategory.description }}
         </p>
       </div>
 
       <!-- Filter Controls -->
-      <div class="flex items-center gap-2 font-mono text-[11px] border border-stone-200 dark:border-stone-900 p-1 rounded-lg self-start sm:self-auto">
+      <div class="flex items-center gap-2 font-mono text-[10px] border border-gruv-border p-1 rounded-lg self-start sm:self-auto">
         <button 
           v-for="cat in categories"
           :key="cat.id"
           @click="handleCategoryChange(cat.id)"
-          class="px-2.5 py-1 rounded transition-colors whitespace-nowrap"
+          class="px-2.5 py-1 rounded border border-transparent transition-colors whitespace-nowrap"
           :class="activeCategory === cat.id 
-            ? 'bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900' 
-            : 'text-stone-500 hover:text-stone-900 dark:hover:text-stone-200'"
+            ? 'bg-gruv-accent/15 text-gruv-accent border-gruv-accent/30' 
+            : 'text-gruv-muted hover:text-gruv-accent'"
         >
           {{ cat.name }}
         </button>
@@ -96,7 +96,7 @@ const handleCategoryChange = (categoryId) => {
       <!-- Coming Soon Section when no posts are available -->
       <div
         v-else
-        class="rounded-xl p-8 text-center max-w-xl mx-auto border border-stone-200 dark:border-stone-900 bg-stone-100/20 dark:bg-stone-900/10"
+        class="rounded-xl p-8 text-center max-w-xl mx-auto border border-gruv-border bg-gruv-card"
       >
         <div class="mb-6 flex justify-center">
           <img
@@ -105,14 +105,14 @@ const handleCategoryChange = (categoryId) => {
             class="h-32 w-auto rounded-lg shadow-sm filter grayscale dark:opacity-80"
           />
         </div>
-        <p class="text-lg font-light text-stone-900 dark:text-stone-100 mb-2">
+        <p class="text-lg font-light text-gruv-fg mb-2">
           More Content Coming Soon
         </p>
-        <p class="text-xs text-stone-500 dark:text-stone-400 mb-6 font-light leading-relaxed">
+        <p class="text-xs text-gruv-fg dark:text-gruv-muted mb-6 font-light leading-relaxed">
           I'm working on new articles about programming, mathematics, and my experiences with open source projects. Check back soon for updates.
         </p>
-        <div class="p-4 rounded border border-stone-200/50 dark:border-stone-900/50 bg-stone-50/50 dark:bg-stone-950/20">
-          <p class="text-xs italic text-stone-400 dark:text-stone-500 font-mono">
+        <div class="p-4 rounded border border-gruv-orange/30 bg-gruv-orange/5">
+          <p class="text-xs italic text-gruv-orange font-mono">
             "Like Zoro, I've wandered off the path. Don't worry, I'll find my way back with new content soon!"
           </p>
         </div>

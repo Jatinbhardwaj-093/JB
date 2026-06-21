@@ -70,18 +70,25 @@ const formatDate = (dateString) => {
 </script>
 
 <template>
-  <div class="blog-reader max-w-3xl mx-auto px-4 sm:px-6 text-stone-900 dark:text-stone-50">
+  <div class="blog-reader max-w-3xl mx-auto px-4 sm:px-6 text-gruv-fg dark:text-gruv-fg">
     <!-- Blog Header -->
-    <header class="mb-8 border-b border-stone-200 dark:border-stone-900 pb-6">
-      <h1 class="text-3xl sm:text-4xl font-light tracking-tight text-stone-950 dark:text-stone-50 mb-4 leading-tight">
+    <header class="mb-8 border-b border-gruv-border pb-6">
+      <h1 class="text-3xl sm:text-4xl font-light tracking-tight text-gruv-fg mb-4 leading-tight">
         {{ post.title }}
       </h1>
 
-      <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-stone-500 dark:text-stone-400">
+      <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-gruv-fg dark:text-gruv-muted">
         <span>{{ formatDate(post.date) }}</span>
         <span>•</span>
-        <span class="px-2 py-0.5 rounded border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/30 text-stone-500 dark:text-stone-400">
+        <span class="px-2 py-0.5 rounded border border-gruv-border dark:border-gruv-border bg-gruv-card text-gruv-fg dark:text-gruv-muted">
           {{ post.minutesToRead }} min read
+        </span>
+        <span>•</span>
+        <span 
+          class="px-2 py-0.5 rounded border text-[9px] font-semibold tracking-wider select-none"
+          :class="post.category.toLowerCase() === 'gsoc' ? 'border-gruv-blue/20 bg-gruv-blue/10 text-gruv-blue' : 'border-gruv-accent/20 bg-gruv-accent/10 text-gruv-accent'"
+        >
+          {{ post.category.toLowerCase() === 'gsoc' ? 'GSoC' : post.category.toUpperCase() }}
         </span>
       </div>
     </header>
@@ -89,7 +96,7 @@ const formatDate = (dateString) => {
     <!-- Blog Content -->
     <div class="blog-content">
       <div v-if="isLoading" class="text-center py-12">
-        <p class="text-stone-400 dark:text-stone-500 font-mono text-xs">Loading blog content...</p>
+        <p class="text-gruv-muted dark:text-gruv-fg font-mono text-xs">Loading blog content...</p>
       </div>
       
       <!-- Render the parsed Markdown HTML -->
@@ -100,10 +107,10 @@ const formatDate = (dateString) => {
       />
 
       <!-- Back button -->
-      <div class="mt-12 pt-6 border-t border-stone-200 dark:border-stone-900">
+      <div class="mt-12 pt-6 border-t border-gruv-border">
         <button
           @click="$router.go(-1)"
-          class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono rounded border border-stone-200 dark:border-stone-900 hover:bg-stone-100 dark:hover:bg-stone-900 text-stone-600 dark:text-stone-400 transition-colors"
+          class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono rounded border border-gruv-border text-gruv-muted hover:border-gruv-accent/50 hover:text-gruv-accent hover:bg-gruv-accent/5 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -146,10 +153,10 @@ const formatDate = (dateString) => {
 
 :deep(.prose) p {
   margin-bottom: 1.5rem;
-  color: #3f3f46; /* text-stone-700 */
+  color: var(--text-muted);
 }
 .dark :deep(.prose) p {
-  color: #d4d4d8; /* text-stone-300 */
+  color: var(--fg-color);
 }
 
 @media (min-width: 640px) {
@@ -163,18 +170,18 @@ const formatDate = (dateString) => {
   font-size: 1.35rem;
   font-weight: 500;
   letter-spacing: -0.02em;
-  color: #09090b; /* text-stone-950 */
+  color: #09090b; /* text-gruv-fg */
   margin-top: 2.25rem;
   margin-bottom: 1rem;
   padding: 0.5rem 0.75rem;
-  background-color: #f4f4f5; /* bg-stone-100 */
-  border-left: 2px solid #71717a; /* stone-500 border */
+  background-color: #f4f4f5; /* bg-gruv-card */
+  border-left: 2px solid var(--accent-color);
   border-radius: 0.375rem;
 }
 .dark :deep(.prose) h2 {
-  color: #fafafa; /* text-stone-50 */
-  background-color: #18181b; /* bg-stone-900 */
-  border-left-color: #52525b; /* stone-600 border */
+  color: #fafafa; /* text-gruv-fg */
+  background-color: #18181b; /* bg-gruv-card */
+  border-left-color: var(--accent-color);
 }
 
 @media (min-width: 640px) {
@@ -186,14 +193,14 @@ const formatDate = (dateString) => {
 :deep(.prose) h3 {
   font-size: 1.15rem;
   font-weight: 500;
-  color: #18181b; /* text-stone-900 */
+  color: #18181b; /* text-gruv-fg */
   margin-top: 1.75rem;
   margin-bottom: 0.75rem;
   border-bottom: 1px solid #e4e4e7;
   padding-bottom: 0.25rem;
 }
 .dark :deep(.prose) h3 {
-  color: #f4f4f5; /* text-stone-100 */
+  color: #f4f4f5; /* text-gruv-fg */
   border-bottom-color: #27272a;
 }
 
@@ -219,10 +226,10 @@ const formatDate = (dateString) => {
   position: absolute;
   left: 0.25rem;
   top: 0;
-  color: #a1a1aa; /* stone-400 */
+  color: var(--text-muted);
 }
 .dark :deep(.prose) li::before {
-  color: #52525b; /* stone-600 */
+  color: var(--text-muted);
 }
 
 :deep(.prose) li p {
@@ -231,14 +238,14 @@ const formatDate = (dateString) => {
 }
 
 :deep(.prose) a {
-  color: #27272a; /* text-stone-800 */
+  color: var(--fg-color);
   font-weight: 450;
   text-decoration: none;
   border-bottom: 1px dashed rgba(39, 39, 42, 0.4);
   transition: all 0.2s ease;
 }
 .dark :deep(.prose) a {
-  color: #e4e4e7; /* text-stone-200 */
+  color: var(--fg-color);
   border-bottom-color: rgba(228, 228, 231, 0.4);
 }
 

@@ -32,9 +32,14 @@ onUnmounted(() => {
       >
         <div class="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-3">
           <img
+            src="../../src/assets/images/profileImage/myimage.png"
+            alt="Profile Photo"
+            class="w-full h-full object-cover rounded-full border-2 border-gray-300 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 dark:hidden"
+          />
+          <img
             src="../../src/assets/images/profileImage/myimage.webp"
             alt="Profile Photo"
-            class="w-full h-full object-cover rounded-full border-2 border-gray-300 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
+            class="w-full h-full object-cover rounded-full border-2 border-gray-300 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300 hidden dark:block"
           />
         </div>
       </div>

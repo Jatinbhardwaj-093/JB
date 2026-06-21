@@ -40,25 +40,25 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 w-full bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-md border-b border-stone-200/50 dark:border-stone-900/50">
+  <header class="sticky top-0 z-50 w-full bg-gruv-bg/80 backdrop-blur-md border-b border-gruv-border">
     <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-      <router-link to="/" class="mono-text tracking-wider font-medium text-sm flex items-center gap-2 group text-stone-900 dark:text-stone-100">
-        <span class="w-1.5 h-1.5 rounded-full bg-stone-800 dark:bg-stone-200 group-hover:scale-125 transition-transform"></span>
-        <span>jatin.bhardwaj</span>
+      <router-link to="/" class="mono-text tracking-wider font-medium text-sm flex items-center gap-2 group text-gruv-fg">
+        <span class="w-1.5 h-1.5 rounded-full bg-gruv-orange group-hover:scale-125 transition-transform"></span>
+        <span>jatin.<span class="text-gruv-orange">bhardwaj</span></span>
       </router-link>
 
-      <nav class="hidden sm:flex items-center gap-8 text-xs font-medium tracking-wider uppercase text-stone-500 dark:text-stone-400">
-        <a href="#about" @click.prevent="handleNavClick('#about')" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">About</a>
-        <a href="#contributions" @click.prevent="handleNavClick('#contributions')" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">Contributions</a>
-        <a href="#projects" @click.prevent="handleNavClick('#projects')" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">Selected Work</a>
-        <router-link to="/blogs" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">Blogs</router-link>
+      <nav class="hidden sm:flex items-center gap-8 text-xs font-medium tracking-wider uppercase text-gruv-fg dark:text-gruv-muted">
+        <a href="#about" @click.prevent="handleNavClick('#about')" class="hover:text-gruv-accent transition-colors">About</a>
+        <a href="#contributions" @click.prevent="handleNavClick('#contributions')" class="hover:text-gruv-accent transition-colors">Contributions</a>
+        <a href="#projects" @click.prevent="handleNavClick('#projects')" class="hover:text-gruv-accent transition-colors">Selected Work</a>
+        <router-link to="/blogs" class="hover:text-gruv-accent transition-colors">Blogs</router-link>
       </nav>
 
       <div class="flex items-center gap-2 sm:gap-4">
         <!-- Theme Toggle -->
         <button 
           @click="toggleTheme" 
-          class="p-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-900 text-stone-500 dark:text-stone-400 transition-colors" 
+          class="p-2 rounded-lg hover:bg-gruv-card dark:hover:bg-gruv-card text-gruv-fg dark:text-gruv-muted transition-colors" 
           aria-label="Toggle theme"
         >
           <!-- Sun Icon (visible in dark mode) -->
@@ -79,14 +79,14 @@ onMounted(() => {
           </svg>
         </button>
 
-        <a href="mailto:jatinbhardwaj093@gmail.com" class="hidden xs:inline-block bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 px-4 py-1.5 rounded text-xs font-mono tracking-tight hover:opacity-90 transition-opacity">
+        <a href="mailto:jatinbhardwaj093@gmail.com" class="hidden xs:inline-block border border-gruv-accent/50 text-gruv-accent bg-gruv-accent/5 px-4 py-1.5 rounded text-xs font-mono tracking-tight hover:bg-gruv-accent hover:text-gruv-bg transition-all">
           /connect
         </a>
 
         <!-- Mobile Menu Hamburger -->
         <button 
           @click="isMenuOpen = !isMenuOpen"
-          class="sm:hidden p-2 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-900 text-stone-500 dark:text-stone-400 transition-colors focus:outline-none"
+          class="sm:hidden p-2 rounded-lg hover:bg-gruv-card dark:hover:bg-gruv-card text-gruv-fg dark:text-gruv-muted transition-colors focus:outline-none"
           aria-label="Toggle menu"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -101,13 +101,13 @@ onMounted(() => {
     <transition name="menu-slide">
       <div 
         v-if="isMenuOpen" 
-        class="sm:hidden border-t border-stone-200/50 dark:border-stone-900/50 bg-stone-50/95 dark:bg-stone-950/95 backdrop-blur-md px-6 py-4 flex flex-col gap-4 text-xs font-medium tracking-wider uppercase text-stone-500 dark:text-stone-400"
+        class="sm:hidden border-t border-gruv-border bg-gruv-bg/95 backdrop-blur-md px-6 py-4 flex flex-col gap-4 text-xs font-medium tracking-wider uppercase text-gruv-fg dark:text-gruv-muted"
       >
-        <a href="#about" @click.prevent="handleNavClick('#about')" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors py-1">About</a>
-        <a href="#contributions" @click.prevent="handleNavClick('#contributions')" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors py-1">Contributions</a>
-        <a href="#projects" @click.prevent="handleNavClick('#projects')" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors py-1">Selected Work</a>
-        <router-link to="/blogs" @click="isMenuOpen = false" class="hover:text-stone-900 dark:hover:text-stone-100 transition-colors py-1">Blogs</router-link>
-        <a href="mailto:jatinbhardwaj093@gmail.com" class="xs:hidden bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 px-4 py-2 rounded text-center font-mono tracking-tight hover:opacity-90 transition-opacity mt-2">
+        <a href="#about" @click.prevent="handleNavClick('#about')" class="hover:text-gruv-accent transition-colors py-1">About</a>
+        <a href="#contributions" @click.prevent="handleNavClick('#contributions')" class="hover:text-gruv-accent transition-colors py-1">Contributions</a>
+        <a href="#projects" @click.prevent="handleNavClick('#projects')" class="hover:text-gruv-accent transition-colors py-1">Selected Work</a>
+        <router-link to="/blogs" @click="isMenuOpen = false" class="hover:text-gruv-accent transition-colors py-1">Blogs</router-link>
+        <a href="mailto:jatinbhardwaj093@gmail.com" class="xs:hidden border border-gruv-accent/50 text-gruv-accent bg-gruv-accent/5 px-4 py-2 rounded text-center font-mono tracking-tight hover:bg-gruv-accent hover:text-gruv-bg transition-all mt-2">
           /connect
         </a>
       </div>
