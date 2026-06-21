@@ -121,7 +121,7 @@ const getLinkClass = (type) => {
           <span 
             v-for="tech in project.technologies" 
             :key="tech"
-            class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none transition-colors"
+            class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none transition-colors"
           >
             {{ tech }}
           </span>

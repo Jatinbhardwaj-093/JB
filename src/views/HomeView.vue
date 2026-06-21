@@ -161,9 +161,9 @@ const getLinkClass = (type) => {
             <h4 class="font-medium text-sm text-gruv-fg mt-1">pgmpy</h4>
             <!-- Separate technology tags -->
             <div class="flex flex-wrap gap-1.5 mt-2.5">
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">Causal Discovery</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">pgmpy</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">Python</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Causal Discovery</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">pgmpy</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Python</span>
             </div>
           </div>
           <div class="md:col-span-9 space-y-3">
@@ -204,11 +204,11 @@ const getLinkClass = (type) => {
             <h4 class="font-medium text-sm text-gruv-fg mt-1">SymPy (Core Library)</h4>
             <!-- Separate technology tags -->
             <div class="flex flex-wrap gap-1.5 mt-2.5">
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">Algebra</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">Series Ring</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">SymPy</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">Python</span>
-              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none">Cython</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Algebra</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Series Ring</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">SymPy</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Python</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none">Cython</span>
             </div>
           </div>
           <div class="md:col-span-9 space-y-3">
@@ -336,7 +336,7 @@ const getLinkClass = (type) => {
             <span 
               v-for="tech in project.technologies" 
               :key="tech"
-              class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/60 bg-gruv-muted/10 text-gruv-muted dark:bg-gruv-muted/5 select-none transition-colors"
+              class="px-2 py-0.5 text-[10px] font-mono rounded-md border border-gruv-border/40 bg-gruv-muted/5 text-gruv-muted/80 dark:bg-gruv-muted/5 dark:text-gruv-muted/50 dark:border-gruv-border/30 select-none transition-colors"
             >
               {{ tech }}
             </span>
