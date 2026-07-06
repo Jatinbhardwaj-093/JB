@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import projects from "../data/projects";
 
 // Project filtering logic
@@ -60,192 +60,269 @@ const getLinkClass = (type) => {
   if (t === 'figma') return 'hover:text-gruv-purple hover:underline';
   return 'hover:text-gruv-accent hover:underline';
 };
+
+// Typewriter effect for terminal title
+const typedText = ref("");
+const fullText = "Jatin Bhardwaj";
+
+onMounted(() => {
+  let i = 0;
+  const type = () => {
+    if (i < fullText.length) {
+      typedText.value += fullText.charAt(i);
+      i++;
+      setTimeout(type, 100);
+    }
+  };
+  type();
+});
 </script>
 
 <template>
   <div class="space-y-24 w-full">
     <!-- Hero Section -->
-    <section id="about" class="grid grid-cols-1 md:grid-cols-12 gap-8 pt-8 items-center">
-      <!-- Left side: Hero Text Info -->
-      <div class="md:col-span-8 space-y-6 order-2 md:order-1">
-        <p class="mono-text text-xs tracking-widest text-gruv-muted uppercase font-medium">
-          Software & Algorithmic Systems
-        </p>
-        <h1 class="text-4xl md:text-6xl font-light tracking-tight text-gruv-fg leading-[1.1]">
-          Designing systems with mathematical <span class="font-normal italic text-gruv-accent">precision</span>.
-        </h1>
-        <p class="max-w-2xl text-gruv-muted text-base md:text-lg font-light leading-relaxed">
-          I am a developer and researcher focused on algebraic computation, causal discovery, and symbolic systems. I contribute to major open-source libraries like 
-          <span class="text-gruv-accent font-semibold border-b border-gruv-accent/30">SymPy</span> 
-          and 
-          <span class="text-gruv-accent font-semibold border-b border-gruv-accent/30">pgmpy</span>, 
-          translating complex theories into clean, high-performance systems.
-        </p>
-        
-        <div class="flex flex-wrap gap-3 pt-4 font-mono text-xs text-gruv-fg dark:text-gruv-muted">
-          <a 
-            href="https://github.com/Jatinbhardwaj-093" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="flex items-center gap-1.5 hover:text-gruv-green transition-colors"
-          >
-            <span>[GitHub]</span>
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/jatin-bhardwaj093/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="flex items-center gap-1.5 hover:text-gruv-blue transition-colors"
-          >
-            <span>[LinkedIn]</span>
-          </a>
-          <span class="border-gruv-border">|</span>
-          <span class="flex items-center gap-1.5 text-gruv-fg dark:text-gruv-muted">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-gruv-green animate-pulse"></span>
-            Available for core engineering roles
-          </span>
+    <section id="about" class="pt-8">
+      <div class="border border-gruv-border rounded-lg overflow-hidden bg-gruv-card/30 backdrop-blur-sm shadow-md w-full">
+        <!-- macOS window header bar -->
+        <div class="bg-gruv-border/10 px-4 py-2.5 flex items-center gap-2 border-b border-gruv-border/80">
+          <div class="w-3 h-3 rounded-full bg-gruv-red"></div>
+          <div class="w-3 h-3 rounded-full bg-gruv-yellow"></div>
+          <div class="w-3 h-3 rounded-full bg-gruv-green"></div>
+          <span class="ml-4 font-mono text-[10px] text-gruv-muted tracking-wider">zsh — jatin@portfolio</span>
         </div>
-      </div>
+        
+        <!-- Unified Grid inside Terminal -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 p-6 md:p-8 items-center">
+          <!-- Text Content -->
+          <div class="md:col-span-8 space-y-6 order-2 md:order-1">
+            <div class="flex items-center gap-2 font-mono text-xs text-gruv-orange">
+              <span>➜</span>
+              <span class="text-gruv-green">~</span>
+              <span class="text-gruv-fg">whoami</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-gruv-fg leading-none min-h-[50px] flex items-center font-mono">
+              <span>{{ typedText }}</span>
+              <span class="w-2.5 h-7 bg-gruv-accent ml-1 animate-pulse"></span>
+            </h1>
 
-      <!-- Right side: Profile Photo -->
-      <div class="hidden md:flex md:col-span-4 justify-end order-1 md:order-2">
-        <div class="relative w-48 aspect-[4/5] sm:w-56 lg:w-64">
-          <!-- Subtle gray background glow -->
-          <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-gruv-accent/10 to-transparent blur-md"></div>
-          <img 
-            src="../assets/images/profileImage/myimage_light.jpg" 
-            alt="Jatin Bhardwaj" 
-            class="relative z-10 w-full h-full object-cover rounded-2xl border border-gruv-border dark:border-gruv-border shadow-sm dark:hidden"
-          />
-          <img 
-            src="../assets/images/profileImage/myimage_dark.jpg" 
-            alt="Jatin Bhardwaj" 
-            class="relative z-10 w-full h-full object-cover rounded-2xl border border-gruv-border dark:border-gruv-border shadow-sm hidden dark:block"
-          />
+            <div class="space-y-4">
+              <p class="mono-text text-xs tracking-widest text-gruv-muted uppercase font-medium">
+                Software & Algorithmic Systems
+              </p>
+              <p class="max-w-2xl text-gruv-fg text-sm md:text-base font-light leading-relaxed">
+                I am a developer and researcher focused on algebraic computation, causal discovery, and symbolic systems. I contribute to major open-source libraries like 
+                <span class="text-gruv-accent font-semibold border-b border-gruv-accent/30">SymPy</span> 
+                and 
+                <span class="text-gruv-accent font-semibold border-b border-gruv-accent/30">pgmpy</span>, 
+                translating complex theories into clean, high-performance systems.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-4 pt-2 font-mono text-xs text-gruv-fg">
+              <a 
+                href="https://github.com/Jatinbhardwaj-093" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="flex items-center gap-1.5 hover:text-gruv-green transition-colors"
+              >
+                <span>[GitHub]</span>
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/jatin-bhardwaj093/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="flex items-center gap-1.5 hover:text-gruv-blue transition-colors"
+              >
+                <span>[LinkedIn]</span>
+              </a>
+              <span class="text-gruv-muted">|</span>
+              <span class="flex items-center gap-1.5 text-gruv-muted">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-gruv-green animate-pulse"></span>
+                Available for core engineering roles
+              </span>
+            </div>
+          </div>
+
+          <!-- Integrated Profile Photo -->
+          <div class="md:col-span-4 flex justify-center md:justify-end order-1 md:order-2">
+            <div class="relative w-44 aspect-[4/5] sm:w-52 md:w-full max-w-[240px]">
+              <!-- Gradients and borders styling photo as a retro console element -->
+              <div class="absolute inset-0 rounded-lg bg-gradient-to-tr from-gruv-accent/10 to-transparent blur-sm"></div>
+              <img 
+                src="../assets/images/profileImage/myimage_light.jpg" 
+                alt="Jatin Bhardwaj" 
+                class="relative z-10 w-full h-full object-cover rounded-lg border border-gruv-border/60 shadow-sm dark:hidden"
+              />
+              <img 
+                src="../assets/images/profileImage/myimage_dark.jpg" 
+                alt="Jatin Bhardwaj" 
+                class="relative z-10 w-full h-full object-cover rounded-lg border border-gruv-border/60 shadow-sm hidden dark:block"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Stats Metric Grid -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-gruv-border">
-      <div class="space-y-1.5 p-3 rounded-lg border border-gruv-border bg-gruv-card">
-        <p class="mono-text text-[10px] text-gruv-muted uppercase tracking-wider">Core OSS Contributions</p>
-        <p class="text-2xl font-normal tracking-tight text-gruv-accent">02 <span class="text-xs text-gruv-muted">Libraries</span></p>
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-gruv-border/60">
+      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+        <div class="flex items-center justify-between">
+          <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// OSS_CORE</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-gruv-green animate-pulse"></span>
+        </div>
+        <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
+          02 <span class="text-[11px] text-gruv-muted font-sans font-light">libs</span>
+        </p>
+        <p class="text-[10px] text-gruv-muted leading-tight">pgmpy & SymPy contributor</p>
       </div>
-      <div class="space-y-1.5 p-3 rounded-lg border border-gruv-border bg-gruv-card">
-        <p class="mono-text text-[10px] text-gruv-muted uppercase tracking-wider">GSoC Alumnus</p>
-        <p class="text-2xl font-normal tracking-tight text-gruv-accent">SymPy <span class="text-xs text-gruv-muted">2025</span></p>
+      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+        <div class="flex items-center justify-between">
+          <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// GSoC</span>
+          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10">STABLE</span>
+        </div>
+        <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
+          SymPy <span class="text-[11px] text-gruv-muted font-sans font-light">2025</span>
+        </p>
+        <p class="text-[10px] text-gruv-muted leading-tight">Series Expansion Algorithms</p>
       </div>
-      <div class="space-y-1.5 p-3 rounded-lg border border-gruv-border bg-gruv-card">
-        <p class="mono-text text-[10px] text-gruv-muted uppercase tracking-wider">Specialization</p>
-        <p class="text-2xl font-normal tracking-tight text-gruv-accent">Symbolic <span class="text-xs text-gruv-muted">& Causal</span></p>
+      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+        <div class="flex items-center justify-between">
+          <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// DOMAIN</span>
+          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10">CORE</span>
+        </div>
+        <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
+          Causal <span class="text-[11px] text-gruv-muted font-sans font-light">& Symbolic</span>
+        </p>
+        <p class="text-[10px] text-gruv-muted leading-tight">Algebraic computational logic</p>
       </div>
-      <div class="space-y-1.5 p-3 rounded-lg border border-gruv-border bg-gruv-card">
-        <p class="mono-text text-[10px] text-gruv-muted uppercase tracking-wider">Preferred Stack</p>
-        <p class="text-2xl font-normal tracking-tight text-gruv-accent">Python / C++</p>
+      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+        <div class="flex items-center justify-between">
+          <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// STACK</span>
+          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10">SYSTEM</span>
+        </div>
+        <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
+          Python <span class="text-[11px] text-gruv-muted font-sans font-light">/ C++</span>
+        </p>
+        <p class="text-[10px] text-gruv-muted leading-tight">Cython performance extensions</p>
       </div>
     </section>
 
     <!-- Open Source Contributions & Timeline -->
     <section id="contributions" class="space-y-12">
       <div class="space-y-2">
-        <h2 class="mono-text text-xs text-gruv-muted tracking-widest uppercase font-medium">Core Achievements</h2>
-        <h3 class="text-2xl font-light tracking-tight text-gruv-fg">Open-Source Research & Systems</h3>
+        <h2 class="mono-text text-xs text-gruv-muted tracking-widest uppercase font-medium">// RELEASE_LOGS</h2>
+        <h3 class="text-2xl font-semibold tracking-tight text-gruv-fg">Open-Source Engineering & Contributions</h3>
       </div>
 
-      <div class="space-y-8 max-w-4xl">
-        <!-- pgmpy Item (on top) -->
-        <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 pb-8 border-b border-gruv-border">
-          <div class="md:col-span-3">
-            <span class="mono-text text-xs text-gruv-purple font-semibold">2026 — PRESENT</span>
-            <h4 class="font-medium text-sm text-gruv-fg mt-1">pgmpy</h4>
-            <!-- Separate technology tags -->
-            <div class="flex flex-wrap gap-1.5 mt-2.5">
-              <span class="tech-badge">Causal Discovery</span>
-              <span class="tech-badge">pgmpy</span>
-              <span class="tech-badge">Python</span>
-            </div>
-          </div>
-          <div class="md:col-span-9 space-y-3">
-            <p class="text-sm text-gruv-muted font-light leading-relaxed">
-              Developed causal discovery algorithms to identify causal structures from data. Designed the <strong>Bootstrap Estimator</strong> and statistical parameter estimation tools to handle complex and sparse datasets.
-            </p>
-            
-            <!-- Clickable Details Accordion Toggle -->
-            <div class="pt-1">
-              <button 
-                @click="toggleContribution('pgmpy')"
-                class="btn-details flex items-center gap-1 focus:outline-none"
-              >
-                <span>{{ expandedContributions.pgmpy ? '[-]' : '[+]' }}</span>
-                <span>{{ expandedContributions.pgmpy ? 'hide_details' : 'view_details' }}</span>
-              </button>
+      <div class="relative border-l border-gruv-border/80 pl-6 ml-3 space-y-10 max-w-4xl">
+        <!-- Timeline Dot for Item 1 -->
+        <div class="relative">
+          <!-- Pulsing Git Commit Dot -->
+          <span class="absolute -left-[31px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gruv-bg border border-gruv-accent">
+            <span class="h-1.5 w-1.5 rounded-full bg-gruv-accent animate-pulse"></span>
+          </span>
 
-              <transition name="page-fade">
-                <ul v-if="expandedContributions.pgmpy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-light">
-                  <li class="flex items-start gap-2">
-                    <span class="text-gruv-purple font-bold mr-1">•</span>
-                    <span>Implementing bootstrap estimators to evaluate the reliability of learned networks</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <span class="text-gruv-purple font-bold mr-1">•</span>
-                    <span>Developing statistical methods to quantify uncertainty in causal discovery</span>
-                  </li>
-                </ul>
-              </transition>
+          <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 bg-gruv-card/10 border border-gruv-border/60 rounded-lg p-5 md:p-6 hover:border-gruv-accent hover:bg-gruv-card/20 transition-all duration-300">
+            <div class="md:col-span-4 space-y-2">
+              <span class="mono-text text-xs text-gruv-accent font-mono font-semibold tracking-wider">[2026 — PRESENT]</span>
+              <h4 class="font-semibold text-base text-gruv-fg">pgmpy</h4>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="tech-badge">Causal Discovery</span>
+                <span class="tech-badge">pgmpy</span>
+                <span class="tech-badge">Python</span>
+              </div>
+            </div>
+            
+            <div class="md:col-span-8 space-y-3">
+              <p class="text-sm text-gruv-muted font-light leading-relaxed">
+                Developed causal discovery algorithms to identify causal structures from data. Designed the <strong>Bootstrap Estimator</strong> and statistical parameter estimation tools to handle complex and sparse datasets.
+              </p>
+              
+              <!-- Clickable Details Accordion Toggle -->
+              <div class="pt-1">
+                <button 
+                  @click="toggleContribution('pgmpy')"
+                  class="btn-details flex items-center gap-1 focus:outline-none"
+                >
+                  <span>{{ expandedContributions.pgmpy ? '[-]' : '[+]' }}</span>
+                  <span>{{ expandedContributions.pgmpy ? 'hide_details' : 'view_details' }}</span>
+                </button>
+
+                <transition name="page-fade">
+                  <ul v-if="expandedContributions.pgmpy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-border/10 p-3 rounded border border-gruv-border/40">
+                    <li class="flex items-start gap-2">
+                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span>Implementing bootstrap estimators to evaluate the reliability of learned networks</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span>Developing statistical methods to quantify uncertainty in causal discovery</span>
+                    </li>
+                  </ul>
+                </transition>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- SymPy Item (second) -->
-        <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 pb-8 border-b border-gruv-border">
-          <div class="md:col-span-3">
-            <span class="mono-text text-xs text-gruv-purple font-semibold">2025</span>
-            <h4 class="font-medium text-sm text-gruv-fg mt-1">SymPy (Core Library)</h4>
-            <!-- Separate technology tags -->
-            <div class="flex flex-wrap gap-1.5 mt-2.5">
-              <span class="tech-badge">Algebra</span>
-              <span class="tech-badge">Series Ring</span>
-              <span class="tech-badge">SymPy</span>
-              <span class="tech-badge">Python</span>
-              <span class="tech-badge">Cython</span>
+        <!-- Timeline Dot for Item 2 -->
+        <div class="relative">
+          <!-- Pulsing Git Commit Dot -->
+          <span class="absolute -left-[31px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gruv-bg border border-gruv-accent">
+            <span class="h-1.5 w-1.5 rounded-full bg-gruv-accent"></span>
+          </span>
+
+          <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 bg-gruv-card/10 border border-gruv-border/60 rounded-lg p-5 md:p-6 hover:border-gruv-accent hover:bg-gruv-card/20 transition-all duration-300">
+            <div class="md:col-span-4 space-y-2">
+              <span class="mono-text text-xs text-gruv-accent font-mono font-semibold tracking-wider">[2025]</span>
+              <h4 class="font-semibold text-base text-gruv-fg">SymPy (Core Library)</h4>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="tech-badge">Algebra</span>
+                <span class="tech-badge">Series Ring</span>
+                <span class="tech-badge">SymPy</span>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Cython</span>
+              </div>
             </div>
-          </div>
-          <div class="md:col-span-9 space-y-3">
-            <p class="text-sm text-gruv-muted font-light leading-relaxed">
-              Contributed to the core algebra and polynomial modules, focusing on architectural frameworks for series expansion algorithms to improve performance and user experience.
-            </p>
 
-            <!-- Clickable Details Accordion Toggle -->
-            <div class="pt-1">
-              <button 
-                @click="toggleContribution('sympy')"
-                class="btn-details flex items-center gap-1 focus:outline-none"
-              >
-                <span>{{ expandedContributions.sympy ? '[-]' : '[+]' }}</span>
-                <span>{{ expandedContributions.sympy ? 'hide_details' : 'view_details' }}</span>
-              </button>
+            <div class="md:col-span-8 space-y-3">
+              <p class="text-sm text-gruv-muted font-light leading-relaxed">
+                Contributed to the core algebra and polynomial modules, focusing on architectural frameworks for series expansion algorithms to improve performance and user experience.
+              </p>
 
-              <transition name="page-fade">
-                <ul v-if="expandedContributions.sympy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-light">
-                  <li class="flex items-start gap-2">
-                    <span class="text-gruv-purple font-bold mr-1">•</span>
-                    <span>Implemented formal mathematical series logic and class frameworks</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <span class="text-gruv-purple font-bold mr-1">•</span>
-                    <span>Built pure Python and optimized Cython backends for performance</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <span class="text-gruv-purple font-bold mr-1">•</span>
-                    <span>Achieved up to 1000x calculation speedups in modules</span>
-                  </li>
-                  <li class="flex items-start gap-2">
-                    <span class="text-gruv-purple font-bold mr-1">•</span>
-                    <span>Developed a comprehensive test suite to validate correctness</span>
-                  </li>
-                </ul>
-              </transition>
+              <!-- Clickable Details Accordion Toggle -->
+              <div class="pt-1">
+                <button 
+                  @click="toggleContribution('sympy')"
+                  class="btn-details flex items-center gap-1 focus:outline-none"
+                >
+                  <span>{{ expandedContributions.sympy ? '[-]' : '[+]' }}</span>
+                  <span>{{ expandedContributions.sympy ? 'hide_details' : 'view_details' }}</span>
+                </button>
+
+                <transition name="page-fade">
+                  <ul v-if="expandedContributions.sympy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-border/10 p-3 rounded border border-gruv-border/40">
+                    <li class="flex items-start gap-2">
+                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span>Implemented formal mathematical series logic and class frameworks</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span>Built pure Python and optimized Cython backends for performance</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span>Achieved up to 1000x calculation speedups in modules</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span>Developed a comprehensive test suite to validate correctness</span>
+                    </li>
+                  </ul>
+                </transition>
+              </div>
             </div>
           </div>
         </div>
@@ -296,17 +373,25 @@ const getLinkClass = (type) => {
         <div
           v-for="project in filteredProjects"
           :key="project.id"
-          class="project-card border-x border-b border-t-2 border-gruv-border border-t-gruv-purple rounded-xl p-6 bg-gruv-card flex flex-col justify-between group"
+          class="project-card border border-gruv-border/80 rounded-lg p-5 md:p-6 bg-gruv-card/20 backdrop-blur-sm flex flex-col justify-between group hover:border-gruv-accent hover:bg-gruv-card/30 transition-all duration-300 relative overflow-hidden"
         >
+          <!-- Top Accent highlight line -->
+          <div class="absolute top-0 left-0 w-full h-[2px] bg-gruv-border/20 group-hover:bg-gruv-accent transition-colors duration-300"></div>
+
           <div class="space-y-4">
-            <div class="flex justify-between items-start">
-              <span class="mono-text text-xs text-gruv-muted uppercase">
-                {{ project.subtitle }}
+            <div class="flex justify-between items-center">
+              <span class="mono-text text-[10px] text-gruv-muted uppercase tracking-wider">
+                // {{ project.subtitle }}
+              </span>
+              <span class="text-[9px] font-mono text-gruv-muted px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10 uppercase">
+                {{ project.category }}
               </span>
             </div>
-            <h4 class="text-lg font-light tracking-tight text-gruv-fg group-hover:text-gruv-fg dark:group-hover:text-gruv-fg transition-colors">
+
+            <h4 class="text-lg font-semibold tracking-tight text-gruv-fg group-hover:text-gruv-accent transition-colors duration-300 font-mono">
               {{ project.title }}
             </h4>
+
             <p class="text-xs text-gruv-muted font-light leading-relaxed">
               {{ project.description }}
             </p>
@@ -322,17 +407,18 @@ const getLinkClass = (type) => {
               </button>
 
               <transition name="page-fade">
-                <ul v-if="expandedProjects[project.id]" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-light">
+                <ul v-if="expandedProjects[project.id]" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-border/10 p-3 rounded border border-gruv-border/40">
                   <li v-for="feat in project.features" :key="feat" class="flex items-start gap-2">
-                    <span class="text-gruv-purple font-bold mr-1">•</span>
+                    <span class="text-gruv-accent font-bold mr-1">•</span>
                     <span>{{ feat }}</span>
                   </li>
                 </ul>
               </transition>
             </div>
           </div>
+
           <!-- Technologies badges -->
-          <div class="flex flex-wrap gap-1.5 mt-4">
+          <div class="flex flex-wrap gap-1.5 mt-5">
             <span 
               v-for="tech in project.technologies" 
               :key="tech"
@@ -341,18 +427,19 @@ const getLinkClass = (type) => {
               {{ tech }}
             </span>
           </div>
+
           <!-- Action links -->
-          <div class="flex gap-4 mt-6 border-t border-gruv-border dark:border-gruv-border/60 pt-3">
+          <div class="flex gap-4 mt-6 border-t border-gruv-border/60 pt-3.5 font-mono text-[11px]">
             <a 
               v-for="(url, type) in project.links"
               :key="type"
               :href="url"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-[11px] font-mono text-gruv-muted transition-colors"
-              :class="getLinkClass(type)"
+              class="flex items-center gap-1 text-gruv-muted transition-colors hover:text-gruv-accent"
             >
-              [{{ getLinkLabel(type) }}]
+              <span>➜</span>
+              <span class="underline decoration-dotted underline-offset-2">{{ getLinkLabel(type) }}</span>
             </a>
           </div>
         </div>

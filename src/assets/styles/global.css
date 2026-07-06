@@ -1,38 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=JetBrains+Mono:wght@100;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 :root {
-    --bg-color: #faf6e8; /* gruvbox light bg (warm paper) */
-    --fg-color: #282828; /* gruvbox light fg */
-    --card-bg: rgba(235, 219, 178, 0.35); /* gruvbox light card border-bg */
+    --bg-color: #f9f5d7; /* gruvbox light bg (f9f5d7 from light edition) */
+    --fg-color: #3c3836; /* gruvbox light fg */
+    --card-bg: rgba(242, 229, 188, 0.4); /* gruvbox light card border-bg (f2e5bc at 40%) */
     --border-color: #d5c4a1; /* gruvbox light border */
     --text-muted: #7c6f64; /* gruvbox light gray */
     --accent-color: #af3a03; /* gruvbox light orange */
-    --selection-bg: #af3a03;
-    --selection-fg: #faf6e8;
-    --scrollbar-track: transparent;
+    --selection-bg: #fabd2f;
+    --selection-fg: #3c3836;
+    --scrollbar-track: #fbf1c7;
     --scrollbar-thumb: #d5c4a1;
     --scrollbar-thumb-hover: #bdae93;
     
     /* Gruvbox Accents - Light Mode */
-    --gruv-red: #cc241d;
-    --gruv-green: #98971a;
+    --gruv-red: #9d0006;
+    --gruv-green: #79740e;
     --gruv-yellow: #b57614;
     --gruv-blue: #076678;
     --gruv-purple: #8f3f71;
-    --gruv-aqua: #427b58;
+    --gruv-aqua: #076678;
     --gruv-orange: #af3a03;
 }
 
 .dark {
-    --bg-color: #1d2021; /* gruvbox dark hard bg */
+    --bg-color: #111415; /* gruvbox dark hard bg (111415 from dark edition) */
     --fg-color: #ebdbb2; /* gruvbox dark fg */
-    --card-bg: rgba(60, 56, 54, 0.35); /* gruvbox dark card */
-    --border-color: #3c3836; /* gruvbox dark border */
+    --card-bg: rgba(29, 32, 33, 0.45); /* gruvbox dark card (1d2021 at 45%) */
+    --border-color: #504534; /* gruvbox dark border */
     --text-muted: #a89984; /* gruvbox dark gray */
     --accent-color: #fe8019; /* gruvbox dark orange */
-    --selection-bg: #fe8019;
+    --selection-bg: #fabd2f;
     --selection-fg: #1d2021;
-    --scrollbar-track: transparent;
+    --scrollbar-track: #1d2021;
     --scrollbar-thumb: #3c3836;
     --scrollbar-thumb-hover: #504945;
     
@@ -45,6 +45,7 @@
     --gruv-aqua: #8ec07c;
     --gruv-orange: #fe8019;
 }
+
 
 *,
 ::after,
