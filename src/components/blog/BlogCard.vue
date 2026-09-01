@@ -46,7 +46,7 @@ const getCategoryLabel = (category) => {
       </div>
 
       <router-link :to="`/blog/${post.slug}`" class="block">
-        <h4 class="text-base font-medium tracking-tight text-gruv-fg group-hover:text-gruv-fg dark:group-hover:text-gruv-fg transition-colors leading-snug">
+        <h4 class="text-base font-medium tracking-tight text-gruv-fg group-hover:text-gruv-accent transition-colors leading-snug">
           {{ post.title }}
         </h4>
       </router-link>

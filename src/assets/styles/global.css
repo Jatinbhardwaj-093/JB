@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 :root {
-    --bg-color: #f9f5d7; /* gruvbox light bg (f9f5d7 from light edition) */
-    --fg-color: #3c3836; /* gruvbox light fg */
-    --card-bg: rgba(242, 229, 188, 0.4); /* gruvbox light card border-bg (f2e5bc at 40%) */
-    --border-color: #d5c4a1; /* gruvbox light border */
-    --text-muted: #7c6f64; /* gruvbox light gray */
-    --accent-color: #af3a03; /* gruvbox light orange */
+    --bg-color: #fbf1c7; /* Authentic Gruvbox Light Background */
+    --fg-color: #3c3836; /* Authentic Gruvbox Light Foreground */
+    --card-bg: #ebdbb2; /* Gruvbox Light 1 (Cards, headers, surfaces) */
+    --border-color: #d5c4a1; /* Gruvbox Light 2 (Borders) */
+    --text-muted: #7c6f64; /* Gruvbox Light 4 (Muted text) */
+    --accent-color: #af3a03; /* Gruvbox Light Orange (Accent) */
     --selection-bg: #fabd2f;
     --selection-fg: #3c3836;
     --scrollbar-track: #fbf1c7;
@@ -19,17 +19,17 @@
     --gruv-yellow: #b57614;
     --gruv-blue: #076678;
     --gruv-purple: #8f3f71;
-    --gruv-aqua: #076678;
+    --gruv-aqua: #427b58;
     --gruv-orange: #af3a03;
 }
 
 .dark {
-    --bg-color: #111415; /* gruvbox dark hard bg (111415 from dark edition) */
-    --fg-color: #ebdbb2; /* gruvbox dark fg */
-    --card-bg: rgba(29, 32, 33, 0.45); /* gruvbox dark card (1d2021 at 45%) */
-    --border-color: #504534; /* gruvbox dark border */
-    --text-muted: #a89984; /* gruvbox dark gray */
-    --accent-color: #fe8019; /* gruvbox dark orange */
+    --bg-color: #1d2021; /* Authentic Gruvbox Dark Hard/Medium Background */
+    --fg-color: #ebdbb2; /* Authentic Gruvbox Dark Foreground */
+    --card-bg: #282828; /* Gruvbox Dark 0 (Cards, headers, surfaces) */
+    --border-color: #3c3836; /* Gruvbox Dark 1 (Borders) */
+    --text-muted: #928374; /* Gruvbox Gray (Muted text) */
+    --accent-color: #fe8019; /* Gruvbox Dark Orange (Accent) */
     --selection-bg: #fabd2f;
     --selection-fg: #1d2021;
     --scrollbar-track: #1d2021;
@@ -190,10 +190,229 @@ textarea:focus {
 }
 
 .sticky-header {
-    background-color: rgba(250, 246, 232, 0.8) !important; /* light bg (#faf6e8) at 80% opacity */
+    background-color: rgba(251, 241, 199, 0.85) !important; /* Authentic Gruvbox Light (#fbf1c7) at 85% opacity */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
 .dark .sticky-header {
-    background-color: rgba(29, 32, 33, 0.8) !important; /* dark bg (#1d2021) at 80% opacity */
+    background-color: rgba(29, 32, 33, 0.85) !important; /* Authentic Gruvbox Dark (#1d2021) at 85% opacity */
+}
+
+/* ==========================================================================
+   Official Gruvbox Syntax Highlighting (Highlight.js) - Dark & Light Modes
+   ========================================================================== */
+.code-block-wrapper {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    background-color: #f2e5bc; /* Gruvbox Light soft background */
+    border: 1px solid #d5c4a1;
+}
+.dark .code-block-wrapper {
+    background-color: #161819; /* Gruvbox Dark hard background */
+    border-color: #3c3836;
+}
+
+.code-block-header {
+    background-color: #e6d7ad; /* Gruvbox Light header */
+    border-bottom: 1px solid #d5c4a1;
+}
+.dark .code-block-header {
+    background-color: #242728; /* Gruvbox Dark header */
+    border-bottom-color: #3c3836;
+}
+
+/* Base Code Text */
+.hljs {
+    color: #3c3836;
+    background: transparent !important;
+}
+.dark .hljs {
+    color: #ebdbb2;
+    background: transparent !important;
+}
+
+/* Keywords, Storage & Conditionals (Gruvbox Purple / Red) */
+.hljs-keyword,
+.hljs-selector-tag {
+    color: #8f3f71; /* Light Gruvbox Purple */
+    font-weight: 500;
+}
+.dark .hljs-keyword,
+.dark .hljs-selector-tag {
+    color: #d3869b; /* Dark Gruvbox Purple */
+    font-weight: 500;
+}
+
+/* Functions, Methods & Invocations (Gruvbox Blue / Aqua) */
+.hljs-function .hljs-title,
+.hljs-title.function_,
+.hljs-function-call,
+.hljs-section {
+    color: #076678; /* Light Gruvbox Blue */
+    font-weight: 600;
+}
+.dark .hljs-function .hljs-title,
+.dark .hljs-title.function_,
+.dark .hljs-function-call,
+.dark .hljs-section {
+    color: #8ec07c; /* Dark Gruvbox Aqua */
+    font-weight: 600;
+}
+
+/* Classes & Types & Built-ins (Gruvbox Yellow / Aqua) */
+.hljs-title,
+.hljs-title.class_,
+.hljs-class .hljs-title,
+.hljs-type {
+    color: #b57614; /* Light Gruvbox Yellow */
+    font-weight: 600;
+}
+.dark .hljs-title,
+.dark .hljs-title.class_,
+.dark .hljs-class .hljs-title,
+.dark .hljs-type {
+    color: #fabd2f; /* Dark Gruvbox Yellow */
+    font-weight: 600;
+}
+
+.hljs-built_in,
+.hljs-symbol,
+.hljs-bullet {
+    color: #427b58; /* Light Gruvbox Aqua */
+}
+.dark .hljs-built_in,
+.dark .hljs-symbol,
+.dark .hljs-bullet {
+    color: #8ec07c; /* Dark Gruvbox Aqua */
+}
+
+/* Strings & Regexp (Gruvbox Green) */
+.hljs-string,
+.hljs-doctag,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-regexp {
+    color: #79740e; /* Light Gruvbox Green */
+}
+.dark .hljs-string,
+.dark .hljs-doctag,
+.dark .hljs-template-tag,
+.dark .hljs-template-variable,
+.dark .hljs-regexp {
+    color: #b8bb26; /* Dark Gruvbox Green */
+}
+
+/* Numbers, Booleans & Constants (Gruvbox Orange) */
+.hljs-number,
+.hljs-literal,
+.hljs-link,
+.hljs-variable.constant_ {
+    color: #af3a03; /* Light Gruvbox Orange */
+    font-weight: 500;
+}
+.dark .hljs-number,
+.dark .hljs-literal,
+.dark .hljs-link,
+.dark .hljs-variable.constant_ {
+    color: #fe8019; /* Dark Gruvbox Orange */
+    font-weight: 500;
+}
+
+/* Variables, Tags & Names (Gruvbox Red) */
+.hljs-variable,
+.hljs-name,
+.hljs-tag {
+    color: #9d0006; /* Light Gruvbox Red */
+}
+.dark .hljs-variable,
+.dark .hljs-name,
+.dark .hljs-tag {
+    color: #fb4934; /* Dark Gruvbox Red */
+}
+
+/* Parameters, Attributes & Properties (Gruvbox Blue) */
+.hljs-params,
+.hljs-attr,
+.hljs-attribute,
+.hljs-property {
+    color: #076678; /* Light Gruvbox Blue */
+}
+.dark .hljs-params,
+.dark .hljs-attr,
+.dark .hljs-attribute,
+.dark .hljs-property {
+    color: #83a598; /* Dark Gruvbox Blue */
+}
+
+/* Comments & Blockquotes (Gruvbox Gray) */
+.hljs-comment,
+.hljs-quote {
+    color: #8c7f70; /* Light Gruvbox Gray */
+    font-style: italic;
+}
+.dark .hljs-comment,
+.dark .hljs-quote {
+    color: #928374; /* Dark Gruvbox Gray */
+    font-style: italic;
+}
+
+/* Interactive Prompts (Gruvbox Orange) */
+.hljs-prompt {
+    color: #af3a03;
+    font-weight: bold;
+}
+.dark .hljs-prompt {
+    color: #fe8019;
+    font-weight: bold;
+}
+
+/* Meta, Preprocessors & Decorators (Gruvbox Orange) */
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-meta .hljs-string {
+    color: #af3a03; /* Light Gruvbox Orange */
+}
+.dark .hljs-meta,
+.dark .hljs-meta .hljs-keyword,
+.dark .hljs-meta .hljs-string {
+    color: #fe8019; /* Dark Gruvbox Orange */
+}
+
+/* Operators, Delimiters & Punctuation */
+.hljs-operator,
+.hljs-punctuation,
+.hljs-subst {
+    color: #af3a03;
+    font-weight: 500;
+}
+.dark .hljs-operator,
+.dark .hljs-punctuation,
+.dark .hljs-subst {
+    color: #fe8019;
+    font-weight: 500;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}
+
+.hljs-addition {
+    color: #79740e;
+    background-color: rgba(121, 116, 14, 0.15);
+}
+.dark .hljs-addition {
+    color: #b8bb26;
+    background-color: rgba(184, 187, 38, 0.15);
+}
+
+.hljs-deletion {
+    color: #9d0006;
+    background-color: rgba(157, 0, 6, 0.15);
+}
+.dark .hljs-deletion {
+    color: #fb4934;
+    background-color: rgba(251, 73, 52, 0.15);
 }

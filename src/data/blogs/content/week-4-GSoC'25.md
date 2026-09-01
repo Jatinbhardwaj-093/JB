@@ -2,11 +2,11 @@
 
 This week was quite productive, especially around testing and fixing methods.
 
-✅ Progress
+### Progress
 
 I mainly focused on refining how equality is determined for power series. While the work is still in the development phase and hasn’t been reviewed yet, I made substantial progress.
 
-⚠️ The Challenge: Power Series Equality
+### The Challenge: Power Series Equality
 
 Equality for power series is surprisingly tricky.
 
@@ -40,7 +40,7 @@ R2(s) == s2  # returns False
 
 This confirms the rule: if two series differ within the shared precision, they are unequal. If they match, but one has unknown values beyond that range, we return None (indeterminate).
 
-🧪 My Implementation
+### My Implementation
 
 Although the current implementation may not be pretty, it does reflect this behavior accurately:
 

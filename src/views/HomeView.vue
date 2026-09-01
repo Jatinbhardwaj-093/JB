@@ -79,85 +79,92 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="space-y-24 w-full">
-    <!-- Hero Section -->
-    <section id="about" class="pt-8">
-      <div class="border border-gruv-border rounded-lg overflow-hidden bg-gruv-card/30 backdrop-blur-sm shadow-md w-full">
-        <!-- macOS window header bar -->
-        <div class="bg-gruv-border/10 px-4 py-2.5 flex items-center gap-2 border-b border-gruv-border/80">
-          <div class="w-3 h-3 rounded-full bg-gruv-red"></div>
-          <div class="w-3 h-3 rounded-full bg-gruv-yellow"></div>
-          <div class="w-3 h-3 rounded-full bg-gruv-green"></div>
-          <span class="ml-4 font-mono text-[10px] text-gruv-muted tracking-wider">zsh — jatin@portfolio</span>
+  <div class="space-y-20 md:space-y-28 w-full max-w-5xl mx-auto">
+    <!-- Hero Section: Terminal Console -->
+    <section id="about" class="pt-6 md:pt-10">
+      <div class="border border-gruv-border rounded-xl overflow-hidden bg-gruv-card/35 backdrop-blur-sm shadow-sm w-full transition-all duration-300">
+        <!-- Terminal window header bar -->
+        <div class="bg-gruv-card/80 px-4 py-2.5 flex items-center justify-between border-b border-gruv-border select-none">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-gruv-red"></div>
+            <div class="w-3 h-3 rounded-full bg-gruv-yellow"></div>
+            <div class="w-3 h-3 rounded-full bg-gruv-green"></div>
+            <span class="ml-3 font-mono text-[11px] text-gruv-muted tracking-wider">zsh — jatin@portfolio</span>
+          </div>
+          <div class="hidden sm:flex items-center gap-1 text-[10px] font-mono text-gruv-muted">
+            <span class="w-1.5 h-1.5 rounded-full bg-gruv-green animate-pulse"></span>
+            <span>active</span>
+          </div>
         </div>
         
-        <!-- Unified Grid inside Terminal -->
+        <!-- Interior Grid -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 p-6 md:p-8 items-center">
           <!-- Text Content -->
-          <div class="md:col-span-8 space-y-6 order-2 md:order-1">
+          <div class="md:col-span-8 space-y-5 order-2 md:order-1">
             <div class="flex items-center gap-2 font-mono text-xs text-gruv-orange">
-              <span>➜</span>
-              <span class="text-gruv-green">~</span>
-              <span class="text-gruv-fg">whoami</span>
+              <span class="text-gruv-green font-bold">➜</span>
+              <span class="text-gruv-muted">~</span>
+              <span class="text-gruv-fg font-medium">whoami</span>
             </div>
             
-            <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-gruv-fg leading-none min-h-[50px] flex items-center font-mono">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gruv-fg leading-none min-h-[48px] flex items-center font-mono">
               <span>{{ typedText }}</span>
-              <span class="w-2.5 h-7 bg-gruv-accent ml-1 animate-pulse"></span>
+              <span class="w-2.5 h-7 sm:h-8 bg-gruv-accent ml-1.5 animate-pulse inline-block"></span>
             </h1>
 
-            <div class="space-y-4">
+            <div class="space-y-3">
               <p class="mono-text text-xs tracking-widest text-gruv-muted uppercase font-medium">
                 Software & Algorithmic Systems
               </p>
-              <p class="max-w-2xl text-gruv-fg text-sm md:text-base font-light leading-relaxed">
+              <p class="max-w-2xl text-gruv-fg text-sm sm:text-base font-light leading-relaxed">
                 I am a developer and researcher focused on algebraic computation, causal discovery, and symbolic systems. I contribute to major open-source libraries like 
-                <span class="text-gruv-accent font-semibold border-b border-gruv-accent/30">SymPy</span> 
+                <span class="text-gruv-accent font-medium border-b border-gruv-accent/30 hover:border-gruv-accent transition-colors">SymPy</span> 
                 and 
-                <span class="text-gruv-accent font-semibold border-b border-gruv-accent/30">pgmpy</span>, 
+                <span class="text-gruv-accent font-medium border-b border-gruv-accent/30 hover:border-gruv-accent transition-colors">pgmpy</span>, 
                 translating complex theories into clean, high-performance systems.
               </p>
             </div>
 
-            <div class="flex flex-wrap gap-4 pt-2 font-mono text-xs text-gruv-fg">
+            <div class="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs text-gruv-fg">
               <a 
                 href="https://github.com/Jatinbhardwaj-093" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                class="flex items-center gap-1.5 hover:text-gruv-green transition-colors"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gruv-border/60 bg-gruv-card/40 hover:border-gruv-green hover:text-gruv-green transition-all"
               >
+                <i class="bi bi-github"></i>
                 <span>[GitHub]</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/jatin-bhardwaj093/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                class="flex items-center gap-1.5 hover:text-gruv-blue transition-colors"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gruv-border/60 bg-gruv-card/40 hover:border-gruv-blue hover:text-gruv-blue transition-all"
               >
+                <i class="bi bi-linkedin"></i>
                 <span>[LinkedIn]</span>
               </a>
-              <span class="text-gruv-muted">|</span>
-              <span class="flex items-center gap-1.5 text-gruv-muted">
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-gruv-green animate-pulse"></span>
-                Available for core engineering roles
-              </span>
+              <span class="text-gruv-muted hidden sm:inline">|</span>
+              <div class="inline-flex items-center gap-2 text-gruv-muted">
+                <span class="inline-block w-2 h-2 rounded-full bg-gruv-green animate-pulse"></span>
+                <span>Available for core engineering roles</span>
+              </div>
             </div>
           </div>
 
-          <!-- Integrated Profile Photo -->
+          <!-- Profile Portrait -->
           <div class="md:col-span-4 flex justify-center md:justify-end order-1 md:order-2">
-            <div class="relative w-44 aspect-[4/5] sm:w-52 md:w-full max-w-[240px]">
-              <!-- Gradients and borders styling photo as a retro console element -->
-              <div class="absolute inset-0 rounded-lg bg-gradient-to-tr from-gruv-accent/10 to-transparent blur-sm"></div>
+            <div class="relative w-44 aspect-[4/5] sm:w-52 md:w-full max-w-[230px] group">
+              <div class="absolute -inset-1 rounded-xl bg-gradient-to-tr from-gruv-accent/15 to-transparent blur-sm opacity-60 group-hover:opacity-100 transition-opacity"></div>
               <img 
                 src="../assets/images/profileImage/myimage_light.jpg" 
                 alt="Jatin Bhardwaj" 
-                class="relative z-10 w-full h-full object-cover rounded-lg border border-gruv-border/60 shadow-sm dark:hidden"
+                class="relative z-10 w-full h-full object-cover rounded-xl border border-gruv-border/60 shadow-sm dark:hidden"
               />
               <img 
                 src="../assets/images/profileImage/myimage_dark.jpg" 
                 alt="Jatin Bhardwaj" 
-                class="relative z-10 w-full h-full object-cover rounded-lg border border-gruv-border/60 shadow-sm hidden dark:block"
+                class="relative z-10 w-full h-full object-cover rounded-xl border border-gruv-border/60 shadow-sm hidden dark:block"
               />
             </div>
           </div>
@@ -165,9 +172,9 @@ onMounted(() => {
       </div>
     </section>
 
-    <!-- Stats Metric Grid -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-gruv-border/60">
-      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+    <!-- Highlights & Metric Cards -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
+      <div class="p-4 rounded-xl border border-gruv-border bg-gruv-card/50 backdrop-blur-sm shadow-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
         <div class="flex items-center justify-between">
           <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// OSS_CORE</span>
           <span class="w-1.5 h-1.5 rounded-full bg-gruv-green animate-pulse"></span>
@@ -175,56 +182,62 @@ onMounted(() => {
         <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
           02 <span class="text-[11px] text-gruv-muted font-sans font-light">libs</span>
         </p>
-        <p class="text-[10px] text-gruv-muted leading-tight">pgmpy & SymPy contributor</p>
+        <p class="text-[10px] text-gruv-muted leading-tight mt-0.5">pgmpy & SymPy contributor</p>
       </div>
-      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+
+      <div class="p-4 rounded-xl border border-gruv-border bg-gruv-card/50 backdrop-blur-sm shadow-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
         <div class="flex items-center justify-between">
-          <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// GSoC</span>
-          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10">STABLE</span>
+          <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// GSOC</span>
+          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border bg-gruv-card">STABLE</span>
         </div>
         <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
           SymPy <span class="text-[11px] text-gruv-muted font-sans font-light">2025</span>
         </p>
-        <p class="text-[10px] text-gruv-muted leading-tight">Series Expansion Algorithms</p>
+        <p class="text-[10px] text-gruv-muted leading-tight mt-0.5">Series Expansion Algorithms</p>
       </div>
-      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+
+      <div class="p-4 rounded-xl border border-gruv-border bg-gruv-card/50 backdrop-blur-sm shadow-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
         <div class="flex items-center justify-between">
           <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// DOMAIN</span>
-          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10">CORE</span>
+          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border bg-gruv-card">CORE</span>
         </div>
         <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
           Causal <span class="text-[11px] text-gruv-muted font-sans font-light">& Symbolic</span>
         </p>
-        <p class="text-[10px] text-gruv-muted leading-tight">Algebraic computational logic</p>
+        <p class="text-[10px] text-gruv-muted leading-tight mt-0.5">Algebraic computational logic</p>
       </div>
-      <div class="space-y-1.5 p-4 rounded-lg border border-gruv-border bg-gruv-card/30 backdrop-blur-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
+
+      <div class="p-4 rounded-xl border border-gruv-border bg-gruv-card/50 backdrop-blur-sm shadow-sm relative overflow-hidden group hover:border-gruv-accent transition-all duration-300">
         <div class="flex items-center justify-between">
           <span class="mono-text text-[9px] text-gruv-muted uppercase tracking-widest font-semibold">// STACK</span>
-          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10">SYSTEM</span>
+          <span class="text-[9px] text-gruv-muted font-mono px-1.5 py-0.5 rounded border border-gruv-border bg-gruv-card">SYSTEM</span>
         </div>
         <p class="text-2xl font-bold tracking-tight text-gruv-fg font-mono mt-2">
           Python <span class="text-[11px] text-gruv-muted font-sans font-light">/ C++</span>
         </p>
-        <p class="text-[10px] text-gruv-muted leading-tight">Cython performance extensions</p>
+        <p class="text-[10px] text-gruv-muted leading-tight mt-0.5">Cython performance extensions</p>
       </div>
     </section>
 
     <!-- Open Source Contributions & Timeline -->
-    <section id="contributions" class="space-y-12">
-      <div class="space-y-2">
+    <section id="contributions" class="space-y-6">
+      <div class="space-y-1">
         <h2 class="mono-text text-xs text-gruv-muted tracking-widest uppercase font-medium">// RELEASE_LOGS</h2>
         <h3 class="text-2xl font-semibold tracking-tight text-gruv-fg">Open-Source Engineering & Contributions</h3>
       </div>
 
-      <div class="relative border-l border-gruv-border/80 pl-6 ml-3 space-y-10 max-w-4xl">
-        <!-- Timeline Dot for Item 1 -->
+      <div class="relative pl-7 space-y-6 max-w-4xl">
+        <!-- Continuous timeline vertical spine -->
+        <div class="absolute left-[11px] top-6 bottom-6 w-[2px] bg-gruv-border"></div>
+
+        <!-- Item 1: pgmpy -->
         <div class="relative">
-          <!-- Pulsing Git Commit Dot -->
-          <span class="absolute -left-[31px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gruv-bg border border-gruv-accent">
+          <!-- Timeline dot precisely centered on spine -->
+          <span class="absolute -left-[24px] top-6 flex h-4 w-4 items-center justify-center rounded-full bg-gruv-bg border-2 border-gruv-accent z-10 shadow-sm">
             <span class="h-1.5 w-1.5 rounded-full bg-gruv-accent animate-pulse"></span>
           </span>
 
-          <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 bg-gruv-card/10 border border-gruv-border/60 rounded-lg p-5 md:p-6 hover:border-gruv-accent hover:bg-gruv-card/20 transition-all duration-300">
+          <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 bg-gruv-card/50 border border-gruv-border rounded-xl p-5 md:p-6 shadow-sm hover:border-gruv-accent hover:bg-gruv-card/70 transition-all duration-300">
             <div class="md:col-span-4 space-y-2">
               <span class="mono-text text-xs text-gruv-accent font-mono font-semibold tracking-wider">[2026 — PRESENT]</span>
               <h4 class="font-semibold text-base text-gruv-fg">pgmpy</h4>
@@ -237,10 +250,10 @@ onMounted(() => {
             
             <div class="md:col-span-8 space-y-3">
               <p class="text-sm text-gruv-muted font-light leading-relaxed">
-                Developed causal discovery algorithms to identify causal structures from data. Designed the <strong>Bootstrap Estimator</strong> and statistical parameter estimation tools to handle complex and sparse datasets.
+                Developed causal discovery algorithms to identify causal structures from data. Designed the <strong class="text-gruv-fg font-medium">Bootstrap Estimator</strong> and statistical parameter estimation tools to handle complex and sparse datasets.
               </p>
               
-              <!-- Clickable Details Accordion Toggle -->
+              <!-- Accordion Toggle -->
               <div class="pt-1">
                 <button 
                   @click="toggleContribution('pgmpy')"
@@ -251,13 +264,13 @@ onMounted(() => {
                 </button>
 
                 <transition name="page-fade">
-                  <ul v-if="expandedContributions.pgmpy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-border/10 p-3 rounded border border-gruv-border/40">
+                  <ul v-if="expandedContributions.pgmpy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-card/70 p-3 rounded-lg border border-gruv-border">
                     <li class="flex items-start gap-2">
-                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span class="text-gruv-accent font-bold">•</span>
                       <span>Implementing bootstrap estimators to evaluate the reliability of learned networks</span>
                     </li>
                     <li class="flex items-start gap-2">
-                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span class="text-gruv-accent font-bold">•</span>
                       <span>Developing statistical methods to quantify uncertainty in causal discovery</span>
                     </li>
                   </ul>
@@ -267,14 +280,14 @@ onMounted(() => {
           </div>
         </div>
 
-        <!-- Timeline Dot for Item 2 -->
+        <!-- Item 2: SymPy -->
         <div class="relative">
-          <!-- Pulsing Git Commit Dot -->
-          <span class="absolute -left-[31px] top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gruv-bg border border-gruv-accent">
+          <!-- Timeline dot precisely centered on spine -->
+          <span class="absolute -left-[24px] top-6 flex h-4 w-4 items-center justify-center rounded-full bg-gruv-bg border-2 border-gruv-accent z-10 shadow-sm">
             <span class="h-1.5 w-1.5 rounded-full bg-gruv-accent"></span>
           </span>
 
-          <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 bg-gruv-card/10 border border-gruv-border/60 rounded-lg p-5 md:p-6 hover:border-gruv-accent hover:bg-gruv-card/20 transition-all duration-300">
+          <div class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 bg-gruv-card/50 border border-gruv-border rounded-xl p-5 md:p-6 shadow-sm hover:border-gruv-accent hover:bg-gruv-card/70 transition-all duration-300">
             <div class="md:col-span-4 space-y-2">
               <span class="mono-text text-xs text-gruv-accent font-mono font-semibold tracking-wider">[2025]</span>
               <h4 class="font-semibold text-base text-gruv-fg">SymPy (Core Library)</h4>
@@ -292,7 +305,7 @@ onMounted(() => {
                 Contributed to the core algebra and polynomial modules, focusing on architectural frameworks for series expansion algorithms to improve performance and user experience.
               </p>
 
-              <!-- Clickable Details Accordion Toggle -->
+              <!-- Accordion Toggle -->
               <div class="pt-1">
                 <button 
                   @click="toggleContribution('sympy')"
@@ -303,21 +316,21 @@ onMounted(() => {
                 </button>
 
                 <transition name="page-fade">
-                  <ul v-if="expandedContributions.sympy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-border/10 p-3 rounded border border-gruv-border/40">
+                  <ul v-if="expandedContributions.sympy" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-card/70 p-3 rounded-lg border border-gruv-border">
                     <li class="flex items-start gap-2">
-                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span class="text-gruv-accent font-bold">•</span>
                       <span>Implemented formal mathematical series logic and class frameworks</span>
                     </li>
                     <li class="flex items-start gap-2">
-                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span class="text-gruv-accent font-bold">•</span>
                       <span>Built pure Python and optimized Cython backends for performance</span>
                     </li>
                     <li class="flex items-start gap-2">
-                      <span class="text-gruv-accent font-bold mr-1">•</span>
-                      <span>Achieved up to 1000x calculation speedups in modules</span>
+                      <span class="text-gruv-accent font-bold">•</span>
+                      <span>Achieved up to 1000x calculation speedups in core modules</span>
                     </li>
                     <li class="flex items-start gap-2">
-                      <span class="text-gruv-accent font-bold mr-1">•</span>
+                      <span class="text-gruv-accent font-bold">•</span>
                       <span>Developed a comprehensive test suite to validate correctness</span>
                     </li>
                   </ul>
@@ -330,38 +343,39 @@ onMounted(() => {
     </section>
 
     <!-- Selected Projects Section -->
-    <section id="projects" class="space-y-12">
+    <section id="projects" class="space-y-8">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div class="space-y-2">
+        <div class="space-y-1">
           <h2 class="mono-text text-xs text-gruv-muted tracking-widest uppercase font-medium">Selected Works</h2>
-          <h3 class="text-2xl font-light tracking-tight text-gruv-fg">Engineering Portfolio</h3>
+          <h3 class="text-2xl font-semibold tracking-tight text-gruv-fg">Engineering Portfolio</h3>
         </div>
-        <!-- Mini Filter Controls -->
-        <div class="flex items-center gap-2 font-mono text-[10px] border border-gruv-border p-1 rounded-lg">
+        
+        <!-- Filter Controls -->
+        <div class="flex items-center gap-1.5 font-mono text-xs border border-gruv-border p-1 rounded-full bg-gruv-card/40 backdrop-blur-sm">
           <button 
             @click="setFilter('all')"
-            class="px-2.5 py-1 rounded border border-transparent transition-colors"
+            class="px-3 py-1 rounded-full transition-all cursor-pointer"
             :class="activeFilter === 'all' 
               ? 'filter-btn-active' 
-              : 'text-gruv-muted hover:text-gruv-accent'"
+              : 'text-gruv-muted hover:text-gruv-fg'"
           >
             All
           </button>
           <button 
             @click="setFilter('math')"
-            class="px-2.5 py-1 rounded border border-transparent transition-colors"
+            class="px-3 py-1 rounded-full transition-all cursor-pointer"
             :class="activeFilter === 'math' 
               ? 'filter-btn-active' 
-              : 'text-gruv-muted hover:text-gruv-accent'"
+              : 'text-gruv-muted hover:text-gruv-fg'"
           >
             Algorithms/Math
           </button>
           <button 
             @click="setFilter('systems')"
-            class="px-2.5 py-1 rounded border border-transparent transition-colors"
+            class="px-3 py-1 rounded-full transition-all cursor-pointer"
             :class="activeFilter === 'systems' 
               ? 'filter-btn-active' 
-              : 'text-gruv-muted hover:text-gruv-accent'"
+              : 'text-gruv-muted hover:text-gruv-fg'"
           >
             Systems/Web
           </button>
@@ -373,17 +387,14 @@ onMounted(() => {
         <div
           v-for="project in filteredProjects"
           :key="project.id"
-          class="project-card border border-gruv-border/80 rounded-lg p-5 md:p-6 bg-gruv-card/20 backdrop-blur-sm flex flex-col justify-between group hover:border-gruv-accent hover:bg-gruv-card/30 transition-all duration-300 relative overflow-hidden"
+          class="project-card border border-gruv-border rounded-xl p-5 md:p-6 bg-gruv-card/50 backdrop-blur-sm shadow-sm flex flex-col justify-between group hover:border-gruv-accent hover:bg-gruv-card/70 transition-all duration-300 relative overflow-hidden"
         >
-          <!-- Top Accent highlight line -->
-          <div class="absolute top-0 left-0 w-full h-[2px] bg-gruv-border/20 group-hover:bg-gruv-accent transition-colors duration-300"></div>
-
-          <div class="space-y-4">
+          <div class="space-y-3.5">
             <div class="flex justify-between items-center">
               <span class="mono-text text-[10px] text-gruv-muted uppercase tracking-wider">
                 // {{ project.subtitle }}
               </span>
-              <span class="text-[9px] font-mono text-gruv-muted px-1.5 py-0.5 rounded border border-gruv-border/40 bg-gruv-border/10 uppercase">
+              <span class="text-[9px] font-mono text-gruv-muted px-2 py-0.5 rounded-full border border-gruv-border bg-gruv-card uppercase">
                 {{ project.category }}
               </span>
             </div>
@@ -407,9 +418,9 @@ onMounted(() => {
               </button>
 
               <transition name="page-fade">
-                <ul v-if="expandedProjects[project.id]" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-border/10 p-3 rounded border border-gruv-border/40">
+                <ul v-if="expandedProjects[project.id]" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-mono bg-gruv-card/70 p-3 rounded-lg border border-gruv-border">
                   <li v-for="feat in project.features" :key="feat" class="flex items-start gap-2">
-                    <span class="text-gruv-accent font-bold mr-1">•</span>
+                    <span class="text-gruv-accent font-bold">•</span>
                     <span>{{ feat }}</span>
                   </li>
                 </ul>
@@ -429,17 +440,17 @@ onMounted(() => {
           </div>
 
           <!-- Action links -->
-          <div class="flex gap-4 mt-6 border-t border-gruv-border/60 pt-3.5 font-mono text-[11px]">
+          <div class="flex flex-wrap gap-4 mt-5 border-t border-gruv-border pt-3.5 font-mono text-[11px]">
             <a 
               v-for="(url, type) in project.links"
               :key="type"
               :href="url"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center gap-1 text-gruv-muted transition-colors hover:text-gruv-accent"
+              class="inline-flex items-center gap-1 text-gruv-muted transition-colors hover:text-gruv-accent"
             >
-              <span>➜</span>
-              <span class="underline decoration-dotted underline-offset-2">{{ getLinkLabel(type) }}</span>
+              <i class="bi bi-arrow-up-right text-[10px]"></i>
+              <span class="hover:underline underline-offset-2">{{ getLinkLabel(type) }}</span>
             </a>
           </div>
         </div>
@@ -447,15 +458,15 @@ onMounted(() => {
     </section>
 
     <!-- Technical Skill Grid -->
-    <section class="space-y-8 border-t border-gruv-border pt-16">
-      <div class="space-y-2">
+    <section class="space-y-8 border-t border-gruv-border pt-12">
+      <div class="space-y-1">
         <h2 class="mono-text text-xs text-gruv-muted tracking-widest uppercase font-medium">Competencies</h2>
-        <h3 class="text-2xl font-light tracking-tight text-gruv-fg">Capability Matrix</h3>
+        <h3 class="text-2xl font-semibold tracking-tight text-gruv-fg">Capability Matrix</h3>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 font-mono text-xs">
         <!-- Col 1 -->
-        <div class="space-y-3 pl-4 border-l border-gruv-border">
+        <div class="space-y-3 pl-4 border-l-2 border-gruv-border">
           <h4 class="text-gruv-purple font-semibold tracking-wider">// SYSTEMS & ALGORITHMS</h4>
           <ul class="space-y-2 text-gruv-muted">
             <li class="hover:text-gruv-fg transition-colors">Causal Discovery & Graph Models</li>
@@ -467,7 +478,7 @@ onMounted(() => {
           </ul>
         </div>
         <!-- Col 2 -->
-        <div class="space-y-3 pl-4 border-l border-gruv-border">
+        <div class="space-y-3 pl-4 border-l-2 border-gruv-border">
           <h4 class="text-gruv-purple font-semibold tracking-wider">// LANGUAGES & RUNTIMES</h4>
           <ul class="space-y-2 text-gruv-muted">
             <li class="hover:text-gruv-fg transition-colors">Python (Advanced)</li>
@@ -477,7 +488,7 @@ onMounted(() => {
           </ul>
         </div>
         <!-- Col 3 -->
-        <div class="space-y-3 pl-4 border-l border-gruv-border">
+        <div class="space-y-3 pl-4 border-l-2 border-gruv-border">
           <h4 class="text-gruv-purple font-semibold tracking-wider">// ENGINEERING & COLLABORATION</h4>
           <ul class="space-y-2 text-gruv-muted">
             <li class="hover:text-gruv-fg transition-colors">Distributed Git Workflows</li>
