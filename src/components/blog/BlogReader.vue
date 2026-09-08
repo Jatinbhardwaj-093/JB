@@ -49,8 +49,8 @@ const props = defineProps({
 const renderedHtml = ref("");
 const isLoading = ref(true);
 
-// Use Vite's glob import to dynamically load markdown files as raw strings
-const markdownFiles = import.meta.glob("/src/data/blogs/content/*.md", {
+// Use Vite's glob import to dynamically load markdown files as raw strings from any category folder
+const markdownFiles = import.meta.glob("/src/data/blogs/**/*.md", {
   query: "?raw",
   import: "default",
 });
@@ -90,8 +90,19 @@ const setupCodeBlockActions = () => {
 const loadPostContent = async () => {
   isLoading.value = true;
   try {
-    const filePath = `/src/data/blogs/content/${props.post.slug}.md`;
-    const loadFile = markdownFiles[filePath];
+    const category = props.post.category ? props.post.category.toLowerCase() : "";
+    const directPath = `/src/data/blogs/${category}/${props.post.slug}.md`;
+
+    // Try direct category path first, or find any matching slug filename in subfolders
+    let loadFile = markdownFiles[directPath];
+    if (!loadFile) {
+      const matchingKey = Object.keys(markdownFiles).find((path) =>
+        path.endsWith(`/${props.post.slug}.md`)
+      );
+      if (matchingKey) {
+        loadFile = markdownFiles[matchingKey];
+      }
+    }
 
     if (loadFile) {
       const rawMarkdown = await loadFile();
@@ -148,9 +159,9 @@ const formatDate = (dateString) => {
         <span>•</span>
         <span 
           class="px-2 py-0.5 rounded border text-[9px] font-semibold tracking-wider select-none"
-          :class="post.category.toLowerCase() === 'gsoc' ? 'border-gruv-blue/30 bg-gruv-blue/10 text-gruv-blue' : 'border-gruv-accent/30 bg-gruv-accent/10 text-gruv-accent'"
+          :class="post.category.toLowerCase() === 'gsoc' ? 'border-gruv-blue/30 bg-gruv-blue/10 text-gruv-blue' : post.category.toLowerCase() === 'pgmpy' ? 'border-gruv-purple/30 bg-gruv-purple/10 text-gruv-purple' : 'border-gruv-accent/30 bg-gruv-accent/10 text-gruv-accent'"
         >
-          {{ post.category.toLowerCase() === 'gsoc' ? 'GSoC' : post.category.toUpperCase() }}
+          {{ post.category.toLowerCase() === 'gsoc' ? 'GSoC' : post.category.toLowerCase() === 'pgmpy' ? 'pgmpy' : post.category.toUpperCase() }}
         </span>
       </div>
     </header>
@@ -247,13 +258,16 @@ const formatDate = (dateString) => {
 }
 
 :deep(.prose) h3 {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 500;
   color: var(--fg-color);
-  margin-top: 1.85rem;
-  margin-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.35rem;
+  margin-top: 2rem;
+  margin-bottom: 0.85rem;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  border-bottom: 1px solid var(--accent-color);
+  padding-bottom: 0.2rem;
 }
 
 :deep(.prose) h4,

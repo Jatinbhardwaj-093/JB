@@ -1,4 +1,5 @@
 import gsocPosts from "./gsoc";
+import pgmpyPosts from "./pgmpy";
 
 // Import other categories as they are created
 // import sympyPosts from './sympy';
@@ -9,6 +10,7 @@ import gsocPosts from "./gsoc";
 // Combine all posts in one array
 const allPosts = [
   ...gsocPosts,
+  ...pgmpyPosts,
   // Add other categories when available
   // ...sympyPosts,
   // ...mathPosts,
@@ -18,6 +20,7 @@ const allPosts = [
 
 console.log("All posts loaded:", allPosts);
 console.log("GSoC posts:", gsocPosts);
+console.log("pgmpy posts:", pgmpyPosts);
 
 // Get posts by category
 export const getPostsByCategory = (category) => {
@@ -30,5 +33,5 @@ export const getPostBySlug = (slug) => {
   return allPosts.find((post) => post.slug === slug);
 };
 
-export { gsocPosts };
+export { gsocPosts, pgmpyPosts };
 export default allPosts;

@@ -154,7 +154,32 @@ export function parseMarkdown(md) {
       .replace(/`([^`]+)`/g, "<code>$1</code>")
       // Italic: *text* or _text_
       .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>")
-      .replace(/(?<!_)_([^_]+)_(?!_)/g, "<em>$1</em>")
+      // Convert basic inline math $...$ into readable unicode
+      .replace(/\$([^\$\n]+)\$/g, (_, math) => {
+        let clean = math
+          .replace(/\\leftrightarrow/g, "↔")
+          .replace(/\\leftarrow/g, "←")
+          .replace(/\\rightarrow/g, "→")
+          .replace(/\\circ/g, "◦")
+          .replace(/\\tau(?![a-zA-Z])/g, "τ")
+          .replace(/\\in(?![a-zA-Z])/g, "∈")
+          .replace(/\\times(?![a-zA-Z])/g, "×")
+          .replace(/\\to(?![a-zA-Z])/g, "→")
+          .replace(/\\le(q)?(?![a-zA-Z])/g, "≤")
+          .replace(/\\ge(q)?(?![a-zA-Z])/g, "≥")
+          .replace(/\\alpha(?![a-zA-Z])/g, "α")
+          .replace(/\\beta(?![a-zA-Z])/g, "β")
+          .replace(/\\gamma(?![a-zA-Z])/g, "γ")
+          .replace(/\\theta(?![a-zA-Z])/g, "θ")
+          .replace(/\\lambda(?![a-zA-Z])/g, "λ")
+          .replace(/\\mu(?![a-zA-Z])/g, "μ")
+          .replace(/\\sigma(?![a-zA-Z])/g, "σ")
+          .replace(/\\mid(?![a-zA-Z])/g, "|")
+          .replace(/\\text\{([^}]+)\}/g, "$1")
+          .replace(/\\!/g, "")
+          .replace(/\\/g, "");
+        return `<span class="font-mono text-gruv-orange">${clean}</span>`;
+      })
       // Links: [text](url)
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
   };
@@ -200,8 +225,88 @@ export function parseMarkdown(md) {
     return tableHtml;
   };
 
-  // Split content into blocks (double newlines)
-  const rawBlocks = html.split(/\n\n+/);
+  // Group lines into semantic blocks (paragraphs, lists, blockquotes, tables, headings)
+  const lines = html.split("\n");
+  const rawBlocks = [];
+  let currentBlock = [];
+  let currentType = null;
+
+  const flushBlock = () => {
+    if (currentBlock.length > 0) {
+      rawBlocks.push(currentBlock.join("\n"));
+      currentBlock = [];
+      currentType = null;
+    }
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      flushBlock();
+      continue;
+    }
+
+    // Code block placeholder
+    if (trimmed.startsWith("__CODEBLOCK_PLACEHOLDER_") && trimmed.endsWith("__")) {
+      flushBlock();
+      rawBlocks.push(trimmed);
+      continue;
+    }
+
+    // Horizontal Rule
+    if (/^(\-{3,}|\*{3,}|\_{3,})$/.test(trimmed)) {
+      flushBlock();
+      rawBlocks.push(trimmed);
+      continue;
+    }
+
+    // Headings
+    if (/^#{1,6}\s/.test(trimmed)) {
+      flushBlock();
+      rawBlocks.push(trimmed);
+      continue;
+    }
+
+    // Table rows
+    if (trimmed.startsWith("|") || (trimmed.includes("|") && i + 1 < lines.length && lines[i + 1].includes("|"))) {
+      if (currentType !== "table") {
+        flushBlock();
+        currentType = "table";
+      }
+      currentBlock.push(trimmed);
+      continue;
+    }
+
+    // Blockquote
+    if (trimmed.startsWith("&gt;") || trimmed.startsWith(">")) {
+      if (currentType !== "blockquote") {
+        flushBlock();
+        currentType = "blockquote";
+      }
+      currentBlock.push(trimmed);
+      continue;
+    }
+
+    // List item (ordered or unordered)
+    if (/^([-*+]|\d+\.)\s/.test(trimmed)) {
+      if (currentType !== "list") {
+        flushBlock();
+        currentType = "list";
+      }
+      currentBlock.push(trimmed);
+      continue;
+    }
+
+    // Regular paragraph text
+    if (currentType !== "para") {
+      flushBlock();
+      currentType = "para";
+    }
+    currentBlock.push(trimmed);
+  }
+  flushBlock();
   const resultBlocks = [];
 
   for (let block of rawBlocks) {

@@ -5,9 +5,9 @@ The past three weeks have been both very productive and tiring. I had almost no 
 
 The main PR [gh-28109](https://github.com/sympy/sympy/pull/28109) was merged in the middle of week 8, which officially made the Series Module available in the main `master` branch.
 
-For the follow-up PR, I needed to add transcendental functions to provide algorithms for their series expansions. This was done in PR [gh-28273](https://github.com/sympy/sympy/pull/28273). This PR also contains some other work that was left in gh-28109—such as adding a method for series precision, separating the protocol, and optimizing the routine of `unify_prec`. It also increases the current test coverage of the whole module.
+For the follow-up PR, I needed to add transcendental functions to provide algorithms for their series expansions. This was done in PR [gh-28273](https://github.com/sympy/sympy/pull/28273). This PR also contains some other work that was left in gh-28109, such as adding a method for series precision, separating the protocol, and optimizing the routine of `unify_prec`. It also increases the current test coverage of the whole module.
 
-This has also been merged into master a few days back—with the help of other supporting PRs: [gh-28281](https://github.com/sympy/sympy/pull/28281), [gh-28283](https://github.com/sympy/sympy/pull/28283), and [gh-28293](https://github.com/sympy/sympy/pull/28293).
+This has also been merged into master a few days back, with the help of other supporting PRs: [gh-28281](https://github.com/sympy/sympy/pull/28281), [gh-28283](https://github.com/sympy/sympy/pull/28283), and [gh-28293](https://github.com/sympy/sympy/pull/28293).
 
 All in all, we now have the lower-level rings over (ZZ, QQ) ground domains with almost all significant methods and operations needed for power series manipulation.
 
@@ -61,6 +61,6 @@ x + 1/3*x**3 + 2/15*x**5 + 17/315*x**7 + O(x**8)
 
 ### Next Steps From Here
 
-Now, what I would like to do is wrap these classes in an upper-level domain ring. This way, it won't be necessary to import different types of rings for different ground domains. What we want is to provide the ground domain as a parameter, which will internally create the ring automatically using the correct class—similar to what the PolyRing does in SymPy and like our `power_series_ring` factory function.
+Now, what I would like to do is wrap these classes in an upper-level domain ring. This way, it won't be necessary to import different types of rings for different ground domains. What we want is to provide the ground domain as a parameter, which will internally create the ring automatically using the correct class, similar to what the PolyRing does in SymPy and like our `power_series_ring` factory function.
 
-We want smooth conversion between ground domains in the upper-level ring class—this will also be much better for series elements. Currently, we have named methods in the class to perform arithmetic operations on series elements. We would like to set up the series element so that it has a proper representation, making it more user (human) readable instead of just a list of coefficients.
+We want smooth conversion between ground domains in the upper-level ring class: this will also be much better for series elements. Currently, we have named methods in the class to perform arithmetic operations on series elements. We would like to set up the series element so that it has a proper representation, making it more user (human) readable instead of just a list of coefficients.

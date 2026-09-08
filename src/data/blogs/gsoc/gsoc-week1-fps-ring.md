@@ -7,7 +7,7 @@ The core goal of this project is to provide a better representation for the Powe
 1. To provide a more usable and user-friendly API.
 2. To support faster computation.
 
-The second point is particularly important because, eventually, we want to use python-flint’s types—specifically fmpq_series and fmpz_series. This means the Python implementation should be as close as possible in structure and behavior so that when flint is installed, we can seamlessly switch to using the classes backed by fmp_series.
+The second point is particularly important because, eventually, we want to use python-flint’s types: specifically fmpq_series and fmpz_series. This means the Python implementation should be as close as possible in structure and behavior so that when flint is installed, we can seamlessly switch to using the classes backed by fmp_series.
 
 
 ## Current Understanding and Decisions Made
@@ -43,10 +43,10 @@ For storing the series coefficients, we’ll use the Dense Univariate Polynomial
 
 - We’re only dealing with univariate formal power series (FPS), so there’s no need for a sparse representation. The list-based form is sufficient.
 - The list will always be at level 0 (i.e., no nesting), avoiding the complexity of multivariate polynomial cases.
-- Since power series are infinite, many operations—such as exp, log, inverse, and trigonometric series expansions—will involve expanding terms up to the specified precision. In most cases, these expansions are dense or have regular gaps (like order 2), so there won’t be performance issues from a list filled with too many zeros.
+- Since power series are infinite, many operations (such as exp, log, inverse, and trigonometric series expansions) will involve expanding terms up to the specified precision. In most cases, these expansions are dense or have regular gaps (like order 2), so there won’t be performance issues from a list filled with too many zeros.
 
 ### Classes for the fast fps ring series 
-There will be three classes. These interfaces aren’t final yet—I need to confirm them with my mentor. But here’s my current understanding.
+There will be three classes. These interfaces aren’t final yet - I need to confirm them with my mentor. But here’s my current understanding.
 
 The Ring class will act as the global class for the series. It should behave similarly to how Flint’s global context cap works.
 
@@ -67,4 +67,4 @@ print(y)  # y + O(y**10)
 
 So yeah, this is what I currently have in mind for the Ring and Context classes.
 
-There will also be a FlintSeriesContext class that provides operations like sin, cos, antiderivative, multiply, and more—similar to what PythonSeriesContext provides. Once flint is installed, there should be a mechanism to automatically decide whether to create elements using the Flint-backed series types.
+There will also be a FlintSeriesContext class that provides operations like sin, cos, antiderivative, multiply, and more, similar to what PythonSeriesContext provides. Once flint is installed, there should be a mechanism to automatically decide whether to create elements using the Flint-backed series types.

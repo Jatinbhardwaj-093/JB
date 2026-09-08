@@ -19,11 +19,14 @@ const formatDate = (dateString) => {
 const getCategoryBadgeClass = (category) => {
   const c = category.toLowerCase();
   if (c === 'gsoc') return 'border-gruv-blue/20 bg-gruv-blue/10 text-gruv-blue';
+  if (c === 'pgmpy') return 'border-gruv-purple/20 bg-gruv-purple/10 text-gruv-purple';
   return 'border-gruv-accent/20 bg-gruv-accent/10 text-gruv-accent';
 };
 
 const getCategoryLabel = (category) => {
-  if (category.toLowerCase() === 'gsoc') return 'GSoC';
+  const c = category.toLowerCase();
+  if (c === 'gsoc') return 'GSoC';
+  if (c === 'pgmpy') return 'pgmpy';
   return category.toUpperCase();
 };
 </script>

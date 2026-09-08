@@ -9,13 +9,19 @@ const categories = ref([
     id: "all",
     name: "All Posts",
     title: "All Writing",
-    description: "Browse everything in one place, starting with my detailed Google Summer of Code journey."
+    description: "Browse everything in one place, from causal discovery in pgmpy to series expansions in SymPy."
   },
   {
     id: "gsoc",
     name: "GSoC",
     title: "Google Summer of Code",
-    description: "My journey and contributions during Google Summer of Code 2025."
+    description: "My journey and contributions during Google Summer of Code 2025 with SymPy."
+  },
+  {
+    id: "pgmpy",
+    name: "pgmpy",
+    title: "pgmpy Mentorship & Causal Discovery",
+    description: "Deep dives, implementations, and notes on causal discovery algorithms and statistical estimation in pgmpy."
   }
 ]);
 
