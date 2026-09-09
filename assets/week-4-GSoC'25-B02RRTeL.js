@@ -10,7 +10,7 @@ I mainly focused on refining how equality is determined for power series. While 
 
 Equality for power series is surprisingly tricky.
 
-Unlike polynomials—where we can directly compare coefficients of matching exponents—power series involve truncation, which hides terms beyond a certain degree. This makes it impossible to be certain about what comes after the truncation point.
+Unlike polynomials (where we can directly compare coefficients of matching exponents), power series involve truncation, which hides terms beyond a certain degree. This makes it impossible to be certain about what comes after the truncation point.
 
 Example: **\`s = 1 + x^2 + 4x^3 + 7x^4 + O(x^5)\`**
 

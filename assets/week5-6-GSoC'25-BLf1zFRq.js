@@ -71,7 +71,7 @@ Following the merge of [gh-28208](https://github.com/sympy/sympy/pull/28208), we
 
 Each of these methods relies on new \`dup_series_*\` routines that are integrated with the Series Ring class logic.
 
-Additionally, a PR related to **type annotations** for the polynomial domain structure was merged: [gh-28177](https://github.com/sympy/sympy/pull/28177). This improves type safety for series operations, as we use the \`DUP\` representation — a list of ground domain coefficients. For example:
+Additionally, a PR related to **type annotations** for the polynomial domain structure was merged: [gh-28177](https://github.com/sympy/sympy/pull/28177). This improves type safety for series operations, as we use the \`DUP\` representation - a list of ground domain coefficients. For example:
 
 - \`DUP[MPZ]\` for integers (ℤ)
 - \`DUP[MPQ]\` for rationals (ℚ)

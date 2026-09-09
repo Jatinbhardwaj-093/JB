@@ -2,7 +2,7 @@ const e=`# GSoC’25 Week-2
 
 Unfortunately, I wasn’t able to write a blog post this week about my progress. That said, there hasn’t been a lot of tangible output this week due to ongoing design discussions and some confusion.
 
-Following our Week-1 meeting, I created a rough sketch of the design and asked for feedback. However, ****Oscar**** had a different approach in mind—specifically, he suggested we completely avoid introducing an Element class for now. This isn’t necessarily contradictory to my initial proposal, since our primary goal is to treat the ring as a context (ctx) for constructing and manipulating elements. Hence, a dedicated element class might be unnecessary at this stage.
+Following our Week-1 meeting, I created a rough sketch of the design and asked for feedback. However, ****Oscar**** had a different approach in mind; specifically, he suggested we completely avoid introducing an Element class for now. This isn’t necessarily contradictory to my initial proposal, since our primary goal is to treat the ring as a context (ctx) for constructing and manipulating elements. Hence, a dedicated element class might be unnecessary at this stage.
 
 As I began working, ****Oscar**** shared a very interesting and elegant behavior from Flint‘s gr_series implementation. When a gr_series element is constructed using a DUP (dense univariate polynomial) list, and the list length is smaller than the ring’s precision, **Flint** automatically treats it as a regular polynomial instead of a truncated series. This is mathematically more accurate, as there’s no truncation happening and all coefficients are fully defined.
 
@@ -42,8 +42,8 @@ While this direction is promising, I’m still unsure if it aligns with our curr
 This week marked significant progress after the slow momentum in Week 2. I continued from where I left off and worked through key design questions that were previously unresolved.
 
 There were two main agenda items this week:
-1.	Finalizing which series type to use from **Flint**.
-2.	Clarifying how precision should be handled.
+1. Finalizing which series type to use from **Flint**.
+2. Clarifying how precision should be handled.
 
 As discussed earlier, gr_series is currently not well-supported in **python-Flint** and lacks APIs for **Transcendental functions**. Hence, we agreed to use fmpz_series and fmpq_series for now. In the future, once **python-flint** improves support for generic rings (gr_series), we can internally switch to it without affecting the public interface. This decouples implementation from usage, which is ideal.
 
