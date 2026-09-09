@@ -21,7 +21,7 @@ A key insight discussed early in the mentorship was the asymmetry between **Fals
 > **Why False Negatives Hurt More than False Positives in Causal Discovery**  
 > A fully connected DAG can represent *any* probability distribution without constraint. However, removing an edge introduces a strict conditional independence constraint, restricting the family of distributions the model can represent. Therefore, erroneously removing an edge (False Negative) restricts your model far more severely than accidentally including an edge (False Positive).
 
-To address this, we rely on **non-parametric bootstrapping**, inspired by the seminal work of [Friedman et al. (1999)](https://arxiv.org/pdf/1301.6695), to measure edge confidence, detect robust features, and quantify structural stability under repeated resampling.
+To address this, non-parametric bootstrapping is used, inspired by the seminal work of [Friedman et al. (1999)](https://arxiv.org/pdf/1301.6695), to measure edge confidence, detect robust features, and quantify structural stability under repeated resampling.
 
 ---
 
@@ -37,75 +37,70 @@ To address this, we rely on **non-parametric bootstrapping**, inspired by the se
 
 #### Week 2: Dynamic Thresholding Without Refitting
 - Users frequently need to explore different probability cutoffs (τ ∈ [0, 1]) to evaluate network density.
-- Rather than forcing users to refit the estimator when experimenting with thresholds, we designed `get_consensus_graph(threshold)` and `get_adjacency_matrix(threshold)`. The expensive bootstrapping runs once, allowing instant threshold experimentation.
+- Rather than forcing users to refit the estimator when experimenting with thresholds, I designed `get_consensus_graph(threshold)` and `get_adjacency_matrix(threshold)`. The expensive bootstrapping runs once, allowing instant threshold experimentation.
 
-#### Week 3: Consensus Literature Survey & Data Structures
-- Explored research literature on alternative consensus graph algorithms and opened [pgmpy Issue #3411](https://github.com/pgmpy/pgmpy/issues/3411) summarizing four methods across three papers.
-- Decided to adopt the greedy thresholding baseline for the initial release while tracking advanced optimization methods.
-
-#### Week 4: The Architecture of Probability Data Structures
-A central technical discussion during this week and upcoming sessions focused on the exact mathematical formulation and data types used to store edge and direction probabilities.
+#### Weeks 3-4: Consensus Research & Probability Data Structure Architecture
+- **Consensus Literature Survey**: Explored research literature on alternative consensus graph algorithms and opened [pgmpy Issue #3411](https://github.com/pgmpy/pgmpy/issues/3411) summarizing four methods across three papers, adopting the greedy thresholding baseline for the initial release while tracking advanced optimization methods.
+- **Probability Data Structure Architecture**: A central technical discussion during Weeks 3 and 4 focused on designing the mathematical formulas and data structures used to store edge existence and orientation probabilities.
 
 In causal discovery, an edge between two variables $u$ and $v$ can take several orientations across bootstrap resamples:
 - Directed ($u \to v$): observed $n_1$ times
 - Reversed directed ($u \leftarrow v$): observed $n_2$ times
 - Undirected ($u - v$ in PDAGs): observed $n_3$ times
 
-##### Mathematical Formulation of Direction & Edge Probabilities
-To capture orientation confidence without losing structural information:
-- Directed orientation probabilities in the adjacency matrix:
-  - `A_{u, v} = n1 / (n1 + n2 + n3)`
-  - `A_{v, u} = n2 / (n1 + n2 + n3)`
-- When undirected edges are present, `A_{u, v} + A_{v, u} != 1`. The remaining probability mass corresponds to the undirected edge:
-  - `P(u - v) = 1 - A_{u, v} - A_{v, u}`
-- The overall edge presence matrix `edge_prob_` is symmetric and captures edge existence across all resamples:
-  - `adjacency matrix: sum(A_i) / N` (where $N$ is total bootstrap iterations)
+##### Initial Mathematical Formulation and Its Failure Modes
+Initially, we explored deriving direction probabilities using a matrix/dictionary setup where directed orientation probabilities were computed as:
+$$A_{u, v} = \frac{n_1}{n_1 + n_2 + n_3}, \quad A_{v, u} = \frac{n_2}{n_1 + n_2 + n_3}$$
 
-##### Data Structure Proposals Evaluated
-During our design review, we debated several candidate data structures to store these statistics:
+When undirected edges were present, $A_{u, v} + A_{v, u} \ne 1$. The remaining probability mass was assumed to be the undirected edge:
+$$P(u - v) = 1 - A_{u, v} - A_{v, u}$$
 
-1. **Agenda Proposal A: Single Dictionary (`direction_probabilities_`)**  
-   - Format: `(u, v) : (Directed or Undirected[str], prob)`  
-   - *Why dropped:* Dictionaries lack the tabular structure that data scientists rely on. They hinder vectorization, make matrix slicing and masking clunky, and require manual iteration for simple threshold queries.
+**Why This Formulation Failed:**  
+While this identity seemed mathematically neat at first glance, we quickly discovered two critical failure cases:
+1. **Absent Edges Produced Phantom 100% Probabilities**: When no edge exists between $u$ and $v$ across any bootstrap resamples ($n_1 = 0, n_2 = 0, n_3 = 0$), both directed entries are zero ($A_{u, v} = 0, A_{v, u} = 0$). Evaluating $1 - A_{u, v} - A_{v, u}$ results in $1 - 0 - 0 = 1.0$! An edge that never existed was erroneously calculated as a 100% certain undirected edge instead of 0.
+2. **Breakdown with Bidirected and Mixed Edges**: If extended to more expressive causal structures (like ADMGs with bidirected edges $u \leftrightarrow v$ or PAGs with circle marks), subtracting directed shares from 1 cannot distinguish which non-directed edge type absorbed the remaining mass. When a user checks for bidirected edges, it would also evaluate to 1 instead of 0.
 
-2. **Agenda Proposal B: Two Separate Attributes**  
-   - Format: `directed_edges_: [u, v] : prob` and `undirected_edges_: [u, v] : prob`  
-   - *Why dropped:* Fragmenting the graph representation into multiple disjoint containers complicates API consumption, forces users to reconcile two separate lookups, and doubles state maintenance overhead.
+##### Candidate Representations and Edge-Case Bottlenecks
+We then explored alternative structures to store these probabilities, each presenting distinct architectural issues:
 
-3. **Alternative: Sentinel Values in a Single Matrix (`Null`, `NaN`, or `-1`)**  
-   - Format: A single numerical matrix encoding undirected edges as `-1` and absent edges as `NaN` or `Null`.  
-   - *Why dropped:* Conflating presence significance with directional confidence creates severe semantic ambiguity. Sentinel numbers distort standard arithmetic operations, corrupt matrix thresholding, and place an unnatural cognitive burden on users to decode arbitrary conventions.
+1. **Adjacency Matrix with Numerical Scalars**:
+   - We considered filling an adjacency matrix directly with edge presence and orientation numbers. However, this immediately raised the question: *what should be placed in the cell when an edge has no directional orientation or does not exist?*
+   - If filled with `0`: It creates an unresolvable ambiguity between "an edge exists but has 0% directional certainty in that direction" and "no edge exists at all". Downstream functions computing maximums or applying threshold filters would fail or misinterpret absent edges.
+   - If filled with sentinel values like `-1`, `NaN`, or `Null`: Placing sentinel values inside a numerical matrix breaks compatibility when users pass the matrix into other machine learning, numerical, or graph libraries (such as scikit-learn, NumPy, or NetworkX). Arithmetic operations, matrix slicing, and thresholding either raise type errors or require convoluted masking logic.
+
+2. **Dictionary-Based Structures (`(u, v): (edge_type, prob)`)**:
+   - Dictionaries can store string keys or tuples cleanly, but they discard the tabular matrix layout that practitioners expect. They prevent vectorization, make matrix masking and slicing clunky, and force users into manual nested loops just to perform simple threshold queries.
+
+3. **Separate Disjoint Containers (`directed_edges_` and `undirected_edges_`)**:
+   - Splitting graph statistics into multiple separate attributes fragments the internal representation. Users are forced to coordinate lookups across two different containers, doubling state management overhead.
 
 ##### The Chosen Architecture: Decoupled DataFrames with Dynamic Tuples
-We cleanly separated presence from orientation into two coordinated pandas DataFrames:
-1. **`edge_prob_`**: A symmetric $N \times N$ matrix indicating overall edge existence frequency (`sum(A_i) / N`). It answers one question unambiguously: *Is there an edge between these variables?*
-2. **`direction_prob_`**: An $N \times N$ DataFrame containing conditional probabilities of edge orientations given that an edge exists.
+To resolve all these issues, I designed a two-tiered architecture that cleanly separates edge presence from directional probability, using **tuples as cell values**:
 
-**Why Tuples as Cell Values? (Extensibility to ADMGs and PAGs):**  
-Rather than hardcoding scalar columns, storing **tuples inside each DataFrame cell** provided a crucial architectural advantage: dynamic extensibility. The cell tuple expands based on the graph family returned by the underlying causal discovery estimator:
-- **DAG Estimators**: Each cell $(u, v)$ stores a 1-tuple `(p_directed,)` representing $P(u \to v \mid \text{edge}(u, v))$.
-- **PDAG Estimators**: Each cell $(u, v)$ stores a 2-tuple `(p_directed, p_undirected)` representing $P(u \to v)$ and $P(u - v)$ respectively.
-- **Future Graph Types (ADMGs and PAGs)**: Causal discovery frequently extends beyond DAGs and PDAGs into models with latent confounding and selection bias. For **ADMGs** (Acyclic Directed Mixed Graphs with bidirected edges $u \leftrightarrow v$) or **PAGs** (Partial Ancestral Graphs with circle marks $u \circ \to v$, $u \circ - \circ v$), the tuple size dynamically expands to represent bidirected, directed, and circle marks as required by the algorithm, without redesigning the data structure or breaking user APIs.
+1. **`edge_prob_`**: A symmetric $N \times N$ pandas DataFrame indicating overall edge existence frequency ($\sum A_i / N$). It answers one question unambiguously: *Is there an edge between these two variables?* Absent edges are simply `0.0`.
+2. **`direction_prob_`**: An $N \times N$ pandas DataFrame where each cell $(u, v)$ stores a **tuple of conditional probabilities** given that an edge exists.
 
-We also vectorized the resampling index generation into a single step (`rng.choice`), avoiding per-iteration overhead.
+**Why Dynamic Tuples? Adapting to Estimator Return Types:**  
+Storing a tuple inside each cell of `direction_prob_` solved the sentinel problem and provided dynamic extensibility based on the return type of the underlying DAG estimator:
+- **DAG Estimators**: Only directed edges are possible. Each cell $(u, v)$ holds a 1-tuple `(p_directed,)` representing $P(u \to v \mid \text{edge}(u, v))$.
+- **PDAG Estimators**: When returning Markov equivalence classes (from constraint-based algorithms like `PC`), candidate edges can be directed or undirected. Each cell $(u, v)$ dynamically stores a 2-tuple `(p_directed, p_undirected)` representing $P(u \to v)$ and $P(u - v)$ respectively.
+- **Future Graph Types (ADMGs and PAGs)**: For graph classes supporting latent confounding or selection bias with bidirected edges ($u \leftrightarrow v$) or circle marks ($u \circ \to v$), the tuple dynamically expands to `(p_directed, p_undirected, p_bidirected, ...)` matching the estimator's return type, without altering the DataFrame structure or breaking user APIs.
+
+I also vectorized the resampling index generation into a single step (`rng.choice`), avoiding per-iteration overhead.
 
 #### Week 5: Handling PDAGs, Acyclicity, and `warm_start`
 This week involved solving one of the most interesting theoretical issues: **cyclicity in PDAGs**.
 - In a DAG, cycle detection is straightforward: check if adding u → v creates a cycle via `nx.has_path(dag, v, u)`.
 - In a PDAG (returned by constraint-based algorithms like `PC`), candidate edges can be directed (u → v) or undirected (u - v).
 - **Crucial Theoretical Realization**: Undirected edges in a PDAG represent reversible orientations in a Markov equivalence class; they do *not* form directed cycles on their own!
-- Therefore, we removed cycle checks for undirected edges and used `pdag.has_acyclic_extension()` specifically when orienting directed edges.
+- Therefore, I removed cycle checks for undirected edges and used `pdag.has_acyclic_extension()` specifically when orienting directed edges.
 
-We also added **`warm_start=True`** (scikit-learn style). If a user fits 20 bootstraps and wants to increase to 50, `warm_start` only executes the 30 new iterations, reusing previously computed graphs.
+I also added **`warm_start=True`** (scikit-learn style). If a user fits 20 bootstraps and wants to increase to 50, `warm_start` only executes the 30 new iterations, reusing previously computed graphs.
 
-#### Week 6: Consensus Research and the Path to ILP
-While our baseline consensus method uses greedy frequency-based edge insertion with cycle prevention, we surveyed more advanced graph aggregation approaches, tracked in [pgmpy Issue #3411](https://github.com/pgmpy/pgmpy/issues/3411).
+#### Week 6: Consensus Research and Aggregation Strategies
+While the baseline consensus method uses greedy frequency-based edge insertion with cycle prevention, I surveyed more advanced graph aggregation approaches, tracked in [pgmpy Issue #3411](https://github.com/pgmpy/pgmpy/issues/3411).
 
-In our Week 6 discussion, we explored Integer Linear Programming (ILP) formulations from the literature. My mentor advised me to research both possibilities: whether to employ ILP as an advanced consensus method for the bootstrap aggregator, or to develop it as a standalone causal discovery algorithm.
-
-Following deeper research and exploration into ILP formulations for structure learning, I decided to focus on building a dedicated causal discovery algorithm rather than restricting it to a consensus aggregation mechanism.
-
-This marks the next chapter of my mentorship work. I will be detailing the formulation, causal constraints, and implementation in a dedicated follow-up post: [ILP-Based Causal Discovery in pgmpy](/blog/ilp-causal-discovery).
+In our Week 6 discussion, we explored alternative aggregation formulations from the literature, evaluating whether mathematical programming could enforce consensus without greedy heuristics. Analyzing these trade-offs confirmed that keeping the bootstrap consensus layer fast, lightweight, and focused on empirical edge frequencies was the right design for scalable bootstrap estimation.
 
 ---
 
@@ -250,4 +245,3 @@ Total bootstrap samples fitted: 50
 - **Enhancement Proposal:** [PEP 6 Draft Proposal](https://github.com/pgmpy/enhancement_proposals/blob/main/6_bootstrap_causal_discovery/draft.md)
 - **Discussion Issue:** [pgmpy/pgmpy#3450](https://github.com/pgmpy/pgmpy/issues/3450)
 - **Implementation PR:** [pgmpy/pgmpy#3464](https://github.com/pgmpy/pgmpy/pull/3464)
-- **Next Chapter:** [ILP-Based Causal Discovery in pgmpy](/blog/ilp-causal-discovery)

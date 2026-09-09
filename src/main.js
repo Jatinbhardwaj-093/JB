@@ -6,6 +6,7 @@ import "./assets/styles/tailwind.css";
 import "./assets/styles/global.css";
 import "./assets/styles/responsive.css"; // Added responsive utilities
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "katex/dist/katex.min.css";
 
 const app = createApp(App);
 

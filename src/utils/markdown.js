@@ -12,6 +12,7 @@ import css from "highlight.js/lib/languages/css";
 import xml from "highlight.js/lib/languages/xml";
 import sql from "highlight.js/lib/languages/sql";
 import diff from "highlight.js/lib/languages/diff";
+import katex from "katex";
 
 // Register common languages
 hljs.registerLanguage("python", python);
@@ -75,9 +76,27 @@ function enhanceSyntaxTokens(html) {
   return parts.join("");
 }
 
+export function resolveAssetUrl(src) {
+  if (!src) return "";
+  if (src.startsWith("http://") || src.startsWith("https://") || src.startsWith("data:") || src.startsWith("blob:")) {
+    return src;
+  }
+  const base = (typeof import.meta !== "undefined" && import.meta.env && import.meta.env.BASE_URL)
+    ? import.meta.env.BASE_URL
+    : "/";
+  if (src.startsWith("/")) {
+    const cleanBase = base.endsWith("/") ? base.slice(0, -1) : base;
+    if (src.startsWith(cleanBase + "/") || src === cleanBase) {
+      return src;
+    }
+    return `${cleanBase}${src}`;
+  }
+  return src;
+}
+
 /**
  * Comprehensive, lightweight Markdown-to-HTML parser for Gruvbox blog posts.
- * Handles headings, tables, lists, bold, italic, highlights, code blocks with tabs/copy, inline code, links, and blockquotes.
+ * Handles headings, tables, lists, bold, italic, highlights, code blocks with tabs/copy, inline code, links, blockquotes, and KaTeX math.
  * 
  * @param {string} md - The raw markdown string
  * @returns {string} The parsed HTML string
@@ -96,7 +115,7 @@ export function parseMarkdown(md) {
   html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, (_, rawLang, code) => {
     const lang = (rawLang || "plaintext").trim().toLowerCase();
     const displayLang = lang || "code";
-    const placeholder = `__CODEBLOCK_PLACEHOLDER_${codeBlocks.length}__`;
+    const placeholder = `@@CODEBLOCK_${codeBlocks.length}@@`;
     
     let highlightedCode = "";
     const cleanCode = code.trim();
@@ -133,6 +152,41 @@ export function parseMarkdown(md) {
     return `\n\n${placeholder}\n\n`;
   });
 
+  // Extract display math blocks: $$...$$
+  const mathBlocks = [];
+  html = html.replace(/\$\$([\s\S]*?)\$\$/g, (_, math) => {
+    const placeholder = `@@KATEX_BLOCK_${mathBlocks.length}@@`;
+    let renderedMath = "";
+    try {
+      renderedMath = katex.renderToString(math.trim(), {
+        displayMode: true,
+        throwOnError: false,
+      });
+    } catch (err) {
+      renderedMath = `<div class="katex-error text-gruv-red font-mono text-xs">${math.trim()}</div>`;
+    }
+    const mathBlockHtml = `<div class="katex-display-wrapper my-6 overflow-x-auto py-2 text-center select-all">${renderedMath}</div>`;
+    mathBlocks.push(mathBlockHtml);
+    return `\n\n${placeholder}\n\n`;
+  });
+
+  // Extract inline math: $...$
+  const inlineMath = [];
+  html = html.replace(/\$([^\$\n]+?)\$/g, (_, math) => {
+    const placeholder = `@@KATEX_INLINE_${inlineMath.length}@@`;
+    let rendered = "";
+    try {
+      rendered = katex.renderToString(math.trim(), {
+        displayMode: false,
+        throwOnError: false,
+      });
+    } catch (err) {
+      rendered = `<span class="katex-error text-gruv-red font-mono text-xs">${math.trim()}</span>`;
+    }
+    inlineMath.push(rendered);
+    return placeholder;
+  });
+
   // Escape HTML in the remaining text
   html = html
     .replace(/&/g, "&amp;")
@@ -154,34 +208,18 @@ export function parseMarkdown(md) {
       .replace(/`([^`]+)`/g, "<code>$1</code>")
       // Italic: *text* or _text_
       .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, "<em>$1</em>")
-      // Convert basic inline math $...$ into readable unicode
-      .replace(/\$([^\$\n]+)\$/g, (_, math) => {
-        let clean = math
-          .replace(/\\leftrightarrow/g, "↔")
-          .replace(/\\leftarrow/g, "←")
-          .replace(/\\rightarrow/g, "→")
-          .replace(/\\circ/g, "◦")
-          .replace(/\\tau(?![a-zA-Z])/g, "τ")
-          .replace(/\\in(?![a-zA-Z])/g, "∈")
-          .replace(/\\times(?![a-zA-Z])/g, "×")
-          .replace(/\\to(?![a-zA-Z])/g, "→")
-          .replace(/\\le(q)?(?![a-zA-Z])/g, "≤")
-          .replace(/\\ge(q)?(?![a-zA-Z])/g, "≥")
-          .replace(/\\alpha(?![a-zA-Z])/g, "α")
-          .replace(/\\beta(?![a-zA-Z])/g, "β")
-          .replace(/\\gamma(?![a-zA-Z])/g, "γ")
-          .replace(/\\theta(?![a-zA-Z])/g, "θ")
-          .replace(/\\lambda(?![a-zA-Z])/g, "λ")
-          .replace(/\\mu(?![a-zA-Z])/g, "μ")
-          .replace(/\\sigma(?![a-zA-Z])/g, "σ")
-          .replace(/\\mid(?![a-zA-Z])/g, "|")
-          .replace(/\\text\{([^}]+)\}/g, "$1")
-          .replace(/\\!/g, "")
-          .replace(/\\/g, "");
-        return `<span class="font-mono text-gruv-orange">${clean}</span>`;
+      // Images: ![alt](url)
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, src) => {
+        const resolved = resolveAssetUrl(src);
+        return `<img src="${resolved}" alt="${alt}" class="rounded-xl border border-gruv-border max-w-full my-4 shadow-sm" loading="lazy" />`;
       })
       // Links: [text](url)
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, text, url) => {
+        const isExternal = url.startsWith("http://") || url.startsWith("https://") || url.startsWith("//");
+        const resolved = (!isExternal && url.startsWith("/")) ? resolveAssetUrl(url) : url;
+        const targetAttr = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
+        return `<a href="${resolved}"${targetAttr}>${text}</a>`;
+      });
   };
 
   // Helper to parse markdown table
@@ -225,6 +263,84 @@ export function parseMarkdown(md) {
     return tableHtml;
   };
 
+  // Helper to parse hierarchical lists (supports nested ordered/unordered, loose lists, continuation lines)
+  const parseListBlock = (lines) => {
+    const root = { type: "root", children: [] };
+    const stack = [{ node: root, indent: -1 }];
+
+    for (let i = 0; i < lines.length; i++) {
+      const raw = lines[i];
+      if (!raw.trim()) continue;
+
+      const indentMatch = raw.match(/^(\s*)/);
+      const indent = indentMatch ? indentMatch[1].replace(/\t/g, "    ").length : 0;
+      const content = raw.trim();
+
+      const olMatch = content.match(/^(\d+)\.\s+(.*)/s);
+      const ulMatch = content.match(/^([-*+])\s+(.*)/s);
+
+      if (olMatch || ulMatch) {
+        const isOl = !!olMatch;
+        const start = isOl ? parseInt(olMatch[1], 10) : null;
+        const text = isOl ? olMatch[2] : ulMatch[2];
+        const itemType = isOl ? "ol" : "ul";
+
+        while (stack.length > 1 && stack[stack.length - 1].indent >= indent) {
+          stack.pop();
+        }
+
+        const parent = stack[stack.length - 1].node;
+
+        let listContainer = null;
+        if (parent.children && parent.children.length > 0) {
+          const lastChild = parent.children[parent.children.length - 1];
+          if (lastChild.type === itemType) {
+            listContainer = lastChild;
+          }
+        }
+
+        if (!listContainer) {
+          listContainer = { type: itemType, start: isOl ? start : undefined, items: [] };
+          if (!parent.children) parent.children = [];
+          parent.children.push(listContainer);
+        }
+
+        const newItem = { text: text, children: [] };
+        listContainer.items.push(newItem);
+
+        stack.push({ node: newItem, indent: indent });
+      } else {
+        if (stack.length > 1) {
+          const currentItem = stack[stack.length - 1].node;
+          if (currentItem.text) {
+            currentItem.text += " " + content;
+          } else {
+            currentItem.text = content;
+          }
+        }
+      }
+    }
+
+    const render = (container) => {
+      if (container.type === "root") {
+        return container.children.map(render).join("\n");
+      }
+      const tag = container.type;
+      const startAttr = (tag === "ol" && container.start && container.start !== 1) ? ` start="${container.start}"` : "";
+      const itemsHtml = container.items.map((item) => {
+        let html = `<li>${parseInline(item.text)}`;
+        if (item.children && item.children.length > 0) {
+          html += "\n" + item.children.map(render).join("\n");
+        }
+        html += `</li>`;
+        return html;
+      }).join("\n");
+      return `<${tag}${startAttr}>\n${itemsHtml}\n</${tag}>`;
+    };
+
+    return render(root);
+  };
+
   // Group lines into semantic blocks (paragraphs, lists, blockquotes, tables, headings)
   const lines = html.split("\n");
   const rawBlocks = [];
@@ -233,7 +349,11 @@ export function parseMarkdown(md) {
 
   const flushBlock = () => {
     if (currentBlock.length > 0) {
-      rawBlocks.push(currentBlock.join("\n"));
+      if (currentType === "list") {
+        rawBlocks.push({ type: "list", lines: [...currentBlock] });
+      } else {
+        rawBlocks.push({ type: currentType || "raw", text: currentBlock.join("\n") });
+      }
       currentBlock = [];
       currentType = null;
     }
@@ -244,28 +364,50 @@ export function parseMarkdown(md) {
     const trimmed = line.trim();
 
     if (!trimmed) {
+      if (currentType === "list") {
+        // Peek ahead past blank lines to see if the list continues
+        let peek = i + 1;
+        while (peek < lines.length && !lines[peek].trim()) {
+          peek++;
+        }
+        if (peek < lines.length) {
+          const nextLine = lines[peek];
+          const nextTrimmed = nextLine.trim();
+          if (/^([-*+]|\d+\.)\s/.test(nextTrimmed) || /^(\s{2,}|\t)\S/.test(nextLine)) {
+            // Continues the list!
+            continue;
+          }
+        }
+      }
       flushBlock();
       continue;
     }
 
     // Code block placeholder
-    if (trimmed.startsWith("__CODEBLOCK_PLACEHOLDER_") && trimmed.endsWith("__")) {
+    if (trimmed.startsWith("@@CODEBLOCK_") && trimmed.endsWith("@@")) {
       flushBlock();
-      rawBlocks.push(trimmed);
+      rawBlocks.push({ type: "placeholder", text: trimmed });
+      continue;
+    }
+
+    // KaTeX display block placeholder
+    if (trimmed.startsWith("@@KATEX_BLOCK_") && trimmed.endsWith("@@")) {
+      flushBlock();
+      rawBlocks.push({ type: "placeholder", text: trimmed });
       continue;
     }
 
     // Horizontal Rule
     if (/^(\-{3,}|\*{3,}|\_{3,})$/.test(trimmed)) {
       flushBlock();
-      rawBlocks.push(trimmed);
+      rawBlocks.push({ type: "hr", text: trimmed });
       continue;
     }
 
     // Headings
     if (/^#{1,6}\s/.test(trimmed)) {
       flushBlock();
-      rawBlocks.push(trimmed);
+      rawBlocks.push({ type: "heading", text: trimmed });
       continue;
     }
 
@@ -295,7 +437,13 @@ export function parseMarkdown(md) {
         flushBlock();
         currentType = "list";
       }
-      currentBlock.push(trimmed);
+      currentBlock.push(line);
+      continue;
+    }
+
+    // Indented continuation line in list
+    if (currentType === "list" && /^(\s{2,}|\t)\S/.test(line)) {
+      currentBlock.push(line);
       continue;
     }
 
@@ -309,12 +457,23 @@ export function parseMarkdown(md) {
   flushBlock();
   const resultBlocks = [];
 
-  for (let block of rawBlocks) {
-    block = block.trim();
+  for (let blockItem of rawBlocks) {
+    if (blockItem.type === "list") {
+      resultBlocks.push(parseListBlock(blockItem.lines));
+      continue;
+    }
+
+    let block = (blockItem.text || "").trim();
     if (!block) continue;
 
     // Preserve code block placeholders
-    if (block.startsWith("__CODEBLOCK_PLACEHOLDER_") && block.endsWith("__")) {
+    if (block.startsWith("@@CODEBLOCK_") && block.endsWith("@@")) {
+      resultBlocks.push(block);
+      continue;
+    }
+
+    // Preserve KaTeX display block placeholders
+    if (block.startsWith("@@KATEX_BLOCK_") && block.endsWith("@@")) {
       resultBlocks.push(block);
       continue;
     }
@@ -322,6 +481,21 @@ export function parseMarkdown(md) {
     // Check for Horizontal Rules (--- or ***)
     if (/^(\-{3,}|\*{3,}|\_{3,})$/.test(block)) {
       resultBlocks.push(`<hr class="gruv-hr" />`);
+      continue;
+    }
+
+    // Check for standalone image: ![alt](url)
+    const imgBlockMatch = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (imgBlockMatch) {
+      const alt = imgBlockMatch[1];
+      const src = resolveAssetUrl(imgBlockMatch[2]);
+      resultBlocks.push(`
+<figure class="my-8 rounded-xl overflow-hidden border border-gruv-border bg-gruv-card shadow-md">
+  <div class="p-2 sm:p-4 bg-[#181a1b] flex justify-center items-center overflow-x-auto">
+    <img src="${src}" alt="${alt}" class="max-w-full h-auto rounded-lg object-contain shadow-sm block" loading="lazy" />
+  </div>
+  ${alt ? `<figcaption class="px-4 py-2.5 text-center text-xs font-mono text-gruv-muted border-t border-gruv-border bg-gruv-card/90">${alt}</figcaption>` : ""}
+</figure>`.trim());
       continue;
     }
 
@@ -370,32 +544,6 @@ export function parseMarkdown(md) {
       continue;
     }
 
-    // Lists (bullet points or numbered)
-    if (block.startsWith("- ") || block.startsWith("* ") || block.startsWith("+ ") || /^\d+\.\s/.test(block)) {
-      const items = block.split("\n");
-      const isOrdered = /^\d+\.\s/.test(block);
-      const listItems = items
-        .map((item) => {
-          item = item.trim();
-          if (item.startsWith("- ") || item.startsWith("* ") || item.startsWith("+ ")) {
-            return `<li>${parseInline(item.slice(2))}</li>`;
-          }
-          const match = item.match(/^\d+\.\s+(.*)/);
-          if (match) {
-            return `<li>${parseInline(match[1])}</li>`;
-          }
-          return `<li>${parseInline(item)}</li>`;
-        })
-        .join("\n");
-
-      if (isOrdered) {
-        resultBlocks.push(`<ol>${listItems}</ol>`);
-      } else {
-        resultBlocks.push(`<ul>${listItems}</ul>`);
-      }
-      continue;
-    }
-
     // Regular Paragraph
     // Normalize single newlines inside paragraph
     const paragraphText = block.replace(/\n/g, " ");
@@ -404,8 +552,18 @@ export function parseMarkdown(md) {
 
   let finalHtml = resultBlocks.join("\n");
 
+  // Re-insert display math blocks
+  finalHtml = finalHtml.replace(/@@KATEX_BLOCK_(\d+)@@/g, (_, index) => {
+    return mathBlocks[parseInt(index, 10)] || "";
+  });
+
+  // Re-insert inline math
+  finalHtml = finalHtml.replace(/@@KATEX_INLINE_(\d+)@@/g, (_, index) => {
+    return inlineMath[parseInt(index, 10)] || "";
+  });
+
   // Re-insert code blocks
-  finalHtml = finalHtml.replace(/__CODEBLOCK_PLACEHOLDER_(\d+)__/g, (_, index) => {
+  finalHtml = finalHtml.replace(/@@CODEBLOCK_(\d+)@@/g, (_, index) => {
     return codeBlocks[parseInt(index, 10)] || "";
   });
 

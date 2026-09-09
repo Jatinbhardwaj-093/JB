@@ -42,8 +42,8 @@ While this direction is promising, I’m still unsure if it aligns with our curr
 This week marked significant progress after the slow momentum in Week 2. I continued from where I left off and worked through key design questions that were previously unresolved.
 
 There were two main agenda items this week:
-1.	Finalizing which series type to use from **Flint**.
-2.	Clarifying how precision should be handled.
+1. Finalizing which series type to use from **Flint**.
+2. Clarifying how precision should be handled.
 
 As discussed earlier, gr_series is currently not well-supported in **python-Flint** and lacks APIs for **Transcendental functions**. Hence, we agreed to use fmpz_series and fmpq_series for now. In the future, once **python-flint** improves support for generic rings (gr_series), we can internally switch to it without affecting the public interface. This decouples implementation from usage, which is ideal.
 

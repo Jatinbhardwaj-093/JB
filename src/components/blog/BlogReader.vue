@@ -286,7 +286,14 @@ const formatDate = (dateString) => {
   margin-bottom: 1.5rem;
 }
 
-:deep(.prose) li {
+:deep(.prose) ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--fg-color);
+}
+
+:deep(.prose) ul > li {
   position: relative;
   padding-left: 1.25rem;
   margin-bottom: 0.5rem;
@@ -294,7 +301,7 @@ const formatDate = (dateString) => {
   color: var(--fg-color);
 }
 
-:deep(.prose) li::before {
+:deep(.prose) ul > li::before {
   content: "•";
   position: absolute;
   left: 0.25rem;
@@ -303,19 +310,25 @@ const formatDate = (dateString) => {
   font-weight: bold;
 }
 
-:deep(.prose) ol {
-  list-style-type: decimal;
-  padding-left: 1.5rem;
-  margin-bottom: 1.5rem;
+:deep(.prose) ol > li {
+  position: relative;
+  padding-left: 0.35rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.65;
   color: var(--fg-color);
 }
 
-:deep(.prose) ol li {
-  padding-left: 0.35rem;
+:deep(.prose) ol > li::before {
+  content: none;
 }
 
-:deep(.prose) ol li::before {
-  content: none;
+:deep(.prose) ol ul,
+:deep(.prose) ul ul,
+:deep(.prose) ol ol,
+:deep(.prose) ul ol {
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+  padding-left: 1.25rem;
 }
 
 :deep(.prose) li p {
