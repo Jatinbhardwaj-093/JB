@@ -7,5 +7,12 @@ export default defineConfig({
   build: {
     // Ensure the build outputs to the correct location
     outDir: "dist",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          katex: ["katex"],
+        },
+      },
+    },
   },
 });
