@@ -1,4 +1,4 @@
-# Exact Causal Discovery with Integer Linear Programming (ILP) in pgmpy
+# Optimal Causal Structure with Integer Linear Programming (ILP) in pgmpy
 
 During my **pgmpy** mentorship, a major focus was formulating and implementing **Integer Linear Programming (ILP)** for exact causal structure learning from continuous observational data.
 

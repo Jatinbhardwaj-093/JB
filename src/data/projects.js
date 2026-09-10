@@ -1,18 +1,38 @@
 const projects = [
   {
     id: 6,
-    title: "Causal Discovery & Parameter Estimation",
+    title: "Bootstrap Estimator for Causal Discovery",
     subtitle: "pgmpy Mentorship",
     category: "Open Source",
-    description: "Selected for the pgmpy mentorship program. Developed statistical estimation tools and bootstrap estimators to discover causal structures from data.",
-    technologies: ["pgmpy", "Python", "NetworkX", "Causal Inference", "Statistical Estimation"],
+    description: "Designed and implemented non-parametric bootstrap estimation in pgmpy to quantify edge confidence, assess structural uncertainty, and build consensus causal graphs across DAGs, PDAGs, and PAGs.",
+    technologies: ["Python", "NetworkX", "Causal Inference", "Statistical Estimation"],
     features: [
-      "Implementing bootstrap estimators to evaluate the reliability of learned networks",
-      "Developing statistical methods to quantify uncertainty in causal discovery",
-      "Integrating parameter estimation routines and structural constraint resolution"
+      "Implemented non-parametric BootstrapEstimator for edge confidence and structural uncertainty across DAGs, PDAGs, and PAGs",
+      "Engineered dynamic thresholding with get_edges() to evaluate confidence graphs without refitting",
+      "Architected flexible direction probability data structures supporting absent-edge handling and partial orientations",
+      "Integrated warm_start graph caching and consensus aggregation algorithms"
     ],
     links: {
-      github: "https://github.com/pgmpy/pgmpy"
+      github: "https://github.com/pgmpy/pgmpy",
+      blog: "/blog/bootstrap-estimator"
+    }
+  },
+  {
+    id: 7,
+    title: "Optimal Causal Structure via ILP Optimization",
+    subtitle: "pgmpy Mentorship",
+    category: "Open Source",
+    description: "Formulated and implemented ILPSearch in pgmpy, translating causal structure learning into an optimal 0-1 Integer Linear Program with cluster-based acyclicity constraints and L0 regularization.",
+    technologies: ["Python", "Integer Linear Programming", "Optimization", "Causal Inference"],
+    features: [
+      "Formulated optimal DAG structure learning as a 0-1 Integer Linear Program (ILP)",
+      "Linearized score metrics and enforced acyclicity using cluster-based cycle elimination constraints",
+      "Incorporated L0 count regularization directly into the optimization objective for sparse graph recovery",
+      "Conducted empirical benchmarks across standard solvers (CBC, SCIP, GLPK) on synthetic and ground-truth causal graphs"
+    ],
+    links: {
+      github: "https://github.com/pgmpy/pgmpy",
+      blog: "/blog/ilp-causal-discovery"
     }
   },
   {
@@ -54,19 +74,19 @@ const projects = [
   },
   {
     id: 3,
-    title: "Google Summer of Code at SymPy",
-    subtitle: "Open Source",
+    title: "Power Series Ring Module (polys.series)",
+    subtitle: "GSoC @ SymPy",
     category: "Open Source",
-    description: "Implemented a formal mathematical series module for SymPy to improve calculation speeds and usability as part of Google Summer of Code 2025.",
-    technologies: ["SymPy", "Python", "Cython", "C", "Pytest", "Hypothesis", "Codecov"],
+    description: "Architected and implemented the new Power Series Ring module from scratch in SymPy, introducing fast series arithmetic, Fast Lagrange Inversion, and ring-domain abstractions.",
+    technologies: ["Python", "Flint Interop", "Computer Algebra", "Series Ring", "Pytest", "Hypothesis"],
     features: [
-      "Implemented formal mathematical series logic and class frameworks",
-      "Built pure Python and optimized Cython backends for performance",
-      "Achieved up to 1000x calculation speedups in comparison to default methods",
-      "Developed a comprehensive test suite to validate correctness"
+      "Implemented PowerSeriesRing, PowerSeriesElement (with Order truncation), and Series domain classes in sympy.polys.series",
+      "Engineered Fast Lagrange Inversion algorithm for compositional series reversion, avoiding expensive Newton iterations",
+      "Implemented Karatsuba multiplication with adaptive truncation, divide-and-conquer composition, and transcendental series expansions",
+      "Aligned structure with python-flint (fmpz_series/fmpq_series) and merged across upstream PRs (#28109, #28208, #28273, #28325)"
     ],
     links: {
-      github: "https://github.com/sympy/sympy/pulls?q=author%3AJatinbhardwaj-093",
+      github: "https://github.com/sympy/sympy/pulls?q=is%3Apr+author%3AJatinbhardwaj-093+is%3Amerged+created%3A2025-06-01..2025-08-31",
       gsoc: "https://summerofcode.withgoogle.com/programs/2025/projects/8VslkGZ9"
     }
   },

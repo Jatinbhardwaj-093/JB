@@ -49,7 +49,7 @@ onMounted(() => {
 
       <nav class="hidden sm:flex items-center gap-8 text-xs font-medium tracking-wider uppercase text-gruv-fg dark:text-gruv-muted">
         <a href="#about" @click.prevent="handleNavClick('#about')" class="hover:text-gruv-accent transition-colors">About</a>
-        <a href="#contributions" @click.prevent="handleNavClick('#contributions')" class="hover:text-gruv-accent transition-colors">Contributions</a>
+        <a href="#experience" @click.prevent="handleNavClick('#experience')" class="hover:text-gruv-accent transition-colors">Experience</a>
         <a href="#projects" @click.prevent="handleNavClick('#projects')" class="hover:text-gruv-accent transition-colors">Selected Work</a>
         <router-link to="/blogs" class="hover:text-gruv-accent transition-colors">Blogs</router-link>
       </nav>
@@ -104,7 +104,7 @@ onMounted(() => {
         class="sm:hidden border-t border-gruv-border bg-gruv-bg/95 backdrop-blur-md px-6 py-4 flex flex-col gap-4 text-xs font-medium tracking-wider uppercase text-gruv-fg dark:text-gruv-muted"
       >
         <a href="#about" @click.prevent="handleNavClick('#about')" class="hover:text-gruv-accent transition-colors py-1">About</a>
-        <a href="#contributions" @click.prevent="handleNavClick('#contributions')" class="hover:text-gruv-accent transition-colors py-1">Contributions</a>
+        <a href="#experience" @click.prevent="handleNavClick('#experience')" class="hover:text-gruv-accent transition-colors py-1">Experience</a>
         <a href="#projects" @click.prevent="handleNavClick('#projects')" class="hover:text-gruv-accent transition-colors py-1">Selected Work</a>
         <router-link to="/blogs" @click="isMenuOpen = false" class="hover:text-gruv-accent transition-colors py-1">Blogs</router-link>
         <a href="mailto:jatinbhardwaj093@gmail.com" class="xs:hidden border border-gruv-accent/50 text-gruv-accent bg-gruv-accent/5 px-4 py-2 rounded text-center font-mono tracking-tight hover:bg-gruv-accent hover:text-gruv-bg transition-all mt-2">

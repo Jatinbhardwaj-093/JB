@@ -31,6 +31,9 @@ const getLinkLabel = (type) => {
     gsoc: "GSoC",
     hfspace: "HF Space",
     colab: "Colab Notebook",
+    blog_bootstrap: "Bootstrap Blog",
+    blog_ilp: "ILP Blog",
+    blog: "Blog Post",
   };
   return labels[type] || type;
 };
@@ -43,6 +46,7 @@ const getLinkClass = (type) => {
   if (t === 'gsoc') return 'hover:text-gruv-blue hover:underline';
   if (t === 'drive') return 'hover:text-gruv-aqua hover:underline';
   if (t === 'figma') return 'hover:text-gruv-purple hover:underline';
+  if (t === 'blog_bootstrap' || t === 'blog_ilp' || t === 'blog') return 'hover:text-gruv-accent hover:underline';
   return 'hover:text-gruv-accent hover:underline';
 };
 </script>
@@ -128,18 +132,27 @@ const getLinkClass = (type) => {
         </div>
 
         <!-- Links -->
-        <div class="flex gap-4 mt-6 border-t border-gruv-border dark:border-gruv-border/60 pt-3">
-          <a
-            v-for="(url, type) in project.links"
-            :key="type"
-            :href="url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-[11px] font-mono text-gruv-muted transition-colors"
-            :class="getLinkClass(type)"
-          >
-            [{{ getLinkLabel(type) }}]
-          </a>
+        <div class="flex flex-wrap gap-4 mt-6 border-t border-gruv-border dark:border-gruv-border/60 pt-3">
+          <template v-for="(url, type) in project.links" :key="type">
+            <a
+              v-if="url.startsWith('http')"
+              :href="url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[11px] font-mono text-gruv-muted transition-colors"
+              :class="getLinkClass(type)"
+            >
+              [{{ getLinkLabel(type) }}]
+            </a>
+            <router-link
+              v-else
+              :to="url"
+              class="text-[11px] font-mono text-gruv-muted transition-colors"
+              :class="getLinkClass(type)"
+            >
+              [{{ getLinkLabel(type) }}]
+            </router-link>
+          </template>
         </div>
       </div>
     </div>

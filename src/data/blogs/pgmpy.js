@@ -15,7 +15,7 @@ const pgmpyPosts = [
     date: "September 9, 2026",
     minutesToRead: 14,
     summary:
-      "Formulating exact causal structure learning using Integer Linear Programming (ILP) in pgmpy: mentorship milestones, acyclicity constraints, L0 regularization, and a practical usage guide.",
+      "Formulating optimal causal structure learning using Integer Linear Programming (ILP) in pgmpy: mentorship milestones, acyclicity constraints, L0 regularization, and a practical usage guide.",
     category: "pgmpy",
     slug: "ilp-causal-discovery",
   },
