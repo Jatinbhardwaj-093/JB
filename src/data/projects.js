@@ -1,5 +1,47 @@
 const projects = [
   {
+    id: 8,
+    title: "Aayam — Cultural Club Operations Platform",
+    subtitle: "Group Project (Team Lead)",
+    category: "Web Dev",
+    badge: "Group Project • Team Lead",
+    description: "An end-to-end cultural club operations and administration system built for IIT BS Drama Society. Led Team-070 (ServiceSync) as Scrum Master & Team Lead across 5 milestones to digitize theatrical workflows, role-based governance, and generative AI production tools.",
+    technologies: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Flask",
+      "SQLite",
+      "Google Gemini API",
+      "Groq Whisper",
+      "MediaPipe",
+      "Pytest"
+    ],
+    team: {
+      teamName: "ServiceSync (Team-070)",
+      role: "Team Lead & Scrum Master",
+      members: [
+        { name: "Jatin Bhardwaj", role: "Team Lead / Scrum Master / Frontend Dev" },
+        { name: "Amit Kumar Patra", role: "Frontend Dev / Backend Dev" },
+        { name: "Shibin Mohammed N P", role: "Product Manager / Code Reviewer" },
+        { name: "Devi Vrinda A", role: "Product Manager / Code Reviewer" },
+        { name: "Bhabani Kundu", role: "Backend Dev / Tester" }
+      ]
+    },
+    features: [
+      "Led Team-070 (ServiceSync) as Team Lead & Scrum Master through all 5 Agile project milestones (User Research, Architecture, Core REST APIs, AI Integration, Final Verification)",
+      "Role-Based Access Control (RBAC) across 5 roles: Club Members, Event Organizers / Directors, Maintainers / Admins, College Regulatory Authorities, and Brand Sponsors",
+      "AI Rehearsal Studio with real-time interactive GenAI dialogue partner and script rehearsal feedback via Google Gemini and Server-Sent Events (SSE)",
+      "Automated Audition Screening Pipeline leveraging MediaPipe pose/visual evaluation and Groq Whisper audio transcription",
+      "GenAI Script Builder with PlateEditor and automated character extraction, plus Maintainer Event Proposal autofill via Gemini",
+      "Comprehensive test coverage with a 152-operation automated pytest validation suite for core REST endpoints and AI services"
+    ],
+    links: {
+      github: "https://github.com/Jatinbhardwaj-093/Aayam-Maitnee_Club_Platform",
+      milestones: "https://github.com/Jatinbhardwaj-093/Aayam-Maitnee_Club_Platform/tree/main/Milestones"
+    }
+  },
+  {
     id: 6,
     title: "Bootstrap Estimator for Causal Discovery",
     subtitle: "pgmpy Mentorship",

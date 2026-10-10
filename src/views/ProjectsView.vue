@@ -34,6 +34,7 @@ const getLinkLabel = (type) => {
     blog_bootstrap: "Bootstrap Blog",
     blog_ilp: "ILP Blog",
     blog: "Blog Post",
+    milestones: "Milestones Docs",
   };
   return labels[type] || type;
 };
@@ -46,6 +47,7 @@ const getLinkClass = (type) => {
   if (t === 'gsoc') return 'hover:text-gruv-blue hover:underline';
   if (t === 'drive') return 'hover:text-gruv-aqua hover:underline';
   if (t === 'figma') return 'hover:text-gruv-purple hover:underline';
+  if (t === 'milestones') return 'hover:text-gruv-yellow hover:underline';
   if (t === 'blog_bootstrap' || t === 'blog_ilp' || t === 'blog') return 'hover:text-gruv-accent hover:underline';
   return 'hover:text-gruv-accent hover:underline';
 };
@@ -80,7 +82,7 @@ const getLinkClass = (type) => {
     </div>
 
     <!-- Projects Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
       <div
         v-for="project in filteredProjects"
         :key="project.id"
@@ -100,7 +102,7 @@ const getLinkClass = (type) => {
           </p>
 
           <!-- Clickable Details Accordion Toggle -->
-          <div v-if="project.features && project.features.length" class="pt-1">
+          <div v-if="(project.features && project.features.length) || project.team" class="pt-1">
             <button 
               @click="toggleProjectDetails(project.id)"
               class="btn-details flex items-center gap-1 focus:outline-none"
@@ -110,12 +112,28 @@ const getLinkClass = (type) => {
             </button>
 
             <transition name="page-fade">
-              <ul v-if="expandedProjects[project.id]" class="mt-3 space-y-2 text-xs text-gruv-fg dark:text-gruv-muted font-light">
-                <li v-for="feat in project.features" :key="feat" class="flex items-start gap-2">
-                  <span class="text-gruv-purple font-bold mr-1">•</span>
-                  <span>{{ feat }}</span>
-                </li>
-              </ul>
+              <div v-if="expandedProjects[project.id]" class="mt-3 space-y-3 text-xs text-gruv-fg dark:text-gruv-muted font-light">
+                <!-- Team Section -->
+                <div v-if="project.team" class="space-y-1.5 pb-2 border-b border-gruv-border">
+                  <div class="text-[11px] font-mono font-medium text-gruv-yellow">
+                    // {{ project.team.teamName }} — Role: {{ project.team.role }}
+                  </div>
+                  <ul class="space-y-1 pl-1 text-[11px] font-mono">
+                    <li v-for="member in project.team.members" :key="member.name" class="flex items-start gap-1.5">
+                      <span class="text-gruv-muted">›</span>
+                      <span><strong class="text-gruv-fg">{{ member.name }}</strong>: <span class="text-gruv-muted">{{ member.role }}</span></span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Features list -->
+                <ul v-if="project.features && project.features.length" class="space-y-2">
+                  <li v-for="feat in project.features" :key="feat" class="flex items-start gap-2">
+                    <span class="text-gruv-purple font-bold mr-1">•</span>
+                    <span>{{ feat }}</span>
+                  </li>
+                </ul>
+              </div>
             </transition>
           </div>
         </div>
