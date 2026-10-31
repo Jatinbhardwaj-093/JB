@@ -1,5 +1,35 @@
 const projects = [
   {
+    id: 9,
+    title: "TrackHeat — Habit & Discipline Matrix",
+    subtitle: "Cross-Platform App & Sync Engine",
+    category: "Web Dev",
+    description: "A high-density binary habit matrix engine inspired by GitHub contribution graphs, built across Web, macOS (Electron), and Android (Expo/React Native). Features sub-50ms simultaneous cross-device WebSocket synchronization via Supabase Realtime, interactive Android home screen widgets, and offline-first dual-tier caching.",
+    technologies: [
+      "React Native",
+      "Expo SDK 57",
+      "React 19",
+      "TypeScript",
+      "Electron",
+      "Supabase Realtime",
+      "WebSockets",
+      "Tailwind CSS",
+      "Android Widgets"
+    ],
+    features: [
+      "High-density contribution matrix visualizations with dynamic 52-week Annual and Monthly grid view modes",
+      "Sub-50ms simultaneous cross-device sync via persistent Supabase Realtime WebSocket broadcast channels with compacted habit serialization (<2 KB)",
+      "Interactive Android home screen widgets (RemoteViews) featuring 1-tap habit logging, live matrix preview, and geometric SVG paths",
+      "Hardened macOS desktop application with privileged app:// scheme, isolated Electron renderer, and native window clearances",
+      "Resilient offline-first state engine with AsyncStorage and cloud-authoritative conflict resolution"
+    ],
+    links: {
+      github: "https://github.com/Jatinbhardwaj-093/TrackHeat",
+      live: "https://trackheat.surge.sh",
+      releases: "https://github.com/Jatinbhardwaj-093/TrackHeat/releases"
+    }
+  },
+  {
     id: 8,
     title: "Aayam — Cultural Club Operations Platform",
     subtitle: "Group Project (Team Lead)",

@@ -35,6 +35,8 @@ const getLinkLabel = (type) => {
     blog_ilp: "ILP Blog",
     blog: "Blog Post",
     milestones: "Milestones Docs",
+    live: "Live Web App",
+    releases: "Binary Releases",
   };
   return labels[type] || type;
 };
@@ -48,6 +50,8 @@ const getLinkClass = (type) => {
   if (t === 'drive') return 'hover:text-gruv-aqua hover:underline';
   if (t === 'figma') return 'hover:text-gruv-purple hover:underline';
   if (t === 'milestones') return 'hover:text-gruv-yellow hover:underline';
+  if (t === 'live') return 'hover:text-gruv-aqua hover:underline';
+  if (t === 'releases') return 'hover:text-gruv-yellow hover:underline';
   if (t === 'blog_bootstrap' || t === 'blog_ilp' || t === 'blog') return 'hover:text-gruv-accent hover:underline';
   return 'hover:text-gruv-accent hover:underline';
 };
